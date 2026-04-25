@@ -256,8 +256,8 @@ const PORTFOLIO = {
   ],
   links: [
     { label: 'Email', value: 'contact@dipeshgurav.com', href: 'mailto:contact@dipeshgurav.com' },
-    { label: 'LinkedIn', value: 'in/theartistbanda', href: 'https://www.linkedin.com/in/theartistbanda/' },
-    { label: 'Dribbble', value: 'theartistbanda', href: 'https://dribbble.com/theartistbanda' },
+    { label: 'LinkedIn', value: 'in/dipeshgurav-design', href: 'https://www.linkedin.com/in/dipeshgurav-design/' },
+    { label: 'Dribbble', value: 'dipeshgurav9', href: 'https://dribbble.com/dipeshgurav9' },
     { label: 'Behance', value: 'theartistbanda', href: 'https://www.behance.net/theartistbanda' },
   ],
 };
