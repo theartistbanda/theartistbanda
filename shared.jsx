@@ -351,4 +351,15 @@ function CustomCursor({ accent = '#C2410C' }) {
   );
 }
 
-Object.assign(window, { useReveal, useCounter, fmt, Placeholder, CustomCursor, PORTFOLIO });
+// Responsive breakpoint hook
+function useBreakpoint() {
+  const [w, setW] = React.useState(window.innerWidth);
+  React.useEffect(() => {
+    const on = () => setW(window.innerWidth);
+    window.addEventListener('resize', on);
+    return () => window.removeEventListener('resize', on);
+  }, []);
+  return { isMobile: w < 640, isTablet: w >= 640 && w < 1024, isDesktop: w >= 1024, w };
+}
+
+Object.assign(window, { useReveal, useCounter, fmt, Placeholder, CustomCursor, PORTFOLIO, useBreakpoint });
