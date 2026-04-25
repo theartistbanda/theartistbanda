@@ -630,11 +630,7 @@ function AFooter() {
           <span style={monoLight}>Typeset in Inter Tight + JetBrains Mono.</span>
           <span style={monoLight}>Grid: 12 col × 24 gutter. Hairlines at 1px.</span>
         </div>
-        <div style={{ gridColumn: 'span 4', textAlign: 'right' }}>
-          <div style={{ fontFamily: 'Georgia, "Iowan Old Style", serif', fontStyle: 'italic', fontSize: 84, lineHeight: 0.9, color: A.paper, letterSpacing: '-0.03em' }}>
-            Dipesh.
-          </div>
-        </div>
+        <div style={{ gridColumn: 'span 4' }} />
       </div>
     </footer>);
 
