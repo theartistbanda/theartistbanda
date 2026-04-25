@@ -618,19 +618,19 @@ function AField({ label, type = 'text', value, onChange, error, multiline }) {
 
 // ─── FOOTER ──────────────────────────────────────────────────────────────────
 function AFooter() {
+  const monoLight = { ...aStyles.mono, color: 'rgba(244,241,236,0.45)' };
   return (
-    <footer style={{ background: A.ink, padding: '40px 32px 32px', color: 'rgba(244,241,236,0.45)', borderTop: `1px solid rgba(244,241,236,0.08)` }}>
-      <div style={{ maxWidth: 1360, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 24, alignItems: 'end' }}>
-        <div style={{ gridColumn: 'span 4', ...aStyles.mono }}>
-          © MMXXVI Dipesh Gurav<br />
-          All rights, all wrongs reserved.
+    <footer style={{ background: A.ink, padding: '72px 32px 64px', color: 'rgba(244,241,236,0.45)', borderTop: `1px solid rgba(244,241,236,0.12)` }}>
+      <div style={{ maxWidth: 1360, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 24, alignItems: 'center' }}>
+        <div style={{ gridColumn: 'span 4', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <span style={monoLight}>© MMXXVI Dipesh Gurav</span>
+          <span style={monoLight}>All rights, all wrongs reserved.</span>
         </div>
-        <div style={{ gridColumn: 'span 4', ...aStyles.mono }}>
-          Typeset in Inter Tight + JetBrains Mono.<br />
-          Grid: 12 col × 24 gutter. Hairlines at 1px.
+        <div style={{ gridColumn: 'span 4', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <span style={monoLight}>Typeset in Inter Tight + JetBrains Mono.</span>
+          <span style={monoLight}>Grid: 12 col × 24 gutter. Hairlines at 1px.</span>
         </div>
         <div style={{ gridColumn: 'span 4', textAlign: 'right' }}>
-          {/* Giant signature */}
           <div style={{ fontFamily: 'Georgia, "Iowan Old Style", serif', fontStyle: 'italic', fontSize: 84, lineHeight: 0.9, color: A.paper, letterSpacing: '-0.03em' }}>
             Dipesh.
           </div>
