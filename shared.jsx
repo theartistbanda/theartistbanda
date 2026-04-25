@@ -105,7 +105,7 @@ const PORTFOLIO = {
       ],
       tags: ['AI Interface', 'Enterprise', 'Design Systems'],
       image: null,
-      href: 'case-taskgpt.html',
+      href: '/#work',
     },
     {
       id: 'aatmnirbhar',
@@ -123,7 +123,7 @@ const PORTFOLIO = {
       ],
       tags: ['Brand', 'Identity', 'Cultural'],
       image: null,
-      href: 'case-aatmnirbhar.html',
+      href: '/#work',
     },
     {
       id: 'jego',
@@ -140,7 +140,7 @@ const PORTFOLIO = {
       ],
       tags: ['Video UX', 'Streaming', 'Localisation'],
       image: null,
-      href: 'case-jego.html',
+      href: '/#work',
     },
     {
       id: 'earlyfoods',
@@ -157,7 +157,7 @@ const PORTFOLIO = {
       ],
       tags: ['E-commerce', 'Emotional UX'],
       image: null,
-      href: 'case-earlyfoods.html',
+      href: '/#work',
     },
   ],
   principles: [
