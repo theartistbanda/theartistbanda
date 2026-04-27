@@ -552,10 +552,10 @@ function ACareerItem({ c, i, bp }) {
   const [ref, inView] = useReveal();
 
   const gridCols = bp.isMobile
-    ? '80px 1fr'
+    ? '72px 1fr'
     : bp.isTablet
-    ? '80px 1fr 1fr'
-    : '60px 120px 1fr 2fr 1fr';
+    ? '72px 1fr 1fr'
+    : '64px 260px 3fr 1fr';
 
   return (
     <div ref={ref} style={{
