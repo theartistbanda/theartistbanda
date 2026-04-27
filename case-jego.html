@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEGO · Case Study — Dipesh Gurav</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F4F1EC; --paper2: #EAE5DC; --ink: #14110F; --ink2: #2A2622;
+    --mute: #6E6A63; --line: rgba(20,17,15,0.14); --accent: #C2410C;
+    --sans: 'Inter Tight', 'Inter', system-ui, sans-serif;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.7; letter-spacing: -0.005em; }
+  a { color: inherit; }
+  .mono { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(244,241,236,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  nav > div { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+  .back { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink2); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .back:hover { color: var(--accent); }
+  .nav-label { flex-shrink: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  .hero { padding: 96px 0 48px; border-bottom: 1px solid var(--line); }
+  .meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 64px; }
+  .meta > div { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+  .meta > div span { color: var(--ink); }
+  h1 { font-family: var(--sans); font-weight: 500; font-size: clamp(48px, 9vw, 132px); line-height: 0.95; letter-spacing: -0.035em; max-width: 12ch; }
+  h1 i { font-style: italic; font-weight: 400; color: var(--accent); }
+  .lede { margin-top: 48px; max-width: 680px; font-size: 19px; line-height: 1.55; color: var(--ink2); letter-spacing: -0.008em; }
+
+  .cover { aspect-ratio: 16/9; margin: 64px 0 0; background: var(--ink); border: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(244,241,236,0.03) 11px 12px); }
+  .cover-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244,241,236,0.35); }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .stat { padding: 28px 24px; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .stat .n { font-family: var(--sans); font-size: 48px; font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
+  .stat .n i { color: var(--accent); font-style: italic; font-weight: 400; }
+  .stat .ns { font-family: var(--sans); font-size: 20px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; }
+
+  section.body { padding: 96px 0; border-bottom: 1px solid var(--line); }
+  .section-head { display: grid; grid-template-columns: 160px 1fr; gap: 48px; margin-bottom: 48px; align-items: start; }
+  .section-head h2 { font-family: var(--sans); font-size: 40px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; max-width: 20ch; }
+  .section-head h2 i { font-style: italic; color: var(--accent); }
+  .prose { max-width: 720px; font-size: 16px; line-height: 1.75; color: var(--ink2); }
+  .prose p + p { margin-top: 16px; }
+  .prose strong { color: var(--ink); font-weight: 500; }
+
+  .process { display: grid; grid-template-columns: repeat(4, 1fr); border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
+  .process > div { padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-height: 200px; }
+  .process h3 { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; margin: 12px 0 8px; }
+  .process p { font-size: 13px; color: var(--mute); line-height: 1.65; }
+
+  /* Insight cards */
+  .insights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 48px; }
+  .insight { background: var(--paper); padding: 28px 24px; }
+  .insight .num { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .insight h3 { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.25; margin-bottom: 10px; }
+  .insight p { font-size: 13px; color: var(--mute); line-height: 1.6; }
+
+  /* Screens row */
+  .screens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+  .screen { aspect-ratio: 9/16; background: var(--paper2); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(20,17,15,0.05) 11px 12px); }
+  .screen span { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); background: var(--paper); padding: 3px 8px; }
+
+  blockquote { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(24px, 3.2vw, 44px); line-height: 1.25; letter-spacing: -0.02em; max-width: 22ch; margin: 40px 0; color: var(--ink); }
+  blockquote span { color: var(--accent); }
+  .quote-attr { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); margin-top: 12px; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+  .tag { font-family: var(--mono); font-size: 9px; padding: 5px 10px; border: 1px solid var(--line); color: var(--ink2); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .next { padding: 80px 0 120px; }
+  .next-label { margin-bottom: 8px; }
+  .next a { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 32px 0; border-top: 1px solid var(--ink); text-decoration: none; color: var(--ink); transition: padding-left 0.2s; }
+  .next a:hover { padding-left: 12px; }
+  .next .nt { font-family: var(--sans); font-size: clamp(32px, 6vw, 88px); letter-spacing: -0.03em; line-height: 1; font-weight: 500; flex: 1; min-width: 0; }
+  .next .nt i { color: var(--accent); font-style: italic; font-weight: 400; }
+  .next .arrow { font-size: 28px; flex-shrink: 0; }
+
+  footer { background: var(--ink); color: rgba(244,241,236,0.5); padding: 32px; text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ─── TABLET ─────────────────────────────────────────────────────────────── */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    nav > div { padding: 0 24px; }
+    .wrap { padding: 0 24px; }
+    .hero { padding: 64px 0 40px; }
+    .meta { grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3) { border-top: 1px solid var(--line); }
+    .stat:nth-child(4) { border-top: 1px solid var(--line); border-right: none; }
+    section.body { padding: 72px 0; }
+    .section-head { grid-template-columns: 120px 1fr; gap: 24px; }
+    .section-head h2 { font-size: 32px; }
+    .process { grid-template-columns: 1fr 1fr; }
+    .process > div:nth-child(2n) { border-right: none; }
+    .process > div { min-height: auto; }
+    .insights { grid-template-columns: 1fr 1fr; }
+    .screens { grid-template-columns: 1fr 1fr; }
+    .screen:last-child { display: none; }
+    .next { padding: 56px 0 96px; }
+    footer { padding: 24px; }
+  }
+
+  /* ─── MOBILE ─────────────────────────────────────────────────────────────── */
+  @media (max-width: 639px) {
+    nav > div { padding: 0 16px; }
+    .nav-label { display: none; }
+    .wrap { padding: 0 16px; }
+    .hero { padding: 48px 0 32px; }
+    .meta { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+    .meta > div:nth-child(3), .meta > div:nth-child(4) { display: none; }
+    .lede { font-size: 16px; margin-top: 28px; }
+    .cover { margin: 32px 0 0; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat { padding: 20px 14px; }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3) { border-top: 1px solid var(--line); }
+    .stat:nth-child(4) { border-top: 1px solid var(--line); border-right: none; }
+    .stat .n { font-size: 36px; }
+    .stat .ns { font-size: 16px; }
+    section.body { padding: 56px 0; }
+    .section-head { grid-template-columns: 1fr; gap: 10px; margin-bottom: 24px; }
+    .section-head h2 { font-size: 24px; }
+    .prose { font-size: 15px; }
+    .process { grid-template-columns: 1fr; }
+    .process > div { border-right: none; min-height: auto; }
+    .insights { grid-template-columns: 1fr; }
+    .screens { grid-template-columns: 1fr; }
+    blockquote { max-width: 100%; margin: 28px 0; }
+    .next { padding: 48px 0 72px; }
+    .next a { padding: 24px 0; gap: 16px; }
+    .arrow { font-size: 20px; }
+    footer { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <a href="/" class="back">← Portfolio</a>
+    <span class="mono nav-label"><span style="color:var(--ink)">●</span> Case 04 / 05 · JEGO</span>
+    <a href="mailto:contact@dipeshgurav.com" class="back">Contact →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="meta">
+      <div>Case / <span>04</span></div>
+      <div>Year / <span>2022</span></div>
+      <div>Role / <span>Lead Product Design</span></div>
+      <div>Context / <span>UAE · Wellbeing Streaming</span></div>
+    </div>
+    <h1>JEGO.<br>Mentors for<br>the Gulf, designed <i>with nuance.</i></h1>
+    <p class="lede">A video streaming platform connecting Gulf users with world-renowned mentors — designed from the ground up for Arabic speakers, Islamic values, and a market that Western wellbeing apps had consistently failed to serve.</p>
+
+    <div class="cover">
+      <span class="cover-label">JEGO · Wellbeing Streaming · UAE</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="mono" style="margin-bottom:8px">Primary Market</div><div class="ns">UAE</div></div>
+      <div class="stat"><div class="mono" style="margin-bottom:8px">RTL Support</div><div class="ns">First-class Arabic</div></div>
+      <div class="stat"><div class="mono" style="margin-bottom:8px">User Interviews</div><div class="n">300<i>+</i></div></div>
+      <div class="stat"><div class="mono" style="margin-bottom:8px">Category</div><div class="ns">Wellbeing · Mentorship</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">§ 01 · Problem</span>
+      <h2>Western wellbeing apps were being imported into a culture they <i>never understood.</i></h2>
+    </div>
+    <div class="prose">
+      <p>The UAE wellbeing market was saturated with apps built for Western audiences — English-first, culturally neutral, and designed around habits and frameworks alien to Gulf users. Meditation apps assumed a secular frame. Mentor content ignored Islamic perspectives on purpose, ambition, and community.</p>
+      <p>JEGO's founders had a clear vision: a streaming platform where Gulf users could access world-class mentors on wellbeing, business, and life — but designed with the cultural fluency those users deserved. <strong>The challenge was not translation. It was design empathy at a civilisational scale.</strong></p>
+    </div>
+
+    <blockquote>"Intuitive is always <span>local.</span> We had to learn what intuitive meant in the Gulf."</blockquote>
+    <div class="quote-attr">— Design principle, JEGO</div>
+
+    <div class="tag-row">
+      <span class="tag">Video UX</span>
+      <span class="tag">Streaming Platform</span>
+      <span class="tag">RTL Design</span>
+      <span class="tag">Arabic Typography</span>
+      <span class="tag">Cross-cultural UX</span>
+      <span class="tag">UAE Market</span>
+      <span class="tag">Figma</span>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">§ 02 · Research</span>
+      <h2>300+ interviews. Journey maps. A month of <i>listening before designing.</i></h2>
+    </div>
+    <div class="prose">
+      <p>Research came before every pixel. Over 300 user interviews across the UAE revealed that Gulf users did not separate wellbeing from spiritual practice, family obligations, or professional ambition — they were one continuous pursuit. This fundamentally changed the product's information architecture.</p>
+    </div>
+
+    <div class="insights">
+      <div class="insight">
+        <div class="num">Insight 01</div>
+        <h3>Wellbeing is not secular in the Gulf</h3>
+        <p>Users expected content to acknowledge Islamic perspectives on mental health, purpose, and rest. Spiritually neutral content was read as culturally foreign.</p>
+      </div>
+      <div class="insight">
+        <div class="num">Insight 02</div>
+        <h3>Arabic is not a translation layer</h3>
+        <p>RTL is not the mirror of LTR. Typography hierarchy, button placement, scroll direction, and reading patterns all required first-principles redesign — not just a flip.</p>
+      </div>
+      <div class="insight">
+        <div class="num">Insight 03</div>
+        <h3>Onboarding must respect ritual</h3>
+        <p>Gulf users evaluate trust in the first 30 seconds. Onboarding needed to feel deliberate and unhurried — aligned with how significant life decisions are made culturally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">§ 03 · Design</span>
+      <h2>RTL first. Cultural nuance built in, <i>not bolted on.</i></h2>
+    </div>
+    <div class="prose">
+      <p>The design system was built RTL-first — Arabic was not a variant, it was the primary language. Every component was designed in Arabic and adapted for English, not the reverse. This meant custom typographic scales for Arabic script, which behaves very differently from Latin at small sizes.</p>
+      <p>Onboarding was designed as a ritual: slow, intentional, and personal. Rather than rushing users to content, JEGO's onboarding established a relationship — asking about goals, time availability, and areas of life the user wanted to improve — before introducing any mentor or course.</p>
+    </div>
+
+    <div class="process">
+      <div>
+        <span class="mono" style="color:var(--accent)">01 / Research</span>
+        <h3>300+ user interviews</h3>
+        <p>Mapped Gulf users' relationship with wellbeing, learning, and digital content. Built detailed journey maps from discovery to daily habit.</p>
+      </div>
+      <div>
+        <span class="mono" style="color:var(--accent)">02 / Architecture</span>
+        <h3>RTL information design</h3>
+        <p>Redesigned every navigation pattern, content hierarchy, and interaction model from Arabic outward. RTL was the primary design language, not an adaptation.</p>
+      </div>
+      <div>
+        <span class="mono" style="color:var(--accent)">03 / Onboarding</span>
+        <h3>Ritual-led entry</h3>
+        <p>Designed an onboarding flow that mirrors how Gulf users make significant life decisions — slowly, deliberately, and with intent — before surfacing any content.</p>
+      </div>
+      <div>
+        <span class="mono" style="color:var(--accent)">04 / Streaming UX</span>
+        <h3>Mobile-first viewing</h3>
+        <p>Optimised the video experience for mobile consumption patterns in the UAE — vertical-first layouts, offline support, and culturally appropriate content discovery.</p>
+      </div>
+    </div>
+
+    <div class="screens">
+      <div class="screen"><span>onboarding.png</span></div>
+      <div class="screen"><span>home-rtl.png</span></div>
+      <div class="screen"><span>player.png</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">§ 04 · Outcome</span>
+      <h2>A wellbeing platform the Gulf could finally <i>call its own.</i></h2>
+    </div>
+    <div class="prose">
+      <p>JEGO launched as a culturally grounded alternative to Western wellbeing apps — with first-class Arabic support, ritual-aligned onboarding, and a mentor roster that included voices relevant to Gulf audiences. The RTL design system was not a feature; it was the foundation everything else was built on.</p>
+      <p>The product demonstrated that cross-cultural design is a skill, not a checklist. Shipping for the Gulf required going beyond personas and into lived experience — understanding how users relate to time, self-improvement, community, and faith as an integrated whole.</p>
+    </div>
+  </div>
+</section>
+
+<section class="next">
+  <div class="wrap">
+    <div class="mono next-label">Next case study</div>
+    <a href="case-earlyfoods.html">
+      <span class="nt">EarlyFoods — <i>designed for trust, not conversion.</i></span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  © MMXXVI · Dipesh Gurav · Nottingham, UK · Designed with purpose, not just pixels
+</footer>
+
+</body>
+</html>

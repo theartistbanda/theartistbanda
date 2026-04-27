@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskGPT · Case Study — Dipesh Gurav</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F4F1EC; --paper2: #EAE5DC; --ink: #14110F; --ink2: #2A2622;
+    --mute: #6E6A63; --line: rgba(20,17,15,0.14); --accent: #C2410C;
+    --sans: 'Inter Tight', 'Inter', system-ui, sans-serif;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.7; letter-spacing: -0.005em; }
+  a { color: inherit; }
+  .mono { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(244,241,236,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  nav > div { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+  .back { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink2); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .back:hover { color: var(--accent); }
+  .nav-label { flex-shrink: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  .hero { padding: 96px 0 48px; border-bottom: 1px solid var(--line); }
+  .meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 64px; }
+  .meta > div { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+  .meta > div span { color: var(--ink); }
+  h1 { font-family: var(--sans); font-weight: 500; font-size: clamp(48px, 9vw, 132px); line-height: 0.95; letter-spacing: -0.035em; max-width: 12ch; }
+  h1 i { font-style: italic; font-weight: 400; color: var(--accent); }
+  .lede { margin-top: 48px; max-width: 680px; font-size: 19px; line-height: 1.55; color: var(--ink2); letter-spacing: -0.008em; }
+
+  .cover { aspect-ratio: 16/9; margin: 64px 0 0; background: var(--ink); border: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(244,241,236,0.04) 11px 12px); }
+  .cover-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244,241,236,0.4); }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .stat { padding: 28px 24px; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .stat .n { font-family: var(--sans); font-size: 48px; font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
+  .stat .n i { color: var(--accent); font-style: italic; font-weight: 400; }
+
+  section.body { padding: 96px 0; border-bottom: 1px solid var(--line); }
+  .section-head { display: grid; grid-template-columns: 160px 1fr; gap: 48px; margin-bottom: 48px; align-items: start; }
+  .section-head h2 { font-family: var(--sans); font-size: 40px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; max-width: 20ch; }
+  .section-head h2 i { font-style: italic; color: var(--accent); }
+  .prose { max-width: 720px; font-size: 16px; line-height: 1.75; color: var(--ink2); }
+  .prose p + p { margin-top: 16px; }
+  .prose strong { color: var(--ink); font-weight: 500; }
+
+  .process { display: grid; grid-template-columns: repeat(4, 1fr); border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
+  .process > div { padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-height: 200px; }
+  .process h3 { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; margin: 12px 0 8px; }
+  .process p { font-size: 13px; color: var(--mute); line-height: 1.65; }
+
+  .impact { display: grid; grid-template-columns: repeat(3, 1fr); border-left: 1px solid var(--line); border-top: 1px solid var(--line); margin-top: 48px; }
+  .impact > div { padding: 28px 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .impact .n { font-size: 44px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+  .impact .n i { color: var(--accent); font-style: italic; font-weight: 400; }
+
+  blockquote { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(24px, 3.2vw, 44px); line-height: 1.25; letter-spacing: -0.02em; max-width: 22ch; margin: 40px 0; color: var(--ink); }
+  blockquote span { color: var(--accent); }
+  .quote-attr { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); margin-top: 12px; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+  .tag { font-family: var(--mono); font-size: 9px; padding: 5px 10px; border: 1px solid var(--line); color: var(--ink2); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .next { padding: 80px 0 120px; }
+  .next-label { margin-bottom: 8px; }
+  .next a { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 32px 0; border-top: 1px solid var(--ink); text-decoration: none; color: var(--ink); transition: padding-left 0.2s; }
+  .next a:hover { padding-left: 12px; }
+  .next .nt { font-family: var(--sans); font-size: clamp(32px, 6vw, 88px); letter-spacing: -0.03em; line-height: 1; font-weight: 500; flex: 1; min-width: 0; }
+  .next .nt i { color: var(--accent); font-style: italic; font-weight: 400; }
+  .next .arrow { font-size: 28px; flex-shrink: 0; }
+
+  footer { background: var(--ink); color: rgba(244,241,236,0.5); padding: 32px; text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ─── TABLET ─────────────────────────────────────────────────────────────── */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    nav > div { padding: 0 24px; }
+    .wrap { padding: 0 24px; }
+    .hero { padding: 64px 0 40px; }
+    .meta { grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+    .stats { grid-template-columns: 1fr 1fr 1fr; }
+    .section-head { grid-template-columns: 120px 1fr; gap: 24px; }
+    .section-head h2 { font-size: 32px; }
+    .process { grid-template-columns: 1fr 1fr; }
+    .process > div:nth-child(2n) { border-right: none; }
+    .process > div { min-height: auto; }
+    .impact { grid-template-columns: 1fr 1fr 1fr; }
+    section.body { padding: 72px 0; }
+    .next { padding: 56px 0 96px; }
+    footer { padding: 24px; }
+  }
+
+  /* ─── MOBILE ─────────────────────────────────────────────────────────────── */
+  @media (max-width: 639px) {
+    nav > div { padding: 0 16px; }
+    .nav-label { display: none; }
+    .wrap { padding: 0 16px; }
+    .hero { padding: 48px 0 32px; }
+    .meta { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+    .meta > div:nth-child(3), .meta > div:nth-child(4) { display: none; }
+    .lede { font-size: 16px; margin-top: 28px; }
+    .cover { margin: 32px 0 0; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat { padding: 20px 14px; }
+    .stat:nth-child(3) { grid-column: span 2; border-right: none; border-top: 1px solid var(--line); }
+    .stat .n { font-size: 36px; }
+    section.body { padding: 56px 0; }
+    .section-head { grid-template-columns: 1fr; gap: 10px; margin-bottom: 24px; }
+    .section-head h2 { font-size: 24px; }
+    .prose { font-size: 15px; }
+    .process { grid-template-columns: 1fr; }
+    .process > div { border-right: none; min-height: auto; }
+    .impact { grid-template-columns: 1fr 1fr; }
+    .impact > div:nth-child(2n) { border-right: none; }
+    .impact .n { font-size: 32px; }
+    blockquote { max-width: 100%; margin: 28px 0; }
+    .next { padding: 48px 0 72px; }
+    .next a { padding: 24px 0; gap: 16px; }
+    .arrow { font-size: 20px; }
+    footer { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <a href="/" class="back">← Portfolio</a>
+    <span class="mono nav-label"><span style="color:var(--ink)">●</span> Case 02 / 05 · TaskGPT</span>
+    <a href="mailto:contact@dipeshgurav.com" class="back">Contact →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="meta">
+      <div>Case / <span>02</span></div>
+      <div>Year / <span>2023 — 2024</span></div>
+      <div>Role / <span>Lead Product Design</span></div>
+      <div>Context / <span>35K DAU · 14 Countries</span></div>
+    </div>
+    <h1>TaskGPT.<br>The AI suite<br>that <i>paid for itself.</i></h1>
+    <p class="lede">End-to-end design of an enterprise AI productivity suite — built on OpenAI, PaLM 2, and LLaMA — used by 35,000 operators daily across 14 countries. Call handling time dropped 20%. The product earned its own cost.</p>
+
+    <div class="cover">
+      <span class="cover-label">TaskGPT · Enterprise AI Suite · TaskUs</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="mono" style="margin-bottom:8px">Cost Reduction</div><div class="n">20<i>%</i></div></div>
+      <div class="stat"><div class="mono" style="margin-bottom:8px">Daily Users</div><div class="n">35<i>K</i></div></div>
+      <div class="stat"><div class="mono" style="margin-bottom:8px">Countries</div><div class="n">14</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">§ 01 · Problem</span>
+      <h2>35,000 operators. Millions of customer queries. A playbook designed <i>before AI existed.</i></h2>
+    </div>
+    <div class="prose">
+      <p>TaskUs agents handle complex enterprise support across 14 countries — insurance claims, fintech queries, healthcare triage. The existing tooling was built for a pre-AI world: multiple tabs, manual copy-paste, static knowledge bases. Resolution time was high. Operator cognitive load was higher.</p>
+      <p>The brief was not "add AI to the product." It was <strong>redesign the entire operator workflow assuming AI is native to every step</strong> — from query classification to response generation to quality evaluation. A full paradigm shift, not a feature addition.</p>
+    </div>
+
+    <blockquote>"Operators should think less about <span>finding</span> answers and more about <span>delivering</span> them."</blockquote>
+    <div class="quote-attr">— Design principle, TaskGPT v1</div>
+
+    <div class="tag-row">
+      <span class="tag">AI Interface Design</span>
+      <span class="tag">Enterprise UX</span>
+      <span class="tag">Design Systems</span>
+      <span class="tag">OpenAI · PaLM 2 · LLaMA</span>
+      <span class="tag">35K DAU</span>
+      <span class="tag">14 Countries</span>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">§ 02 · Approach</span>
+      <h2>The PCAF framework — a new language for <i>AI-native design.</i></h2>
+    </div>
+    <div class="prose">
+      <p>Before designing screens, I authored the PCAF framework — an internal design system for AI interface decisions at TaskUs. PCAF defines how AI suggestions surface, how operators accept or override them, and how confidence levels are communicated without overwhelming attention.</p>
+      <p>Every screen in TaskGPT traces back to a PCAF principle. This ensured consistency across EvaluateUs, the LevelUp gamification system, and the core TaskGPT suite — three products that share an operator audience but serve very different moments in the workflow.</p>
+    </div>
+
+    <div class="process">
+      <div>
+        <span class="mono" style="color:var(--accent)">01 / Research</span>
+        <h3>Journey mapping with 35K+ operators</h3>
+        <p>Shadowed agents across 6 site locations. Mapped every tool switch, every manual lookup, every moment where the current workflow forced a wrong decision.</p>
+      </div>
+      <div>
+        <span class="mono" style="color:var(--accent)">02 / Framework</span>
+        <h3>PCAF — AI design system</h3>
+        <p>Built the PCAF framework to define how AI surfaces in the UI: Prompt, Context, Action, Feedback. Now used across all TaskUs AI products.</p>
+      </div>
+      <div>
+        <span class="mono" style="color:var(--accent)">03 / Design</span>
+        <h3>Multi-model AI suite</h3>
+        <p>Designed the full product across OpenAI, PaLM 2, and LLaMA — each model serving a different operator task with appropriate confidence indicators.</p>
+      </div>
+      <div>
+        <span class="mono" style="color:var(--accent)">04 / Ecosystem</span>
+        <h3>LevelUp gamification</h3>
+        <p>Designed the LevelUp engagement layer — challenges, leaderboards, streaks — that lifted operator engagement 40% and reduced attrition on high-volume queues.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">§ 03 · Outcome</span>
+      <h2>20% cost reduction.<br><i>35K daily users.</i> One framework that changed how TaskUs builds AI products.</h2>
+    </div>
+    <div class="prose">
+      <p>TaskGPT shipped across 14 countries and 35,000 daily operators. Call handling time fell 20% within the first two quarters — a reduction that translated directly to operational cost savings for enterprise clients.</p>
+      <p>The PCAF framework, originally built for TaskGPT, was adopted company-wide as the standard for AI interface decisions. EvaluateUs, the performance evaluation suite, and the LevelUp gamification layer both shipped under it. The design system outlived the project it was born from.</p>
+    </div>
+
+    <div class="impact">
+      <div><div class="n">20<i>%</i></div><div class="mono">Operational cost saved</div></div>
+      <div><div class="n">35<i>K</i></div><div class="mono">Daily active operators</div></div>
+      <div><div class="n">40<i>%</i></div><div class="mono">Engagement lift via LevelUp</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="next">
+  <div class="wrap">
+    <div class="mono next-label">Next case study</div>
+    <a href="case-aatmnirbhar.html">
+      <span class="nt">Aatmnirbhar — <i>one night, a national symbol.</i></span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  © MMXXVI · Dipesh Gurav · Nottingham, UK · Designed with purpose, not just pixels
+</footer>
+
+</body>
+</html>
