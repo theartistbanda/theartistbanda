@@ -809,6 +809,16 @@ function AContact() {
 
           {/* Right — form */}
           <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div style={{ marginBottom: 8 }}>
+              <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.45)', marginBottom: 12 }}>/ Write to me</div>
+              <h3 style={{
+                fontSize: bp.isMobile ? 22 : 28,
+                fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1,
+                margin: 0, color: A.paper
+              }}>
+                Or drop me a line directly.
+              </h3>
+            </div>
             <AField label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name} />
             <AField label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email} />
             <AField label="Message" multiline value={form.msg} onChange={(v) => setForm({ ...form, msg: v })} error={errors.msg} />

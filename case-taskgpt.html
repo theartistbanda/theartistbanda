@@ -47,10 +47,10 @@
   .stat .n i { color: var(--accent); font-style: italic; font-weight: 400; }
 
   section.body { padding: 96px 0; border-bottom: 1px solid var(--line); }
-  .section-head { display: grid; grid-template-columns: 160px 1fr; gap: 48px; margin-bottom: 48px; align-items: start; }
-  .section-head h2 { font-family: var(--sans); font-size: 40px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; max-width: 20ch; }
+  .section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
+  .section-head h2 { font-family: var(--sans); font-size: 40px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
   .section-head h2 i { font-style: italic; color: var(--accent); }
-  .prose { padding-left: calc(160px + 48px); font-size: 16px; line-height: 1.75; color: var(--ink2); }
+  .prose { font-size: 16px; line-height: 1.75; color: var(--ink2); }
   .prose p + p { margin-top: 16px; }
   .prose strong { color: var(--ink); font-weight: 500; }
 
@@ -88,9 +88,8 @@
     .hero { padding: 64px 0 40px; }
     .meta { grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
     .stats { grid-template-columns: 1fr 1fr 1fr; }
-    .section-head { grid-template-columns: 120px 1fr; gap: 24px; }
+    .section-head { gap: 10px; margin-bottom: 36px; }
     .section-head h2 { font-size: 32px; }
-    .prose { padding-left: calc(120px + 24px); }
     .process { grid-template-columns: 1fr 1fr; }
     .process > div:nth-child(2n) { border-right: none; }
     .process > div { min-height: auto; }
@@ -115,9 +114,9 @@
     .stat:nth-child(3) { grid-column: span 2; border-right: none; border-top: 1px solid var(--line); }
     .stat .n { font-size: 36px; }
     section.body { padding: 56px 0; }
-    .section-head { grid-template-columns: 1fr; gap: 10px; margin-bottom: 24px; }
+    .section-head { gap: 8px; margin-bottom: 24px; }
     .section-head h2 { font-size: 24px; }
-    .prose { font-size: 15px; padding-left: 0; }
+    .prose { font-size: 15px; }
     .process { grid-template-columns: 1fr; }
     .process > div { border-right: none; min-height: auto; }
     .impact { grid-template-columns: 1fr 1fr; }
