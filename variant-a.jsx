@@ -335,7 +335,7 @@ function AWork() {
         </div>
 
         <div style={{ borderTop: `1px solid ${A.ink}` }}>
-          {PORTFOLIO.projects.map((p) => <AProjectRow key={p.id} p={p} />)}
+          {PORTFOLIO.projects.filter(p => p.selected !== false).map((p) => <AProjectRow key={p.id} p={p} />)}
         </div>
       </div>
     </section>

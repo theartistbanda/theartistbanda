@@ -91,6 +91,7 @@ const PORTFOLIO = {
     },
     {
       id: 'taskgpt',
+      selected: false,
       index: '02',
       year: 2024,
       title: 'TaskGPT',
@@ -109,6 +110,7 @@ const PORTFOLIO = {
     },
     {
       id: 'aatmnirbhar',
+      selected: false,
       index: '03',
       year: 2020,
       title: 'Aatmnirbhar',
