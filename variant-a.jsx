@@ -229,7 +229,7 @@ function AHero() {
           marginTop: bp.isMobile ? 40 : 80,
           alignItems: 'start'
         }}>
-          {bp.isDesktop && <div style={{ gridColumn: 'span 1', ...aStyles.mono }}>§ 00</div>}
+          {bp.isDesktop && <div style={{ gridColumn: 'span 1', ...aStyles.mono }}>00</div>}
 
           <div style={bp.isDesktop ? { gridColumn: 'span 5' } : {}}>
             <p style={{ fontSize: bp.isMobile ? 16 : 18, lineHeight: 1.45, letterSpacing: '-0.01em', margin: 0, color: A.ink2 }}>
@@ -319,7 +319,7 @@ function AWork() {
           gridTemplateColumns: bp.isMobile ? '1fr' : bp.isTablet ? '1fr 1fr' : 'repeat(12, 1fr)',
           gap: 24, marginBottom: bp.isMobile ? 32 : 64
         }}>
-          {bp.isDesktop && <div style={{ gridColumn: 'span 1', ...aStyles.mono }}>§ 01</div>}
+          {bp.isDesktop && <div style={{ gridColumn: 'span 1', ...aStyles.mono }}>01</div>}
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Selected Work · 2020 — 2025</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
@@ -451,7 +451,7 @@ function AOrigin() {
 
           {/* Left */}
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
-            {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.55)', marginBottom: 12 }}>§ 02</div>}
+            {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.55)', marginBottom: 12 }}>02</div>}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 20 }}>The origin story</div>
             <h2 style={{
               fontSize: 'clamp(36px, 7vw, 88px)',
@@ -516,7 +516,7 @@ function APrinciples() {
     <section id="principles" style={{ padding: `${vPad} ${side}`, borderBottom: `1px solid ${A.line}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
         <div style={{ marginBottom: bp.isMobile ? 32 : 48 }}>
-          {bp.isDesktop && <div style={{ ...aStyles.mono, marginBottom: 8 }}>§ 03</div>}
+          {bp.isDesktop && <div style={{ ...aStyles.mono, marginBottom: 8 }}>03</div>}
           <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Operating principles</div>
           <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
             Six beliefs that decide<br />every design call.
@@ -645,7 +645,7 @@ function ACareer() {
           gap: 24, marginBottom: bp.isMobile ? 32 : 48
         }}>
           <div>
-            {bp.isDesktop && <div style={{ ...aStyles.mono, marginBottom: 8 }}>§ 04</div>}
+            {bp.isDesktop && <div style={{ ...aStyles.mono, marginBottom: 8 }}>04</div>}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Curriculum vitae</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
               Twelve years,<br />four cities, millions of users.
@@ -684,7 +684,7 @@ function AAbout() {
         }}>
           {/* Main bio */}
           <div style={bp.isDesktop ? { gridColumn: 'span 8' } : {}}>
-            {bp.isDesktop && <div style={{ ...aStyles.mono, marginBottom: 8 }}>§ 05</div>}
+            {bp.isDesktop && <div style={{ ...aStyles.mono, marginBottom: 8 }}>05</div>}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>The person behind the work</div>
             <h2 style={{ fontSize: bp.isMobile ? 26 : 40, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1, margin: 0, marginBottom: 32 }}>
               I became a designer because<br />technology is supposed to make<br />life <span style={{ fontStyle: 'italic' }}>easier</span>.
@@ -771,7 +771,7 @@ function AContact() {
         }}>
           {/* Left — info + links */}
           <div>
-            {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.45)', marginBottom: 12 }}>§ 06</div>}
+            {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.45)', marginBottom: 12 }}>06</div>}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>End · Let us collaborate</div>
             <h2 style={{
               fontSize: 'clamp(36px, 7vw, 88px)',
