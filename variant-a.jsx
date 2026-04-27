@@ -651,7 +651,7 @@ function ACareer() {
               Twelve years,<br />four cities, millions of users.
             </h2>
           </div>
-          <a href="#" data-cursor="hover" style={{
+          <a href="/dipesh-gurav-cv.pdf" download data-cursor="hover" style={{
             ...aStyles.mono, padding: '10px 14px', border: `1px solid ${A.line}`,
             color: A.ink, textDecoration: 'none', flexShrink: 0
           }}>
