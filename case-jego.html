@@ -38,6 +38,7 @@
   .lede { margin-top: 48px; font-size: 19px; line-height: 1.55; color: var(--ink2); letter-spacing: -0.008em; }
 
   .cover { aspect-ratio: 16/9; margin: 64px 0 0; background: var(--ink); border: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(244,241,236,0.03) 11px 12px); }
+  .cover img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
   .cover-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244,241,236,0.35); }
 
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -71,6 +72,7 @@
   .screens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
   .screen { aspect-ratio: 9/16; background: var(--paper2); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(20,17,15,0.05) 11px 12px); }
   .screen span { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); background: var(--paper); padding: 3px 8px; }
+  .screen img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 
   blockquote { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(24px, 3.2vw, 44px); line-height: 1.25; letter-spacing: -0.02em; max-width: 22ch; margin: 40px 0; color: var(--ink); }
   blockquote span { color: var(--accent); }
@@ -168,7 +170,7 @@
     <p class="lede">A video streaming platform connecting Gulf users with world-renowned mentors — designed from the ground up for Arabic speakers, Islamic values, and a market that Western wellbeing apps had consistently failed to serve.</p>
 
     <div class="cover">
-      <span class="cover-label">JEGO · Wellbeing Streaming · UAE</span>
+      <img src="/assets/jego-cover.png" alt="JEGO wellbeing streaming app" />
     </div>
 
     <div class="stats">
@@ -271,9 +273,9 @@
     </div>
 
     <div class="screens">
-      <div class="screen"><span>onboarding.png</span></div>
-      <div class="screen"><span>home-rtl.png</span></div>
-      <div class="screen"><span>player.png</span></div>
+      <div class="screen"><img src="/assets/jego-screen-1.png" alt="JEGO home screen" /></div>
+      <div class="screen"><img src="/assets/jego-screen-2.png" alt="JEGO daily wisdom screen" /></div>
+      <div class="screen"><img src="/assets/jego-screen-3.png" alt="JEGO profile screen" /></div>
     </div>
   </div>
 </section>

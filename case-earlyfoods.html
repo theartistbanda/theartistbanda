@@ -38,6 +38,8 @@
   .lede { margin-top: 48px; font-size: 19px; line-height: 1.55; color: var(--ink2); letter-spacing: -0.008em; }
 
   .cover { aspect-ratio: 16/9; margin: 64px 0 0; background: var(--paper2); border: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(20,17,15,0.04) 11px 12px); }
+  .cover img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .web-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
   .cover-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(20,17,15,0.3); }
 
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -190,7 +192,7 @@
     <p class="lede">A mom-founded premium organic food company in the UAE — feeding natural, fresh, and chemical-free food to children. The design challenge was not selling food. It was earning the trust of parents making daily decisions about what goes into their child's body.</p>
 
     <div class="cover">
-      <span class="cover-label">EarlyFoods · Organic Baby Food · UAE E-commerce</span>
+      <img src="/assets/earlyfoods-cover.png" alt="EarlyFoods organic baby food e-commerce" />
     </div>
 
     <div class="stats">
@@ -301,7 +303,7 @@
     </div>
 
     <div class="web-screens">
-      <div class="web-screen"><span>homepage-desktop.png</span></div>
+      <div class="web-screen"><img src="/assets/earlyfoods-web-1.png" alt="EarlyFoods website on tablet" /></div>
       <div class="web-screen"><span>product-listing.png</span></div>
     </div>
   </div>
