@@ -461,12 +461,12 @@ function AOrigin() {
               Zero brief.<br />
               <span style={{ fontStyle: 'italic', color: A.accent }}>A national symbol.</span>
             </h2>
-            <p style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(244,241,236,0.7)', maxWidth: 480, marginTop: 40 }}>
+            <p style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(244,241,236,0.7)', maxWidth: bp.isDesktop ? 480 : '100%', marginTop: 40 }}>
               May 2020. India launches Aatmnirbhar Bharat. I open Illustrator. By morning, the logo is on government
               campaigns, manufacturer packaging and news tickers across the country. Officially adopted for PM SVANidhi.
               No brief. No client. No credit.
             </p>
-            <p style={{ fontFamily: 'Georgia, "Iowan Old Style", serif', fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, lineHeight: 1.4, color: A.paper, marginTop: 32, maxWidth: 520 }}>
+            <p style={{ fontFamily: 'Georgia, "Iowan Old Style", serif', fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, lineHeight: 1.4, color: A.paper, marginTop: 32, maxWidth: bp.isDesktop ? 520 : '100%' }}>
               "Good design does not ask permission — it simply works for people."
             </p>
           </div>
@@ -594,11 +594,13 @@ function ACareerItem({ c, i, bp }) {
             <div style={{ fontSize: bp.isMobile ? 16 : 20, fontWeight: 500, letterSpacing: '-0.015em', lineHeight: 1.2 }}>{c.role}</div>
             <div style={{ fontSize: 13, color: A.accent, marginTop: 4 }}>{c.org}</div>
             <p style={{ fontSize: 13, color: A.mute, lineHeight: 1.65, margin: '12px 0 0' }}>{c.body}</p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 12 }}>
-              {c.tags.map((t) => (
-                <span key={t} style={{ ...aStyles.mono, fontSize: 9, padding: '4px 7px', border: `1px solid ${A.line}`, color: A.ink2 }}>{t}</span>
-              ))}
-            </div>
+            {bp.isMobile && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 12 }}>
+                {c.tags.map((t) => (
+                  <span key={t} style={{ ...aStyles.mono, fontSize: 9, padding: '4px 7px', border: `1px solid ${A.line}`, color: A.ink2 }}>{t}</span>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -687,7 +689,7 @@ function AAbout() {
             <h2 style={{ fontSize: bp.isMobile ? 26 : 40, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1, margin: 0, marginBottom: 32 }}>
               I became a designer because<br />technology is supposed to make<br />life <span style={{ fontStyle: 'italic' }}>easier</span>.
             </h2>
-            <div style={{ fontSize: 15, lineHeight: 1.7, color: A.ink2, maxWidth: 560 }}>
+            <div style={{ fontSize: 15, lineHeight: 1.7, color: A.ink2, maxWidth: bp.isDesktop ? 560 : '100%' }}>
               <p style={{ margin: 0 }}>If a product confuses you, the problem is not you — it is the design. That one belief has driven every project across twelve years in this field.</p>
               <p style={{ marginTop: 16 }}>My work spans AI productivity tools that reduced operational costs by 20%, digital wellness apps with millions of downloads in 22 languages, fintech that strips friction out of money, and a national symbol now used by 90% of Indian manufacturers.</p>
               <p style={{ marginTop: 16 }}>Shipping across India, the UAE and fourteen other countries taught me that "intuitive" is always culturally specific. Building for a billion-user context, a Gulf market and a global enterprise requires empathy deeper than personas.</p>
@@ -778,7 +780,7 @@ function AContact() {
               Let us build<br />
               something <span style={{ fontStyle: 'italic', color: A.accent }}>meaningful.</span>
             </h2>
-            <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(244,241,236,0.65)', maxWidth: 460, marginTop: 32 }}>
+            <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(244,241,236,0.65)', maxWidth: bp.isDesktop ? 460 : '100%', marginTop: 32 }}>
               Open to senior product design roles, consulting, and conversations with people who care about the humans behind the pixels.
             </p>
             <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column' }}>
