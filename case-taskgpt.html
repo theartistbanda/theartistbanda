@@ -35,7 +35,7 @@
   .meta > div span { color: var(--ink); }
   h1 { font-family: var(--sans); font-weight: 500; font-size: clamp(48px, 9vw, 132px); line-height: 0.95; letter-spacing: -0.035em; max-width: 12ch; }
   h1 i { font-style: italic; font-weight: 400; color: var(--accent); }
-  .lede { margin-top: 48px; max-width: 680px; font-size: 19px; line-height: 1.55; color: var(--ink2); letter-spacing: -0.008em; }
+  .lede { margin-top: 48px; font-size: 19px; line-height: 1.55; color: var(--ink2); letter-spacing: -0.008em; }
 
   .cover { aspect-ratio: 16/9; margin: 64px 0 0; background: var(--ink); border: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(244,241,236,0.04) 11px 12px); }
   .cover-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244,241,236,0.4); }
@@ -50,7 +50,7 @@
   .section-head { display: grid; grid-template-columns: 160px 1fr; gap: 48px; margin-bottom: 48px; align-items: start; }
   .section-head h2 { font-family: var(--sans); font-size: 40px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; max-width: 20ch; }
   .section-head h2 i { font-style: italic; color: var(--accent); }
-  .prose { max-width: 720px; font-size: 16px; line-height: 1.75; color: var(--ink2); }
+  .prose { padding-left: calc(160px + 48px); font-size: 16px; line-height: 1.75; color: var(--ink2); }
   .prose p + p { margin-top: 16px; }
   .prose strong { color: var(--ink); font-weight: 500; }
 
@@ -90,6 +90,7 @@
     .stats { grid-template-columns: 1fr 1fr 1fr; }
     .section-head { grid-template-columns: 120px 1fr; gap: 24px; }
     .section-head h2 { font-size: 32px; }
+    .prose { padding-left: calc(120px + 24px); }
     .process { grid-template-columns: 1fr 1fr; }
     .process > div:nth-child(2n) { border-right: none; }
     .process > div { min-height: auto; }
@@ -116,7 +117,7 @@
     section.body { padding: 56px 0; }
     .section-head { grid-template-columns: 1fr; gap: 10px; margin-bottom: 24px; }
     .section-head h2 { font-size: 24px; }
-    .prose { font-size: 15px; }
+    .prose { font-size: 15px; padding-left: 0; }
     .process { grid-template-columns: 1fr; }
     .process > div { border-right: none; min-height: auto; }
     .impact { grid-template-columns: 1fr 1fr; }
