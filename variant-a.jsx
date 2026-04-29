@@ -323,7 +323,7 @@ function AWork() {
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Selected Work · 2020 — 2025</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-              Five products. Four markets.<br />
+              Three products. Three markets.<br />
               <span style={{ color: A.mute }}>Measurable behaviour change.</span>
             </h2>
           </div>
@@ -690,9 +690,9 @@ function AAbout() {
               I became a designer because<br />technology is supposed to make<br />life <span style={{ fontStyle: 'italic' }}>easier</span>.
             </h2>
             <div style={{ fontSize: 15, lineHeight: 1.7, color: A.ink2, maxWidth: bp.isDesktop ? 560 : '100%' }}>
-              <p style={{ margin: 0 }}>If a product confuses you, the problem is not you — it is the design. That one belief has driven every project across twelve years in this field.</p>
-              <p style={{ marginTop: 16 }}>My work spans AI productivity tools that reduced operational costs by 20%, digital wellness apps with millions of downloads in 22 languages, fintech that strips friction out of money, and a national symbol now used by 90% of Indian manufacturers.</p>
-              <p style={{ marginTop: 16 }}>Shipping across India, the UAE and fourteen other countries taught me that "intuitive" is always culturally specific. Building for a billion-user context, a Gulf market and a global enterprise requires empathy deeper than personas.</p>
+              <p style={{ margin: 0 }}>I grew up watching technology promise to simplify life, then complicate it. A form too long. A menu that hides the thing you need. An app that helps and frustrates in equal measure. That gap between what technology promises and what it actually does became my professional obsession.</p>
+              <p style={{ marginTop: 16 }}>The work has taken me across industries — enterprise AI, consumer wellbeing, e-commerce, national identity — but the design problem is always the same: reduce the distance between what someone needs to do and what the product lets them do. The medium changes. The brief does not.</p>
+              <p style={{ marginTop: 16 }}>I have designed for a billion-person market, a Gulf audience shaped by faith and cultural ritual, and enterprise operators in fourteen countries. Each taught me that the word "intuitive" carries an unspoken postscript: <em>intuitive for whom</em>. The answer is never assumed. It is always researched.</p>
               <p style={{ marginTop: 16 }}>Off-hours I water plants, tidy rooms and keep simple rituals. They remind me why clarity matters — in life and in the grid.</p>
             </div>
           </div>
@@ -772,7 +772,7 @@ function AContact() {
           {/* Left — info + links */}
           <div>
             {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.45)', marginBottom: 12 }}>06</div>}
-            <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>End · Let us collaborate</div>
+            <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>/ Let's work together</div>
             <h2 style={{
               fontSize: 'clamp(36px, 7vw, 88px)',
               fontWeight: 500, lineHeight: 1, letterSpacing: '-0.03em', margin: 0
