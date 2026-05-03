@@ -35,10 +35,44 @@ function sp(bp) {
   return bp.isMobile ? '16px' : bp.isTablet ? '24px' : '32px';
 }
 
+// ─── AVAILABILITY BANNER ─────────────────────────────────────────────────────
+function ABanner() {
+  const bp = useBreakpoint();
+  const side = sp(bp);
+  return (
+    <React.Fragment>
+      <style>{`@keyframes abPulse{0%,100%{opacity:1}50%{opacity:.35}}`}</style>
+      <div style={{
+        position: 'sticky', top: 0, zIndex: 82,
+        background: A.ink,
+        borderBottom: '1px solid rgba(244,241,236,0.1)',
+        padding: `9px ${side}`,
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10
+      }}>
+        <span style={{
+          width: 6, height: 6, borderRadius: 99, background: A.accent,
+          display: 'inline-block', flexShrink: 0,
+          animation: 'abPulse 2s ease-in-out infinite'
+        }} />
+        <span style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.72)', fontSize: bp.isMobile ? 9 : 10 }}>
+          {bp.isMobile
+            ? 'Available for UK roles from June 2026'
+            : 'Relocating to the UK · Available for onsite and hybrid roles from June 2026 · Scheduling interviews now'}
+        </span>
+        <a href="#contact" data-cursor="hover" style={{
+          ...aStyles.mono, fontSize: bp.isMobile ? 9 : 10,
+          color: A.accent, textDecoration: 'none', flexShrink: 0
+        }}>Get in touch →</a>
+      </div>
+    </React.Fragment>
+  );
+}
+
 function VariantA() {
   return (
     <div style={aStyles.root}>
       <CustomCursor accent={A.accent} />
+      <ABanner />
       <ANav />
       <AHero />
       <AMetrics />
@@ -74,7 +108,7 @@ function ANav() {
 
   return (
     <nav style={{
-      position: 'sticky', top: 0, zIndex: 80,
+      position: 'sticky', top: 38, zIndex: 80,
       background: 'rgba(244,241,236,0.92)', backdropFilter: 'blur(12px)',
       borderBottom: `1px solid ${A.line}`
     }}>
@@ -896,4 +930,4 @@ function AFooter() {
   );
 }
 
-Object.assign(window, { VariantA, ANav, AHero, AMetrics, AWork, AOrigin, APrinciples, ACareer, AAbout, AContact, AFooter });
+Object.assign(window, { VariantA, ABanner, ANav, AHero, AMetrics, AWork, AOrigin, APrinciples, ACareer, AAbout, AContact, AFooter });
