@@ -331,6 +331,7 @@ function CustomCursor({ accent = '#C2410C' }) {
     <React.Fragment>
       <div
         ref={dot}
+        aria-hidden="true"
         style={{
           position: 'fixed', top: 0, left: 0, width: 6, height: 6, borderRadius: 99,
           background: accent, pointerEvents: 'none', zIndex: 9999,
@@ -339,6 +340,7 @@ function CustomCursor({ accent = '#C2410C' }) {
       />
       <div
         ref={ring}
+        aria-hidden="true"
         style={{
           position: 'fixed', top: 0, left: 0,
           width: ringSize, height: ringSize, borderRadius: 99,

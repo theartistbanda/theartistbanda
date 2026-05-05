@@ -9,7 +9,7 @@ const A = {
   paper2: '#1C1916',
   ink: '#EDEAE4',
   ink2: '#9A948D',
-  mute: '#6B6660',
+  mute: '#8C8680',
   line: 'rgba(237,234,228,0.09)',
   accent: '#C2410C',
   accentSoft: '#2A1208',
@@ -78,14 +78,16 @@ function VariantA() {
       <CustomCursor accent={A.accent} />
       <ABanner />
       <ANav />
-      <AHero />
-      <AMetrics />
-      <AWork />
-      <AOrigin />
-      <APrinciples />
-      <ACareer />
-      <AAbout />
-      <AContact />
+      <main>
+        <AHero />
+        <AMetrics />
+        <AWork />
+        <AOrigin />
+        <APrinciples />
+        <ACareer />
+        <AAbout />
+        <AContact />
+      </main>
       <AFooter />
     </div>
   );
@@ -489,7 +491,7 @@ function AOrigin() {
 
           {/* Left */}
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
-            {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.55)', marginBottom: 12 }}>02</div>}
+            {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.70)', marginBottom: 12 }}>02</div>}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 20 }}>The origin story</div>
             <h2 style={{
               fontSize: 'clamp(36px, 7vw, 88px)',
@@ -499,7 +501,7 @@ function AOrigin() {
               Zero brief.<br />
               <span style={{ fontStyle: 'italic', color: A.accent }}>A national symbol.</span>
             </h2>
-            <p style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(244,241,236,0.7)', maxWidth: bp.isDesktop ? 480 : '100%', marginTop: 40 }}>
+            <p style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(237,234,228,0.82)', maxWidth: bp.isDesktop ? 480 : '100%', marginTop: 40 }}>
               May 2020. India launches Aatmnirbhar Bharat. I open Illustrator. By morning, the logo is on government
               campaigns, manufacturer packaging and news tickers across the country. Officially adopted for PM SVANidhi.
               No brief. No client. No credit.
@@ -528,7 +530,7 @@ function AOrigin() {
                 borderBottom: i < 2 ? `1px solid rgba(244,241,236,0.12)` : 'none'
               }}>
                 <div style={{ fontSize: bp.isMobile ? 28 : 40, fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1 }}>{n}</div>
-                <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.55)', marginTop: 12 }}>{l}</div>
+                <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.70)', marginTop: 12 }}>{l}</div>
               </div>
             ))}
             <div style={{ gridColumn: 'span 2', padding: bp.isMobile ? '20px 16px' : 28, background: 'rgba(194,65,12,0.1)', borderTop: `1px solid rgba(244,241,236,0.08)` }}>
@@ -829,7 +831,7 @@ function AContact() {
         }}>
           {/* Left — info + links */}
           <div>
-            {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.45)', marginBottom: 12 }}>06</div>}
+            {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)', marginBottom: 12 }}>06</div>}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>/ Let's work together</div>
             <h2 style={{
               fontSize: 'clamp(36px, 7vw, 88px)',
@@ -838,7 +840,7 @@ function AContact() {
               Let us build<br />
               something <span style={{ fontStyle: 'italic', color: A.accent }}>meaningful.</span>
             </h2>
-            <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(244,241,236,0.65)', maxWidth: bp.isDesktop ? 460 : '100%', marginTop: 32 }}>
+            <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(237,234,228,0.80)', maxWidth: bp.isDesktop ? 460 : '100%', marginTop: 32 }}>
               Open to senior product design roles, consulting, and conversations with people who care about the humans behind the pixels.
             </p>
             <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column' }}>
@@ -855,9 +857,9 @@ function AContact() {
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '12px'}
                   onMouseLeave={(e) => e.currentTarget.style.paddingLeft = '0'}>
-                  <span style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.45)' }}>/ {String(i + 1).padStart(2, '0')}</span>
+                  <span style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)' }}>/ {String(i + 1).padStart(2, '0')}</span>
                   <span style={{ fontSize: bp.isMobile ? 15 : 20, fontWeight: 500, letterSpacing: '-0.01em' }}>
-                    {l.label} — <span style={{ color: 'rgba(244,241,236,0.6)', fontWeight: 400 }}>{l.value}</span>
+                    {l.label} — <span style={{ color: 'rgba(237,234,228,0.75)', fontWeight: 400 }}>{l.value}</span>
                   </span>
                   <span style={{ color: A.accent, fontSize: 18 }}>→</span>
                 </a>
@@ -878,7 +880,7 @@ function AContact() {
                   Thanks, {senderName}.<br />I'll be in touch.
                 </h3>
               </div>
-              <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(244,241,236,0.65)', margin: 0 }}>
+              <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(237,234,228,0.80)', margin: 0 }}>
                 Your message landed safely. I read every enquiry personally and typically reply within 48 hours.
               </p>
               <button onClick={() => { setSent(false); setSendError(false); }} data-cursor="hover"
@@ -896,7 +898,7 @@ function AContact() {
           ) : (
             <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               <div style={{ marginBottom: 8 }}>
-                <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.45)', marginBottom: 12 }}>/ Write to me</div>
+                <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)', marginBottom: 12 }}>/ Write to me</div>
                 <h3 style={{
                   fontSize: bp.isMobile ? 22 : 28,
                   fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1,
@@ -936,7 +938,7 @@ function AField({ label, type = 'text', value, onChange, error, multiline }) {
   const Tag = multiline ? 'textarea' : 'input';
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', ...aStyles.mono, color: focus ? A.accent : 'rgba(244,241,236,0.45)', marginBottom: 8, transition: 'color .2s' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', ...aStyles.mono, color: focus ? A.accent : 'rgba(237,234,228,0.65)', marginBottom: 8, transition: 'color .2s' }}>
         <span>{label}</span>
         {error && <span style={{ color: A.accent }}>✱ {error}</span>}
       </div>
@@ -964,10 +966,10 @@ function AField({ label, type = 'text', value, onChange, error, multiline }) {
 function AFooter() {
   const bp = useBreakpoint();
   const side = sp(bp);
-  const monoLight = { ...aStyles.mono, color: 'rgba(244,241,236,0.45)' };
+  const monoLight = { ...aStyles.mono, color: 'rgba(237,234,228,0.65)' };
 
   return (
-    <footer style={{ background: A.surf, padding: `72px ${side} 64px`, color: 'rgba(237,234,228,0.45)', borderTop: `1px solid rgba(237,234,228,0.10)` }}>
+    <footer style={{ background: A.surf, padding: `72px ${side} 64px`, color: 'rgba(237,234,228,0.65)', borderTop: `1px solid rgba(237,234,228,0.10)` }}>
       <div style={{
         maxWidth: 1360, margin: '0 auto',
         display: 'grid',
