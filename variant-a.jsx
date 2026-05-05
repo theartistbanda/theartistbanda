@@ -11,7 +11,7 @@ const A = {
   ink2: '#9A948D',
   mute: '#8C8680',
   line: 'rgba(237,234,228,0.09)',
-  accent: '#C2410C',
+  accent: '#E05320',
   accentSoft: '#2A1208',
   surf: '#080604',
 };
@@ -919,7 +919,7 @@ function AContact() {
                 style={{
                   ...aStyles.mono, padding: '14px 20px',
                   background: sending ? 'rgba(237,234,228,0.1)' : A.accent,
-                  color: A.ink, border: 'none', cursor: sending ? 'default' : 'pointer',
+                  color: sending ? A.ink : A.paper, border: 'none', cursor: sending ? 'default' : 'pointer',
                   textAlign: 'left', display: 'flex', justifyContent: 'space-between',
                   transition: 'background .2s'
                 }}>
