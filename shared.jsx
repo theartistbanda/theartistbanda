@@ -268,8 +268,8 @@ const PORTFOLIO = {
 function Placeholder({ label, ratio = '16/9', tone = 'ink', style }) {
   const colors =
     tone === 'ink'
-      ? { bg: '#14110F', fg: 'rgba(244,241,236,0.55)', line: 'rgba(244,241,236,0.08)' }
-      : { bg: '#ECE7DE', fg: 'rgba(20,17,15,0.55)', line: 'rgba(20,17,15,0.07)' };
+      ? { bg: '#080604', fg: 'rgba(237,234,228,0.55)', line: 'rgba(237,234,228,0.08)' }
+      : { bg: '#1C1916', fg: 'rgba(237,234,228,0.35)', line: 'rgba(237,234,228,0.06)' };
   return (
     <div
       style={{

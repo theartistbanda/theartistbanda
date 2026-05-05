@@ -5,14 +5,15 @@
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhhi3HmoZQ5Omybk_s424iDbCbdbDDXTCOFfGYhl9jjVqny_VoS9q0g-WLwCW6-5sX/exec';
 
 const A = {
-  paper: '#F4F1EC',
-  paper2: '#EAE5DC',
-  ink: '#14110F',
-  ink2: '#2A2622',
-  mute: '#6E6A63',
-  line: 'rgba(20,17,15,0.14)',
+  paper: '#0F0D0B',
+  paper2: '#1C1916',
+  ink: '#EDEAE4',
+  ink2: '#9A948D',
+  mute: '#6B6660',
+  line: 'rgba(237,234,228,0.09)',
   accent: '#C2410C',
-  accentSoft: '#F4D9C8'
+  accentSoft: '#2A1208',
+  surf: '#080604',
 };
 
 const aStyles = {
@@ -47,8 +48,8 @@ function ABanner() {
       <style>{`@keyframes abPulse{0%,100%{opacity:1}50%{opacity:.35}}`}</style>
       <div style={{
         position: 'sticky', top: 0, zIndex: 82,
-        background: A.ink,
-        borderBottom: '1px solid rgba(244,241,236,0.1)',
+        background: A.surf,
+        borderBottom: '1px solid rgba(237,234,228,0.1)',
         padding: `9px ${side}`,
         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10
       }}>
@@ -112,7 +113,7 @@ function ANav() {
   return (
     <nav style={{
       position: 'sticky', top: 38, zIndex: 80,
-      background: 'rgba(244,241,236,0.92)', backdropFilter: 'blur(12px)',
+      background: 'rgba(15,13,11,0.92)', backdropFilter: 'blur(12px)',
       borderBottom: `1px solid ${A.line}`
     }}>
       <div style={{
@@ -371,7 +372,7 @@ function AWork() {
           )}
         </div>
 
-        <div style={{ borderTop: `1px solid ${A.ink}` }}>
+        <div style={{ borderTop: `1px solid ${A.line}` }}>
           {PORTFOLIO.projects.filter(p => p.selected !== false).map((p) => <AProjectRow key={p.id} p={p} />)}
         </div>
       </div>
@@ -478,7 +479,7 @@ function AOrigin() {
   const vPad = bp.isMobile ? '72px' : '120px';
 
   return (
-    <section id="origin" style={{ background: A.ink, color: A.paper, padding: `${vPad} ${side}`, borderBottom: `1px solid ${A.line}` }}>
+    <section id="origin" style={{ background: A.surf, color: A.ink, padding: `${vPad} ${side}`, borderBottom: `1px solid ${A.line}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
         <div style={{
           display: 'grid',
@@ -503,7 +504,7 @@ function AOrigin() {
               campaigns, manufacturer packaging and news tickers across the country. Officially adopted for PM SVANidhi.
               No brief. No client. No credit.
             </p>
-            <p style={{ fontFamily: 'Georgia, "Iowan Old Style", serif', fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, lineHeight: 1.4, color: A.paper, marginTop: 32, maxWidth: bp.isDesktop ? 520 : '100%' }}>
+            <p style={{ fontFamily: 'Georgia, "Iowan Old Style", serif', fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, lineHeight: 1.4, color: A.ink, marginTop: 32, maxWidth: bp.isDesktop ? 520 : '100%' }}>
               "Good design does not ask permission — it simply works for people."
             </p>
           </div>
@@ -600,7 +601,7 @@ function ACareerItem({ c, i, bp }) {
       gridTemplateColumns: gridCols,
       gap: bp.isMobile ? 16 : 24,
       padding: bp.isMobile ? '24px 0' : '32px 8px',
-      borderTop: i === 0 ? `1px solid ${A.ink}` : `1px solid ${A.line}`,
+      borderTop: `1px solid ${A.line}`,
       alignItems: 'start',
       opacity: inView ? 1 : 0,
       transform: inView ? 'none' : 'translateY(16px)',
@@ -818,7 +819,7 @@ function AContact() {
   };
 
   return (
-    <section id="contact" style={{ background: A.ink, color: A.paper, padding: `${vPad} ${side}` }}>
+    <section id="contact" style={{ background: A.surf, color: A.ink, padding: `${vPad} ${side}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
         <div style={{
           display: 'grid',
@@ -850,7 +851,7 @@ function AContact() {
                     padding: '18px 0',
                     borderTop: i === 0 ? `1px solid rgba(244,241,236,0.15)` : 'none',
                     borderBottom: `1px solid rgba(244,241,236,0.15)`,
-                    textDecoration: 'none', color: A.paper, transition: 'padding-left .2s'
+                    textDecoration: 'none', color: A.ink, transition: 'padding-left .2s'
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '12px'}
                   onMouseLeave={(e) => e.currentTarget.style.paddingLeft = '0'}>
@@ -872,7 +873,7 @@ function AContact() {
                 <h3 style={{
                   fontSize: bp.isMobile ? 22 : 28,
                   fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.2,
-                  margin: 0, color: A.paper
+                  margin: 0, color: A.ink
                 }}>
                   Thanks, {senderName}.<br />I'll be in touch.
                 </h3>
@@ -883,8 +884,8 @@ function AContact() {
               <button onClick={() => { setSent(false); setSendError(false); }} data-cursor="hover"
                 style={{
                   ...aStyles.mono, padding: '14px 20px',
-                  background: 'transparent', color: A.paper,
-                  border: `1px solid rgba(244,241,236,0.2)`,
+                  background: 'transparent', color: A.ink,
+                  border: `1px solid rgba(237,234,228,0.2)`,
                   cursor: 'pointer', textAlign: 'left',
                   display: 'flex', justifyContent: 'space-between',
                   transition: 'border-color .2s'
@@ -899,7 +900,7 @@ function AContact() {
                 <h3 style={{
                   fontSize: bp.isMobile ? 22 : 28,
                   fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1,
-                  margin: 0, color: A.paper
+                  margin: 0, color: A.ink
                 }}>
                   Or drop me a line directly.
                 </h3>
@@ -915,8 +916,8 @@ function AContact() {
               <button type="submit" data-cursor="hover" disabled={sending}
                 style={{
                   ...aStyles.mono, padding: '14px 20px',
-                  background: sending ? 'rgba(244,241,236,0.1)' : A.accent,
-                  color: A.paper, border: 'none', cursor: sending ? 'default' : 'pointer',
+                  background: sending ? 'rgba(237,234,228,0.1)' : A.accent,
+                  color: A.ink, border: 'none', cursor: sending ? 'default' : 'pointer',
                   textAlign: 'left', display: 'flex', justifyContent: 'space-between',
                   transition: 'background .2s'
                 }}>
@@ -951,7 +952,7 @@ function AField({ label, type = 'text', value, onChange, error, multiline }) {
           width: '100%', background: 'transparent',
           borderBottom: `1px solid ${focus ? A.accent : 'rgba(244,241,236,0.3)'}`,
           borderTop: 0, borderLeft: 0, borderRight: 0,
-          padding: '10px 0', color: A.paper, fontSize: 16,
+          padding: '10px 0', color: A.ink, fontSize: 16,
           fontFamily: 'inherit', outline: 'none', resize: 'vertical',
           transition: 'border-color .2s'
         }} />
@@ -966,7 +967,7 @@ function AFooter() {
   const monoLight = { ...aStyles.mono, color: 'rgba(244,241,236,0.45)' };
 
   return (
-    <footer style={{ background: A.ink, padding: `72px ${side} 64px`, color: 'rgba(244,241,236,0.45)', borderTop: `1px solid rgba(244,241,236,0.12)` }}>
+    <footer style={{ background: A.surf, padding: `72px ${side} 64px`, color: 'rgba(237,234,228,0.45)', borderTop: `1px solid rgba(237,234,228,0.10)` }}>
       <div style={{
         maxWidth: 1360, margin: '0 auto',
         display: 'grid',
