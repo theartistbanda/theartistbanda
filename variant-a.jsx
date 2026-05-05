@@ -2,7 +2,7 @@
 // Desktop: strict 12-col grid. Tablet: 2-col adaptive. Mobile: single column.
 
 // Paste your deployed Google Apps Script URL here after setup:
-const APPS_SCRIPT_URL = 'PASTE_YOUR_SCRIPT_URL_HERE';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhhi3HmoZQ5Omybk_s424iDbCbdbDDXTCOFfGYhl9jjVqny_VoS9q0g-WLwCW6-5sX/exec';
 
 const A = {
   paper: '#F4F1EC',
