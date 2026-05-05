@@ -1,6 +1,9 @@
 // Variant A — SWISS GRID (Responsive)
 // Desktop: strict 12-col grid. Tablet: 2-col adaptive. Mobile: single column.
 
+// Paste your deployed Google Apps Script URL here after setup:
+const APPS_SCRIPT_URL = 'PASTE_YOUR_SCRIPT_URL_HERE';
+
 const A = {
   paper: '#F4F1EC',
   paper2: '#EAE5DC',
@@ -782,16 +785,36 @@ function AContact() {
   const vPad = bp.isMobile ? '72px' : '120px';
   const [form, setForm] = React.useState({ name: '', email: '', msg: '' });
   const [errors, setErrors] = React.useState({});
+  const [sending, setSending] = React.useState(false);
   const [sent, setSent] = React.useState(false);
+  const [senderName, setSenderName] = React.useState('');
+  const [sendError, setSendError] = React.useState(false);
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!form.name.trim()) errs.name = 'Required';
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email)) errs.email = 'Invalid email';
     if (form.msg.trim().length < 8) errs.msg = 'Tell me a bit more';
     setErrors(errs);
-    if (!Object.keys(errs).length) setSent(true);
+    if (Object.keys(errs).length) return;
+
+    setSending(true);
+    setSendError(false);
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new URLSearchParams({ name: form.name, email: form.email, message: form.msg })
+      });
+      setSenderName(form.name);
+      setForm({ name: '', email: '', msg: '' });
+      setSent(true);
+    } catch {
+      setSendError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -841,32 +864,66 @@ function AContact() {
             </div>
           </div>
 
-          {/* Right — form */}
-          <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <div style={{ marginBottom: 8 }}>
-              <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.45)', marginBottom: 12 }}>/ Write to me</div>
-              <h3 style={{
-                fontSize: bp.isMobile ? 22 : 28,
-                fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1,
-                margin: 0, color: A.paper
-              }}>
-                Or drop me a line directly.
-              </h3>
+          {/* Right — success state or form */}
+          {sent ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              <div style={{ marginBottom: 8 }}>
+                <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 12 }}>/ Message received</div>
+                <h3 style={{
+                  fontSize: bp.isMobile ? 22 : 28,
+                  fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.2,
+                  margin: 0, color: A.paper
+                }}>
+                  Thanks, {senderName}.<br />I'll be in touch.
+                </h3>
+              </div>
+              <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(244,241,236,0.65)', margin: 0 }}>
+                Your message landed safely. I read every enquiry personally and typically reply within 48 hours.
+              </p>
+              <button onClick={() => { setSent(false); setSendError(false); }} data-cursor="hover"
+                style={{
+                  ...aStyles.mono, padding: '14px 20px',
+                  background: 'transparent', color: A.paper,
+                  border: `1px solid rgba(244,241,236,0.2)`,
+                  cursor: 'pointer', textAlign: 'left',
+                  display: 'flex', justifyContent: 'space-between',
+                  transition: 'border-color .2s'
+                }}>
+                Send another message <span>→</span>
+              </button>
             </div>
-            <AField label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name} />
-            <AField label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email} />
-            <AField label="Message" multiline value={form.msg} onChange={(v) => setForm({ ...form, msg: v })} error={errors.msg} />
-            <button type="submit" data-cursor="hover" disabled={sent}
-              style={{
-                ...aStyles.mono, padding: '14px 20px',
-                background: sent ? 'rgba(244,241,236,0.1)' : A.accent,
-                color: A.paper, border: 'none', cursor: sent ? 'default' : 'pointer',
-                textAlign: 'left', display: 'flex', justifyContent: 'space-between',
-                transition: 'background .2s'
-              }}>
-              {sent ? 'Message transmitted ✓' : 'Send transmission'} <span>→</span>
-            </button>
-          </form>
+          ) : (
+            <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              <div style={{ marginBottom: 8 }}>
+                <div style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.45)', marginBottom: 12 }}>/ Write to me</div>
+                <h3 style={{
+                  fontSize: bp.isMobile ? 22 : 28,
+                  fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1,
+                  margin: 0, color: A.paper
+                }}>
+                  Or drop me a line directly.
+                </h3>
+              </div>
+              <AField label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name} />
+              <AField label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email} />
+              <AField label="Message" multiline value={form.msg} onChange={(v) => setForm({ ...form, msg: v })} error={errors.msg} />
+              {sendError && (
+                <p style={{ ...aStyles.mono, color: A.accent, margin: 0 }}>
+                  Something went wrong — try emailing me directly.
+                </p>
+              )}
+              <button type="submit" data-cursor="hover" disabled={sending}
+                style={{
+                  ...aStyles.mono, padding: '14px 20px',
+                  background: sending ? 'rgba(244,241,236,0.1)' : A.accent,
+                  color: A.paper, border: 'none', cursor: sending ? 'default' : 'pointer',
+                  textAlign: 'left', display: 'flex', justifyContent: 'space-between',
+                  transition: 'background .2s'
+                }}>
+                {sending ? 'Sending…' : 'Send transmission'} <span>→</span>
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </section>
