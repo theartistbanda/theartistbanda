@@ -936,13 +936,15 @@ function AContact() {
 function AField({ label, type = 'text', value, onChange, error, multiline }) {
   const [focus, setFocus] = React.useState(false);
   const Tag = multiline ? 'textarea' : 'input';
+  const id = `field-${label.toLowerCase().replace(/\s+/g, '-')}`;
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', ...aStyles.mono, color: focus ? A.accent : 'rgba(237,234,228,0.65)', marginBottom: 8, transition: 'color .2s' }}>
+      <label htmlFor={id} style={{ display: 'flex', justifyContent: 'space-between', ...aStyles.mono, color: focus ? A.accent : 'rgba(237,234,228,0.65)', marginBottom: 8, transition: 'color .2s', cursor: 'text' }}>
         <span>{label}</span>
         {error && <span style={{ color: A.accent }}>✱ {error}</span>}
-      </div>
+      </label>
       <Tag
+        id={id}
         type={type}
         value={value}
         data-cursor="text"
@@ -952,7 +954,7 @@ function AField({ label, type = 'text', value, onChange, error, multiline }) {
         rows={multiline ? 4 : undefined}
         style={{
           width: '100%', background: 'transparent',
-          borderBottom: `1px solid ${focus ? A.accent : 'rgba(244,241,236,0.3)'}`,
+          borderBottom: `1px solid ${focus ? A.accent : 'rgba(237,234,228,0.2)'}`,
           borderTop: 0, borderLeft: 0, borderRight: 0,
           padding: '10px 0', color: A.ink, fontSize: 16,
           fontFamily: 'inherit', outline: 'none', resize: 'vertical',
