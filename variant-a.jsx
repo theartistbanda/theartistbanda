@@ -60,8 +60,8 @@ function ABanner() {
         }} />
         <span style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.72)', fontSize: bp.isMobile ? 9 : 10 }}>
           {bp.isMobile
-            ? 'Available for UK roles from June 2026'
-            : 'Relocating to the UK · Available for onsite and hybrid roles from June 2026 · Scheduling interviews now'}
+            ? 'Full right to work in UK · Available from June 2026'
+            : 'Full right to work in the UK · No sponsorship required · Available for onsite and hybrid roles from June 2026'}
         </span>
         <a href="#contact" data-cursor="hover" style={{
           ...aStyles.mono, fontSize: bp.isMobile ? 9 : 10,
@@ -634,6 +634,12 @@ function ACareerItem({ c, i, bp }) {
             <div style={{ fontSize: bp.isMobile ? 16 : 20, fontWeight: 500, letterSpacing: '-0.015em', lineHeight: 1.2 }}>{c.role}</div>
             <div style={{ fontSize: 13, color: A.accent, marginTop: 4 }}>{c.org}</div>
             <p style={{ fontSize: 13, color: A.mute, lineHeight: 1.65, margin: '12px 0 0' }}>{c.body}</p>
+            {c.nda && (
+              <div style={{ marginTop: 10, display: 'flex', alignItems: 'flex-start', gap: 7 }}>
+                <span style={{ width: 5, height: 5, borderRadius: 99, background: A.accent, display: 'inline-block', flexShrink: 0, marginTop: 3 }} />
+                <span style={{ ...aStyles.mono, fontSize: 9, color: A.accent, lineHeight: 1.6 }}>{c.nda}</span>
+              </div>
+            )}
             {bp.isMobile && (
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 12 }}>
                 {c.tags.map((t) => (
@@ -654,9 +660,17 @@ function ACareerItem({ c, i, bp }) {
         </div>
       )}
 
-      {/* Desktop — body + tags in separate columns */}
+      {/* Desktop — body + NDA note + tags in separate columns */}
       {bp.isDesktop && (
-        <span style={{ fontSize: 13.5, color: A.mute, lineHeight: 1.65 }}>{c.body}</span>
+        <div>
+          <span style={{ fontSize: 13.5, color: A.mute, lineHeight: 1.65 }}>{c.body}</span>
+          {c.nda && (
+            <div style={{ marginTop: 12, display: 'flex', alignItems: 'flex-start', gap: 7 }}>
+              <span style={{ width: 5, height: 5, borderRadius: 99, background: A.accent, display: 'inline-block', flexShrink: 0, marginTop: 3 }} />
+              <span style={{ ...aStyles.mono, fontSize: 9, color: A.accent, lineHeight: 1.6 }}>{c.nda}</span>
+            </div>
+          )}
+        </div>
       )}
       {bp.isDesktop && (
         <span style={{ display: 'flex', flexWrap: 'wrap', gap: 4, alignItems: 'flex-start' }}>

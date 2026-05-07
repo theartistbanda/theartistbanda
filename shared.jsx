@@ -207,6 +207,7 @@ const PORTFOLIO = {
       org: 'TaskUs · Global BPO · Nottingham, UK',
       body:
         'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs, and the LevelUp gamification system. Authored the PCAF framework now adopted across all TaskUs products.',
+      nda: 'Full case studies protected by NDA — available for discussion in a confidential interview setting.',
       tags: ['AI Design', 'Enterprise UX', 'Design Systems', 'Leadership'],
       current: true,
     },
