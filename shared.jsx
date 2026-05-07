@@ -61,9 +61,9 @@ const PORTFOLIO = {
   years: 12,
   tagline: 'Designing for the humans behind the pixels.',
   lead:
-    'Senior product designer behind AI tools cutting enterprise costs 20%, a wellbeing app with 10M users in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
+    'Senior product designer behind AI tools cutting enterprise costs 20%, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
   metrics: [
-    { value: 10, suffix: 'M+', label: 'Downloads · YourHour', sub: 'Play Store verified' },
+    { value: 1, suffix: 'M+', label: 'Downloads · YourHour', sub: 'Play Store verified' },
     { value: 20, suffix: '%', label: 'Enterprise cost cut', sub: 'TaskGPT @ TaskUs' },
     { value: 40, suffix: '%', label: 'Engagement lift', sub: 'LevelUp gamification' },
     { value: 90, suffix: '%', label: 'Indian manufacturers', sub: 'Aatmnirbhar logo' },
@@ -74,12 +74,12 @@ const PORTFOLIO = {
       index: '01',
       year: 2021,
       title: 'YourHour',
-      kicker: 'Digital wellbeing · India · 10M downloads',
+      kicker: 'Digital wellbeing · India · 1M+ downloads',
       tagline: 'Breaking digital addiction at scale.',
       body:
         'Behavioural psychology and compassionate UX to help millions reclaim attention — without becoming another addictive feed.',
       stats: [
-        ['10M+', 'Downloads'],
+        ['1M+', 'Downloads'],
         ['70K', 'Reviews'],
         ['22', 'Languages'],
         ['4.7★', 'Play Store'],
@@ -216,7 +216,7 @@ const PORTFOLIO = {
       role: 'Product Design Consultant',
       org: 'The Artist Banda · Consultancy · Indore → UK',
       body:
-        'Sole designer and strategist on all three featured case studies: YourHour (independent product, 10M downloads), JEGO (client — UAE wellbeing platform), and EarlyFoods (client — UAE e-commerce). Also drew the Aatmnirbhar Bharat national logo overnight in May 2020, later adopted by the Government of India.',
+        'Sole designer and strategist on all three featured case studies: YourHour (independent product, 1M+ downloads), JEGO (client — UAE wellbeing platform), and EarlyFoods (client — UAE e-commerce). Also drew the Aatmnirbhar Bharat national logo overnight in May 2020, later adopted by the Government of India.',
       tags: ['Brand', 'Product Strategy', 'Wellbeing UX'],
     },
     {
@@ -250,7 +250,7 @@ const PORTFOLIO = {
   ],
   notable: [
     'Aatmnirbhar Bharat national logo',
-    'YourHour · 4.7★ · 10M users',
+    'YourHour · 4.7★ · 1M+ downloads',
     'AWS Summit London 2025',
     'Repos Energy fuel-delivery',
     '300+ user interviews',
