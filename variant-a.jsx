@@ -714,22 +714,30 @@ function AAbout() {
   const side = sp(bp);
   const vPad = bp.isMobile ? '72px' : '120px';
 
+  const sidebarRow = (label, children, last = false) => (
+    <div style={{ padding: '20px 24px', borderBottom: last ? 'none' : `1px solid ${A.line}` }}>
+      <div style={{ ...aStyles.mono, color: A.mute, marginBottom: 12 }}>{label}</div>
+      {children}
+    </div>
+  );
+
   return (
-    <section id="studio" style={{ padding: `${vPad} ${side}`, background: A.paper2, borderBottom: `1px solid ${A.line}` }}>
+    <section id="studio" style={{ padding: `${vPad} ${side}`, background: A.paper, borderBottom: `1px solid ${A.line}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: bp.isDesktop ? 'repeat(12, 1fr)' : '1fr',
-          gap: 24
+          gap: 24,
+          alignItems: 'start'
         }}>
           {/* Main bio */}
-          <div style={bp.isDesktop ? { gridColumn: 'span 8' } : {}}>
+          <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
             {bp.isDesktop && <div style={{ ...aStyles.mono, marginBottom: 8 }}>05</div>}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>The person behind the work</div>
-            <h2 style={{ fontSize: bp.isMobile ? 26 : 40, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1, margin: 0, marginBottom: 32 }}>
+            <h2 style={{ fontSize: bp.isMobile ? 26 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0, marginBottom: 40 }}>
               I became a designer because<br />technology is supposed to make<br />life <span style={{ fontStyle: 'italic' }}>easier</span>.
             </h2>
-            <div style={{ fontSize: 15, lineHeight: 1.7, color: A.ink2, maxWidth: bp.isDesktop ? 560 : '100%' }}>
+            <div style={{ fontSize: 15, lineHeight: 1.75, color: A.ink2, borderTop: `1px solid ${A.line}`, paddingTop: 32 }}>
               <p style={{ margin: 0 }}>I grew up watching technology promise to simplify life, then complicate it. A form too long. A menu that hides the thing you need. An app that helps and frustrates in equal measure. That gap between what technology promises and what it actually does became my professional obsession.</p>
               <p style={{ marginTop: 16 }}>The work has taken me across industries — enterprise AI, consumer wellbeing, e-commerce, national identity — but the design problem is always the same: reduce the distance between what someone needs to do and what the product lets them do. The medium changes. The brief does not.</p>
               <p style={{ marginTop: 16 }}>I have designed for a billion-person market, a Gulf audience shaped by faith and cultural ritual, and enterprise operators in fourteen countries. Each taught me that the word "intuitive" carries an unspoken postscript: <em>intuitive for whom</em>. The answer is never assumed. It is always researched.</p>
@@ -737,47 +745,46 @@ function AAbout() {
             </div>
           </div>
 
-          {/* Sidebar cards */}
+          {/* Sidebar — unified panel */}
           <div style={{
-            gridColumn: bp.isDesktop ? 'span 4' : undefined,
-            display: 'flex', flexDirection: 'column', gap: 16,
-            marginTop: bp.isMobile || bp.isTablet ? 40 : 0
+            gridColumn: bp.isDesktop ? 'span 5' : undefined,
+            marginTop: bp.isMobile || bp.isTablet ? 48 : 0,
+            background: A.paper2,
+            border: `1px solid ${A.line}`,
           }}>
-            <AInfoCard label="Currently" value={['Lead Designer · TaskUs', 'Nottingham, UK']} />
-            <AInfoCard label="Experience" value={['12+ years', '14 countries', 'Millions of users']} />
-            <div style={{ background: A.paper, border: `1px solid ${A.line}`, padding: 20 }}>
-              <div style={{ ...aStyles.mono, color: A.mute, marginBottom: 12 }}>Skills · Tools</div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                {PORTFOLIO.skills.map((s) => (
-                  <span key={s} style={{ fontSize: 11, padding: '5px 9px', background: A.paper2, color: A.ink, border: `1px solid ${A.line}` }}>{s}</span>
+            {sidebarRow('Currently', (
+              <>
+                <div style={{ fontSize: 14, color: A.ink, lineHeight: 1.6 }}>Lead Designer · TaskUs</div>
+                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>Nottingham, UK</div>
+              </>
+            ))}
+            {sidebarRow('Experience', (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                {['12+ years', '14 countries', '1M+ downloads shipped'].map((v) => (
+                  <div key={v} style={{ fontSize: 14, color: A.ink, lineHeight: 1.5 }}>{v}</div>
                 ))}
               </div>
-            </div>
-            <div style={{ background: A.paper, border: `1px solid ${A.line}`, padding: 20 }}>
-              <div style={{ ...aStyles.mono, color: A.mute, marginBottom: 12 }}>Notable</div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+            ))}
+            {sidebarRow('Skills · Tools', (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {PORTFOLIO.skills.map((s) => (
+                  <span key={s} style={{ fontSize: 11, padding: '5px 9px', background: A.paper, color: A.ink2, border: `1px solid ${A.line}` }}>{s}</span>
+                ))}
+              </div>
+            ))}
+            {sidebarRow('Notable', (
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {PORTFOLIO.notable.map((n) => (
-                  <li key={n} style={{ fontSize: 12.5, display: 'flex', gap: 10, color: A.ink2 }}>
-                    <span style={{ color: A.accent }}>—</span>{n}
+                  <li key={n} style={{ fontSize: 12.5, display: 'flex', gap: 10, alignItems: 'flex-start', color: A.ink2 }}>
+                    <span style={{ color: A.accent, flexShrink: 0, lineHeight: 1.6 }}>—</span>{n}
                   </li>
                 ))}
               </ul>
-            </div>
+            ), true)}
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function AInfoCard({ label, value }) {
-  return (
-    <div style={{ background: A.paper, border: `1px solid ${A.line}`, padding: 20 }}>
-      <div style={{ ...aStyles.mono, color: A.mute, marginBottom: 10 }}>{label}</div>
-      {value.map((v, i) => (
-        <div key={i} style={{ fontSize: 14, color: A.ink, lineHeight: 1.4 }}>{v}</div>
-      ))}
-    </div>
   );
 }
 
