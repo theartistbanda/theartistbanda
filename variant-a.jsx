@@ -834,23 +834,27 @@ function AContact() {
           display: 'grid',
           gridTemplateColumns: bp.isDesktop ? '7fr 5fr' : '1fr',
           gap: bp.isMobile ? 48 : 64,
-          alignItems: 'start'
+          alignItems: bp.isDesktop ? 'stretch' : 'start'
         }}>
-          {/* Left — info + links */}
-          <div>
-            {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)', marginBottom: 12 }}>06</div>}
-            <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>/ Let's work together</div>
-            <h2 style={{
-              fontSize: 'clamp(36px, 7vw, 88px)',
-              fontWeight: 500, lineHeight: 1, letterSpacing: '-0.03em', margin: 0
-            }}>
-              Let us build<br />
-              something <span style={{ fontStyle: 'italic', color: A.accent }}>meaningful.</span>
-            </h2>
-            <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(237,234,228,0.80)', maxWidth: bp.isDesktop ? 460 : '100%', marginTop: 32 }}>
-              Open to senior product design roles, consulting, and conversations with people who care about the humans behind the pixels.
-            </p>
-            <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column' }}>
+          {/* Left — intro top, links pushed to bottom */}
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div>
+              {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)', marginBottom: 12 }}>06</div>}
+              <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>/ Let's work together</div>
+              <h2 style={{
+                fontSize: 'clamp(36px, 7vw, 88px)',
+                fontWeight: 500, lineHeight: 1, letterSpacing: '-0.03em', margin: 0
+              }}>
+                Let us build<br />
+                something <span style={{ fontStyle: 'italic', color: A.accent }}>meaningful.</span>
+              </h2>
+              <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(237,234,228,0.80)', maxWidth: bp.isDesktop ? 460 : '100%', marginTop: 32 }}>
+                Open to senior product design roles, consulting, and conversations with people who care about the humans behind the pixels.
+              </p>
+            </div>
+            {/* Spacer — pushes links to bottom on desktop */}
+            {bp.isDesktop && <div style={{ flex: 1 }} />}
+            <div style={{ marginTop: bp.isDesktop ? 0 : 40 }}>
               {PORTFOLIO.links.map((l, i) => (
                 <a key={l.label} href={l.href} data-cursor="hover"
                   style={{
@@ -874,66 +878,71 @@ function AContact() {
             </div>
           </div>
 
-          {/* Right — success state or form */}
-          {sent ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <div style={{ marginBottom: 8 }}>
-                <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 12 }}>/ Message received</div>
-                <h3 style={{
-                  fontSize: bp.isMobile ? 22 : 28,
-                  fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.2,
-                  margin: 0, color: A.ink
-                }}>
-                  Thanks, {senderName}.<br />I'll be in touch.
-                </h3>
-              </div>
-              <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(237,234,228,0.80)', margin: 0 }}>
-                Your message landed safely. I read every enquiry personally and typically reply within 48 hours.
-              </p>
-              <button onClick={() => { setSent(false); setSendError(false); }} data-cursor="hover"
-                style={{
-                  ...aStyles.mono, padding: '14px 20px',
-                  background: 'transparent', color: A.ink,
-                  border: `1px solid rgba(237,234,228,0.2)`,
-                  cursor: 'pointer', textAlign: 'left',
-                  display: 'flex', justifyContent: 'space-between',
-                  transition: 'border-color .2s'
-                }}>
-                Send another message <span>→</span>
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <div style={{ marginBottom: 8 }}>
-                <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)', marginBottom: 12 }}>/ Write to me</div>
-                <h3 style={{
-                  fontSize: bp.isMobile ? 22 : 28,
-                  fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1,
-                  margin: 0, color: A.ink
-                }}>
-                  Or drop me a line directly.
-                </h3>
-              </div>
-              <AField label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name} />
-              <AField label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email} />
-              <AField label="Message" multiline value={form.msg} onChange={(v) => setForm({ ...form, msg: v })} error={errors.msg} />
-              {sendError && (
-                <p style={{ ...aStyles.mono, color: A.accent, margin: 0 }}>
-                  Something went wrong — try emailing me directly.
+          {/* Right — form pinned to bottom, aligning with first link */}
+          <div style={{
+            display: 'flex', flexDirection: 'column',
+            justifyContent: bp.isDesktop ? 'flex-end' : 'flex-start'
+          }}>
+            {sent ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+                <div style={{ marginBottom: 8 }}>
+                  <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 12 }}>/ Message received</div>
+                  <h3 style={{
+                    fontSize: bp.isMobile ? 22 : 28,
+                    fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.2,
+                    margin: 0, color: A.ink
+                  }}>
+                    Thanks, {senderName}.<br />I'll be in touch.
+                  </h3>
+                </div>
+                <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(237,234,228,0.80)', margin: 0 }}>
+                  Your message landed safely. I read every enquiry personally and typically reply within 48 hours.
                 </p>
-              )}
-              <button type="submit" data-cursor="hover" disabled={sending}
-                style={{
-                  ...aStyles.mono, padding: '14px 20px',
-                  background: sending ? 'rgba(237,234,228,0.1)' : A.accent,
-                  color: sending ? A.ink : A.paper, border: 'none', cursor: sending ? 'default' : 'pointer',
-                  textAlign: 'left', display: 'flex', justifyContent: 'space-between',
-                  transition: 'background .2s'
-                }}>
-                {sending ? 'Sending…' : 'Send transmission'} <span>→</span>
-              </button>
-            </form>
-          )}
+                <button onClick={() => { setSent(false); setSendError(false); }} data-cursor="hover"
+                  style={{
+                    ...aStyles.mono, padding: '14px 20px',
+                    background: 'transparent', color: A.ink,
+                    border: `1px solid rgba(237,234,228,0.2)`,
+                    cursor: 'pointer', textAlign: 'left',
+                    display: 'flex', justifyContent: 'space-between',
+                    transition: 'border-color .2s'
+                  }}>
+                  Send another message <span>→</span>
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+                <div style={{ marginBottom: 8 }}>
+                  <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)', marginBottom: 12 }}>/ Write to me</div>
+                  <h3 style={{
+                    fontSize: bp.isMobile ? 22 : 28,
+                    fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1,
+                    margin: 0, color: A.ink
+                  }}>
+                    Or drop me a line directly.
+                  </h3>
+                </div>
+                <AField label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name} />
+                <AField label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email} />
+                <AField label="Message" multiline value={form.msg} onChange={(v) => setForm({ ...form, msg: v })} error={errors.msg} />
+                {sendError && (
+                  <p style={{ ...aStyles.mono, color: A.accent, margin: 0 }}>
+                    Something went wrong — try emailing me directly.
+                  </p>
+                )}
+                <button type="submit" data-cursor="hover" disabled={sending}
+                  style={{
+                    ...aStyles.mono, padding: '14px 20px',
+                    background: sending ? 'rgba(237,234,228,0.1)' : A.accent,
+                    color: sending ? A.ink : A.paper, border: 'none', cursor: sending ? 'default' : 'pointer',
+                    textAlign: 'left', display: 'flex', justifyContent: 'space-between',
+                    transition: 'background .2s'
+                  }}>
+                  {sending ? 'Sending…' : 'Send transmission'} <span>→</span>
+                </button>
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </section>
