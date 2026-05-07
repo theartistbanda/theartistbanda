@@ -63,7 +63,7 @@ const PORTFOLIO = {
   lead:
     'Senior product designer behind AI tools cutting enterprise costs 20%, a wellbeing app with 10M users in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
   metrics: [
-    { value: 10, suffix: 'M+', label: 'Users on YourHour', sub: '22 languages' },
+    { value: 10, suffix: 'M+', label: 'Downloads · YourHour', sub: 'Play Store verified' },
     { value: 20, suffix: '%', label: 'Enterprise cost cut', sub: 'TaskGPT @ TaskUs' },
     { value: 40, suffix: '%', label: 'Engagement lift', sub: 'LevelUp gamification' },
     { value: 90, suffix: '%', label: 'Indian manufacturers', sub: 'Aatmnirbhar logo' },
@@ -74,12 +74,12 @@ const PORTFOLIO = {
       index: '01',
       year: 2021,
       title: 'YourHour',
-      kicker: 'Digital wellbeing · India · 10M users',
+      kicker: 'Digital wellbeing · India · 10M downloads',
       tagline: 'Breaking digital addiction at scale.',
       body:
         'Behavioural psychology and compassionate UX to help millions reclaim attention — without becoming another addictive feed.',
       stats: [
-        ['10M+', 'Users'],
+        ['10M+', 'Downloads'],
         ['70K', 'Reviews'],
         ['22', 'Languages'],
         ['4.7★', 'Play Store'],
@@ -204,9 +204,9 @@ const PORTFOLIO = {
       from: '2022',
       to: 'Now',
       role: 'Lead UI/UX Designer',
-      org: 'TaskUs · Nottingham, UK',
+      org: 'TaskUs · Global BPO · Nottingham, UK',
       body:
-        'Lead designer on enterprise products for 35K+ daily users in 14 countries. Shipped TaskGPT, EvaluateUs, and the LevelUp gamification ecosystem. Authored the PCAF framework now used across TaskUs products.',
+        'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs, and the LevelUp gamification system. Authored the PCAF framework now adopted across all TaskUs products.',
       tags: ['AI Design', 'Enterprise UX', 'Design Systems', 'Leadership'],
       current: true,
     },
@@ -214,9 +214,9 @@ const PORTFOLIO = {
       from: '2018',
       to: '2022',
       role: 'Product Design Consultant',
-      org: 'The Artist Banda · Indore → UK',
+      org: 'The Artist Banda · Consultancy · Indore → UK',
       body:
-        'Ran a consultancy. Designed YourHour, JEGO, EarlyFoods; drew the Aatmnirbhar Bharat national logo overnight in May 2020.',
+        'Sole designer and strategist on all three featured case studies: YourHour (independent product, 10M downloads), JEGO (client — UAE wellbeing platform), and EarlyFoods (client — UAE e-commerce). Also drew the Aatmnirbhar Bharat national logo overnight in May 2020, later adopted by the Government of India.',
       tags: ['Brand', 'Product Strategy', 'Wellbeing UX'],
     },
     {
