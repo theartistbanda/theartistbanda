@@ -85,7 +85,7 @@ const PORTFOLIO = {
         ['4.7★', 'Play Store'],
       ],
       tags: ['Behavioural Design', 'Android · iOS', 'Cross-cultural'],
-      image: '/assets/yourhour-cover.jpg',
+      image: '/assets/yourhour-cover.webp',
       href: 'case-yourhour.html',
     },
     {
@@ -140,7 +140,7 @@ const PORTFOLIO = {
         ['RTL', 'First-class'],
       ],
       tags: ['Video UX', 'Streaming', 'Localisation'],
-      image: '/assets/jego-cover.jpg',
+      image: '/assets/jego-cover.webp',
       href: 'case-jego.html',
     },
     {
@@ -157,7 +157,7 @@ const PORTFOLIO = {
         ['Trust', 'KPI'],
       ],
       tags: ['E-commerce', 'Emotional UX'],
-      image: '/assets/earlyfoods-cover.jpg',
+      image: '/assets/earlyfoods-cover.webp',
       href: 'case-earlyfoods.html',
     },
   ],

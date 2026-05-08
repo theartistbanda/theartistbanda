@@ -96,7 +96,7 @@ const PORTFOLIO = {
     body: 'Behavioural psychology and compassionate UX to help millions reclaim attention — without becoming another addictive feed.',
     stats: [['1M+', 'Downloads'], ['70K', 'Reviews'], ['22', 'Languages'], ['4.7★', 'Play Store']],
     tags: ['Behavioural Design', 'Android · iOS', 'Cross-cultural'],
-    image: '/assets/yourhour-cover.jpg',
+    image: '/assets/yourhour-cover.webp',
     href: 'case-yourhour.html'
   }, {
     id: 'taskgpt',
@@ -134,7 +134,7 @@ const PORTFOLIO = {
     body: 'A video platform connecting Gulf users with world-class mentors. Typography, RTL patterns and ritual-led onboarding built for the UAE market.',
     stats: [['UAE', 'Primary market'], ['RTL', 'First-class']],
     tags: ['Video UX', 'Streaming', 'Localisation'],
-    image: '/assets/jego-cover.jpg',
+    image: '/assets/jego-cover.webp',
     href: 'case-jego.html'
   }, {
     id: 'earlyfoods',
@@ -146,7 +146,7 @@ const PORTFOLIO = {
     body: 'A brand parents can feel safe with — because they are feeding it to their children. Emotional UX over checkout funnels.',
     stats: [['UAE', 'Market'], ['Trust', 'KPI']],
     tags: ['E-commerce', 'Emotional UX'],
-    image: '/assets/earlyfoods-cover.jpg',
+    image: '/assets/earlyfoods-cover.webp',
     href: 'case-earlyfoods.html'
   }],
   principles: [{
