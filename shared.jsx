@@ -307,6 +307,7 @@ function Placeholder({ label, ratio = '16/9', tone = 'ink', style }) {
 function CustomCursor({ accent = '#C2410C' }) {
   const dot = React.useRef(null);
   const ring = React.useRef(null);
+  const modeRef = React.useRef('default');
   const [mode, setMode] = React.useState('default');
   React.useEffect(() => {
     if (matchMedia('(pointer: coarse)').matches) return;
@@ -315,7 +316,8 @@ function CustomCursor({ accent = '#C2410C' }) {
       dx = e.clientX; dy = e.clientY;
       if (dot.current) dot.current.style.transform = `translate(${dx - 3}px, ${dy - 3}px)`;
       const t = e.target.closest?.('[data-cursor]');
-      setMode(t ? t.getAttribute('data-cursor') : 'default');
+      const next = t ? t.getAttribute('data-cursor') : 'default';
+      if (next !== modeRef.current) { modeRef.current = next; setMode(next); }
     };
     let raf;
     const loop = () => {
