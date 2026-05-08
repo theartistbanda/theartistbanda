@@ -1,0 +1,27 @@
+{
+  "name": "deploy",
+  "version": "1.0.0",
+  "description": "Static site. No build step. All four files sit at the root.",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/babel shared.jsx --presets @babel/preset-react -o shared.js && ./node_modules/.bin/babel variant-a.jsx --presets @babel/preset-react -o variant-a.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theartistbanda/theartistbanda.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/theartistbanda/theartistbanda/issues"
+  },
+  "homepage": "https://github.com/theartistbanda/theartistbanda#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-react": "^7.28.5"
+  }
+}
