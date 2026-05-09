@@ -201,7 +201,7 @@ const PORTFOLIO = {
   ],
   career: [
     {
-      from: '2022',
+      from: '2021',
       to: 'Now',
       role: 'Lead UI/UX Designer',
       org: 'TaskUs · Global BPO · Nottingham, UK',

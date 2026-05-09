@@ -175,7 +175,7 @@ const PORTFOLIO = {
     body: 'Close the gap between complexity in the world and clarity in the mind. That is the entire job.'
   }],
   career: [{
-    from: '2022',
+    from: '2021',
     to: 'Now',
     role: 'Lead UI/UX Designer',
     org: 'TaskUs · Global BPO · Nottingham, UK',
