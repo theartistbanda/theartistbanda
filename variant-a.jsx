@@ -769,7 +769,7 @@ function AAbout() {
             {sidebarRow('Currently', (
               <>
                 <div style={{ fontSize: 14, color: A.ink, lineHeight: 1.6 }}>Lead Designer · TaskUs</div>
-                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>Nottingham, UK</div>
+                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>London Area, UK</div>
               </>
             ))}
             {sidebarRow('Experience', (

@@ -61,7 +61,7 @@ function fmt(n, opts = {}) {
 const PORTFOLIO = {
   name: 'Dipesh Gurav',
   role: 'Product Designer',
-  location: 'Nottingham, UK',
+  location: 'London Area, UK',
   years: 12,
   tagline: 'Designing for the humans behind the pixels.',
   lead: 'Senior product designer behind AI tools cutting enterprise costs 20%, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
@@ -178,7 +178,7 @@ const PORTFOLIO = {
     from: '2021',
     to: 'Now',
     role: 'Lead UI/UX Designer',
-    org: 'TaskUs · Global BPO · Nottingham, UK',
+    org: 'TaskUs · Global BPO · London Area, UK',
     body: 'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs, and the LevelUp gamification system. Authored the PCAF framework now adopted across all TaskUs products.',
     nda: 'Full case studies protected by NDA — available for discussion in a confidential interview setting.',
     tags: ['AI Design', 'Enterprise UX', 'Design Systems', 'Leadership'],

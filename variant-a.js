@@ -1278,7 +1278,7 @@ function AAbout() {
       color: A.ink2,
       lineHeight: 1.6
     }
-  }, "Nottingham, UK"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
+  }, "London Area, UK"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
