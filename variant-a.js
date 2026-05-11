@@ -338,17 +338,7 @@ function AHero() {
       margin: 0,
       color: A.ink2
     }
-  }, PORTFOLIO.lead)), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
-    style: {
-      gridColumn: 'span 3',
-      ...aStyles.mono
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      color: A.ink,
-      marginBottom: 6
-    }
-  }, "Fig. 001"), "A self-portrait", /*#__PURE__*/React.createElement("br", null), "in hairlines, headlines,", /*#__PURE__*/React.createElement("br", null), "and one rust square."), /*#__PURE__*/React.createElement("div", {
+  }, PORTFOLIO.lead)), /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: bp.isDesktop ? 'span 3' : undefined,
       display: 'flex',

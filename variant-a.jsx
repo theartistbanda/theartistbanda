@@ -277,12 +277,6 @@ function AHero() {
             </p>
           </div>
 
-          {bp.isDesktop && (
-            <div style={{ gridColumn: 'span 3', ...aStyles.mono }}>
-              <div style={{ color: A.ink, marginBottom: 6 }}>Fig. 001</div>
-              A self-portrait<br />in hairlines, headlines,<br />and one rust square.
-            </div>
-          )}
 
           <div style={{
             gridColumn: bp.isDesktop ? 'span 3' : undefined,
