@@ -57,7 +57,7 @@ function fmt(n, opts = {}) {
 const PORTFOLIO = {
   name: 'Dipesh Gurav',
   role: 'Product Designer',
-  location: 'London Area, UK',
+  location: 'Remote, India',
   years: 12,
   tagline: 'Designing for the humans behind the pixels.',
   lead:

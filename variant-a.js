@@ -274,7 +274,7 @@ function AHero() {
       marginBottom: bp.isTablet ? 40 : 64,
       ...aStyles.mono
     }
-  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role, " \xB7 est. 2013"), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 52.9548\xB0N"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role, " \xB7 est. 2013"), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 20.5937\xB0N"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: 'right'
     }
@@ -1268,7 +1268,7 @@ function AAbout() {
       color: A.ink2,
       lineHeight: 1.6
     }
-  }, "London Area, UK"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
+  }, "Remote, India"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
