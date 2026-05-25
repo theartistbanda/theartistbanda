@@ -147,9 +147,7 @@ function ANav() {
       fontWeight: 600,
       letterSpacing: '-0.01em'
     }
-  }, "Dipesh Gurav"), bp.isDesktop && /*#__PURE__*/React.createElement("span", {
-    style: aStyles.mono
-  }, "/ 001")), bp.isDesktop && /*#__PURE__*/React.createElement("ul", {
+  }, "Dipesh Gurav")), bp.isDesktop && /*#__PURE__*/React.createElement("ul", {
     style: {
       display: 'flex',
       gap: 28,
@@ -169,11 +167,7 @@ function ANav() {
       display: 'flex',
       gap: 6
     }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: A.ink
-    }
-  }, String(i).padStart(2, '0')), x)))), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
+  }, x)))), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: aStyles.mono
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -323,10 +317,9 @@ function AHero() {
     }
   }, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: {
-      gridColumn: 'span 1',
-      ...aStyles.mono
+      gridColumn: 'span 1'
     }
-  }, "00"), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: bp.isDesktop ? {
       gridColumn: 'span 5'
     } : {}
@@ -1110,10 +1103,9 @@ function ACareer() {
     }
   }, /*#__PURE__*/React.createElement("div", null, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: {
-      ...aStyles.mono,
       marginBottom: 8
     }
-  }, "04"), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       ...aStyles.mono,
       color: A.accent,
@@ -1189,10 +1181,9 @@ function AAbout() {
     } : {}
   }, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: {
-      ...aStyles.mono,
       marginBottom: 8
     }
-  }, "05"), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       ...aStyles.mono,
       color: A.accent,
@@ -1383,11 +1374,9 @@ function AContact() {
     }
   }, /*#__PURE__*/React.createElement("div", null, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: {
-      ...aStyles.mono,
-      color: 'rgba(237,234,228,0.65)',
       marginBottom: 12
     }
-  }, "06"), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       ...aStyles.mono,
       color: A.accent,
@@ -1441,11 +1430,6 @@ function AContact() {
     onMouseEnter: e => e.currentTarget.style.paddingLeft = '12px',
     onMouseLeave: e => e.currentTarget.style.paddingLeft = '0'
   }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...aStyles.mono,
-      color: 'rgba(237,234,228,0.65)'
-    }
-  }, "/ ", String(i + 1).padStart(2, '0')), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: bp.isMobile ? 15 : 20,
       fontWeight: 500,

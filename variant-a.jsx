@@ -128,7 +128,6 @@ function ANav() {
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexShrink: 0 }}>
           <span style={{ width: 6, height: 6, borderRadius: 99, background: A.accent, display: 'inline-block', flexShrink: 0 }} />
           <span style={{ fontWeight: 600, letterSpacing: '-0.01em' }}>Dipesh Gurav</span>
-          {bp.isDesktop && <span style={aStyles.mono}>/ 001</span>}
         </div>
 
         {/* Desktop nav links */}
@@ -138,7 +137,7 @@ function ANav() {
               <li key={x}>
                 <a href={`#${x.toLowerCase()}`} data-cursor="hover"
                   style={{ color: A.mute, textDecoration: 'none', display: 'flex', gap: 6 }}>
-                  <span style={{ color: A.ink }}>{String(i).padStart(2, '0')}</span>{x}
+                  {x}
                 </a>
               </li>
             ))}
@@ -269,7 +268,7 @@ function AHero() {
           marginTop: bp.isMobile ? 40 : 80,
           alignItems: 'start'
         }}>
-          {bp.isDesktop && <div style={{ gridColumn: 'span 1', ...aStyles.mono }}>00</div>}
+          {bp.isDesktop && <div style={{ gridColumn: 'span 1' }} />}
 
           <div style={bp.isDesktop ? { gridColumn: 'span 5' } : {}}>
             <p style={{ fontSize: bp.isMobile ? 16 : 18, lineHeight: 1.45, letterSpacing: '-0.01em', margin: 0, color: A.ink2 }}>
@@ -691,7 +690,7 @@ function ACareer() {
           gap: 24, marginBottom: bp.isMobile ? 32 : 48
         }}>
           <div>
-            {bp.isDesktop && <div style={{ ...aStyles.mono, marginBottom: 8 }}>04</div>}
+            {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Curriculum vitae</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
               Twelve years,<br />four cities, millions of users.
@@ -738,7 +737,7 @@ function AAbout() {
         }}>
           {/* Main bio */}
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
-            {bp.isDesktop && <div style={{ ...aStyles.mono, marginBottom: 8 }}>05</div>}
+            {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>The person behind the work</div>
             <h2 style={{ fontSize: bp.isMobile ? 26 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0, marginBottom: 40 }}>
               I became a designer because<br />technology is supposed to make<br />life <span style={{ fontStyle: 'italic' }}>easier</span>.
@@ -845,7 +844,7 @@ function AContact() {
           {/* Left — intro top, links pushed to bottom */}
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div>
-              {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)', marginBottom: 12 }}>06</div>}
+              {bp.isDesktop && <div style={{ marginBottom: 12 }} />}
               <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>/ Let's work together</div>
               <h2 style={{
                 fontSize: 'clamp(36px, 7vw, 88px)',
@@ -874,7 +873,6 @@ function AContact() {
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '12px'}
                   onMouseLeave={(e) => e.currentTarget.style.paddingLeft = '0'}>
-                  <span style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)' }}>/ {String(i + 1).padStart(2, '0')}</span>
                   <span style={{ fontSize: bp.isMobile ? 15 : 20, fontWeight: 500, letterSpacing: '-0.01em' }}>
                     {l.label} — <span style={{ color: 'rgba(237,234,228,0.75)', fontWeight: 400 }}>{l.value}</span>
                   </span>
