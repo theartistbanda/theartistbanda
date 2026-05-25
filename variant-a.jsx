@@ -357,7 +357,7 @@ function AWork() {
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Selected Work · 2020 — 2025</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-              Three products. Three markets.<br />
+              Five products. Four markets.<br />
               <span style={{ color: A.mute }}>Measurable behaviour change.</span>
             </h2>
           </div>

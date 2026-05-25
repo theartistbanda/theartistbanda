@@ -148,6 +148,18 @@ const PORTFOLIO = {
     tags: ['E-commerce', 'Conversion Rate Optimisation', 'Emotional UX'],
     image: '/assets/earlyfoods-cover.webp',
     href: 'case-earlyfoods.html'
+  }, {
+    id: 'job-app-assistant',
+    index: '06',
+    year: 2025,
+    title: 'Job App Assistant',
+    kicker: 'Generative AI · Solo build · Live product',
+    tagline: 'Building the back room, from scratch.',
+    body: 'A working AI web application — designed, coded, and deployed in a single session. Node.js, Claude API, real server. Not a prototype.',
+    stats: [['1 day', 'Build time'], ['4', 'Files'], ['Live', 'Status']],
+    tags: ['Generative AI Tools', 'AI Interfaces', 'Solo build'],
+    image: '/assets/jaa-app-ui.jpg',
+    href: 'case-job-app-assistant.html'
   }],
   principles: [{
     n: '01',
