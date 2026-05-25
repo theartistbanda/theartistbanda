@@ -158,7 +158,7 @@ const PORTFOLIO = {
     body: 'A working AI web application — designed, coded, and deployed in a single session. Node.js, Claude API, real server. Not a prototype.',
     stats: [['1 day', 'Build time'], ['4', 'Files'], ['Live', 'Status']],
     tags: ['Generative AI Tools', 'AI Interfaces', 'Solo build'],
-    image: '/assets/jaa-app-ui.webp',
+    image: '/assets/jaa-cover.webp',
     href: 'case-job-app-assistant.html'
   }],
   principles: [{
