@@ -350,7 +350,6 @@ function AWork() {
           gridTemplateColumns: bp.isMobile ? '1fr' : bp.isTablet ? '1fr 1fr' : 'repeat(12, 1fr)',
           gap: 24, marginBottom: bp.isMobile ? 32 : 64
         }}>
-          {bp.isDesktop && <div style={{ gridColumn: 'span 1' }} />}
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Selected Work · 2020 — 2025</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
@@ -837,7 +836,7 @@ function AContact() {
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div>
               {bp.isDesktop && <div style={{ marginBottom: 12 }} />}
-              <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>/ Let's work together</div>
+              <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Let's work together</div>
               <h2 style={{
                 fontSize: 'clamp(36px, 7vw, 88px)',
                 fontWeight: 500, lineHeight: 1, letterSpacing: '-0.03em', margin: 0
@@ -909,7 +908,7 @@ function AContact() {
             ) : (
               <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
                 <div style={{ marginBottom: 8 }}>
-                  <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)', marginBottom: 12 }}>/ Write to me</div>
+                  <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)', marginBottom: 12 }}>Write to me</div>
                   <h3 style={{
                     fontSize: bp.isMobile ? 22 : 28,
                     fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1,

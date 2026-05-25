@@ -455,11 +455,7 @@ function AWork() {
       gap: 24,
       marginBottom: bp.isMobile ? 32 : 64
     }
-  }, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
-    style: {
-      gridColumn: 'span 1'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: bp.isDesktop ? {
       gridColumn: 'span 7'
     } : {}
@@ -1362,7 +1358,7 @@ function AContact() {
       color: A.accent,
       marginBottom: 16
     }
-  }, "/ Let's work together"), /*#__PURE__*/React.createElement("h2", {
+  }, "Let's work together"), /*#__PURE__*/React.createElement("h2", {
     style: {
       fontSize: 'clamp(36px, 7vw, 88px)',
       fontWeight: 500,
@@ -1498,7 +1494,7 @@ function AContact() {
       color: 'rgba(237,234,228,0.65)',
       marginBottom: 12
     }
-  }, "/ Write to me"), /*#__PURE__*/React.createElement("h3", {
+  }, "Write to me"), /*#__PURE__*/React.createElement("h3", {
     style: {
       fontSize: bp.isMobile ? 22 : 28,
       fontWeight: 500,
