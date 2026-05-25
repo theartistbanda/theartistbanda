@@ -43,9 +43,6 @@ function ABanner() {
   const side = sp(bp);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, `@keyframes abPulse{0%,100%{opacity:1}50%{opacity:.35}}`), /*#__PURE__*/React.createElement("div", {
     style: {
-      position: 'sticky',
-      top: 0,
-      zIndex: 82,
       background: A.surf,
       borderBottom: '1px solid rgba(237,234,228,0.1)',
       padding: `9px ${side}`,
@@ -87,7 +84,13 @@ function VariantA() {
     style: aStyles.root
   }, /*#__PURE__*/React.createElement(CustomCursor, {
     accent: A.accent
-  }), /*#__PURE__*/React.createElement(ABanner, null), /*#__PURE__*/React.createElement(ANav, null), /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(AHero, null), /*#__PURE__*/React.createElement(AMetrics, null), /*#__PURE__*/React.createElement(AWork, null), /*#__PURE__*/React.createElement(AOrigin, null), /*#__PURE__*/React.createElement(APrinciples, null), /*#__PURE__*/React.createElement(ACareer, null), /*#__PURE__*/React.createElement(AAbout, null), /*#__PURE__*/React.createElement(AContact, null)), /*#__PURE__*/React.createElement(AFooter, null));
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'sticky',
+      top: 0,
+      zIndex: 82
+    }
+  }, /*#__PURE__*/React.createElement(ABanner, null), /*#__PURE__*/React.createElement(ANav, null)), /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(AHero, null), /*#__PURE__*/React.createElement(AMetrics, null), /*#__PURE__*/React.createElement(AWork, null), /*#__PURE__*/React.createElement(AOrigin, null), /*#__PURE__*/React.createElement(APrinciples, null), /*#__PURE__*/React.createElement(ACareer, null), /*#__PURE__*/React.createElement(AAbout, null), /*#__PURE__*/React.createElement(AContact, null)), /*#__PURE__*/React.createElement(AFooter, null));
 }
 
 // ─── NAV ─────────────────────────────────────────────────────────────────────
@@ -108,9 +111,6 @@ function ANav() {
   const links = ['Index', 'Work', 'Origin', 'Career', 'Studio'];
   return /*#__PURE__*/React.createElement("nav", {
     style: {
-      position: 'sticky',
-      top: 38,
-      zIndex: 80,
       background: 'rgba(15,13,11,0.92)',
       backdropFilter: 'blur(12px)',
       borderBottom: `1px solid ${A.line}`

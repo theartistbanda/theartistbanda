@@ -47,7 +47,6 @@ function ABanner() {
     <React.Fragment>
       <style>{`@keyframes abPulse{0%,100%{opacity:1}50%{opacity:.35}}`}</style>
       <div style={{
-        position: 'sticky', top: 0, zIndex: 82,
         background: A.surf,
         borderBottom: '1px solid rgba(237,234,228,0.1)',
         padding: `9px ${side}`,
@@ -76,8 +75,10 @@ function VariantA() {
   return (
     <div style={aStyles.root}>
       <CustomCursor accent={A.accent} />
-      <ABanner />
-      <ANav />
+      <div style={{ position: 'sticky', top: 0, zIndex: 82 }}>
+        <ABanner />
+        <ANav />
+      </div>
       <main>
         <AHero />
         <AMetrics />
@@ -114,7 +115,6 @@ function ANav() {
 
   return (
     <nav style={{
-      position: 'sticky', top: 38, zIndex: 80,
       background: 'rgba(15,13,11,0.92)', backdropFilter: 'blur(12px)',
       borderBottom: `1px solid ${A.line}`
     }}>
