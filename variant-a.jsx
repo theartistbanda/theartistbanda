@@ -268,8 +268,6 @@ function AHero() {
           marginTop: bp.isMobile ? 40 : 80,
           alignItems: 'start'
         }}>
-          {bp.isDesktop && <div style={{ gridColumn: 'span 1' }} />}
-
           <div style={bp.isDesktop ? { gridColumn: 'span 5' } : {}}>
             <p style={{ fontSize: bp.isMobile ? 16 : 18, lineHeight: 1.45, letterSpacing: '-0.01em', margin: 0, color: A.ink2 }}>
               {PORTFOLIO.lead}
@@ -435,13 +433,7 @@ function AProjectRow({ p }) {
         position: 'relative',
         background: hover ? A.paper2 : 'transparent'
       }}>
-      <span style={{ fontSize: 28, fontWeight: 500, letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: 12 }}>
-        <span style={{
-          width: 8, height: 8, borderRadius: 99,
-          background: hover ? A.accent : 'transparent',
-          border: `1px solid ${hover ? A.accent : A.line}`,
-          transition: 'background .18s, border-color .18s'
-        }} />
+      <span style={{ fontSize: 28, fontWeight: 500, letterSpacing: '-0.02em' }}>
         {p.title}
       </span>
       <span style={{ fontSize: 14, color: A.ink2, letterSpacing: '-0.005em' }}>{p.tagline}</span>
@@ -864,7 +856,7 @@ function AContact() {
                 <a key={l.label} href={l.href} data-cursor="hover"
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: bp.isMobile ? '64px 1fr 32px' : '80px 1fr 40px',
+                    gridTemplateColumns: bp.isMobile ? '1fr 32px' : '1fr 40px',
                     gap: bp.isMobile ? 12 : 24, alignItems: 'center',
                     padding: '18px 0',
                     borderTop: i === 0 ? `1px solid rgba(244,241,236,0.15)` : 'none',

@@ -311,11 +311,7 @@ function AHero() {
       marginTop: bp.isMobile ? 40 : 80,
       alignItems: 'start'
     }
-  }, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
-    style: {
-      gridColumn: 'span 1'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: bp.isDesktop ? {
       gridColumn: 'span 5'
     } : {}
@@ -613,21 +609,9 @@ function AProjectRow({
     style: {
       fontSize: 28,
       fontWeight: 500,
-      letterSpacing: '-0.02em',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12
+      letterSpacing: '-0.02em'
     }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      width: 8,
-      height: 8,
-      borderRadius: 99,
-      background: hover ? A.accent : 'transparent',
-      border: `1px solid ${hover ? A.accent : A.line}`,
-      transition: 'background .18s, border-color .18s'
-    }
-  }), p.title), /*#__PURE__*/React.createElement("span", {
+  }, p.title), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 14,
       color: A.ink2,
@@ -1413,7 +1397,7 @@ function AContact() {
     "data-cursor": "hover",
     style: {
       display: 'grid',
-      gridTemplateColumns: bp.isMobile ? '64px 1fr 32px' : '80px 1fr 40px',
+      gridTemplateColumns: bp.isMobile ? '1fr 32px' : '1fr 40px',
       gap: bp.isMobile ? 12 : 24,
       alignItems: 'center',
       padding: '18px 0',
