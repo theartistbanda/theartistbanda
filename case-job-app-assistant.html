@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job App Assistant · Case Study — Dipesh Gurav</title>
+<meta name="description" content="Job App Assistant — A working AI web application designed, coded, and deployed in a single session by Dipesh Gurav. Node.js, Claude API, live on Render.">
+<link rel="canonical" href="https://dipeshgurav.com/case-job-app-assistant">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #0F0D0B; --paper2: #1C1916; --ink: #EDEAE4; --ink2: #9A948D;
+    --mute: #8C8680; --line: rgba(237,234,228,0.09); --accent: #E05320;
+    --sans: 'Inter Tight', 'Inter', system-ui, sans-serif;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.7; letter-spacing: -0.005em; }
+  a { color: inherit; }
+  .mono { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(15,13,11,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  nav > div { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+  .back { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink2); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .back:hover { color: var(--accent); }
+  .nav-label { flex-shrink: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  .hero { padding: 96px 0 48px; border-bottom: 1px solid var(--line); }
+  .meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 64px; }
+  .meta > div { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+  .meta > div span { color: var(--ink); }
+  h1 { font-family: var(--sans); font-weight: 500; font-size: clamp(48px, 9vw, 132px); line-height: 0.95; letter-spacing: -0.035em; max-width: 12ch; }
+  h1 i { font-style: italic; font-weight: 400; color: var(--accent); }
+  .lede { margin-top: 48px; font-size: 19px; line-height: 1.55; color: var(--ink2); letter-spacing: -0.008em; }
+
+  .cover { aspect-ratio: 16/9; margin: 64px 0 0; border: 1px solid var(--line); overflow: hidden; }
+  .cover img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .stat { padding: 28px 24px; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: none; }
+  .stat .n { font-family: var(--sans); font-size: 48px; font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
+  .stat .n i { color: var(--accent); font-style: italic; font-weight: 400; }
+  .stat .n a { text-decoration: none; color: inherit; }
+  .stat .n a:hover { color: var(--accent); }
+
+  section.body { padding: 96px 0; border-bottom: 1px solid var(--line); }
+  .section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
+  .section-head h2 { font-family: var(--sans); font-size: 40px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+  .section-head h2 i { font-style: italic; color: var(--accent); }
+  .prose { font-size: 16px; line-height: 1.75; color: var(--ink2); }
+  .prose p + p { margin-top: 16px; }
+  .prose strong { color: var(--ink); font-weight: 500; }
+  .prose code { font-family: var(--mono); font-size: 12px; background: var(--paper2); padding: 2px 6px; border: 1px solid var(--line); color: var(--ink); }
+  .prose a { color: var(--ink); border-bottom: 1px solid var(--line); }
+  .prose a:hover { color: var(--accent); }
+
+  .diagram { margin: 48px 0 0; border: 1px solid var(--line); overflow: hidden; }
+  .diagram img { width: 100%; display: block; }
+
+  .file-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-left: 1px solid var(--line); border-top: 1px solid var(--line); margin: 40px 0 0; }
+  .file-grid > div { padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .file-grid .fname { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 10px; }
+  .file-grid h3 { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+  .file-grid p { font-size: 13px; color: var(--mute); line-height: 1.65; }
+
+  .decision-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-left: 1px solid var(--line); border-top: 1px solid var(--line); margin-top: 40px; }
+  .decision-grid > div { padding: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .decision-grid h3 { font-size: 16px; font-weight: 500; margin-bottom: 10px; }
+  .decision-grid p { font-size: 14px; color: var(--mute); line-height: 1.65; }
+
+  blockquote { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(24px, 3.2vw, 44px); line-height: 1.25; letter-spacing: -0.02em; max-width: 22ch; margin: 40px 0; color: var(--ink); }
+  blockquote span { color: var(--accent); }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+  .tag { font-family: var(--mono); font-size: 9px; padding: 5px 10px; border: 1px solid var(--line); color: var(--ink2); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .next { padding: 80px 0 120px; }
+  .next-label { margin-bottom: 8px; }
+  .next a { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 32px 0; border-top: 1px solid var(--line); text-decoration: none; color: var(--ink); transition: padding-left 0.2s; }
+  .next a:hover { padding-left: 12px; }
+  .next .nt { font-family: var(--sans); font-size: clamp(32px, 6vw, 88px); letter-spacing: -0.03em; line-height: 1; font-weight: 500; flex: 1; min-width: 0; }
+  .next .nt i { color: var(--accent); font-style: italic; font-weight: 400; }
+  .next .arrow { font-size: 28px; flex-shrink: 0; }
+
+  footer { background: #080604; color: rgba(237,234,228,0.65); padding: 32px; text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ─── TABLET ─────────────────────────────────────────────────────────────── */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    nav > div { padding: 0 24px; }
+    .wrap { padding: 0 24px; }
+    .hero { padding: 64px 0 40px; }
+    .meta { grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3) { border-top: 1px solid var(--line); border-right: 1px solid var(--line); }
+    .stat:nth-child(4) { border-top: 1px solid var(--line); }
+    .section-head h2 { font-size: 32px; }
+    .file-grid { grid-template-columns: 1fr 1fr; }
+    .file-grid > div:nth-child(2n) { border-right: none; }
+    .decision-grid { grid-template-columns: 1fr; }
+    .decision-grid > div { border-right: none; }
+    section.body { padding: 72px 0; }
+    .next { padding: 56px 0 96px; }
+    footer { padding: 24px; }
+  }
+
+  /* ─── MOBILE ─────────────────────────────────────────────────────────────── */
+  @media (max-width: 639px) {
+    nav > div { padding: 0 16px; }
+    .nav-label { display: none; }
+    .wrap { padding: 0 16px; }
+    .hero { padding: 48px 0 32px; }
+    .meta { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+    .meta > div:nth-child(3), .meta > div:nth-child(4) { display: none; }
+    .lede { font-size: 16px; margin-top: 28px; }
+    .cover { margin: 32px 0 0; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat { padding: 20px 14px; }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3) { border-top: 1px solid var(--line); border-right: 1px solid var(--line); }
+    .stat:nth-child(4) { border-top: 1px solid var(--line); border-right: none; }
+    .stat .n { font-size: 36px; }
+    section.body { padding: 56px 0; }
+    .section-head { gap: 8px; margin-bottom: 24px; }
+    .section-head h2 { font-size: 24px; }
+    .prose { font-size: 15px; }
+    .file-grid { grid-template-columns: 1fr 1fr; }
+    .file-grid > div:nth-child(2n) { border-right: none; }
+    .decision-grid { grid-template-columns: 1fr; }
+    .decision-grid > div { border-right: none; }
+    blockquote { max-width: 100%; margin: 28px 0; }
+    .next { padding: 48px 0 72px; }
+    .next a { padding: 24px 0; gap: 16px; }
+    .arrow { font-size: 20px; }
+    footer { padding: 24px 16px; }
+  }
+</style>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<nav>
+  <div>
+    <a href="/" class="back">← Portfolio</a>
+    <span class="mono nav-label"><span style="color:var(--ink)">●</span> Case 05 / 05 · Job App Assistant</span>
+    <a href="mailto:contact@dipeshgurav.com" class="back">Contact →</a>
+  </div>
+</nav>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div class="meta">
+      <div>Case / <span>05</span></div>
+      <div>Year / <span>2025</span></div>
+      <div>Role / <span>Designer · Developer · Product</span></div>
+      <div>Context / <span>Solo build · One session · Live product</span></div>
+    </div>
+    <h1>Job App Assistant.<br>Building the back room.<br><i>From scratch.</i></h1>
+    <p class="lede">A working AI web application — designed, coded, and deployed in a single session. Not a prototype. Not a Figma file. A live product with a real URL, a real server, and a real API key that never once appeared in the wrong place.</p>
+
+    <div class="cover">
+      <img src="/assets/jaa-app-ui.jpg" alt="Job App Assistant — full three-panel UI on desktop" />
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="mono" style="margin-bottom:8px">Session</div>
+        <div class="n">1<i> day</i></div>
+      </div>
+      <div class="stat">
+        <div class="mono" style="margin-bottom:8px">Files</div>
+        <div class="n">4</div>
+      </div>
+      <div class="stat">
+        <div class="mono" style="margin-bottom:8px">Stack</div>
+        <div class="n" style="font-size:24px;line-height:1.2">Node · Claude API</div>
+      </div>
+      <div class="stat">
+        <div class="mono" style="margin-bottom:8px">Status</div>
+        <div class="n"><a href="https://job-app-assistant.onrender.com" target="_blank" rel="noopener">Live<i> ↗</i></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">01 · The question</span>
+      <h2>I didn't know what happened <i>after the click.</i></h2>
+    </div>
+    <div class="prose">
+      <p>I've been designing AI-powered products for three years. TaskGPT. Generative workflows. Claude as a design collaborator. But if you'd asked me what actually happens when a user clicks Generate on an AI tool — not conceptually, but at every literal step — I couldn't have told you.</p>
+      <p>I knew there was a server. I knew there was an API key. I knew there was something called a backend. But where the key lived, why it couldn't live in the browser, what was actually running on the other end — I had no picture of it.</p>
+      <p>For a designer who works at the intersection of human judgement and AI tools, that felt like a gap worth closing. Not by reading. By building.</p>
+    </div>
+
+    <blockquote>"The concepts are learnable. The plumbing just needs to <span>become visible</span> once."</blockquote>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">02 · The mental model</span>
+      <h2>It's a print shop. <i>Once you see it, you can't unsee it.</i></h2>
+    </div>
+    <div class="prose">
+      <p>Before writing a single line of code, I needed an analogy that made the architecture legible. Imagine a print shop. A customer walks in through the front door, places an order. The counter person takes it to the back room, uses the machine, brings the shirt back out. The customer never touches the machine. They never see the access code to the back room.</p>
+      <p>In an AI web app: the <strong>front door</strong> is the browser — what the user sees and touches. The <strong>back room</strong> is the server — a programme running somewhere, always on. The <strong>machine</strong> is the AI API — doing the actual work. The <strong>access code</strong> is the API key — the secret that proves you're allowed in.</p>
+      <p>The rule is absolute: <strong>the key never leaves the back room.</strong> Not in the code. Not on GitHub. Not in the browser's network inspector. It lives only in the server's environment, set once in the hosting dashboard. Once that landed, the rest was just execution.</p>
+    </div>
+
+    <div class="diagram">
+      <img loading="lazy" src="/assets/jaa-print-shop.jpg" alt="The print shop analogy — front door (browser), back room (server), printing machine (Anthropic API)" />
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">03 · What I built</span>
+      <h2>A job application assistant. <i>Genuinely useful, genuinely shipped.</i></h2>
+    </div>
+    <div class="prose">
+      <p>Paste a job description, upload your resume, select what you need — cover letter, fit score with honest flags, Q&A answers, contact outreach template — and get a full application package back in seconds. Four files. Three separate concerns.</p>
+    </div>
+
+    <div class="diagram">
+      <img loading="lazy" src="/assets/jaa-file-separation.jpg" alt="File separation — index.html (floor plan), style.css (interior design), app.js (electrical wiring)" />
+    </div>
+
+    <div class="file-grid">
+      <div>
+        <div class="fname">index.html</div>
+        <h3>Floor plan</h3>
+        <p>Structure only. No opinions on look or behaviour — rooms and walls, nothing decorative.</p>
+      </div>
+      <div>
+        <div class="fname">style.css</div>
+        <h3>Interior design</h3>
+        <p>Every visual decision. The dark surface system, the score circle that turns green, amber, or red. Change the look without touching the logic.</p>
+      </div>
+      <div>
+        <div class="fname">app.js</div>
+        <h3>Electrical wiring</h3>
+        <p>All behaviour. Click events, progress bar animation, localStorage history, bento grid rendering. Fix a bug without touching the design.</p>
+      </div>
+      <div>
+        <div class="fname">server.js</div>
+        <h3>The back room</h3>
+        <p>Runs on the server. Holds the key, calls Anthropic, returns structured JSON. The browser never speaks to Anthropic directly.</p>
+      </div>
+    </div>
+
+    <div class="diagram" style="margin-top:16px">
+      <img loading="lazy" src="/assets/jaa-github-security.jpg" alt="What goes to GitHub vs what never leaves your Mac — the .env file stays off git forever" />
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">04 · The design decisions</span>
+      <h2>Most of the hard calls <i>were design calls.</i></h2>
+    </div>
+    <div class="prose">
+      <p>The code executes intent. The intent is always a design decision first.</p>
+    </div>
+
+    <div class="decision-grid">
+      <div>
+        <h3>Sticky generate button</h3>
+        <p>The input form is long — job description, checkboxes, resume upload, extra context. If the primary CTA scrolled away, users would have to hunt for it at exactly the moment they're ready to act. Pinning it to the bottom of the panel is a UX principle, not a code problem. Once the decision was made, the CSS was one property.</p>
+      </div>
+      <div>
+        <h3>Three-panel layout</h3>
+        <p>History on the left. Results in the centre. Input on the right. This is the same shell as Claude, ChatGPT, and Gemini — interfaces people use every day. The mental model arrives pre-loaded. Learning curve: near zero.</p>
+      </div>
+      <div>
+        <h3>Bento grid results</h3>
+        <p>A wall of text is the wrong answer for dense AI output. Results render as distinct tiles — fit score with a score circle, cover letter and Q&A side by side on desktop and stacked on mobile, contact research spanning the full width. Each tile has its own copy button. Information design, not decoration.</p>
+      </div>
+      <div>
+        <h3>Mobile sheet behaviour</h3>
+        <p>On mobile, the input panel slides up as a bottom sheet. A floating close button sits above it — circular, bordered, fixed — visible at all times. The generate button stays pinned at the bottom of the viewport in every state. These decisions reduce the cognitive distance between intent and action.</p>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <img loading="lazy" src="/assets/jaa-app-ui.jpg" alt="Three-panel desktop layout annotated — history, results, input with sticky generate button" />
+    </div>
+
+    <div class="diagram" style="margin-top:16px">
+      <img loading="lazy" src="/assets/jaa-mobile-views.jpg" alt="Mobile views — default input panel, bento results, history sidebar" />
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">05 · The pipeline</span>
+      <h2>From code on a laptop <i>to a URL you can share.</i></h2>
+    </div>
+    <div class="prose">
+      <p>The deployment loop, once understood, is almost embarrassingly simple. Write code locally in VS Code. The API key lives in a <code>.env</code> file that never gets committed — <code>.gitignore</code> makes that permanent. Push to GitHub. Render watches the repository and redeploys automatically. The API key is set once in Render's dashboard, read at runtime, never visible in the codebase.</p>
+      <p>Every future update is three commands: <code>git add .</code> → <code>git commit</code> → <code>git push</code>. Render handles the rest in under two minutes.</p>
+    </div>
+
+    <div class="diagram">
+      <img loading="lazy" src="/assets/jaa-pipeline.jpg" alt="Deployment pipeline — Mac to GitHub to Render to Claude API to live URL" />
+    </div>
+
+    <div class="tag-row">
+      <span class="tag">Node.js</span>
+      <span class="tag">Express</span>
+      <span class="tag">Claude API</span>
+      <span class="tag">GitHub</span>
+      <span class="tag">Render</span>
+      <span class="tag">Solo build</span>
+      <span class="tag">One session</span>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">06 · Outcome</span>
+      <h2>A working product. <i>And a mental model that won't leave.</i></h2>
+    </div>
+    <div class="prose">
+      <p>The app is live at <a href="https://job-app-assistant.onrender.com" target="_blank" rel="noopener">job-app-assistant.onrender.com</a>. It generates cover letters, fit scores, Q&A answers, and contact outreach templates — all structured, all copyable, all downloadable as PDF.</p>
+      <p>But the more durable outcome is the picture in my head. I now know what the back room looks like. I know where the key lives, why it matters, what each file owns and why that separation is worth defending. I know the difference between a concept that lives in a deck and a product that lives on a server.</p>
+      <p>For a designer who works at the intersection of human judgement and AI tools, that picture changes what's possible.</p>
+    </div>
+
+    <blockquote>"The code executes the intent. The intent is always <span>a design decision</span> first."</blockquote>
+  </div>
+</section>
+
+<section class="next">
+  <div class="wrap">
+    <div class="mono next-label">You have reached the end. Start from the beginning.</div>
+    <a href="case-yourhour.html">
+      <span class="nt">YourHour — <i>breaking digital addiction, compassionately.</i></span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+</main>
+<footer>
+  © MMXXVI · Dipesh Gurav · Nottingham, UK · Designed with purpose, not just pixels
+</footer>
+
+</body>
+</html>
