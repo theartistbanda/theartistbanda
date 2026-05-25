@@ -472,10 +472,9 @@ function AWork() {
     }
   }, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: {
-      gridColumn: 'span 1',
-      ...aStyles.mono
+      gridColumn: 'span 1'
     }
-  }, "01"), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: bp.isDesktop ? {
       gridColumn: 'span 7'
     } : {}
@@ -577,18 +576,13 @@ function AProjectRow({
       style: {
         ...baseStyle,
         display: 'grid',
-        gridTemplateColumns: '48px 1fr 1fr 32px',
+        gridTemplateColumns: '1fr 1fr 32px',
         gap: 16,
         alignItems: 'center',
         padding: '24px 8px',
         background: hover ? A.paper2 : 'transparent'
       }
     }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        ...aStyles.mono,
-        color: A.ink
-      }
-    }, p.index), /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 22,
         fontWeight: 500,
@@ -619,7 +613,7 @@ function AProjectRow({
     style: {
       ...baseStyle,
       display: 'grid',
-      gridTemplateColumns: '60px 2fr 3fr 2fr 1.2fr 40px',
+      gridTemplateColumns: '2fr 3fr 2fr 1.2fr 40px',
       gap: 24,
       alignItems: 'center',
       padding: '28px 8px',
@@ -627,11 +621,6 @@ function AProjectRow({
       background: hover ? A.paper2 : 'transparent'
     }
   }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...aStyles.mono,
-      color: A.ink
-    }
-  }, p.index), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 28,
       fontWeight: 500,
@@ -728,11 +717,9 @@ function AOrigin() {
     } : {}
   }, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: {
-      ...aStyles.mono,
-      color: 'rgba(237,234,228,0.70)',
       marginBottom: 12
     }
-  }, "02"), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       ...aStyles.mono,
       color: A.accent,
@@ -838,10 +825,9 @@ function APrinciples() {
     }
   }, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: {
-      ...aStyles.mono,
       marginBottom: 8
     }
-  }, "03"), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
       ...aStyles.mono,
       color: A.accent,
@@ -884,7 +870,7 @@ function APrinciples() {
       ...aStyles.mono,
       color: A.accent
     }
-  }, "Principle / ", p.n), /*#__PURE__*/React.createElement("span", {
+  }, "Principle"), /*#__PURE__*/React.createElement("span", {
     style: {
       width: 6,
       height: 6,

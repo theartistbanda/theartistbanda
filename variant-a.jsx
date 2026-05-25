@@ -353,7 +353,7 @@ function AWork() {
           gridTemplateColumns: bp.isMobile ? '1fr' : bp.isTablet ? '1fr 1fr' : 'repeat(12, 1fr)',
           gap: 24, marginBottom: bp.isMobile ? 32 : 64
         }}>
-          {bp.isDesktop && <div style={{ gridColumn: 'span 1', ...aStyles.mono }}>01</div>}
+          {bp.isDesktop && <div style={{ gridColumn: 'span 1' }} />}
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Selected Work · 2020 — 2025</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
@@ -412,11 +412,10 @@ function AProjectRow({ p }) {
         onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
         style={{
           ...baseStyle, display: 'grid',
-          gridTemplateColumns: '48px 1fr 1fr 32px',
+          gridTemplateColumns: '1fr 1fr 32px',
           gap: 16, alignItems: 'center', padding: '24px 8px',
           background: hover ? A.paper2 : 'transparent'
         }}>
-        <span style={{ ...aStyles.mono, color: A.ink }}>{p.index}</span>
         <span style={{ fontSize: 22, fontWeight: 500, letterSpacing: '-0.015em' }}>{p.title}</span>
         <span style={{ fontSize: 13, color: A.ink2 }}>{p.tagline}</span>
         <span style={{ fontSize: 18, color: hover ? A.accent : A.mute, transition: 'color .18s', textAlign: 'right' }}>
@@ -432,12 +431,11 @@ function AProjectRow({ p }) {
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{
         ...baseStyle, display: 'grid',
-        gridTemplateColumns: '60px 2fr 3fr 2fr 1.2fr 40px',
+        gridTemplateColumns: '2fr 3fr 2fr 1.2fr 40px',
         gap: 24, alignItems: 'center', padding: '28px 8px',
         position: 'relative',
         background: hover ? A.paper2 : 'transparent'
       }}>
-      <span style={{ ...aStyles.mono, color: A.ink }}>{p.index}</span>
       <span style={{ fontSize: 28, fontWeight: 500, letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: 12 }}>
         <span style={{
           width: 8, height: 8, borderRadius: 99,
@@ -485,7 +483,7 @@ function AOrigin() {
 
           {/* Left */}
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
-            {bp.isDesktop && <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.70)', marginBottom: 12 }}>02</div>}
+            {bp.isDesktop && <div style={{ marginBottom: 12 }} />}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 20 }}>The origin story</div>
             <h2 style={{
               fontSize: 'clamp(36px, 7vw, 88px)',
@@ -550,7 +548,7 @@ function APrinciples() {
     <section id="principles" style={{ padding: `${vPad} ${side}`, borderBottom: `1px solid ${A.line}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
         <div style={{ marginBottom: bp.isMobile ? 32 : 48 }}>
-          {bp.isDesktop && <div style={{ ...aStyles.mono, marginBottom: 8 }}>03</div>}
+          {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
           <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Operating principles</div>
           <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
             Six beliefs that decide<br />every design call.
@@ -565,7 +563,7 @@ function APrinciples() {
               display: 'flex', flexDirection: 'column'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-                <span style={{ ...aStyles.mono, color: A.accent }}>Principle / {p.n}</span>
+                <span style={{ ...aStyles.mono, color: A.accent }}>Principle</span>
                 <span style={{ width: 6, height: 6, borderRadius: 99, background: A.line }} />
               </div>
               <h3 style={{ fontSize: bp.isMobile ? 17 : 20, fontWeight: 500, letterSpacing: '-0.01em', lineHeight: 1.2, margin: 0, marginBottom: 16, color: A.ink }}>
