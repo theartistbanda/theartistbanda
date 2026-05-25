@@ -1268,7 +1268,7 @@ function AAbout() {
       color: A.ink2,
       lineHeight: 1.6
     }
-  }, "Remote, India"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
+  }, "Remote, UK"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
