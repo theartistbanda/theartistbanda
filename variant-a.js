@@ -268,11 +268,7 @@ function AHero() {
       marginBottom: bp.isTablet ? 40 : 64,
       ...aStyles.mono
     }
-  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role, " \xB7 est. 2013"), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 20.5937\xB0N"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
-    style: {
-      textAlign: 'right'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role, " \xB7 est. 2013"), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 20.5937\xB0N"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.accent
     }

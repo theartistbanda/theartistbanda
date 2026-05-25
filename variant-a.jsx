@@ -227,7 +227,7 @@ function AHero() {
             <div>{PORTFOLIO.location} · 20.5937°N</div>
             {bp.isDesktop && <div>Portfolio / vol. MMXXVI</div>}
             {bp.isDesktop && (
-              <div style={{ textAlign: 'right' }}>
+              <div>
                 <span style={{ color: A.accent }}>●</span> Currently designing for TaskUs
               </div>
             )}
