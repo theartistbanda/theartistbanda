@@ -95,7 +95,7 @@ const PORTFOLIO = {
     tagline: 'Breaking digital addiction at scale.',
     body: 'Behavioural psychology and compassionate UX to help millions reclaim attention — without becoming another addictive feed.',
     stats: [['1M+', 'Downloads'], ['70K', 'Reviews'], ['22', 'Languages'], ['4.7★', 'Play Store']],
-    tags: ['Behavioural Design', 'Android · iOS', 'Cross-cultural'],
+    tags: ['Behavioural Design', 'Digital Health', 'HealthTech', 'Android · iOS', 'Cross-cultural'],
     image: '/assets/yourhour-cover.webp',
     href: 'case-yourhour.html'
   }, {
@@ -145,7 +145,7 @@ const PORTFOLIO = {
     tagline: 'Designed for trust, not conversion.',
     body: 'A brand parents can feel safe with — because they are feeding it to their children. Emotional UX over checkout funnels.',
     stats: [['UAE', 'Market'], ['Trust', 'KPI']],
-    tags: ['E-commerce', 'Emotional UX'],
+    tags: ['E-commerce', 'Conversion Rate Optimisation', 'Emotional UX'],
     image: '/assets/earlyfoods-cover.webp',
     href: 'case-earlyfoods.html'
   }],
@@ -181,7 +181,7 @@ const PORTFOLIO = {
     org: 'TaskUs · Global BPO · Remote, UK',
     body: 'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs, and the LevelUp gamification system. Authored the PCAF framework now adopted across all TaskUs products.',
     nda: 'Full case studies protected by NDA — available for discussion in a confidential interview setting.',
-    tags: ['AI Design', 'Enterprise UX', 'Design Systems', 'Leadership'],
+    tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Leadership'],
     current: true
   }, {
     from: '2018',
@@ -205,7 +205,7 @@ const PORTFOLIO = {
     body: 'Formal training in interaction design, motion graphics and visual communication.',
     tags: ['UI/UX', 'Motion']
   }],
-  skills: ['Behavioural UX', 'AI Interfaces', 'Design Systems', 'Cross-cultural', 'Figma', 'AR/VR', 'Three.js', 'Team Leadership', 'Product Strategy'],
+  skills: ['Behavioural UX', 'AI Interfaces', 'Generative AI Tools', 'Design Systems', 'A/B Testing', 'Experimentation', 'Cross-cultural', 'Figma', 'Conversion Rate Optimisation', 'Team Leadership', 'Product Strategy'],
   notable: ['Aatmnirbhar Bharat national logo', 'YourHour · 4.7★ · 1M+ downloads', 'AWS Summit London 2025', 'Repos Energy fuel-delivery', '300+ user interviews'],
   links: [{
     label: 'Email',
