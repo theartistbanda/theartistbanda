@@ -175,7 +175,7 @@ const PORTFOLIO = {
         ['Live', 'Status'],
       ],
       tags: ['Generative AI Tools', 'AI Interfaces', 'Solo build'],
-      image: '/assets/jaa-app-ui.jpg',
+      image: '/assets/jaa-app-ui.webp',
       href: 'case-job-app-assistant.html',
     },
   ],
