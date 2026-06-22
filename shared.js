@@ -60,11 +60,11 @@ function fmt(n, opts = {}) {
 // -----------------------------------------------------------------------------
 const PORTFOLIO = {
   name: 'Dipesh Gurav',
-  role: 'Product Designer',
-  location: 'Remote, UK',
+  role: 'Lead Product Designer',
+  location: 'London, UK',
   years: 12,
   tagline: 'Designing for the humans behind the pixels.',
-  lead: 'Senior product designer behind AI tools cutting enterprise costs 20%, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
+  lead: 'Lead product designer behind AI tools cutting enterprise costs 20%, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
   metrics: [{
     value: 1,
     suffix: 'M+',
@@ -94,7 +94,7 @@ const PORTFOLIO = {
     kicker: 'Digital wellbeing · India · 1M+ downloads',
     tagline: 'Breaking digital addiction at scale.',
     body: 'Behavioural psychology and compassionate UX to help millions reclaim attention — without becoming another addictive feed.',
-    stats: [['1M+', 'Downloads'], ['70K', 'Reviews'], ['22', 'Languages'], ['4.7★', 'Play Store']],
+    stats: [['1M+', 'Downloads'], ['70K', 'Reviews'], ['22', 'Languages'], ['4.6★', 'Play Store']],
     tags: ['Behavioural Design', 'Digital Health', 'HealthTech', 'Android · iOS', 'Cross-cultural'],
     image: '/assets/yourhour-cover.webp',
     href: 'case-yourhour.html'
@@ -196,29 +196,29 @@ const PORTFOLIO = {
     tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Leadership'],
     current: true
   }, {
-    from: '2018',
-    to: '2022',
-    role: 'Product Design Consultant',
-    org: 'The Artist Banda · Consultancy · Indore → UK',
-    body: 'Sole designer and strategist on all three featured case studies: YourHour (independent product, 1M+ downloads), JEGO (client — UAE wellbeing platform), and EarlyFoods (client — UAE e-commerce). Also drew the Aatmnirbhar Bharat national logo overnight in May 2020, later adopted by the Government of India.',
-    tags: ['Brand', 'Product Strategy', 'Wellbeing UX']
+    from: '2017',
+    to: '2021',
+    role: 'Product Designer',
+    org: 'Mindefy Technologies · Indore, India',
+    body: 'Sole designer across fintech, payments and digital wellbeing. Shipped YourHour (independent product, 1M+ downloads), the Repos Energy fuel-delivery UX, and the GreenBill paperless invoicing system.',
+    tags: ['Fintech', 'Mobile', 'Wellbeing UX']
   }, {
-    from: '2015',
-    to: '2018',
-    role: 'Senior Product Designer',
-    org: 'Mind-e-fy Technologies',
-    body: 'Led product design for wellbeing and fintech — Repos Energy fuel-delivery UX, a paperless receipt system, multiple fintech products.',
-    tags: ['Fintech', 'Mobile', 'Sustainability']
+    from: '2014',
+    to: '2017',
+    role: 'Product Design Consultant & Founder',
+    org: 'The Artist Banda · Bengaluru, India',
+    body: 'Independent consultancy across brand, fintech and wellbeing. Designed JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce), and drew the Aatmnirbhar Bharat national logo overnight with no brief — later adopted by the Government of India.',
+    tags: ['Brand', 'Product Strategy', 'Wellbeing UX']
   }, {
     from: '2012',
     to: '2014',
-    role: 'Masters · UI/UX, Graphics & Animation',
+    role: 'AD3D Edge+ Diploma · Design, Animation & VFX',
     org: 'MAAC Indore',
     body: 'Formal training in interaction design, motion graphics and visual communication.',
     tags: ['UI/UX', 'Motion']
   }],
   skills: ['Behavioural UX', 'AI Interfaces', 'Generative AI Tools', 'Design Systems', 'A/B Testing', 'Experimentation', 'Cross-cultural', 'Figma', 'Conversion Rate Optimisation', 'Team Leadership', 'Product Strategy'],
-  notable: ['Aatmnirbhar Bharat national logo', 'YourHour · 4.7★ · 1M+ downloads', 'AWS Summit London 2025', 'Repos Energy fuel-delivery', '300+ user interviews'],
+  notable: ['Aatmnirbhar Bharat national logo', 'YourHour · 4.6★ · 1M+ downloads', 'AWS Summit London 2025', 'Repos Energy fuel-delivery', '300+ user interviews'],
   links: [{
     label: 'Email',
     value: 'contact@dipeshgurav.com',

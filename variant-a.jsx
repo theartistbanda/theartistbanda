@@ -223,8 +223,8 @@ function AHero() {
             gridTemplateColumns: bp.isTablet ? '1fr 1fr' : 'repeat(4, 1fr)',
             gap: 24, marginBottom: bp.isTablet ? 40 : 64, ...aStyles.mono
           }}>
-            <div>{PORTFOLIO.role} · est. 2013</div>
-            <div>{PORTFOLIO.location} · 20.5937°N</div>
+            <div>{PORTFOLIO.role} · est. 2014</div>
+            <div>{PORTFOLIO.location} · 51.5074°N</div>
             {bp.isDesktop && <div>Portfolio / vol. MMXXVI</div>}
             {bp.isDesktop && (
               <div>
@@ -751,7 +751,7 @@ function AAbout() {
             {sidebarRow('Currently', (
               <>
                 <div style={{ fontSize: 14, color: A.ink, lineHeight: 1.6 }}>Lead Designer · TaskUs</div>
-                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>Remote, UK</div>
+                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>London, UK</div>
               </>
             ))}
             {sidebarRow('Experience', (
