@@ -224,7 +224,7 @@ function AHero() {
             gap: 24, marginBottom: bp.isTablet ? 40 : 64, ...aStyles.mono
           }}>
             <div>{PORTFOLIO.role} · est. 2014</div>
-            <div>{PORTFOLIO.location} · 51.5074°N</div>
+            <div>{PORTFOLIO.location} · UK-wide & remote</div>
             {bp.isDesktop && <div>Portfolio / vol. MMXXVI</div>}
             {bp.isDesktop && (
               <div>
@@ -751,7 +751,7 @@ function AAbout() {
             {sidebarRow('Availability', (
               <>
                 <div style={{ fontSize: 14, color: A.ink, lineHeight: 1.6 }}>Open to work · Immediate joiner</div>
-                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>London, UK</div>
+                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>UK-wide & remote</div>
               </>
             ))}
             {sidebarRow('Experience', (

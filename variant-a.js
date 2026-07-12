@@ -268,7 +268,7 @@ function AHero() {
       marginBottom: bp.isTablet ? 40 : 64,
       ...aStyles.mono
     }
-  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role, " \xB7 est. 2014"), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 51.5074\xB0N"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role, " \xB7 est. 2014"), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 UK-wide & remote"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.accent
     }
@@ -1221,7 +1221,7 @@ function AAbout() {
       color: A.ink2,
       lineHeight: 1.6
     }
-  }, "London, UK"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
+  }, "UK-wide & remote"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',

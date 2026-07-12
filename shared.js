@@ -61,7 +61,7 @@ function fmt(n, opts = {}) {
 const PORTFOLIO = {
   name: 'Dipesh Gurav',
   role: 'Lead Product Designer',
-  location: 'London, UK',
+  location: 'United Kingdom',
   years: 12,
   tagline: 'Designing for the humans behind the pixels.',
   lead: 'Lead product designer behind AI tools cutting enterprise costs 20%, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
