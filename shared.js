@@ -188,13 +188,13 @@ const PORTFOLIO = {
   }],
   career: [{
     from: '2021',
-    to: 'Now',
+    to: '2026',
     role: 'Lead UI/UX Designer',
     org: 'TaskUs · Global BPO · Remote, UK',
     body: 'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs, and the LevelUp gamification system. Authored the PCAF framework now adopted across all TaskUs products.',
     nda: 'Full case studies protected by NDA — available for discussion in a confidential interview setting.',
     tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Leadership'],
-    current: true
+    current: false
   }, {
     from: '2017',
     to: '2021',

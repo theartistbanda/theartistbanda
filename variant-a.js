@@ -272,7 +272,7 @@ function AHero() {
     style: {
       color: A.accent
     }
-  }, "\u25CF"), " Currently designing for TaskUs")), /*#__PURE__*/React.createElement("h1", {
+  }, "\u25CF"), " Open to work \xB7 immediate joiner")), /*#__PURE__*/React.createElement("h1", {
     style: {
       fontFamily: '"Inter Tight", "Inter", sans-serif',
       fontWeight: 500,
@@ -1209,13 +1209,13 @@ function AAbout() {
       background: A.paper2,
       border: `1px solid ${A.line}`
     }
-  }, sidebarRow('Currently', /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, sidebarRow('Availability', /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 14,
       color: A.ink,
       lineHeight: 1.6
     }
-  }, "Lead Designer \xB7 TaskUs"), /*#__PURE__*/React.createElement("div", {
+  }, "Open to work \xB7 Immediate joiner"), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 14,
       color: A.ink2,

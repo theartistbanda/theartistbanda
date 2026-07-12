@@ -228,7 +228,7 @@ function AHero() {
             {bp.isDesktop && <div>Portfolio / vol. MMXXVI</div>}
             {bp.isDesktop && (
               <div>
-                <span style={{ color: A.accent }}>●</span> Currently designing for TaskUs
+                <span style={{ color: A.accent }}>●</span> Open to work · immediate joiner
               </div>
             )}
           </div>
@@ -748,9 +748,9 @@ function AAbout() {
             background: A.paper2,
             border: `1px solid ${A.line}`,
           }}>
-            {sidebarRow('Currently', (
+            {sidebarRow('Availability', (
               <>
-                <div style={{ fontSize: 14, color: A.ink, lineHeight: 1.6 }}>Lead Designer · TaskUs</div>
+                <div style={{ fontSize: 14, color: A.ink, lineHeight: 1.6 }}>Open to work · Immediate joiner</div>
                 <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>London, UK</div>
               </>
             ))}
