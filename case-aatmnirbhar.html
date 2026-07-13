@@ -3,10 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aatmnirbhar · Case Study — Dipesh Gurav</title>
-<meta name="description" content="Aatmnirbhar Bharat — UX/UI case study by Dipesh Gurav, Lead Product Designer. Full case study coming soon.">
-<meta name="robots" content="noindex, nofollow">
+<title>Aatmnirbhar · Case Study | Dipesh Gurav</title>
+<meta name="description" content="How Dipesh Gurav designed the Aatmnirbhar Bharat logo, the national identity mark officially adopted for the Government of India's PM SVANidhi scheme and used by 90% of Indian manufacturers.">
+<meta name="robots" content="index, follow">
 <link rel="canonical" href="https://dipeshgurav.com/case-aatmnirbhar">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dipeshgurav.com/case-aatmnirbhar">
+<meta property="og:title" content="Aatmnirbhar Bharat | National identity mark | Dipesh Gurav">
+<meta property="og:description" content="One night, zero brief: the logo officially adopted for the Government of India's PM SVANidhi scheme, now used by 90% of Indian manufacturers.">
+<meta property="og:image" content="https://dipeshgurav.com/assets/aatmnirbhar-cover.jpg">
+<meta property="og:image:width" content="3840">
+<meta property="og:image:height" content="2160">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aatmnirbhar Bharat | National identity mark | Dipesh Gurav">
+<meta name="twitter:image" content="https://dipeshgurav.com/assets/aatmnirbhar-cover.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -40,7 +51,12 @@
   h1 i { font-style: italic; font-weight: 400; color: var(--accent); }
   .lede { margin-top: 48px; font-size: 19px; line-height: 1.55; color: var(--ink2); letter-spacing: -0.008em; }
 
-  /* Hero dark panel — used instead of an image */
+  /* The mark itself */
+  .mark-panel { background: #F4F1EC; border: 1px solid var(--line); margin: 64px 0 0; padding: 64px 48px; display: flex; align-items: center; justify-content: center; }
+  .mark-panel img { display: block; max-width: 420px; width: 60%; height: auto; }
+  @media (max-width: 639px) { .mark-panel { padding: 40px 24px; margin: 32px 0 0; } .mark-panel img { width: 80%; } }
+
+  /* Hero dark panel */
   .cover-dark { background: var(--ink); border: 1px solid var(--line); margin: 64px 0 0; padding: 80px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
   .cover-stat { display: flex; flex-direction: column; gap: 6px; }
   .cover-stat .n { font-family: var(--sans); font-size: 64px; font-weight: 500; letter-spacing: -0.04em; line-height: 1; color: var(--paper); }
@@ -174,7 +190,14 @@
       <div>Context / <span>Government of India</span></div>
     </div>
     <h1>Aatmnirbhar.<br>One night.<br>Zero brief.<br><i>A national symbol.</i></h1>
-    <p class="lede">In May 2020, India launched the Aatmnirbhar Bharat initiative. By morning, a logo existed — no client, no brief, no credit requested. It was officially adopted for PM SVANidhi and is now used by roughly 90% of Indian manufacturers.</p>
+    <p class="lede">In May 2020, India launched the Aatmnirbhar Bharat initiative. By morning, a logo existed: no client, no brief, no credit requested. It was officially adopted for PM SVANidhi and is now used by roughly 90% of Indian manufacturers.</p>
+
+    <div class="mark-panel">
+      <picture>
+        <source srcset="/assets/aatmnirbhar-logo.webp" type="image/webp">
+        <img src="/assets/aatmnirbhar-logo.jpg" alt="The Aatmnirbhar Bharat logo: a saffron figure rising within the map of India, with the initiative name in Devanagari script" width="1954" height="2297" loading="eager">
+      </picture>
+    </div>
 
     <div class="cover-dark">
       <div style="display:flex;flex-direction:column;gap:24px;">
@@ -208,12 +231,12 @@
       <h2>A national moment needed a national <i>visual identity.</i></h2>
     </div>
     <div class="prose">
-      <p>On 12 May 2020, Prime Minister Modi announced Aatmnirbhar Bharat — Self-Reliant India — a sweeping economic response to the COVID-19 crisis. The initiative needed a symbol: something that could represent Make in India, self-sufficiency, and national unity simultaneously.</p>
+      <p>On 12 May 2020, Prime Minister Modi announced Aatmnirbhar Bharat (Self-Reliant India), a sweeping economic response to the COVID-19 crisis. The initiative needed a symbol: something that could represent Make in India, self-sufficiency, and national unity simultaneously.</p>
       <p>No design brief was issued. No agency was commissioned. The government announcement went live, and the visual vacuum was immediate. Watching the announcement, I opened Adobe Illustrator.</p>
     </div>
 
     <blockquote>"No brief. No client. Just a country that needed a <span>symbol</span> by morning."</blockquote>
-    <div class="quote-attr">— Dipesh Gurav, May 2020</div>
+    <div class="quote-attr">Dipesh Gurav, May 2020</div>
 
     <div class="tag-row">
       <span class="tag">Brand Identity</span>
@@ -229,7 +252,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="mono">The Night</span>
-      <h2>From announcement to symbol — <i>one Illustrator session.</i></h2>
+      <h2>From announcement to symbol: <i>one Illustrator session.</i></h2>
     </div>
     <div class="prose">
       <p>The design challenge was deceptively precise: create a logo that communicates self-reliance without feeling isolationist, India without being flag-literal, and unity without being generic. It had to scale from mobile screens to factory packaging to government banners.</p>
@@ -251,7 +274,7 @@
       <div class="timeline-time">2 AM</div>
       <div class="timeline-body">
         <h3>Refinement in Illustrator</h3>
-        <p>Dozens of iterations — exploring the Ashoka Chakra, lotus motifs, geometric abstraction, and finally a mark that balanced national pride with universal readability.</p>
+        <p>Dozens of iterations: exploring the Ashoka Chakra, lotus motifs, geometric abstraction, and finally a mark that balanced national pride with universal readability.</p>
       </div>
 
       <div class="timeline-time">Morning</div>
@@ -270,12 +293,12 @@
       <h2>90% of Indian manufacturers.<br><i>Officially adopted</i> for PM SVANidhi.</h2>
     </div>
     <div class="prose">
-      <p>The logo was officially adopted for PM SVANidhi — the government scheme providing collateral-free working capital loans to street vendors, one of the most visible COVID-19 relief programmes in India. From there it spread organically to manufacturers, retailers, and government communications.</p>
-      <p>Today, an estimated 90% of Indian manufacturers who use the Aatmnirbhar Bharat branding use this logo. It appears on packaging, government campaigns, and national advertising with no agency attribution — which is perhaps the most honest outcome a designer can ask for. Good design serves the purpose, not the credit.</p>
+      <p>The logo was officially adopted for PM SVANidhi, the government scheme providing collateral-free working capital loans to street vendors, one of the most visible COVID-19 relief programmes in India. From there it spread organically to manufacturers, retailers, and government communications.</p>
+      <p>Today, an estimated 90% of Indian manufacturers who use the Aatmnirbhar Bharat branding use this logo. It appears on packaging, government campaigns, and national advertising with no agency attribution, which is perhaps the most honest outcome a designer can ask for. Good design serves the purpose, not the credit.</p>
     </div>
 
-    <blockquote>"Good design does not ask permission — it simply <span>works</span> for people."</blockquote>
-    <div class="quote-attr">— Design principle</div>
+    <blockquote>"Good design does not ask permission; it simply <span>works</span> for people."</blockquote>
+    <div class="quote-attr">Design principle</div>
   </div>
 </section>
 
@@ -283,7 +306,7 @@
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
     <a href="case-jego.html">
-      <span class="nt">JEGO — <i>mentors for the Gulf.</i></span>
+      <span class="nt">JEGO: <i>mentors for the Gulf.</i></span>
       <span class="arrow">→</span>
     </a>
   </div>

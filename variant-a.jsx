@@ -1,4 +1,4 @@
-// Variant A — SWISS GRID (Responsive)
+// Variant A: SWISS GRID (Responsive)
 // Desktop: strict 12-col grid. Tablet: 2-col adaptive. Mobile: single column.
 
 // Paste your deployed Google Apps Script URL here after setup:
@@ -144,7 +144,7 @@ function ANav() {
           </ul>
         )}
 
-        {/* Clock — desktop only */}
+        {/* Clock: desktop only */}
         {bp.isDesktop && (
           <div style={aStyles.mono}>
             <span style={{ color: A.ink }}>● </span>{t}
@@ -160,7 +160,7 @@ function ANav() {
             {bp.isMobile ? 'Hire me →' : 'Available for work →'}
           </a>
 
-          {/* Hamburger — tablet + mobile */}
+          {/* Hamburger: tablet + mobile */}
           {!bp.isDesktop && (
             <button
               onClick={() => setOpen(o => !o)}
@@ -216,7 +216,7 @@ function AHero() {
     <section style={{ padding: `${vPad} ${side} ${bp.isMobile ? '40px' : '48px'}`, borderBottom: `1px solid ${A.line}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
 
-        {/* Meta row — hidden on mobile */}
+        {/* Meta row: hidden on mobile */}
         {!bp.isMobile && (
           <div style={{
             display: 'grid',
@@ -351,7 +351,7 @@ function AWork() {
           gap: 24, marginBottom: bp.isMobile ? 32 : 64
         }}>
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
-            <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Selected Work · 2020 — 2025</div>
+            <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Selected Work · 2020–2025</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
               Five products. Four markets.<br />
               <span style={{ color: A.mute }}>Measurable behaviour change.</span>
@@ -384,7 +384,7 @@ function AProjectRow({ p }) {
     borderBottom: `1px solid ${A.line}`
   };
 
-  // Mobile — simple two-column card
+  // Mobile: simple two-column card
   if (bp.isMobile) {
     return (
       <a ref={ref} href={p.href} style={{
@@ -401,7 +401,7 @@ function AProjectRow({ p }) {
     );
   }
 
-  // Tablet — 4-column
+  // Tablet: 4-column
   if (bp.isTablet) {
     return (
       <a ref={ref} href={p.href}
@@ -421,7 +421,7 @@ function AProjectRow({ p }) {
     );
   }
 
-  // Desktop — full 6-column with hover preview
+  // Desktop: full 6-column with hover preview
   return (
     <a ref={ref} href={p.href} data-cursor="hover"
       onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
@@ -489,11 +489,11 @@ function AOrigin() {
               No brief. No client. No credit.
             </p>
             <p style={{ fontFamily: 'Georgia, "Iowan Old Style", serif', fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, lineHeight: 1.4, color: A.ink, marginTop: 32, maxWidth: bp.isDesktop ? 520 : '100%' }}>
-              "Good design does not ask permission — it simply works for people."
+              "Good design does not ask permission; it simply works for people."
             </p>
           </div>
 
-          {/* Right — stats */}
+          {/* Right: stats */}
           <div style={{
             gridColumn: bp.isDesktop ? 'span 5' : undefined,
             display: 'grid', gridTemplateColumns: '1fr 1fr',
@@ -633,7 +633,7 @@ function ACareerItem({ c, i, bp }) {
         )}
       </div>
 
-      {/* Body — tablet third column */}
+      {/* Body: tablet third column */}
       {bp.isTablet && (
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, alignItems: 'flex-start', paddingTop: 4 }}>
           {c.tags.map((t) => (
@@ -642,7 +642,7 @@ function ACareerItem({ c, i, bp }) {
         </div>
       )}
 
-      {/* Desktop — body + NDA note + tags in separate columns */}
+      {/* Desktop: body + NDA note + tags in separate columns */}
       {bp.isDesktop && (
         <div>
           <span style={{ fontSize: 13.5, color: A.mute, lineHeight: 1.65 }}>{c.body}</span>
@@ -735,13 +735,13 @@ function AAbout() {
             </h2>
             <div style={{ fontSize: 15, lineHeight: 1.75, color: A.ink2, borderTop: `1px solid ${A.line}`, paddingTop: 32 }}>
               <p style={{ margin: 0 }}>I grew up watching technology promise to simplify life, then complicate it. A form too long. A menu that hides the thing you need. An app that helps and frustrates in equal measure. That gap between what technology promises and what it actually does became my professional obsession.</p>
-              <p style={{ marginTop: 16 }}>The work has taken me across industries — enterprise AI, consumer wellbeing, e-commerce, national identity — but the design problem is always the same: reduce the distance between what someone needs to do and what the product lets them do. The medium changes. The brief does not.</p>
+              <p style={{ marginTop: 16 }}>The work has taken me across industries: enterprise AI, consumer wellbeing, e-commerce, national identity, but the design problem is always the same: reduce the distance between what someone needs to do and what the product lets them do. The medium changes. The brief does not.</p>
               <p style={{ marginTop: 16 }}>I have designed for a billion-person market, a Gulf audience shaped by faith and cultural ritual, and enterprise operators in fourteen countries. Each taught me that the word "intuitive" carries an unspoken postscript: <em>intuitive for whom</em>. The answer is never assumed. It is always researched.</p>
-              <p style={{ marginTop: 16 }}>Off-hours I water plants, tidy rooms and keep simple rituals. They remind me why clarity matters — in life and in the grid.</p>
+              <p style={{ marginTop: 16 }}>Off-hours I water plants, tidy rooms and keep simple rituals. They remind me why clarity matters, in life and in the grid.</p>
             </div>
           </div>
 
-          {/* Sidebar — unified panel */}
+          {/* Sidebar: unified panel */}
           <div style={{
             gridColumn: bp.isDesktop ? 'span 5' : undefined,
             marginTop: bp.isMobile || bp.isTablet ? 48 : 0,
@@ -772,7 +772,7 @@ function AAbout() {
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {PORTFOLIO.notable.map((n) => (
                   <li key={n} style={{ fontSize: 12.5, display: 'flex', gap: 10, alignItems: 'flex-start', color: A.ink2 }}>
-                    <span style={{ color: A.accent, flexShrink: 0, lineHeight: 1.6 }}>—</span>{n}
+                    <span style={{ color: A.accent, flexShrink: 0, lineHeight: 1.6 }}>·</span>{n}
                   </li>
                 ))}
               </ul>
@@ -832,7 +832,7 @@ function AContact() {
           gap: bp.isMobile ? 48 : 64,
           alignItems: bp.isDesktop ? 'stretch' : 'start'
         }}>
-          {/* Left — intro top, links pushed to bottom */}
+          {/* Left: intro top, links pushed to bottom */}
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div>
               {bp.isDesktop && <div style={{ marginBottom: 12 }} />}
@@ -848,7 +848,7 @@ function AContact() {
                 Open to senior product design roles, consulting, and conversations with people who care about the humans behind the pixels.
               </p>
             </div>
-            {/* Spacer — pushes links to bottom on desktop */}
+            {/* Spacer: pushes links to bottom on desktop */}
             {bp.isDesktop && <div style={{ flex: 1 }} />}
             <div style={{ marginTop: bp.isDesktop ? 0 : 40 }}>
               {PORTFOLIO.links.map((l, i) => (
@@ -865,7 +865,7 @@ function AContact() {
                   onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '12px'}
                   onMouseLeave={(e) => e.currentTarget.style.paddingLeft = '0'}>
                   <span style={{ fontSize: bp.isMobile ? 15 : 20, fontWeight: 500, letterSpacing: '-0.01em' }}>
-                    {l.label} — <span style={{ color: 'rgba(237,234,228,0.75)', fontWeight: 400 }}>{l.value}</span>
+                    {l.label} · <span style={{ color: 'rgba(237,234,228,0.75)', fontWeight: 400 }}>{l.value}</span>
                   </span>
                   <span style={{ color: A.accent, fontSize: 18 }}>→</span>
                 </a>
@@ -873,7 +873,7 @@ function AContact() {
             </div>
           </div>
 
-          {/* Right — form pinned to bottom, aligning with first link */}
+          {/* Right: form pinned to bottom, aligning with first link */}
           <div style={{
             display: 'flex', flexDirection: 'column',
             justifyContent: bp.isDesktop ? 'flex-end' : 'flex-start'
@@ -922,7 +922,7 @@ function AContact() {
                 <AField label="Message" multiline value={form.msg} onChange={(v) => setForm({ ...form, msg: v })} error={errors.msg} />
                 {sendError && (
                   <p style={{ ...aStyles.mono, color: A.accent, margin: 0 }}>
-                    Something went wrong — try emailing me directly.
+                    Something went wrong. Try emailing me directly.
                   </p>
                 )}
                 <button type="submit" data-cursor="hover" disabled={sending}

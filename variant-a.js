@@ -1,4 +1,4 @@
-// Variant A — SWISS GRID (Responsive)
+// Variant A: SWISS GRID (Responsive)
 // Desktop: strict 12-col grid. Tablet: 2-col adaptive. Mobile: single column.
 
 // Paste your deployed Google Apps Script URL here after setup:
@@ -465,7 +465,7 @@ function AWork() {
       color: A.accent,
       marginBottom: 16
     }
-  }, "Selected Work \xB7 2020 \u2014 2025"), /*#__PURE__*/React.createElement("h2", {
+  }, "Selected Work \xB7 2020\u20132025"), /*#__PURE__*/React.createElement("h2", {
     style: {
       fontSize: bp.isMobile ? 28 : 44,
       fontWeight: 500,
@@ -508,7 +508,7 @@ function AProjectRow({
     borderBottom: `1px solid ${A.line}`
   };
 
-  // Mobile — simple two-column card
+  // Mobile: simple two-column card
   if (bp.isMobile) {
     return /*#__PURE__*/React.createElement("a", {
       ref: ref,
@@ -547,7 +547,7 @@ function AProjectRow({
     }, "\u2192"));
   }
 
-  // Tablet — 4-column
+  // Tablet: 4-column
   if (bp.isTablet) {
     return /*#__PURE__*/React.createElement("a", {
       ref: ref,
@@ -584,7 +584,7 @@ function AProjectRow({
     }, hover ? '→' : '·'));
   }
 
-  // Desktop — full 6-column with hover preview
+  // Desktop: full 6-column with hover preview
   return /*#__PURE__*/React.createElement("a", {
     ref: ref,
     href: p.href,
@@ -725,7 +725,7 @@ function AOrigin() {
       marginTop: 32,
       maxWidth: bp.isDesktop ? 520 : '100%'
     }
-  }, "\"Good design does not ask permission \u2014 it simply works for people.\"")), /*#__PURE__*/React.createElement("div", {
+  }, "\"Good design does not ask permission; it simply works for people.\"")), /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: bp.isDesktop ? 'span 5' : undefined,
       display: 'grid',
@@ -1194,7 +1194,7 @@ function AAbout() {
     style: {
       marginTop: 16
     }
-  }, "The work has taken me across industries \u2014 enterprise AI, consumer wellbeing, e-commerce, national identity \u2014 but the design problem is always the same: reduce the distance between what someone needs to do and what the product lets them do. The medium changes. The brief does not."), /*#__PURE__*/React.createElement("p", {
+  }, "The work has taken me across industries: enterprise AI, consumer wellbeing, e-commerce, national identity, but the design problem is always the same: reduce the distance between what someone needs to do and what the product lets them do. The medium changes. The brief does not."), /*#__PURE__*/React.createElement("p", {
     style: {
       marginTop: 16
     }
@@ -1202,7 +1202,7 @@ function AAbout() {
     style: {
       marginTop: 16
     }
-  }, "Off-hours I water plants, tidy rooms and keep simple rituals. They remind me why clarity matters \u2014 in life and in the grid."))), /*#__PURE__*/React.createElement("div", {
+  }, "Off-hours I water plants, tidy rooms and keep simple rituals. They remind me why clarity matters, in life and in the grid."))), /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: bp.isDesktop ? 'span 5' : undefined,
       marginTop: bp.isMobile || bp.isTablet ? 48 : 0,
@@ -1273,7 +1273,7 @@ function AAbout() {
       flexShrink: 0,
       lineHeight: 1.6
     }
-  }, "\u2014"), n))), true)))));
+  }, "\xB7"), n))), true)))));
 }
 
 // ─── CONTACT ─────────────────────────────────────────────────────────────────
@@ -1411,7 +1411,7 @@ function AContact() {
       fontWeight: 500,
       letterSpacing: '-0.01em'
     }
-  }, l.label, " \u2014 ", /*#__PURE__*/React.createElement("span", {
+  }, l.label, " \xB7 ", /*#__PURE__*/React.createElement("span", {
     style: {
       color: 'rgba(237,234,228,0.75)',
       fontWeight: 400
@@ -1535,7 +1535,7 @@ function AContact() {
       color: A.accent,
       margin: 0
     }
-  }, "Something went wrong \u2014 try emailing me directly."), /*#__PURE__*/React.createElement("button", {
+  }, "Something went wrong. Try emailing me directly."), /*#__PURE__*/React.createElement("button", {
     type: "submit",
     "data-cursor": "hover",
     disabled: sending,

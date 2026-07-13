@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // and only after the page is idle — so it never competes with first render.
   function preloadCovers() {
     if (!window.matchMedia('(hover: hover)').matches) return;
-    ['/assets/yourhour-cover.webp', '/assets/jego-cover.webp', '/assets/earlyfoods-cover.webp'].forEach(function (src) {
+    ['/assets/yourhour-cover.webp', '/assets/aatmnirbhar-cover.webp', '/assets/jego-cover.webp', '/assets/earlyfoods-cover.webp'].forEach(function (src) {
       var img = new Image();
       img.src = src;
     });

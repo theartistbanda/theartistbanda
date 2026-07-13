@@ -23,7 +23,7 @@ function useReveal(options = {}) {
   return [ref, inView];
 }
 
-// Animated counter — ticks from 0 to target once in view
+// Animated counter: ticks from 0 to target once in view
 function useCounter(target, inView, duration = 1600) {
   const [val, setVal] = React.useState(0);
   React.useEffect(() => {
@@ -42,7 +42,7 @@ function useCounter(target, inView, duration = 1600) {
   return val;
 }
 
-// Format counter values — strips trailing .0 and optionally formats with commas
+// Format counter values: strips trailing .0 and optionally formats with commas
 function fmt(n, opts = {}) {
   const { decimals = 0, suffix = '', prefix = '' } = opts;
   const fixed = Number(n).toFixed(decimals);
@@ -51,7 +51,7 @@ function fmt(n, opts = {}) {
 }
 
 // -----------------------------------------------------------------------------
-// Portfolio content — single source of truth so all three variants render
+// Portfolio content: single source of truth so all three variants render
 // the same Dipesh Gurav story without drift.
 // -----------------------------------------------------------------------------
 const PORTFOLIO = {
@@ -77,7 +77,7 @@ const PORTFOLIO = {
       kicker: 'Digital wellbeing · India · 1M+ downloads',
       tagline: 'Breaking digital addiction at scale.',
       body:
-        'Behavioural psychology and compassionate UX to help millions reclaim attention — without becoming another addictive feed.',
+        'Behavioural psychology and compassionate UX to help millions reclaim attention without becoming another addictive feed.',
       stats: [
         ['1M+', 'Downloads'],
         ['70K', 'Reviews'],
@@ -90,7 +90,6 @@ const PORTFOLIO = {
     },
     {
       id: 'taskgpt',
-      selected: false,
       index: '02',
       year: 2024,
       title: 'TaskGPT',
@@ -109,7 +108,6 @@ const PORTFOLIO = {
     },
     {
       id: 'aatmnirbhar',
-      selected: false,
       index: '03',
       year: 2020,
       title: 'Aatmnirbhar',
@@ -123,7 +121,7 @@ const PORTFOLIO = {
         ['PM SVANidhi', 'Official'],
       ],
       tags: ['Brand', 'Identity', 'Cultural'],
-      image: null,
+      image: '/assets/aatmnirbhar-cover.webp',
       href: 'case-aatmnirbhar.html',
     },
     {
@@ -151,7 +149,7 @@ const PORTFOLIO = {
       kicker: 'E-commerce · Organic baby food · UAE',
       tagline: 'Designed for trust, not conversion.',
       body:
-        'A brand parents can feel safe with — because they are feeding it to their children. Emotional UX over checkout funnels.',
+        'A brand parents can feel safe with, because they are feeding it to their children. Emotional UX over checkout funnels.',
       stats: [
         ['UAE', 'Market'],
         ['Trust', 'KPI'],
@@ -168,7 +166,7 @@ const PORTFOLIO = {
       kicker: 'Generative AI · Solo build · Live product',
       tagline: 'Building the back room, from scratch.',
       body:
-        'A working AI web application — designed, coded, and deployed in a single session. Node.js, Claude API, real server. Not a prototype.',
+        'A working AI web application: designed, coded, and deployed in a single session. Node.js, Claude API, real server. Not a prototype.',
       stats: [
         ['1 day', 'Build time'],
         ['4', 'Files'],
@@ -184,7 +182,7 @@ const PORTFOLIO = {
       n: '01',
       title: 'If it confuses you, it is the design’s fault',
       body:
-        'Technology is supposed to make life easier. When people struggle, the design failed — and that is always fixable.',
+        'Technology is supposed to make life easier. When people struggle, the design failed, and that is always fixable.',
     },
     {
       n: '02',
@@ -202,7 +200,7 @@ const PORTFOLIO = {
       n: '04',
       title: 'Emotion is a design material',
       body:
-        'The gap between apps people try once and apps they use daily is almost always emotional. Trust, delight, belonging — architectable.',
+        'The gap between apps people try once and apps they use daily is almost always emotional. Trust, delight, belonging: architectable.',
     },
     {
       n: '05',
@@ -225,7 +223,7 @@ const PORTFOLIO = {
       org: 'TaskUs · Global BPO · Remote, UK',
       body:
         'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs, and the LevelUp gamification system. Authored the PCAF framework now adopted across all TaskUs products.',
-      nda: 'Full case studies protected by NDA — available for discussion in a confidential interview setting.',
+      nda: 'Full case studies protected by NDA, available for discussion in a confidential interview setting.',
       tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Leadership'],
       current: false,
     },
@@ -244,7 +242,7 @@ const PORTFOLIO = {
       role: 'Product Design Consultant & Founder',
       org: 'The Artist Banda · Bengaluru, India',
       body:
-        'Independent consultancy across brand, fintech and wellbeing. Designed JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce), and drew the Aatmnirbhar Bharat national logo overnight with no brief — later adopted by the Government of India.',
+        'Independent consultancy across brand, fintech and wellbeing. Designed JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce), and drew the Aatmnirbhar Bharat national logo overnight with no brief, later adopted by the Government of India.',
       tags: ['Brand', 'Product Strategy', 'Wellbeing UX'],
     },
     {
@@ -284,7 +282,7 @@ const PORTFOLIO = {
   ],
 };
 
-// Placeholder pattern — hatched monospace label. Used wherever we do not have
+// Placeholder pattern: hatched monospace label. Used wherever we do not have
 // a real screenshot; the mix is intentional per the brief.
 function Placeholder({ label, ratio = '16/9', tone = 'ink', style }) {
   const colors =
@@ -322,7 +320,7 @@ function Placeholder({ label, ratio = '16/9', tone = 'ink', style }) {
   );
 }
 
-// Custom cursor — renders a small ink dot and a larger ring that lags behind.
+// Custom cursor: renders a small ink dot and a larger ring that lags behind.
 // Respects a data-cursor="hover|text" attribute on hovered elements.
 function CustomCursor({ accent = '#C2410C' }) {
   const dot = React.useRef(null);

@@ -23,7 +23,7 @@ function useReveal(options = {}) {
   return [ref, inView];
 }
 
-// Animated counter — ticks from 0 to target once in view
+// Animated counter: ticks from 0 to target once in view
 function useCounter(target, inView, duration = 1600) {
   const [val, setVal] = React.useState(0);
   React.useEffect(() => {
@@ -42,7 +42,7 @@ function useCounter(target, inView, duration = 1600) {
   return val;
 }
 
-// Format counter values — strips trailing .0 and optionally formats with commas
+// Format counter values: strips trailing .0 and optionally formats with commas
 function fmt(n, opts = {}) {
   const {
     decimals = 0,
@@ -55,7 +55,7 @@ function fmt(n, opts = {}) {
 }
 
 // -----------------------------------------------------------------------------
-// Portfolio content — single source of truth so all three variants render
+// Portfolio content: single source of truth so all three variants render
 // the same Dipesh Gurav story without drift.
 // -----------------------------------------------------------------------------
 const PORTFOLIO = {
@@ -93,14 +93,13 @@ const PORTFOLIO = {
     title: 'YourHour',
     kicker: 'Digital wellbeing · India · 1M+ downloads',
     tagline: 'Breaking digital addiction at scale.',
-    body: 'Behavioural psychology and compassionate UX to help millions reclaim attention — without becoming another addictive feed.',
+    body: 'Behavioural psychology and compassionate UX to help millions reclaim attention without becoming another addictive feed.',
     stats: [['1M+', 'Downloads'], ['70K', 'Reviews'], ['22', 'Languages'], ['4.6★', 'Play Store']],
     tags: ['Behavioural Design', 'Digital Health', 'HealthTech', 'Android · iOS', 'Cross-cultural'],
     image: '/assets/yourhour-cover.webp',
     href: 'case-yourhour.html'
   }, {
     id: 'taskgpt',
-    selected: false,
     index: '02',
     year: 2024,
     title: 'TaskGPT',
@@ -113,7 +112,6 @@ const PORTFOLIO = {
     href: 'case-taskgpt.html'
   }, {
     id: 'aatmnirbhar',
-    selected: false,
     index: '03',
     year: 2020,
     title: 'Aatmnirbhar',
@@ -122,7 +120,7 @@ const PORTFOLIO = {
     body: 'Drawn overnight in May 2020. Adopted for PM SVANidhi. Now used by roughly 90% of Indian manufacturers.',
     stats: [['90%', 'Adoption'], ['1 night', 'To ship'], ['PM SVANidhi', 'Official']],
     tags: ['Brand', 'Identity', 'Cultural'],
-    image: null,
+    image: '/assets/aatmnirbhar-cover.webp',
     href: 'case-aatmnirbhar.html'
   }, {
     id: 'jego',
@@ -143,7 +141,7 @@ const PORTFOLIO = {
     title: 'EarlyFoods',
     kicker: 'E-commerce · Organic baby food · UAE',
     tagline: 'Designed for trust, not conversion.',
-    body: 'A brand parents can feel safe with — because they are feeding it to their children. Emotional UX over checkout funnels.',
+    body: 'A brand parents can feel safe with, because they are feeding it to their children. Emotional UX over checkout funnels.',
     stats: [['UAE', 'Market'], ['Trust', 'KPI']],
     tags: ['E-commerce', 'Conversion Rate Optimisation', 'Emotional UX'],
     image: '/assets/earlyfoods-cover.webp',
@@ -155,7 +153,7 @@ const PORTFOLIO = {
     title: 'Job App Assistant',
     kicker: 'Generative AI · Solo build · Live product',
     tagline: 'Building the back room, from scratch.',
-    body: 'A working AI web application — designed, coded, and deployed in a single session. Node.js, Claude API, real server. Not a prototype.',
+    body: 'A working AI web application: designed, coded, and deployed in a single session. Node.js, Claude API, real server. Not a prototype.',
     stats: [['1 day', 'Build time'], ['4', 'Files'], ['Live', 'Status']],
     tags: ['Generative AI Tools', 'AI Interfaces', 'Solo build'],
     image: '/assets/jaa-cover.webp',
@@ -164,7 +162,7 @@ const PORTFOLIO = {
   principles: [{
     n: '01',
     title: 'If it confuses you, it is the design’s fault',
-    body: 'Technology is supposed to make life easier. When people struggle, the design failed — and that is always fixable.'
+    body: 'Technology is supposed to make life easier. When people struggle, the design failed, and that is always fixable.'
   }, {
     n: '02',
     title: 'Behaviour first, visuals second',
@@ -176,7 +174,7 @@ const PORTFOLIO = {
   }, {
     n: '04',
     title: 'Emotion is a design material',
-    body: 'The gap between apps people try once and apps they use daily is almost always emotional. Trust, delight, belonging — architectable.'
+    body: 'The gap between apps people try once and apps they use daily is almost always emotional. Trust, delight, belonging: architectable.'
   }, {
     n: '05',
     title: 'Measure what you made',
@@ -192,7 +190,7 @@ const PORTFOLIO = {
     role: 'Lead UI/UX Designer',
     org: 'TaskUs · Global BPO · Remote, UK',
     body: 'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs, and the LevelUp gamification system. Authored the PCAF framework now adopted across all TaskUs products.',
-    nda: 'Full case studies protected by NDA — available for discussion in a confidential interview setting.',
+    nda: 'Full case studies protected by NDA, available for discussion in a confidential interview setting.',
     tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Leadership'],
     current: false
   }, {
@@ -207,7 +205,7 @@ const PORTFOLIO = {
     to: '2017',
     role: 'Product Design Consultant & Founder',
     org: 'The Artist Banda · Bengaluru, India',
-    body: 'Independent consultancy across brand, fintech and wellbeing. Designed JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce), and drew the Aatmnirbhar Bharat national logo overnight with no brief — later adopted by the Government of India.',
+    body: 'Independent consultancy across brand, fintech and wellbeing. Designed JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce), and drew the Aatmnirbhar Bharat national logo overnight with no brief, later adopted by the Government of India.',
     tags: ['Brand', 'Product Strategy', 'Wellbeing UX']
   }, {
     from: '2012',
@@ -238,7 +236,7 @@ const PORTFOLIO = {
   }]
 };
 
-// Placeholder pattern — hatched monospace label. Used wherever we do not have
+// Placeholder pattern: hatched monospace label. Used wherever we do not have
 // a real screenshot; the mix is intentional per the brief.
 function Placeholder({
   label,
@@ -280,7 +278,7 @@ function Placeholder({
   }, label));
 }
 
-// Custom cursor — renders a small ink dot and a larger ring that lags behind.
+// Custom cursor: renders a small ink dot and a larger ring that lags behind.
 // Respects a data-cursor="hover|text" attribute on hovered elements.
 function CustomCursor({
   accent = '#C2410C'
