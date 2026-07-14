@@ -99,7 +99,20 @@ const PORTFOLIO = {
     image: '/assets/yourhour-cover.webp',
     href: 'case-yourhour.html'
   }, {
+    id: 'levelup',
+    index: '02',
+    year: 2024,
+    title: 'LevelUp',
+    kicker: 'Gamification · Enterprise SaaS · 3D',
+    tagline: 'Work that plays like a game.',
+    body: 'An enterprise gamification platform: 3D characters, interactive challenges and real-time leaderboards. Daily engagement rose 40%; now the company standard.',
+    stats: [['40%', 'Engagement lift'], ['35K', 'Daily users'], ['3D', 'Three.js characters']],
+    tags: ['Gamification', 'Enterprise SaaS', 'Design Systems'],
+    image: '/assets/levelup-cover.webp',
+    href: 'case-levelup.html'
+  }, {
     id: 'taskgpt',
+    selected: false,
     index: '02',
     year: 2024,
     title: 'TaskGPT',

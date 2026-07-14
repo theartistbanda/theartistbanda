@@ -18,10 +18,10 @@ Dipesh Gurav is a Lead UX/UI Product Designer with 12 years of professional expe
 
 ## Notable Projects
 
-**TaskGPT**: Enterprise AI productivity suite at TaskUs
-- 35,000 daily users across 14 countries, built on OpenAI, PaLM 2 and LLaMA
-- Cut call handling time and operating costs by 20% each
-- Authored the PCAF framework, now the company standard for AI interface design
+**LevelUp**: Enterprise gamification platform at TaskUs
+- 3D characters, interactive challenges and real-time leaderboards
+- Lifted daily engagement 40% and reduced attrition on high-volume queues
+- The first gamification system at TaskUs, now the company standard
 
 **Aatmnirbhar Bharat logo**: National identity mark, Government of India
 - Officially adopted for the PM SVANidhi scheme
