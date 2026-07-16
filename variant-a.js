@@ -1640,7 +1640,19 @@ function AFooter() {
     style: monoLight
   }, "\xA9 MMXXVI Dipesh Gurav"), /*#__PURE__*/React.createElement("span", {
     style: monoLight
-  }, "All rights, all wrongs reserved.")), /*#__PURE__*/React.createElement("div", {
+  }, "All rights, all wrongs reserved."), /*#__PURE__*/React.createElement("span", {
+    style: monoLight
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "mailto:contact@dipeshgurav.com",
+    style: {
+      color: 'inherit'
+    }
+  }, "contact@dipeshgurav.com"), ' · ', /*#__PURE__*/React.createElement("a", {
+    href: "tel:+447352673152",
+    style: {
+      color: 'inherit'
+    }
+  }, "+44 7352 673152"))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',

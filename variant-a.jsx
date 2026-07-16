@@ -993,6 +993,11 @@ function AFooter() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <span style={monoLight}>© MMXXVI Dipesh Gurav</span>
           <span style={monoLight}>All rights, all wrongs reserved.</span>
+          <span style={monoLight}>
+            <a href="mailto:contact@dipeshgurav.com" style={{ color: 'inherit' }}>contact@dipeshgurav.com</a>
+            {' · '}
+            <a href="tel:+447352673152" style={{ color: 'inherit' }}>+44 7352 673152</a>
+          </span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12, textAlign: bp.isMobile ? 'left' : 'right' }}>
           <span style={monoLight}>Typeset in Inter Tight + JetBrains Mono.</span>

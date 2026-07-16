@@ -235,6 +235,10 @@ const PORTFOLIO = {
     value: 'contact@dipeshgurav.com',
     href: 'mailto:contact@dipeshgurav.com'
   }, {
+    label: 'Phone',
+    value: '+44 7352 673152',
+    href: 'tel:+447352673152'
+  }, {
     label: 'LinkedIn',
     value: 'in/dipeshgurav-design',
     href: 'https://www.linkedin.com/in/dipeshgurav-design/'
