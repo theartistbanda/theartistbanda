@@ -28,6 +28,7 @@ function useCounter(target, inView, duration = 1600) {
   const [val, setVal] = React.useState(0);
   React.useEffect(() => {
     if (!inView) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { setVal(target); return; }
     let raf;
     const start = performance.now();
     const tick = (now) => {
@@ -66,7 +67,7 @@ const PORTFOLIO = {
     { value: 1, suffix: 'M+', label: 'Downloads · YourHour', sub: 'Play Store verified' },
     { value: 20, suffix: '%', label: 'Enterprise cost cut', sub: 'TaskGPT @ TaskUs' },
     { value: 40, suffix: '%', label: 'Engagement lift', sub: 'LevelUp gamification' },
-    { value: 90, suffix: '%', label: 'Indian manufacturers', sub: 'Aatmnirbhar logo' },
+    { value: 90, suffix: '%', label: 'Manufacturer adoption', sub: 'Aatmnirbhar logo · India' },
   ],
   projects: [
     {
@@ -325,7 +326,7 @@ function Placeholder({ label, ratio = '16/9', tone = 'ink', style }) {
     >
       <span
         style={{
-          fontFamily: 'ui-monospace, "JetBrains Mono", "Menlo", monospace',
+          fontFamily: '"JetBrains Mono", ui-monospace, "Menlo", monospace',
           fontSize: 10,
           letterSpacing: '0.12em',
           textTransform: 'uppercase',
@@ -347,8 +348,9 @@ function CustomCursor({ accent = '#C2410C' }) {
   const ring = React.useRef(null);
   const modeRef = React.useRef('default');
   const [mode, setMode] = React.useState('default');
+  const coarse = React.useMemo(() => matchMedia('(pointer: coarse)').matches, []);
   React.useEffect(() => {
-    if (matchMedia('(pointer: coarse)').matches) return;
+    if (coarse) return;
     let rx = 0, ry = 0, dx = 0, dy = 0;
     const onMove = (e) => {
       dx = e.clientX; dy = e.clientY;
@@ -368,6 +370,7 @@ function CustomCursor({ accent = '#C2410C' }) {
     return () => { window.removeEventListener('mousemove', onMove); cancelAnimationFrame(raf); };
   }, []);
   const ringSize = mode === 'hover' ? 48 : mode === 'text' ? 4 : 32;
+  if (coarse) return null;
   return (
     <React.Fragment>
       <div

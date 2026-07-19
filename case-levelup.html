@@ -21,7 +21,7 @@
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #0F0D0B; --paper2: #1C1916; --ink: #EDEAE4; --ink2: #9A948D;
@@ -93,6 +93,7 @@
   .stat:last-child { border-right: none; }
   .stat .n { font-family: var(--sans); font-size: 48px; font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
   .stat .n i { color: var(--accent); font-style: italic; font-weight: 400; }
+  .stat .ns { font-family: var(--sans); font-size: 32px; font-weight: 500; letter-spacing: -0.02em; line-height: 48px; }
 
   /* ─── BODY SECTIONS ──────────────────────────────────────────────────────── */
   section.body { padding: 96px 0; border-bottom: 1px solid var(--line); }
@@ -118,6 +119,9 @@
   blockquote span { color: var(--accent); }
   .quote-attr { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); margin-top: 12px; }
 
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+  .tag { font-family: var(--mono); font-size: 9px; padding: 5px 10px; border: 1px solid var(--line); color: var(--ink2); letter-spacing: 0.08em; text-transform: uppercase; }
+
   /* ─── SCREENS ────────────────────────────────────────────────────────────── */
   .screens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
   .screen {
@@ -140,14 +144,6 @@
   .next .nt { font-family: var(--sans); font-size: clamp(32px, 6vw, 88px); letter-spacing: -0.03em; line-height: 1; font-weight: 500; flex: 1; min-width: 0; }
   .next .nt i { color: var(--accent); font-style: italic; font-weight: 400; }
   .next .arrow { font-size: 28px; flex-shrink: 0; }
-
-  /* ─── FIGMA CTA ─────────────────────────────────────────────────────────── */
-    display: inline-flex; align-items: center; gap: 14px;
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--accent); text-decoration: none;
-    padding: 14px 22px; border: 1px solid var(--accent);
-    transition: background 0.2s, color 0.2s;
-  }
 
   /* ─── FOOTER ─────────────────────────────────────────────────────────────── */
   footer {
@@ -204,6 +200,7 @@
     .stat:nth-child(3) { border-top: 1px solid var(--line); }
     .stat:nth-child(4) { border-top: 1px solid var(--line); border-right: none; }
     .stat .n { font-size: 36px; }
+    .stat .ns { font-size: 22px; line-height: 36px; }
 
     section.body { padding: 56px 0; }
     .section-head { gap: 8px; margin-bottom: 24px; }
@@ -230,6 +227,12 @@
   .wide { border: 1px solid var(--line); margin-top: 40px; }
   .wide img { width: 100%; display: block; }
   @media (max-width: 639px) { .impact { grid-template-columns: 1fr 1fr; } .impact > div:nth-child(2n) { border-right: none; } .impact .n { font-size: 32px; } }
+
+  /* Reduced motion: honour the user's OS-level preference */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>

@@ -26,7 +26,7 @@ const aStyles = {
     letterSpacing: '-0.005em'
   },
   mono: {
-    fontFamily: 'ui-monospace, "JetBrains Mono", "IBM Plex Mono", Menlo, monospace',
+    fontFamily: '"JetBrains Mono", ui-monospace, "IBM Plex Mono", Menlo, monospace',
     fontSize: 10,
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
@@ -59,8 +59,8 @@ function ABanner() {
         }} />
         <span style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.72)', fontSize: bp.isMobile ? 9 : 10 }}>
           {bp.isMobile
-            ? 'Full right to work in UK · Available from June 2026'
-            : 'Full right to work in the UK · No sponsorship required · Available for onsite and hybrid roles from June 2026'}
+            ? 'Full right to work in UK · Available now'
+            : 'Full right to work in the UK · No sponsorship required · Available now · Remote-first, UK-wide'}
         </span>
         <a href="#contact" data-cursor="hover" style={{
           ...aStyles.mono, fontSize: bp.isMobile ? 9 : 10,
@@ -111,7 +111,7 @@ function ANav() {
     return () => clearInterval(i);
   }, []);
 
-  const links = ['Index', 'Work', 'Origin', 'Career', 'Studio'];
+  const links = ['Work', 'Origin', 'Principles', 'Career', 'Studio'];
 
   return (
     <nav style={{
@@ -208,7 +208,8 @@ function AHero() {
     return () => window.removeEventListener('scroll', on);
   }, []);
 
-  const parallax = Math.min(scroll * 0.25, 80);
+  const reduceMotion = React.useMemo(() => matchMedia('(prefers-reduced-motion: reduce)').matches, []);
+  const parallax = reduceMotion ? 0 : Math.min(scroll * 0.25, 80);
   const vPad = bp.isMobile ? '48px' : bp.isTablet ? '64px' : '80px';
   const side = sp(bp);
 
@@ -353,13 +354,13 @@ function AWork() {
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Selected Work · 2020–2025</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-              Five products. Four markets.<br />
+              Six products. Four markets.<br />
               <span style={{ color: A.mute }}>Measurable behaviour change.</span>
             </h2>
           </div>
           {bp.isDesktop && (
             <div style={{ gridColumn: 'span 4', alignSelf: 'end', textAlign: 'right', ...aStyles.mono }}>
-              The index below is chronological. Click any row to<br />open the case study.
+              Click any row to<br />open the case study.
             </div>
           )}
         </div>
@@ -448,7 +449,7 @@ function AProjectRow({ p }) {
         transition: 'opacity .22s, transform .22s'
       }}>
         {p.image
-          ? <img src={p.image} alt="" style={{ width: '100%', display: 'block', boxShadow: '0 20px 60px rgba(20,17,15,0.22)' }} onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+          ? <img src={p.image} alt="" loading="lazy" decoding="async" style={{ width: '100%', display: 'block', boxShadow: '0 20px 60px rgba(20,17,15,0.22)' }} onError={(e) => { e.currentTarget.style.display = 'none'; }} />
           : <Placeholder label={`${p.id}.png`} tone="ink" />
         }
       </div>
@@ -488,7 +489,7 @@ function AOrigin() {
               campaigns, manufacturer packaging and news tickers across the country. Officially adopted for PM SVANidhi.
               No brief. No client. No credit.
             </p>
-            <p style={{ fontFamily: 'Georgia, "Iowan Old Style", serif', fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, lineHeight: 1.4, color: A.ink, marginTop: 32, maxWidth: bp.isDesktop ? 520 : '100%' }}>
+            <p style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 300, fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, lineHeight: 1.4, color: A.ink, marginTop: 32, maxWidth: bp.isDesktop ? 520 : '100%' }}>
               "Good design does not ask permission; it simply works for people."
             </p>
           </div>
@@ -516,7 +517,7 @@ function AOrigin() {
               </div>
             ))}
             <div style={{ gridColumn: 'span 2', padding: bp.isMobile ? '20px 16px' : 28, background: 'rgba(194,65,12,0.1)', borderTop: `1px solid rgba(244,241,236,0.08)` }}>
-              <div style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, color: A.accent, letterSpacing: '-0.01em' }}>
+              <div style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 300, fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, color: A.accent, letterSpacing: '-0.01em' }}>
                 Design captures culture, not just pixels.
               </div>
             </div>
@@ -841,7 +842,7 @@ function AContact() {
                 fontSize: 'clamp(36px, 7vw, 88px)',
                 fontWeight: 500, lineHeight: 1, letterSpacing: '-0.03em', margin: 0
               }}>
-                Let us build<br />
+                Let's build<br />
                 something <span style={{ fontStyle: 'italic', color: A.accent }}>meaningful.</span>
               </h2>
               <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(237,234,228,0.80)', maxWidth: bp.isDesktop ? 460 : '100%', marginTop: 32 }}>

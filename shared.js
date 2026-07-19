@@ -28,6 +28,10 @@ function useCounter(target, inView, duration = 1600) {
   const [val, setVal] = React.useState(0);
   React.useEffect(() => {
     if (!inView) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setVal(target);
+      return;
+    }
     let raf;
     const start = performance.now();
     const tick = now => {
@@ -83,8 +87,8 @@ const PORTFOLIO = {
   }, {
     value: 90,
     suffix: '%',
-    label: 'Indian manufacturers',
-    sub: 'Aatmnirbhar logo'
+    label: 'Manufacturer adoption',
+    sub: 'Aatmnirbhar logo · India'
   }],
   projects: [{
     id: 'yourhour',
@@ -284,7 +288,7 @@ function Placeholder({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontFamily: 'ui-monospace, "JetBrains Mono", "Menlo", monospace',
+      fontFamily: '"JetBrains Mono", ui-monospace, "Menlo", monospace',
       fontSize: 10,
       letterSpacing: '0.12em',
       textTransform: 'uppercase',
@@ -304,8 +308,9 @@ function CustomCursor({
   const ring = React.useRef(null);
   const modeRef = React.useRef('default');
   const [mode, setMode] = React.useState('default');
+  const coarse = React.useMemo(() => matchMedia('(pointer: coarse)').matches, []);
   React.useEffect(() => {
-    if (matchMedia('(pointer: coarse)').matches) return;
+    if (coarse) return;
     let rx = 0,
       ry = 0,
       dx = 0,
@@ -336,6 +341,7 @@ function CustomCursor({
     };
   }, []);
   const ringSize = mode === 'hover' ? 48 : mode === 'text' ? 4 : 32;
+  if (coarse) return null;
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     ref: dot,
     "aria-hidden": "true",

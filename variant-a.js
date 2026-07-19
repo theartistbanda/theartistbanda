@@ -24,7 +24,7 @@ const aStyles = {
     letterSpacing: '-0.005em'
   },
   mono: {
-    fontFamily: 'ui-monospace, "JetBrains Mono", "IBM Plex Mono", Menlo, monospace',
+    fontFamily: '"JetBrains Mono", ui-monospace, "IBM Plex Mono", Menlo, monospace',
     fontSize: 10,
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
@@ -67,7 +67,7 @@ function ABanner() {
       color: 'rgba(244,241,236,0.72)',
       fontSize: bp.isMobile ? 9 : 10
     }
-  }, bp.isMobile ? 'Full right to work in UK · Available from June 2026' : 'Full right to work in the UK · No sponsorship required · Available for onsite and hybrid roles from June 2026'), /*#__PURE__*/React.createElement("a", {
+  }, bp.isMobile ? 'Full right to work in UK · Available now' : 'Full right to work in the UK · No sponsorship required · Available now · Remote-first, UK-wide'), /*#__PURE__*/React.createElement("a", {
     href: "#contact",
     "data-cursor": "hover",
     style: {
@@ -108,7 +108,7 @@ function ANav() {
     const i = setInterval(tick, 1000);
     return () => clearInterval(i);
   }, []);
-  const links = ['Index', 'Work', 'Origin', 'Career', 'Studio'];
+  const links = ['Work', 'Origin', 'Principles', 'Career', 'Studio'];
   return /*#__PURE__*/React.createElement("nav", {
     style: {
       background: 'rgba(15,13,11,0.92)',
@@ -247,7 +247,8 @@ function AHero() {
     });
     return () => window.removeEventListener('scroll', on);
   }, []);
-  const parallax = Math.min(scroll * 0.25, 80);
+  const reduceMotion = React.useMemo(() => matchMedia('(prefers-reduced-motion: reduce)').matches, []);
+  const parallax = reduceMotion ? 0 : Math.min(scroll * 0.25, 80);
   const vPad = bp.isMobile ? '48px' : bp.isTablet ? '64px' : '80px';
   const side = sp(bp);
   return /*#__PURE__*/React.createElement("section", {
@@ -473,7 +474,7 @@ function AWork() {
       lineHeight: 1.05,
       margin: 0
     }
-  }, "Five products. Four markets.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+  }, "Six products. Four markets.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.mute
     }
@@ -484,7 +485,7 @@ function AWork() {
       textAlign: 'right',
       ...aStyles.mono
     }
-  }, "The index below is chronological. Click any row to", /*#__PURE__*/React.createElement("br", null), "open the case study.")), /*#__PURE__*/React.createElement("div", {
+  }, "Click any row to", /*#__PURE__*/React.createElement("br", null), "open the case study.")), /*#__PURE__*/React.createElement("div", {
     style: {
       borderTop: `1px solid ${A.line}`
     }
@@ -642,6 +643,8 @@ function AProjectRow({
   }, p.image ? /*#__PURE__*/React.createElement("img", {
     src: p.image,
     alt: "",
+    loading: "lazy",
+    decoding: "async",
     style: {
       width: '100%',
       display: 'block',
@@ -717,7 +720,8 @@ function AOrigin() {
     }
   }, "May 2020. India launches Aatmnirbhar Bharat. I open Illustrator. By morning, the logo is on government campaigns, manufacturer packaging and news tickers across the country. Officially adopted for PM SVANidhi. No brief. No client. No credit."), /*#__PURE__*/React.createElement("p", {
     style: {
-      fontFamily: 'Georgia, "Iowan Old Style", serif',
+      fontFamily: '"Fraunces", Georgia, serif',
+      fontWeight: 300,
       fontStyle: 'italic',
       fontSize: bp.isMobile ? 18 : 22,
       lineHeight: 1.4,
@@ -762,7 +766,8 @@ function AOrigin() {
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontFamily: 'Georgia, serif',
+      fontFamily: '"Fraunces", Georgia, serif',
+      fontWeight: 300,
       fontStyle: 'italic',
       fontSize: bp.isMobile ? 18 : 22,
       color: A.accent,
@@ -1366,7 +1371,7 @@ function AContact() {
       letterSpacing: '-0.03em',
       margin: 0
     }
-  }, "Let us build", /*#__PURE__*/React.createElement("br", null), "something ", /*#__PURE__*/React.createElement("span", {
+  }, "Let's build", /*#__PURE__*/React.createElement("br", null), "something ", /*#__PURE__*/React.createElement("span", {
     style: {
       fontStyle: 'italic',
       color: A.accent
