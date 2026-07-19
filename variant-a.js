@@ -67,7 +67,7 @@ function ABanner() {
       color: 'rgba(244,241,236,0.72)',
       fontSize: bp.isMobile ? 9 : 10
     }
-  }, bp.isMobile ? 'Full right to work in UK · Available now' : 'Full right to work in the UK · No sponsorship required · Available now · Remote-first, UK-wide'), /*#__PURE__*/React.createElement("a", {
+  }, bp.isMobile ? 'Right to work in the UK · Available now' : 'Full right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'), /*#__PURE__*/React.createElement("a", {
     href: "#contact",
     "data-cursor": "hover",
     style: {
@@ -269,7 +269,7 @@ function AHero() {
       marginBottom: bp.isTablet ? 40 : 64,
       ...aStyles.mono
     }
-  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role, " \xB7 est. 2014"), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 UK-wide & remote"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role, " \xB7 est. 2014"), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 Open UK-wide"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.accent
     }
@@ -1226,7 +1226,7 @@ function AAbout() {
       color: A.ink2,
       lineHeight: 1.6
     }
-  }, "UK-wide & remote"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
+  }, "Remote \xB7 Hybrid \xB7 On-site \xB7 UK-wide"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',

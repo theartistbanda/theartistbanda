@@ -59,8 +59,8 @@ function ABanner() {
         }} />
         <span style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.72)', fontSize: bp.isMobile ? 9 : 10 }}>
           {bp.isMobile
-            ? 'Full right to work in UK · Available now'
-            : 'Full right to work in the UK · No sponsorship required · Available now · Remote-first, UK-wide'}
+            ? 'Right to work in the UK · Available now'
+            : 'Full right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'}
         </span>
         <a href="#contact" data-cursor="hover" style={{
           ...aStyles.mono, fontSize: bp.isMobile ? 9 : 10,
@@ -225,7 +225,7 @@ function AHero() {
             gap: 24, marginBottom: bp.isTablet ? 40 : 64, ...aStyles.mono
           }}>
             <div>{PORTFOLIO.role} · est. 2014</div>
-            <div>{PORTFOLIO.location} · UK-wide & remote</div>
+            <div>{PORTFOLIO.location} · Open UK-wide</div>
             {bp.isDesktop && <div>Portfolio / vol. MMXXVI</div>}
             {bp.isDesktop && (
               <div>
@@ -752,7 +752,7 @@ function AAbout() {
             {sidebarRow('Availability', (
               <>
                 <div style={{ fontSize: 14, color: A.ink, lineHeight: 1.6 }}>Open to work · Immediate joiner</div>
-                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>UK-wide & remote</div>
+                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>Remote · Hybrid · On-site · UK-wide</div>
               </>
             ))}
             {sidebarRow('Experience', (

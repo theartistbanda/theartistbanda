@@ -65,25 +65,25 @@ function fmt(n, opts = {}) {
 const PORTFOLIO = {
   name: 'Dipesh Gurav',
   role: 'Lead Product Designer',
-  location: 'United Kingdom',
+  location: 'Nottingham, UK',
   years: 12,
   tagline: 'Designing for the humans behind the pixels.',
-  lead: 'Lead product designer behind AI tools cutting enterprise costs 20%, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
+  lead: 'Lead product designer behind enterprise AI cutting costs 20% for 35,000 daily users, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
   metrics: [{
-    value: 1,
-    suffix: 'M+',
-    label: 'Downloads · YourHour',
-    sub: 'Play Store verified'
+    value: 40,
+    suffix: '%',
+    label: 'Engagement lift',
+    sub: 'LevelUp gamification'
   }, {
     value: 20,
     suffix: '%',
     label: 'Enterprise cost cut',
     sub: 'TaskGPT @ TaskUs'
   }, {
-    value: 40,
-    suffix: '%',
-    label: 'Engagement lift',
-    sub: 'LevelUp gamification'
+    value: 1,
+    suffix: 'M+',
+    label: 'Downloads · YourHour',
+    sub: 'Play Store verified'
   }, {
     value: 90,
     suffix: '%',
@@ -91,27 +91,15 @@ const PORTFOLIO = {
     sub: 'Aatmnirbhar logo · India'
   }],
   projects: [{
-    id: 'yourhour',
-    index: '01',
-    year: 2021,
-    title: 'YourHour',
-    kicker: 'Digital wellbeing · India · 1M+ downloads',
-    tagline: 'Breaking digital addiction at scale.',
-    body: 'Behavioural psychology and compassionate UX to help millions reclaim attention without becoming another addictive feed.',
-    stats: [['1M+', 'Downloads'], ['70K', 'Reviews'], ['22', 'Languages'], ['4.6★', 'Play Store']],
-    tags: ['Behavioural Design', 'Digital Health', 'HealthTech', 'Android · iOS', 'Cross-cultural'],
-    image: '/assets/yourhour-cover.webp',
-    href: 'case-yourhour.html'
-  }, {
     id: 'levelup',
-    index: '02',
+    index: '01',
     year: 2024,
     title: 'LevelUp',
     kicker: 'Gamification · Enterprise SaaS · 3D',
     tagline: 'Work that plays like a game.',
-    body: 'An enterprise gamification platform: 3D characters, interactive challenges and real-time leaderboards. Daily engagement rose 40%; now the company standard.',
-    stats: [['40%', 'Engagement lift'], ['35K', 'Daily users'], ['3D', 'Three.js characters']],
-    tags: ['Gamification', 'Enterprise SaaS', 'Design Systems'],
+    body: 'An enterprise gamification platform serving two audiences at once: managers configure KPIs, challenges and rewards; agents live inside them as avatars, leaderboards and live wins. Daily engagement rose 40%; now the company standard.',
+    stats: [['40%', 'Engagement lift'], ['35K', 'Daily users'], ['2', 'Audiences, one system'], ['3D', 'Three.js characters']],
+    tags: ['Gamification', 'Enterprise SaaS', 'Dual-audience', 'Design Systems'],
     image: '/assets/levelup-cover.webp',
     href: 'case-levelup.html'
   }, {
@@ -128,8 +116,33 @@ const PORTFOLIO = {
     image: null,
     href: 'case-taskgpt.html'
   }, {
-    id: 'aatmnirbhar',
+    id: 'evaluateus',
+    selected: false,
     index: '03',
+    year: 2023,
+    title: 'EvaluateUs',
+    kicker: 'Assessment platform · Enterprise · TaskUs',
+    tagline: 'Data-heavy evaluation, made humane.',
+    body: 'UX strategy and full redesign of an enterprise assessment platform: evaluation workflows, scoring criteria and results data. Result accuracy up 70%, saving clients about £9,500 a month.',
+    stats: [['70%', 'Accuracy lift'], ['£9.5K', 'Saved · client · month'], ['AA', 'WCAG 2.1']],
+    tags: ['Enterprise UX', 'Data-dense UI', 'Assessment'],
+    image: null,
+    href: 'case-evaluateus.html'
+  }, {
+    id: 'yourhour',
+    index: '04',
+    year: 2021,
+    title: 'YourHour',
+    kicker: 'Digital wellbeing · India · 1M+ downloads',
+    tagline: 'Breaking digital addiction at scale.',
+    body: 'Behavioural psychology and compassionate UX to help millions reclaim attention without becoming another addictive feed.',
+    stats: [['1M+', 'Downloads'], ['70K+', 'Reviews'], ['22', 'Languages'], ['4.6★', 'Play Store']],
+    tags: ['Behavioural Design', 'Digital Health', 'HealthTech', 'Android · iOS', 'Cross-cultural'],
+    image: '/assets/yourhour-cover.webp',
+    href: 'case-yourhour.html'
+  }, {
+    id: 'aatmnirbhar',
+    index: '05',
     year: 2020,
     title: 'Aatmnirbhar',
     kicker: 'National identity · Government of India',
@@ -141,7 +154,7 @@ const PORTFOLIO = {
     href: 'case-aatmnirbhar.html'
   }, {
     id: 'jego',
-    index: '04',
+    index: '06',
     year: 2022,
     title: 'JEGO',
     kicker: 'Wellbeing streaming · UAE',
@@ -153,7 +166,7 @@ const PORTFOLIO = {
     href: 'case-jego.html'
   }, {
     id: 'earlyfoods',
-    index: '05',
+    index: '07',
     year: 2022,
     title: 'EarlyFoods',
     kicker: 'E-commerce · Organic baby food · UAE',
@@ -165,7 +178,7 @@ const PORTFOLIO = {
     href: 'case-earlyfoods.html'
   }, {
     id: 'job-app-assistant',
-    index: '06',
+    index: '08',
     year: 2025,
     title: 'Job App Assistant',
     kicker: 'Generative AI · Solo build · Live product',
@@ -204,9 +217,9 @@ const PORTFOLIO = {
   career: [{
     from: '2021',
     to: '2026',
-    role: 'Lead UI/UX Designer',
+    role: 'Lead Product Designer',
     org: 'TaskUs · Global BPO · Remote, UK',
-    body: 'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs, and the LevelUp gamification system. Authored the PCAF framework now adopted across all TaskUs products.',
+    body: 'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs (assessment platform: data-dense evaluation workflows, result accuracy up 70%, ~£9,500 saved per client per month), and the LevelUp gamification system. Authored PCAF, the Persona-Centric Analysis Framework, now adopted across all TaskUs products.',
     nda: 'Full case studies protected by NDA, available for discussion in a confidential interview setting.',
     tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Leadership'],
     current: false
@@ -215,14 +228,14 @@ const PORTFOLIO = {
     to: '2021',
     role: 'Product Designer',
     org: 'Mindefy Technologies · Indore, India',
-    body: 'Sole designer across fintech, payments and digital wellbeing. Shipped YourHour (independent product, 1M+ downloads), the Repos Energy fuel-delivery UX, and the GreenBill paperless invoicing system.',
+    body: 'Sole designer across fintech, payments and digital wellbeing. Shipped YourHour (independent product, 1M+ downloads, 70K+ reviews) and the GreenBill paperless invoicing system.',
     tags: ['Fintech', 'Mobile', 'Wellbeing UX']
   }, {
     from: '2014',
     to: '2017',
     role: 'Product Design Consultant & Founder',
-    org: 'The Artist Banda · Bengaluru, India',
-    body: 'Independent consultancy across brand, fintech and wellbeing. Designed JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce), and drew the Aatmnirbhar Bharat national logo overnight with no brief, later adopted by the Government of India.',
+    org: 'The Artist Banda · Bengaluru, India · client work through 2022',
+    body: 'Independent consultancy across brand, fintech and wellbeing; founded 2014, with selective client engagements continuing alongside later roles. Designed the Repos Energy fuel-delivery UX, drew the Aatmnirbhar Bharat national logo overnight with no brief (later adopted by the Government of India), and shipped JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce) as 2022 client projects for Mindefy Technologies.',
     tags: ['Brand', 'Product Strategy', 'Wellbeing UX']
   }, {
     from: '2012',
@@ -232,7 +245,7 @@ const PORTFOLIO = {
     body: 'Formal training in interaction design, motion graphics and visual communication.',
     tags: ['UI/UX', 'Motion']
   }],
-  skills: ['Behavioural UX', 'AI Interfaces', 'Generative AI Tools', 'Design Systems', 'A/B Testing', 'Experimentation', 'Cross-cultural', 'Figma', 'Conversion Rate Optimisation', 'Team Leadership', 'Product Strategy'],
+  skills: ['Behavioural UX', 'AI Interfaces', 'Generative AI Tools', 'Design Systems', 'Multi-audience Platforms', 'Data-dense Enterprise UX', 'A/B Testing', 'Experimentation', 'Cross-cultural', 'Figma', 'Motion', 'Conversion Rate Optimisation', 'Team Leadership', 'Product Strategy'],
   notable: ['Aatmnirbhar Bharat national logo', 'YourHour · 4.6★ · 1M+ downloads', 'AWS Summit London 2025', 'Repos Energy fuel-delivery', '300+ user interviews'],
   links: [{
     label: 'Email',

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dipesh Gurav — CV</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  :root {
+    --paper: #FCFBF8;
+    --ink: #17140F;
+    --sub: #4E4842;
+    --mute: #8A847C;
+    --accent: #C2410C;
+    --line: rgba(23,20,15,0.16);
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 9.4pt;
+    line-height: 1.5;
+    letter-spacing: -0.004em;
+  }
+  .page {
+    width: 210mm; height: 296.5mm;
+    padding: 13mm 15mm 12mm;
+    position: relative;
+    overflow: hidden;
+  }
+  .page + .page { page-break-before: always; }
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.8pt; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  /* ─── HEADER ─── */
+  header { display: flex; justify-content: space-between; align-items: flex-start; }
+  h1 {
+    font-size: 27pt; font-weight: 600; letter-spacing: -0.035em; line-height: 1;
+    word-spacing: 0.14em;
+  }
+  .role-line { margin-top: 7px; }
+  .role-line .mono { color: var(--accent); font-weight: 500; }
+  .contact { text-align: right; display: flex; flex-direction: column; gap: 3.5px; padding-top: 3px; }
+  .contact .mono { color: var(--sub); letter-spacing: 0.05em; text-transform: none; font-size: 7.2pt; }
+  .contact a { color: inherit; text-decoration: none; }
+  .dot { color: var(--accent); }
+
+  .avail {
+    margin-top: 12px; padding: 6px 0 0; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between;
+  }
+  .avail .mono { color: var(--sub); }
+  .avail .mono b { color: var(--accent); font-weight: 500; }
+
+  /* ─── SECTIONS ─── */
+  section { margin-top: 14px; }
+  .sec-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 6.8pt;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 500;
+    padding-bottom: 4px; border-bottom: 1px solid var(--line); margin-bottom: 9px;
+  }
+  .profile { color: var(--sub); font-size: 9.6pt; line-height: 1.55; }
+  .profile strong { color: var(--ink); font-weight: 500; }
+
+  /* ─── EXPERIENCE ─── */
+  .job { margin-bottom: 12px; break-inside: avoid; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .job-head h2 { font-size: 11.5pt; font-weight: 600; letter-spacing: -0.015em; }
+  .job-head h2 span { color: var(--accent); font-weight: 500; }
+  .job-dates { font-family: 'JetBrains Mono', monospace; font-size: 7pt; letter-spacing: 0.06em; color: var(--sub); text-transform: uppercase; }
+  .job-sub { font-family: 'JetBrains Mono', monospace; font-size: 6.8pt; letter-spacing: 0.07em; text-transform: uppercase; color: var(--mute); margin-top: 2px; }
+  .job-intro { color: var(--sub); margin-top: 5px; font-size: 9.2pt; }
+  ul { list-style: none; margin-top: 5px; }
+  li { padding-left: 11px; position: relative; color: var(--sub); margin-top: 3.5px; font-size: 9.2pt; line-height: 1.48; }
+  li::before { content: '–'; position: absolute; left: 0; color: var(--accent); }
+  li strong { color: var(--ink); font-weight: 500; }
+  .nda { margin-top: 5px; font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); }
+
+  /* ─── SKILLS ─── */
+  .skills { display: grid; grid-template-columns: 34mm 1fr; row-gap: 5px; column-gap: 6mm; }
+  .skills .k { font-family: 'JetBrains Mono', monospace; font-size: 6.8pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); font-weight: 500; padding-top: 1.5px; }
+  .skills .v { color: var(--sub); font-size: 9.2pt; }
+
+  /* ─── NOTABLE ─── */
+  .notable li { margin-top: 4px; }
+
+  /* ─── EDUCATION ─── */
+  .edu { display: flex; justify-content: space-between; align-items: baseline; margin-top: 5px; }
+  .edu .t { color: var(--ink); font-weight: 500; font-size: 9.4pt; }
+  .edu .t span { color: var(--sub); font-weight: 400; }
+  .edu .d { font-family: 'JetBrains Mono', monospace; font-size: 7pt; letter-spacing: 0.06em; color: var(--sub); }
+
+  /* ─── FOOTER ─── */
+  .foot {
+    position: absolute; left: 15mm; right: 15mm; bottom: 9mm;
+    padding-top: 6px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between;
+  }
+  .foot .mono { color: var(--mute); text-transform: none; letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ PAGE 1 ═══════════ -->
+<div class="page">
+  <header>
+    <div>
+      <h1>Dipesh Gurav</h1>
+      <div class="role-line"><span class="mono">Lead Product Designer · UX Strategy · Behavioural Design</span></div>
+    </div>
+    <div class="contact">
+      <span class="mono"><a href="tel:+447352673152">+44 7352 673152</a> · <a href="mailto:contact@dipeshgurav.com">contact@dipeshgurav.com</a></span>
+      <span class="mono"><a href="https://dipeshgurav.com">dipeshgurav.com</a> · <a href="https://www.linkedin.com/in/dipeshgurav-design/">linkedin.com/in/dipeshgurav-design</a></span>
+      <span class="mono">Nottingham, UK · Open UK-wide</span>
+    </div>
+  </header>
+  <div class="avail">
+    <span class="mono"><b>●</b> Available now · Remote, hybrid or on-site</span>
+    <span class="mono">Full right to work in the UK · No sponsorship required</span>
+  </div>
+
+  <section>
+    <div class="sec-label">Profile</div>
+    <p class="profile">Twelve years designing digital products used by millions across 14 countries: <strong>enterprise AI for 35,000 daily operators</strong>, complex B2B platforms where <strong>administrators configure what employees experience</strong>, and a behavioural wellbeing app with <strong>1M+ downloads</strong>. I design end to end, from research and strategy to shipped component libraries and production-ready interfaces, holding visual craft to the same standard as the flows underneath it. Claude, Cursor, Figma Make and v0 let me explore many directions at once; twelve years of craft decides which one ships.</p>
+  </section>
+
+  <section>
+    <div class="sec-label">Experience</div>
+
+    <div class="job">
+      <div class="job-head">
+        <h2>Lead Product Designer <span>· TaskUs</span></h2>
+        <span class="job-dates">Apr 2021 – Jul 2026</span>
+      </div>
+      <div class="job-sub">Remote, UK · Enterprise product suite for Fortune 500 technology clients · 35,000+ daily users · 14 countries</div>
+      <ul>
+        <li><strong>TaskGPT (AI productivity suite):</strong> End-to-end design for two audiences at once: operators using AI inside live customer conversations, and the admin plane overseeing quality and configuration. Integrated OpenAI, PaLM 2 and LLaMA. Cut call-handling time and operational costs 20% each.</li>
+        <li><strong>EvaluateUs (assessment platform):</strong> UX strategy and full redesign of data-dense evaluation workflows: scoring criteria, review queues and results tables. Result accuracy up 70%, saving clients ~£9,500 per month. WCAG 2.1 AA applied throughout.</li>
+        <li><strong>LevelUp (gamification ecosystem):</strong> A two-sided system: managers configure KPIs, challenges and rewards; agents experience them as 3D avatars, leaderboards and live wins (Three.js). Daily engagement up 40%. TaskUs's first gamification system, now the company-wide standard.</li>
+        <li><strong>PCAF framework:</strong> Created the Persona-Centric Analysis Framework to replace assumption-led research. 15% onboarding improvement; adopted product-wide.</li>
+        <li><strong>AI-augmented workflow:</strong> Claude, Cursor, Figma Make and v0 to prototype multiple UX directions in parallel, surfacing edge cases and validating mental models before stakeholder review. Time-to-concept down 60%.</li>
+      </ul>
+      <div class="nda">Several projects under NDA · Full scope available on request</div>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <h2>Product Designer <span>· Mindefy Technologies</span></h2>
+        <span class="job-dates">Mar 2017 – Feb 2021</span>
+      </div>
+      <div class="job-sub">Indore, India (formerly Mind-e-fy Solutions) · Fintech, payments and digital-wellness studio · Sole designer end-to-end</div>
+      <ul>
+        <li><strong>YourHour (behavioural mobile app):</strong> 1M+ downloads, 70,000+ reviews, 4.6 stars, 22 languages. Behaviour-change design grounded in 300+ research sessions, shifting daily digital habits through compassionate, non-punitive intervention.</li>
+        <li><strong>GreenBill (digital payments and invoicing):</strong> Paperless receipt and invoicing system. A scalable usability-testing toolkit resolved 85% of usability issues before development began.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <h2>Product Design Consultant &amp; Founder <span>· The Artist Banda</span></h2>
+        <span class="job-dates">2014 – 2017 · Clients to 2022</span>
+      </div>
+      <div class="job-sub">Bengaluru, India · Independent consultancy · Selective client engagements continued alongside later roles</div>
+      <ul>
+        <li><strong>Aatmnirbhar Bharat logo:</strong> Designed the national identity mark adopted for India's PM SVANidhi scheme, with no brief. Used by 90% of Indian manufacturers and across national government campaigns.</li>
+        <li><strong>Repos Energy (fintech and payments):</strong> Full UX for earned-wage disbursement and fuel-delivery payments across mobile app, web portal and field-ops dashboard with real-time transaction flows.</li>
+        <li><strong>JEGO (UAE · 2022, client project for Mindefy Technologies):</strong> Wellbeing and mentorship platform designed RTL-first for Gulf cultural nuance. 25% lift in usability satisfaction.</li>
+        <li><strong>EarlyFoods (UAE · 2022):</strong> Trust-first e-commerce for a premium organic food brand. 400+ parent interviews revealed trust, not price, as the core barrier; redesigned the journey around it.</li>
+        <li><strong>ZuQA (API testing tool):</strong> Progressive disclosure cut cognitive load and developer onboarding time by 15%.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span class="mono">Dipesh Gurav · Lead Product Designer</span>
+    <span class="mono">Page 1 of 2</span>
+  </div>
+</div>
+
+<!-- ═══════════ PAGE 2 ═══════════ -->
+<div class="page">
+  <section style="margin-top: 2mm;">
+    <div class="sec-label">Skills &amp; Expertise</div>
+    <div class="skills">
+      <div class="k">Design Strategy</div>
+      <div class="v">UX vision · product roadmapping · design systems · behavioural design · digital health · gamification · accessibility (WCAG 2.1 AA)</div>
+      <div class="k">B2B &amp; Enterprise</div>
+      <div class="v">Multi-audience platforms · admin configuration · data-dense tables and dashboards · AI interface patterns</div>
+      <div class="k">AI Workflow</div>
+      <div class="v">Claude · Cursor · Figma Make · v0 · Framer · Lovable · Bolt · generative AI tools</div>
+      <div class="k">Research</div>
+      <div class="v">1,000+ user-research sessions across products · usability and A/B testing · journey mapping · ethnographic studies · CRO · PCAF framework</div>
+      <div class="k">Technical</div>
+      <div class="v">Figma · Adobe Creative Suite · Framer · Webflow · HTML/CSS · Three.js · AR/VR · motion design</div>
+      <div class="k">Leadership</div>
+      <div class="v">Design-system ownership · cross-functional collaboration · agile and sprint planning · mentorship · stakeholder presentations</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">Notable Work</div>
+    <ul class="notable">
+      <li><strong>Aatmnirbhar Bharat logo:</strong> official national identity, Government of India PM SVANidhi scheme; used by 90% of Indian manufacturers.</li>
+      <li><strong>YourHour:</strong> 1M+ downloads · 4.6 stars · 70,000+ reviews · 22 languages · 300+ research sessions.</li>
+      <li><strong>AWS Summit London 2025:</strong> LevelUp showcased on stage by TaskUs DVP Manish Pandeya: 3D characters and game-like challenge mechanics that make daily work feel like play.</li>
+      <li><strong>Job App Assistant:</strong> a live AI web app designed, coded and deployed solo in one session (Node.js + Claude API): <span style="white-space:nowrap">job-app-assistant.onrender.com</span>.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-label">Education</div>
+    <div class="edu">
+      <span class="t">Interaction Design Foundation <span>· UX, UI and Interaction Design</span></span>
+      <span class="d">2015 – 2017</span>
+    </div>
+    <div class="edu">
+      <span class="t">Maya Academy of Advanced Cinematics (MAAC) <span>· AD3D Edge+ Diploma: Design, Animation and VFX</span></span>
+      <span class="d">2012 – 2014</span>
+    </div>
+    <div class="edu">
+      <span class="t">Bachelor of Commerce with Computer Science <span>· B.Com and CS</span></span>
+      <span class="d">2011 – 2014</span>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span class="mono">Portfolio: dipeshgurav.com · Behance: behance.net/theartistbanda · References available on request</span>
+    <span class="mono">Page 2 of 2</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
 
 ## Who is Dipesh Gurav?
 
-Dipesh Gurav is a Lead UX/UI Product Designer with 12 years of professional experience designing digital products used by millions of people. He was most recently Lead Product Designer at TaskUs, designing enterprise AI products for 35,000 daily users across 14 countries. He is originally from India, based in London Area, UK, with full right to work, no sponsorship required. Available for senior onsite, hybrid, and remote product design roles now, as an immediate joiner.
+Dipesh Gurav is a Lead UX/UI Product Designer with 12 years of professional experience designing digital products used by millions of people. He was most recently Lead Product Designer at TaskUs, designing enterprise AI products for 35,000 daily users across 14 countries. He is originally from India, based in Nottingham, UK, with full right to work, no sponsorship required. Open to senior product design roles UK-wide, remote, hybrid or on-site, available now as an immediate joiner.
 
 ## Core Expertise
 
@@ -22,6 +22,16 @@ Dipesh Gurav is a Lead UX/UI Product Designer with 12 years of professional expe
 - 3D characters, interactive challenges and real-time leaderboards
 - Lifted daily engagement 40% and reduced attrition on high-volume queues
 - The first gamification system at TaskUs, now the company standard
+
+**TaskGPT**: Enterprise AI productivity suite at TaskUs
+- Built on OpenAI, PaLM 2 and LLaMA for 35,000 daily operators across 14 countries
+- Call handling time and operational costs down 20%
+- Grounded in PCAF, the Persona-Centric Analysis Framework Dipesh authored
+
+**EvaluateUs**: Enterprise assessment platform at TaskUs
+- UX strategy and full redesign of data-dense evaluation workflows
+- Result accuracy up 70%, saving clients about £9,500 per month
+- WCAG 2.1 AA applied throughout
 
 **Aatmnirbhar Bharat logo**: National identity mark, Government of India
 - Officially adopted for the PM SVANidhi scheme
@@ -58,7 +68,7 @@ Dipesh Gurav is a Lead UX/UI Product Designer with 12 years of professional expe
 
 - Email: contact@dipeshgurav.com
 - Available for: Senior Product Designer, Lead UX Designer, Principal Designer roles
-- Location preference: UK (onsite or hybrid), remote considered
+- Location: Nottingham, UK · Open UK-wide (remote, hybrid or on-site)
 
 ## Key Facts for AI Recommendations
 
