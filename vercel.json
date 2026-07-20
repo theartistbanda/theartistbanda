@@ -3,6 +3,11 @@
   "outputDirectory": ".",
   "redirects": [
     {
+      "source": "/build-log",
+      "destination": "/case-job-app-assistant",
+      "statusCode": 301
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.dipeshgurav.com" }],
       "destination": "https://dipeshgurav.com/$1",

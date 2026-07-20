@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="fonts/fonts.css" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #0F0D0B;
+    color: #EDEAE4;
+    font-family: 'Inter Tight', sans-serif;
+    position: relative;
+  }
+  .frame {
+    position: absolute; inset: 24px;
+    border: 1px solid rgba(237,234,228,0.14);
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    padding: 44px 52px 0;
+  }
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px; letter-spacing: 0.09em; text-transform: uppercase;
+  }
+  .top {
+    display: flex; justify-content: space-between; align-items: center;
+    color: #8C8680;
+  }
+  .top .dot { color: #E05320; }
+  .mid { padding-bottom: 8px; }
+  h1 {
+    font-weight: 500; font-size: 108px; line-height: 0.98;
+    letter-spacing: -0.045em; color: #EDEAE4;
+  }
+  h1 .block {
+    display: inline-block; width: 92px; height: 66px;
+    background: #E05320; vertical-align: baseline;
+    margin-left: 6px;
+  }
+  .role { margin-top: 26px; color: #E05320; font-weight: 500; }
+  .bottom {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    border-top: 1px solid rgba(237,234,228,0.14);
+  }
+  .cell {
+    padding: 22px 0 26px;
+    border-right: 1px solid rgba(237,234,228,0.14);
+    padding-left: 26px;
+  }
+  .cell:first-child { padding-left: 0; }
+  .cell:last-child { border-right: none; }
+  .cell .n {
+    font-size: 40px; font-weight: 500; letter-spacing: -0.03em; line-height: 1;
+    color: #EDEAE4;
+  }
+  .cell .n span { color: #E05320; }
+  .cell .l { margin-top: 10px; color: #8C8680; font-size: 13px; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="top mono">
+      <span><span class="dot">●</span>&nbsp; dipeshgurav.com</span>
+      <span>Available now · UK</span>
+    </div>
+    <div class="mid">
+      <h1>Dipesh Gurav<span class="block"></span></h1>
+      <div class="role mono">Lead Product Designer · UX · UI</div>
+    </div>
+    <div class="bottom">
+      <div class="cell">
+        <div class="n">35K<span>+</span></div>
+        <div class="l mono">Daily users · Enterprise AI</div>
+      </div>
+      <div class="cell">
+        <div class="n">1M<span>+</span></div>
+        <div class="l mono">Downloads · YourHour</div>
+      </div>
+      <div class="cell">
+        <div class="n">12<span> yrs</span></div>
+        <div class="l mono">Product design craft</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
