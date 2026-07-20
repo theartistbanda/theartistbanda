@@ -53,8 +53,19 @@
 
   /* The mark itself */
   .mark-panel { background: #F4F1EC; border: 1px solid var(--line); margin: 64px 0 0; padding: 64px 48px; display: flex; align-items: center; justify-content: center; }
-  .mark-panel img { display: block; max-width: 420px; width: 60%; height: auto; }
-  @media (max-width: 639px) { .mark-panel { padding: 40px 24px; margin: 32px 0 0; } .mark-panel img { width: 80%; } }
+  /* width uses min() rather than max-width+% together: the two combined inside a
+     flex item can resolve against an indefinite containing block and render
+     off-centre in some browsers. min() keeps the box (and centring) unambiguous. */
+  .mark-panel img { display: block; width: min(60%, 420px); height: auto; }
+  @media (max-width: 639px) { .mark-panel { padding: 40px 24px; margin: 32px 0 0; } .mark-panel img { width: min(80%, 320px); } }
+
+  /* Wide supporting images: construction grid, proof-of-adoption, reception */
+  .wide { border: 1px solid var(--line); margin-top: 40px; }
+  .wide img { width: 100%; display: block; }
+  .cap { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-top: 10px; }
+  .photos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+  .photos img { width: 100%; display: block; border: 1px solid var(--line); }
+  @media (max-width: 639px) { .photos { grid-template-columns: 1fr; } }
 
   /* Hero dark panel */
   .cover-dark { background: var(--ink); border: 1px solid var(--line); margin: 64px 0 0; padding: 80px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
@@ -201,10 +212,7 @@
     <p class="lede">In May 2020, India launched the Aatmnirbhar Bharat initiative. By morning, a logo existed: no client, no brief, no credit requested. It was officially adopted for PM SVANidhi and is now used by roughly 90% of Indian manufacturers.</p>
 
     <div class="mark-panel">
-      <picture>
-        <source srcset="/assets/aatmnirbhar-logo.webp" type="image/webp">
-        <img src="/assets/aatmnirbhar-logo.webp" alt="The Aatmnirbhar Bharat logo: a saffron figure rising within the map of India, with the initiative name in Devanagari script" width="1954" height="2297" loading="eager">
-      </picture>
+      <img src="/assets/aatmnirbhar-logo.webp" alt="The Aatmnirbhar Bharat logo: a saffron figure rising within the map of India, with the initiative name in Devanagari script" width="1954" height="2297" loading="eager">
     </div>
 
     <div class="cover-dark">
@@ -291,6 +299,11 @@
         <p>The logo was shared publicly without expectation. Within days it was on news tickers, government social accounts, and manufacturer packaging across India.</p>
       </div>
     </div>
+
+    <div class="wide">
+      <img loading="lazy" src="/assets/aatmnirbhar-construction.webp" alt="Aatmnirbhar Bharat logo construction grid: the circles, angles and proportional guides behind the mark" />
+    </div>
+    <div class="cap">The construction grid · every curve and angle built on a single proportional system</div>
   </div>
 </section>
 
@@ -303,7 +316,14 @@
     <div class="prose">
       <p>The logo was officially adopted for PM SVANidhi, the government scheme providing collateral-free working capital loans to street vendors, one of the most visible COVID-19 relief programmes in India. From there it spread organically to manufacturers, retailers, and government communications.</p>
       <p>Today, an estimated 90% of Indian manufacturers who use the Aatmnirbhar Bharat branding use this logo. It appears on packaging, government campaigns, and national advertising with no agency attribution, which is perhaps the most honest outcome a designer can ask for. Good design serves the purpose, not the credit.</p>
+      <p>No agency attribution also means no easy way to prove reach. What exists instead is the trail it left: the logo turning up in an unrelated business's own search results, and the messages from strangers who found it and used it.</p>
     </div>
+
+    <div class="photos">
+      <img loading="lazy" src="/assets/aatmnirbhar-search-proof.webp" alt="Google Images search result showing the Aatmnirbhar Bharat logo adopted by an unrelated business, found organically via search" />
+      <img loading="lazy" src="/assets/aatmnirbhar-support.webp" alt="Collage of messages from strangers thanking Dipesh Gurav for the Aatmnirbhar Bharat logo" />
+    </div>
+    <div class="cap">Left: found organically in a stranger's search results, no attribution asked. Right: a fraction of the messages it brought in.</div>
 
     <blockquote>"Good design does not ask permission; it simply <span>works</span> for people."</blockquote>
     <div class="quote-attr">Design principle</div>
