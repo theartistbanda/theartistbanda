@@ -124,7 +124,7 @@ const PORTFOLIO = {
     body: 'UX strategy and full redesign of an enterprise assessment platform: evaluation workflows, scoring criteria and results data. Result accuracy up 70%, saving clients about £9,500 a month.',
     stats: [['70%', 'Accuracy lift'], ['£9.5K', 'Saved · client · month'], ['AA', 'WCAG 2.1']],
     tags: ['Enterprise UX', 'Data-dense UI', 'Assessment'],
-    image: null,
+    image: '/assets/evaluateus-cover.webp',
     href: 'case-evaluateus.html'
   }, {
     id: 'yourhour',

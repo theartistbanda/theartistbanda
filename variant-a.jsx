@@ -291,10 +291,11 @@ function AHero() {
             marginTop: bp.isMobile ? 16 : 0
           }}>
             <a href="#work" data-cursor="hover" style={{
-              ...aStyles.cta, padding: '13px 16px', background: A.ink, color: A.paper,
+              ...aStyles.cta, padding: '13px 16px', border: `1px solid rgba(237,234,228,0.2)`,
+              color: A.accent,
               textDecoration: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
             }}>
-              View the index <span style={{ color: A.accent }}>→</span>
+              View the index <span>→</span>
             </a>
             <a href="#contact" data-cursor="hover" style={{
               ...aStyles.cta, fontWeight: 500, padding: '13px 16px', border: `1px solid rgba(237,234,228,0.2)`,

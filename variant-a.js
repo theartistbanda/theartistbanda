@@ -349,18 +349,14 @@ function AHero() {
     style: {
       ...aStyles.cta,
       padding: '13px 16px',
-      background: A.ink,
-      color: A.paper,
+      border: `1px solid rgba(237,234,228,0.2)`,
+      color: A.accent,
       textDecoration: 'none',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center'
     }
-  }, "View the index ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: A.accent
-    }
-  }, "\u2192")), /*#__PURE__*/React.createElement("a", {
+  }, "View the index ", /*#__PURE__*/React.createElement("span", null, "\u2192")), /*#__PURE__*/React.createElement("a", {
     href: "#contact",
     "data-cursor": "hover",
     style: {

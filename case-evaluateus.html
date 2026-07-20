@@ -6,6 +6,13 @@
 <title>EvaluateUs · Case Study | Dipesh Gurav</title>
 <meta name="description" content="EvaluateUs: enterprise assessment platform case study by Dipesh Gurav. Designed for TaskUs. Available for discussion in a confidential interview setting.">
 <meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dipeshgurav.com/case-evaluateus">
+<meta property="og:title" content="EvaluateUs · Case Study | Dipesh Gurav">
+<meta property="og:description" content="UX strategy and full redesign of TaskUs's assessment and training platform. Result accuracy up 70%, saving clients about £9,500 a month.">
+<meta property="og:image" content="https://dipeshgurav.com/assets/evaluateus-cover.jpg">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://dipeshgurav.com/case-evaluateus">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,6 +49,13 @@
 
   .cover { aspect-ratio: 16/9; margin: 64px 0 0; background: var(--ink); border: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(244,241,236,0.04) 11px 12px); }
   .cover-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244,241,236,0.4); }
+  .cover img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .wide { border: 1px solid var(--line); margin-top: 40px; }
+  .wide img { width: 100%; display: block; }
+  .cap { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-top: 10px; }
+  .photos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+  .photos img { width: 100%; display: block; border: 1px solid var(--line); }
+  @media (max-width: 639px) { .photos { grid-template-columns: 1fr; } }
 
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .stat { padding: 28px 24px; border-right: 1px solid var(--line); }
@@ -159,13 +173,13 @@
       <div>Type / <span>Case Study</span></div>
       <div>Year / <span>2022–2023</span></div>
       <div>Role / <span>Lead Product Design</span></div>
-      <div>Context / <span>Assessment Platform · TaskUs</span></div>
+      <div>Context / <span>Assessment &amp; Training SaaS · TaskUs</span></div>
     </div>
     <h1>EvaluateUs.<br>Heavy data,<br>held <i>fairly.</i></h1>
     <p class="lede">UX strategy and a full redesign of TaskUs's enterprise assessment platform: the system where operator performance is scored, reviewed and acted on. Result accuracy rose 70%, saving clients roughly £9,500 a month, with WCAG 2.1 AA applied throughout.</p>
 
     <div class="cover">
-      <span class="cover-label">EvaluateUs · Assessment Platform · TaskUs</span>
+      <img src="/assets/evaluateus-cover.webp" alt="EvaluateUs dashboard on a laptop: assessment statistics, active users chart, assessment creation and skills breakdown" />
     </div>
 
     <div class="stats">
@@ -203,6 +217,28 @@
 <section class="body">
   <div class="wrap">
     <div class="section-head">
+      <span class="mono">The product</span>
+      <h2>Skills built. Assessments run. <i>Results reported.</i></h2>
+    </div>
+    <div class="prose">
+      <p>EvaluateUs is a learning and training SaaS as much as an assessment tool. Campaigns and scripts are configured per team, candidates take skill assessments, and managers read the outcomes in analytics dashboards and reports. The surfaces below are production design: configuration tables, the assessment builder, candidate views and the reporting layer.</p>
+    </div>
+
+    <div class="wide">
+      <img loading="lazy" src="/assets/evaluateus-overview.webp" alt="EvaluateUs: learning and training SaaS with skill development, training builder, analytics dashboard and reports" />
+    </div>
+    <div class="cap">The dashboard · active users, assessment creation and skills breakdown at a glance</div>
+
+    <div class="wide">
+      <img loading="lazy" src="/assets/evaluateus-screens.webp" alt="EvaluateUs screens: login, dashboards, assessment gallery, candidates, configuration tables and reports" />
+    </div>
+    <div class="cap">The full surface · campaigns, scripts, candidates, configuration and reports (client names softened)</div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
       <span class="mono">Approach</span>
       <h2>Strategy first. Then the <i>redesign.</i></h2>
     </div>
@@ -215,6 +251,26 @@
       <div><div class="n">+70<i>%</i></div><div class="mono">Result accuracy</div></div>
       <div><div class="n">£9.5<i>K</i></div><div class="mono">Saved per client per month</div></div>
       <div><div class="n">AA</div><div class="mono">WCAG 2.1 throughout</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="mono">Craft</span>
+      <h2>A system under the <i>surface.</i></h2>
+    </div>
+    <div class="prose">
+      <p>Like every product in the suite, EvaluateUs ships on a design system: an extensive component library, a deliberately minimal styleguide, and a pixel-perfect file with strict non-fractional sizing and advanced auto-layout, so teams can customise without breaking the system.</p>
+    </div>
+
+    <div class="photos">
+      <img loading="lazy" src="/assets/evaluateus-components.webp" alt="EvaluateUs component library: menus, buttons, assessment cards and filters" />
+      <img loading="lazy" src="/assets/evaluateus-stylesheet.webp" alt="EvaluateUs minimal stylesheet: branding colours and text styles" />
+    </div>
+    <div class="wide">
+      <img loading="lazy" src="/assets/evaluateus-highlights.webp" alt="EvaluateUs file highlights: pixel perfect, organised layers, component library, minimal styleguide and auto-layout" />
     </div>
   </div>
 </section>

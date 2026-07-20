@@ -122,7 +122,7 @@ const PORTFOLIO = {
         ['AA', 'WCAG 2.1'],
       ],
       tags: ['Enterprise UX', 'Data-dense UI', 'Assessment'],
-      image: null,
+      image: '/assets/evaluateus-cover.webp',
       href: 'case-evaluateus.html',
     },
     {
