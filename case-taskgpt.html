@@ -5,7 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TaskGPT · Case Study | Dipesh Gurav</title>
 <meta name="description" content="TaskGPT: AI productivity suite case study by Dipesh Gurav. Designed for TaskUs. Available for discussion in a confidential interview setting.">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dipeshgurav.com/case-taskgpt">
+<meta property="og:title" content="TaskGPT · Case Study | Dipesh Gurav">
+<meta property="og:description" content="End-to-end design of an enterprise AI suite for 35,000 daily operators across 14 countries. Call handling time down 20%.">
+<meta property="og:image" content="https://dipeshgurav.com/assets/taskgpt-cover.jpg">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://dipeshgurav.com/case-taskgpt">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,6 +49,10 @@
 
   .cover { aspect-ratio: 16/9; margin: 64px 0 0; background: var(--ink); border: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(244,241,236,0.04) 11px 12px); }
   .cover-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244,241,236,0.4); }
+  .cover img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .wide { border: 1px solid var(--line); margin-top: 40px; }
+  .wide img { width: 100%; display: block; }
+  .cap { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-top: 10px; }
 
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .stat { padding: 28px 24px; border-right: 1px solid var(--line); }
@@ -163,7 +174,7 @@
     <p class="lede">End-to-end design of an enterprise AI productivity suite built on OpenAI, PaLM 2, and LLaMA, used by 35,000 operators daily across 14 countries. Call handling time dropped 20%. The product earned its own cost.</p>
 
     <div class="cover">
-      <span class="cover-label">TaskGPT · Enterprise AI Suite · TaskUs</span>
+      <img src="/assets/taskgpt-cover.webp" alt="TaskGPT feedback dashboard: product and knowledge ratings, conversation ratings and qualitative feedback columns" />
     </div>
 
     <div class="stats">
@@ -238,6 +249,33 @@
 <section class="body">
   <div class="wrap">
     <div class="section-head">
+      <span class="mono">The admin plane</span>
+      <h2>Operators use the AI. Admins <i>configure it.</i></h2>
+    </div>
+    <div class="prose">
+      <p>TaskGPT is two products in one interface. Operators live in the assistant during live customer conversations. Behind them sits the admin plane: chatbots configured per client, usage and consumption dashboards, and data-dense feedback reporting that tells the team what the AI is actually doing in production. Designing both directions at once, configuration on one side and lived workflow on the other, is what made the suite hold together.</p>
+    </div>
+
+    <div class="wide">
+      <img loading="lazy" src="/assets/taskgpt-config.webp" alt="TaskGPT admin plane: creating and configuring a chatbot for a client, with type, welcome message and JSON configuration" />
+    </div>
+    <div class="cap">Client configuration · one chatbot per client, from welcome message to JSON config (client name redacted)</div>
+
+    <div class="wide">
+      <img loading="lazy" src="/assets/taskgpt-report.webp" alt="TaskGPT feedback report: data-dense table of ratings by operator with experience, quality and NLU scores" />
+    </div>
+    <div class="cap">Feedback reporting · every rating traceable to a session, exportable for clients</div>
+
+    <div class="wide">
+      <img loading="lazy" src="/assets/taskgpt-overview.webp" alt="TaskGPT dashboards: users, sessions, responses and token consumption overview plus feedback ratings view" />
+    </div>
+    <div class="cap">Usage dashboards · users, sessions, valid responses and token consumption at a glance</div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
       <span class="mono">Outcome</span>
       <h2>20% cost reduction.<br><i>35K daily users.</i> One framework that changed how TaskUs builds AI products.</h2>
     </div>
@@ -257,8 +295,8 @@
 <section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
-    <a href="case-yourhour.html">
-      <span class="nt">YourHour: <i>breaking digital addiction, compassionately.</i></span>
+    <a href="case-evaluateus.html">
+      <span class="nt">EvaluateUs: <i>heavy data, held fairly.</i></span>
       <span class="arrow">→</span>
     </a>
   </div>

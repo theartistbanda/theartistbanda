@@ -91,7 +91,6 @@ const PORTFOLIO = {
     },
     {
       id: 'taskgpt',
-      selected: false,
       index: '02',
       year: 2024,
       title: 'TaskGPT',
@@ -105,12 +104,11 @@ const PORTFOLIO = {
         ['14', 'Countries'],
       ],
       tags: ['AI Interface', 'Enterprise', 'Design Systems'],
-      image: null,
+      image: '/assets/taskgpt-cover.webp',
       href: 'case-taskgpt.html',
     },
     {
       id: 'evaluateus',
-      selected: false,
       index: '03',
       year: 2023,
       title: 'EvaluateUs',

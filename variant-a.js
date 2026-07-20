@@ -474,7 +474,7 @@ function AWork() {
       lineHeight: 1.05,
       margin: 0
     }
-  }, "Six products. Four markets.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+  }, "Eight products. Four markets.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.mute
     }

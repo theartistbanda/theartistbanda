@@ -104,7 +104,6 @@ const PORTFOLIO = {
     href: 'case-levelup.html'
   }, {
     id: 'taskgpt',
-    selected: false,
     index: '02',
     year: 2024,
     title: 'TaskGPT',
@@ -113,11 +112,10 @@ const PORTFOLIO = {
     body: 'End-to-end design on an OpenAI + PaLM 2 + LLaMA suite for 35,000 daily operators. Call handling time down 20%.',
     stats: [['20%', 'Cost saved'], ['35K', 'Daily users'], ['14', 'Countries']],
     tags: ['AI Interface', 'Enterprise', 'Design Systems'],
-    image: null,
+    image: '/assets/taskgpt-cover.webp',
     href: 'case-taskgpt.html'
   }, {
     id: 'evaluateus',
-    selected: false,
     index: '03',
     year: 2023,
     title: 'EvaluateUs',

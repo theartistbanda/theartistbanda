@@ -220,6 +220,11 @@
     footer { padding: 24px 16px; }
   }
 
+  .photos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+  .photos img { width: 100%; display: block; border: 1px solid var(--line); }
+  .cap { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-top: 10px; }
+  @media (max-width: 639px) { .photos { grid-template-columns: 1fr; } }
+
   .impact { display: grid; grid-template-columns: repeat(3, 1fr); border-left: 1px solid var(--line); border-top: 1px solid var(--line); margin-top: 48px; }
   .impact > div { padding: 28px 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .impact .n { font-size: 44px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
@@ -390,6 +395,27 @@
 <section class="body">
   <div class="wrap">
     <div class="section-head">
+      <span class="mono">Launch day</span>
+      <h2>31 January 2024. The floor <i>lights up.</i></h2>
+    </div>
+    <div class="prose">
+      <p>LevelUp went live across TaskUs sites with the avatars on every screen: the MVP spotlight on the operations floor, live leaderboards in the boardroom, and teams watching their names climb in real time. Not a Figma frame. A shipped product, in the rooms it was designed for.</p>
+    </div>
+
+    <div class="photos">
+      <img loading="lazy" src="/assets/levelup-launch-1.webp" alt="LevelUp live leaderboards on the boardroom screens during launch" />
+      <img loading="lazy" src="/assets/levelup-launch-2.webp" alt="LevelUp MVP spotlight on a laptop on the operations floor at launch" />
+    </div>
+    <div class="wide">
+      <img loading="lazy" src="/assets/levelup-launch-3.webp" alt="LevelUp MVP leaderboard with two 3D avatars on an office screen" />
+    </div>
+    <div class="cap">Launch day across TaskUs sites · MVP spotlight, live points, 3D avatars in production (names blurred)</div>
+  </div>
+</section>
+
+<section class="body">
+  <div class="wrap">
+    <div class="section-head">
       <span class="mono">Outcome</span>
       <h2>40% more engagement.<br><i>The company standard</i> for gamification.</h2>
     </div>
@@ -409,8 +435,8 @@
 <section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
-    <a href="case-yourhour.html">
-      <span class="nt">YourHour: <i>breaking digital addiction, compassionately.</i></span>
+    <a href="case-taskgpt.html">
+      <span class="nt">TaskGPT: <i>the AI suite that paid for itself.</i></span>
       <span class="arrow">→</span>
     </a>
   </div>
