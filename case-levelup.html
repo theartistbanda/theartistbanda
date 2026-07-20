@@ -233,6 +233,8 @@
   .wide img { width: 100%; display: block; }
   @media (max-width: 639px) { .impact { grid-template-columns: 1fr 1fr; } .impact > div:nth-child(2n) { border-right: none; } .impact .n { font-size: 32px; } }
 
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
   /* Reduced motion: honour the user's OS-level preference */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }

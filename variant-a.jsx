@@ -31,6 +31,15 @@ const aStyles = {
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
     color: A.mute
+  },
+  // CTA type scale: readable at arm's length, unlike the 10px meta labels.
+  // Primary pairs dark ink text on accent (~5:1, AA) or paper on ink (~15:1).
+  cta: {
+    fontFamily: '"JetBrains Mono", ui-monospace, "IBM Plex Mono", Menlo, monospace',
+    fontSize: 12,
+    fontWeight: 600,
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase'
   }
 };
 
@@ -63,7 +72,7 @@ function ABanner() {
             : 'Full right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'}
         </span>
         <a href="#contact" data-cursor="hover" style={{
-          ...aStyles.mono, fontSize: bp.isMobile ? 9 : 10,
+          ...aStyles.mono, fontSize: bp.isMobile ? 9 : 10, fontWeight: 500,
           color: A.accent, textDecoration: 'none', flexShrink: 0
         }}>Get in touch →</a>
       </div>
@@ -153,8 +162,8 @@ function ANav() {
 
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <a href="#contact" data-cursor="hover" style={{
-            ...aStyles.mono, color: A.paper, background: A.ink,
-            padding: '8px 14px', textDecoration: 'none',
+            ...aStyles.cta, color: A.paper, background: A.accent,
+            padding: '10px 16px', textDecoration: 'none',
             display: 'inline-flex', gap: 8, alignItems: 'center', flexShrink: 0
           }}>
             {bp.isMobile ? 'Hire me →' : 'Available for work →'}
@@ -282,16 +291,16 @@ function AHero() {
             marginTop: bp.isMobile ? 16 : 0
           }}>
             <a href="#work" data-cursor="hover" style={{
-              ...aStyles.mono, padding: '12px 16px', background: A.ink, color: A.paper,
-              textDecoration: 'none', display: 'flex', justifyContent: 'space-between'
+              ...aStyles.cta, padding: '13px 16px', background: A.ink, color: A.paper,
+              textDecoration: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
             }}>
-              View the index <span>→</span>
+              View the index <span style={{ color: A.accent }}>→</span>
             </a>
             <a href="#contact" data-cursor="hover" style={{
-              ...aStyles.mono, padding: '12px 16px', border: `1px solid ${A.line}`,
-              color: A.ink, textDecoration: 'none', display: 'flex', justifyContent: 'space-between'
+              ...aStyles.cta, fontWeight: 500, padding: '13px 16px', border: `1px solid rgba(237,234,228,0.2)`,
+              color: A.ink, textDecoration: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
             }}>
-              Start a project <span>→</span>
+              Start a project <span style={{ color: A.accent }}>→</span>
             </a>
           </div>
         </div>
@@ -689,10 +698,11 @@ function ACareer() {
             </h2>
           </div>
           <a href="/dipesh-gurav-cv.pdf" download data-cursor="hover" style={{
-            ...aStyles.mono, padding: '10px 14px', border: `1px solid ${A.line}`,
-            color: A.ink, textDecoration: 'none', flexShrink: 0
+            ...aStyles.cta, fontWeight: 500, padding: '12px 16px', border: `1px solid rgba(237,234,228,0.2)`,
+            color: A.ink, textDecoration: 'none', flexShrink: 0,
+            display: 'inline-flex', gap: 10, alignItems: 'center'
           }}>
-            Download PDF résumé →
+            Download PDF résumé <span style={{ color: A.accent }}>→</span>
           </a>
         </div>
         <div>
@@ -786,6 +796,23 @@ function AAbout() {
 }
 
 // ─── CONTACT ─────────────────────────────────────────────────────────────────
+function AContactIcon({ type }) {
+  const s = { width: 16, height: 16, display: 'block' };
+  const p = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' };
+  switch (type) {
+    case 'Email':
+      return (<svg style={s} viewBox="0 0 24 24" {...p}><rect x="3" y="5" width="18" height="14" /><polyline points="3 7 12 13 21 7" /></svg>);
+    case 'Phone':
+      return (<svg style={s} viewBox="0 0 24 24" {...p}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>);
+    case 'LinkedIn':
+      return (<svg style={s} viewBox="0 0 24 24" {...p}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v1.5" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>);
+    case 'Dribbble':
+      return (<svg style={s} viewBox="0 0 24 24" {...p}><circle cx="12" cy="12" r="10" /><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32" /></svg>);
+    default:
+      return (<svg style={s} viewBox="0 0 24 24" {...p}><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>);
+  }
+}
+
 function AContact() {
   const bp = useBreakpoint();
   const side = sp(bp);
@@ -852,23 +879,32 @@ function AContact() {
             {/* Spacer: pushes links to bottom on desktop */}
             {bp.isDesktop && <div style={{ flex: 1 }} />}
             <div style={{ marginTop: bp.isDesktop ? 0 : 40 }}>
-              {PORTFOLIO.links.map((l, i) => (
+              <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)', marginBottom: 10 }}>Direct lines</div>
+              {PORTFOLIO.links.map((l) => (
                 <a key={l.label} href={l.href} data-cursor="hover"
                   style={{
-                    display: 'grid',
-                    gridTemplateColumns: bp.isMobile ? '1fr 32px' : '1fr 40px',
-                    gap: bp.isMobile ? 12 : 24, alignItems: 'center',
-                    padding: '18px 0',
-                    borderTop: i === 0 ? `1px solid rgba(244,241,236,0.15)` : 'none',
-                    borderBottom: `1px solid rgba(244,241,236,0.15)`,
+                    display: 'flex', alignItems: 'center', gap: bp.isMobile ? 12 : 16,
+                    padding: '9px 0',
                     textDecoration: 'none', color: A.ink, transition: 'padding-left .2s'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '12px'}
+                  onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '8px'}
                   onMouseLeave={(e) => e.currentTarget.style.paddingLeft = '0'}>
-                  <span style={{ fontSize: bp.isMobile ? 15 : 20, fontWeight: 500, letterSpacing: '-0.01em' }}>
-                    {l.label} · <span style={{ color: 'rgba(237,234,228,0.75)', fontWeight: 400 }}>{l.value}</span>
+                  <span aria-hidden="true" style={{
+                    width: 36, height: 36, flexShrink: 0,
+                    border: `1px solid rgba(244,241,236,0.16)`,
+                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                    color: A.accent
+                  }}>
+                    <AContactIcon type={l.label} />
                   </span>
-                  <span style={{ color: A.accent, fontSize: 18 }}>→</span>
+                  <span style={{ display: 'flex', flexDirection: 'column', gap: 1, minWidth: 0 }}>
+                    <span style={{ ...aStyles.mono, fontSize: 9 }}>{l.label}</span>
+                    <span style={{
+                      fontSize: bp.isMobile ? 15 : 17, fontWeight: 500, letterSpacing: '-0.01em',
+                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'
+                    }}>{l.value}</span>
+                  </span>
+                  <span style={{ marginLeft: 'auto', color: A.accent, fontSize: 16, flexShrink: 0 }}>→</span>
                 </a>
               ))}
             </div>
@@ -896,14 +932,14 @@ function AContact() {
                 </p>
                 <button onClick={() => { setSent(false); setSendError(false); }} data-cursor="hover"
                   style={{
-                    ...aStyles.mono, padding: '14px 20px',
+                    ...aStyles.cta, fontWeight: 500, padding: '14px 20px',
                     background: 'transparent', color: A.ink,
                     border: `1px solid rgba(237,234,228,0.2)`,
                     cursor: 'pointer', textAlign: 'left',
-                    display: 'flex', justifyContent: 'space-between',
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     transition: 'border-color .2s'
                   }}>
-                  Send another message <span>→</span>
+                  Send another message <span style={{ color: A.accent }}>→</span>
                 </button>
               </div>
             ) : (
@@ -918,9 +954,9 @@ function AContact() {
                     Or drop me a line directly.
                   </h3>
                 </div>
-                <AField label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name} />
-                <AField label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email} />
-                <AField label="Message" multiline value={form.msg} onChange={(v) => setForm({ ...form, msg: v })} error={errors.msg} />
+                <AField label="Name" placeholder="Your name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name} />
+                <AField label="Email" type="email" placeholder="you@company.com" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email} />
+                <AField label="Message" multiline placeholder="What are we building?" value={form.msg} onChange={(v) => setForm({ ...form, msg: v })} error={errors.msg} />
                 {sendError && (
                   <p style={{ ...aStyles.mono, color: A.accent, margin: 0 }}>
                     Something went wrong. Try emailing me directly.
@@ -928,10 +964,10 @@ function AContact() {
                 )}
                 <button type="submit" data-cursor="hover" disabled={sending}
                   style={{
-                    ...aStyles.mono, padding: '14px 20px',
+                    ...aStyles.cta, padding: '15px 20px',
                     background: sending ? 'rgba(237,234,228,0.1)' : A.accent,
                     color: sending ? A.ink : A.paper, border: 'none', cursor: sending ? 'default' : 'pointer',
-                    textAlign: 'left', display: 'flex', justifyContent: 'space-between',
+                    textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     transition: 'background .2s'
                   }}>
                   {sending ? 'Sending…' : 'Send transmission'} <span>→</span>
@@ -945,13 +981,13 @@ function AContact() {
   );
 }
 
-function AField({ label, type = 'text', value, onChange, error, multiline }) {
+function AField({ label, type = 'text', value, onChange, error, multiline, placeholder }) {
   const [focus, setFocus] = React.useState(false);
   const Tag = multiline ? 'textarea' : 'input';
   const id = `field-${label.toLowerCase().replace(/\s+/g, '-')}`;
   return (
     <div>
-      <label htmlFor={id} style={{ display: 'flex', justifyContent: 'space-between', ...aStyles.mono, color: focus ? A.accent : 'rgba(237,234,228,0.65)', marginBottom: 8, transition: 'color .2s', cursor: 'text' }}>
+      <label htmlFor={id} style={{ display: 'flex', justifyContent: 'space-between', ...aStyles.mono, color: focus ? A.accent : 'rgba(237,234,228,0.75)', marginBottom: 8, transition: 'color .2s', cursor: 'text' }}>
         <span>{label}</span>
         {error && <span style={{ color: A.accent }}>✱ {error}</span>}
       </label>
@@ -959,18 +995,19 @@ function AField({ label, type = 'text', value, onChange, error, multiline }) {
         id={id}
         type={type}
         value={value}
+        placeholder={placeholder}
         data-cursor="text"
         onChange={(e) => onChange(e.target.value)}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         rows={multiline ? 4 : undefined}
         style={{
-          width: '100%', background: 'transparent',
-          borderBottom: `1px solid ${focus ? A.accent : 'rgba(237,234,228,0.2)'}`,
-          borderTop: 0, borderLeft: 0, borderRight: 0,
-          padding: '10px 0', color: A.ink, fontSize: 16,
+          width: '100%',
+          background: focus ? 'rgba(224,83,32,0.05)' : 'rgba(237,234,228,0.04)',
+          border: `1px solid ${focus ? A.accent : 'rgba(237,234,228,0.16)'}`,
+          padding: '12px 14px', color: A.ink, fontSize: 16,
           fontFamily: 'inherit', outline: 'none', resize: 'vertical',
-          transition: 'border-color .2s'
+          transition: 'border-color .2s, background .2s'
         }} />
     </div>
   );

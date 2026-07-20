@@ -120,13 +120,15 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,wght@1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,wght@1,300;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   html, body { margin: 0; padding: 0; background: #0F0D0B; }
   * { box-sizing: border-box; }
   body, body * { cursor: none; }
   input, textarea { cursor: text !important; }
   @media (pointer: coarse) { body, body * { cursor: auto; } }
+  input::placeholder, textarea::placeholder { color: rgba(237,234,228,0.35); opacity: 1; }
+  a:focus-visible, button:focus-visible { outline: 2px solid #E05320; outline-offset: 3px; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   }
