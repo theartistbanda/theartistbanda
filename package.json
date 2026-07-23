@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "./node_modules/.bin/babel shared.jsx --presets @babel/preset-react -o shared.js && ./node_modules/.bin/babel variant-a.jsx --presets @babel/preset-react -o variant-a.js",
+    "build:vendor:core": "./node_modules/.bin/esbuild --bundle --format=esm --minify node_modules/motion/dist/es/index.mjs --outfile=vendor/motion.js",
+    "build:vendor:react": "./node_modules/.bin/esbuild --bundle --format=esm --minify --external:react --external:react/jsx-runtime node_modules/motion/dist/es/react.mjs --outfile=vendor/motion-react.js",
+    "build:vendor": "npm run build:vendor:core && npm run build:vendor:react",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +25,8 @@
   "devDependencies": {
     "@babel/cli": "^7.28.6",
     "@babel/core": "^7.29.0",
-    "@babel/preset-react": "^7.28.5"
+    "@babel/preset-react": "^7.28.5",
+    "esbuild": "^0.28.1",
+    "motion": "^12.42.2"
   }
 }
