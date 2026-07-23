@@ -51,4 +51,7 @@ Run `npm run build:vendor` after upgrading the `motion` devDependency. Re-run
 the bare-import checks described in the implementation plan
 (`docs/superpowers/plans/2026-07-23-motion-vendor-wiring.md`, Task 2 Step 4)
 against the new output before trusting it — a version bump could introduce a
-new dependency (e.g. on react-dom) that isn't shimmed yet.
+new dependency (e.g. on react-dom) that isn't shimmed yet. Also re-check
+whether the new bundle's compiled `jsx`/`jsxs` calls pass a third (`key`)
+argument — `vendor/react-jsx-runtime-shim.mjs` forwards it correctly, but
+it's worth confirming a version bump hasn't changed how keys reach it.
