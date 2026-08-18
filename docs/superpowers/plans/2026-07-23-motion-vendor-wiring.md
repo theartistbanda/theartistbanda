@@ -27,7 +27,7 @@
 **Interfaces:**
 - Produces: `node_modules/motion` (package, providing `dist/es/index.mjs` and `dist/es/react.mjs` entry points), `node_modules/.bin/esbuild`, and npm scripts `build:vendor:core`, `build:vendor:react`, `build:vendor` — consumed by Task 2.
 
-- [ ] **Step 1: Add the two devDependencies to `package.json`**
+- [x] **Step 1: Add the two devDependencies to `package.json`**
 
 Edit the `devDependencies` block in `package.json` from:
 
@@ -51,7 +51,7 @@ to:
   }
 ```
 
-- [ ] **Step 2: Add the vendor build scripts**
+- [x] **Step 2: Add the vendor build scripts**
 
 Edit the `scripts` block in `package.json` from:
 
@@ -74,7 +74,7 @@ to:
   },
 ```
 
-- [ ] **Step 3: Install and verify**
+- [x] **Step 3: Install and verify**
 
 Run: `npm install`
 
@@ -84,7 +84,7 @@ Expected: `12.42.2` (or a newer 12.x/13.x patch — if a newer version installed
 Then run: `ls node_modules/.bin/esbuild`
 Expected: file exists, no error
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add package.json package-lock.json
@@ -111,22 +111,22 @@ Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 - Consumes: `build:vendor` script and `node_modules/motion` from Task 1.
 - Produces: `vendor/motion.js` (vanilla Motion DOM API, zero external dependencies — `import { animate, scroll, inView, ... } from "/vendor/motion.js"` works standalone), `vendor/motion-react.js` (the `motion/react` component API — `import { motion, AnimatePresence, ... } from "/vendor/motion-react.js"`, requires `"react"` and `"react/jsx-runtime"` to be resolvable, e.g. via an import map), `vendor/react-shim.mjs` (re-exports `window.React`), `vendor/react-jsx-runtime-shim.mjs` (re-exports a `jsx`/`jsxs`/`Fragment` polyfill built on `window.React.createElement`). Consumed by Task 3's regression check and by any future page that wants to use Motion.
 
-- [ ] **Step 1: Generate the vanilla bundle**
+- [x] **Step 1: Generate the vanilla bundle**
 
 Run: `npm run build:vendor:core`
 Expected: exits 0, prints something like `vendor/motion.js  ~135kb` and `⚡ Done in <N>ms`
 
-- [ ] **Step 2: Verify the vanilla bundle is fully self-contained**
+- [x] **Step 2: Verify the vanilla bundle is fully self-contained**
 
 Run: `grep -oE 'from"[a-zA-Z][^"]*"' vendor/motion.js | sort -u`
 Expected: no output (empty) — confirms zero unresolved bare imports.
 
-- [ ] **Step 3: Generate the React bundle**
+- [x] **Step 3: Generate the React bundle**
 
 Run: `npm run build:vendor:react`
 Expected: exits 0, prints something like `vendor/motion-react.js  ~185kb` and `⚡ Done in <N>ms`
 
-- [ ] **Step 4: Verify the React bundle's only bare imports are `react` and `react/jsx-runtime`, and it has no react-dom dependency**
+- [x] **Step 4: Verify the React bundle's only bare imports are `react` and `react/jsx-runtime`, and it has no react-dom dependency**
 
 Run: `grep -oE 'from"[a-zA-Z][^"]*"' vendor/motion-react.js | sort -u`
 Expected exactly:
@@ -140,7 +140,7 @@ Expected: `0`
 
 If either check produces different output than expected (e.g. a newer `motion` version added a new bare import), stop and re-derive the shim/import-map requirements for the new import before continuing — do not proceed with an unverified assumption.
 
-- [ ] **Step 5: Write the React shim**
+- [x] **Step 5: Write the React shim**
 
 Create `vendor/react-shim.mjs`:
 
@@ -158,7 +158,7 @@ export const {
 } = React;
 ```
 
-- [ ] **Step 6: Write the jsx-runtime shim**
+- [x] **Step 6: Write the jsx-runtime shim**
 
 Create `vendor/react-jsx-runtime-shim.mjs`:
 
@@ -176,7 +176,7 @@ export const Fragment = React.Fragment;
 
 (This works because React's automatic JSX runtime's `jsx(type, config)` and `React.createElement(type, config)` have equivalent behavior when called with a single config object: both extract `key`/`ref` from it and treat the rest — including an existing `children` property — as props identically. This is not a full reimplementation of `react/jsx-runtime`, just enough of its public surface for `motion/react`'s compiled output to run correctly.)
 
-- [ ] **Step 7: Smoke-test the whole chain in a real browser**
+- [x] **Step 7: Smoke-test the whole chain in a real browser**
 
 This repo has no automated test runner (`npm test` is a placeholder). Verification here means: actually load the bundles in a real browser tab against the site's real vendored React, and watch a `motion.div` animate with zero console errors — proving the shims resolve correctly and a single React instance is shared (a duplicate-React-copy bug would throw "invalid hook call" immediately).
 
@@ -254,14 +254,14 @@ Expected: `#status` reads `animation-complete`; the orange box has visibly moved
 
 If this fails, do not proceed to Step 8 — the shim code or bundle has a real problem that must be fixed first.
 
-- [ ] **Step 8: Clean up the smoke test**
+- [x] **Step 8: Clean up the smoke test**
 
 ```bash
 pkill -f "http.server 8935"
 rm -rf "$SMOKETEST"
 ```
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add vendor/motion.js vendor/motion-react.js vendor/react-shim.mjs vendor/react-jsx-runtime-shim.mjs
@@ -290,7 +290,7 @@ Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 - Consumes: `vendor/motion.js`, `vendor/motion-react.js`, `vendor/react-shim.mjs`, `vendor/react-jsx-runtime-shim.mjs` from Task 2.
 - Produces: nothing consumed by later tasks — this is the terminal task.
 
-- [ ] **Step 1: Write `vendor/README.md`**
+- [x] **Step 1: Write `vendor/README.md`**
 
 ```markdown
 # vendor/
@@ -349,7 +349,7 @@ against the new output before trusting it — a version bump could introduce a
 new dependency (e.g. on react-dom) that isn't shimmed yet.
 ```
 
-- [ ] **Step 2: Commit the README**
+- [x] **Step 2: Commit the README**
 
 ```bash
 git add vendor/README.md
@@ -358,7 +358,7 @@ git commit -m "Document vendor/ Motion bundle usage
 Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 ```
 
-- [ ] **Step 3: Regression-check the live site is byte-for-byte unaffected**
+- [x] **Step 3: Regression-check the live site is byte-for-byte unaffected**
 
 Confirm no existing tracked file changed:
 
@@ -383,7 +383,7 @@ Using browser automation: navigate to `http://localhost:8934/index.html`, wait f
 
 Stop the server: `pkill -f "http.server 8934"`
 
-- [ ] **Step 4: Final check**
+- [x] **Step 4: Final check**
 
 Run: `git status --short`
 Expected: clean (nothing uncommitted) — if anything is unstaged, review it before finishing; every change in this plan should already be committed by this point.
