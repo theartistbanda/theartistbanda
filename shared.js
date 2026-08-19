@@ -68,7 +68,7 @@ const PORTFOLIO = {
   location: 'Nottingham, UK',
   years: 12,
   tagline: 'Designing for the humans behind the pixels.',
-  lead: 'Lead product designer behind enterprise AI cutting costs 20% for around 35,000 daily users, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
+  lead: 'Lead product designer behind enterprise AI cutting costs 20% for around 35,000 daily users, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by a large number of manufacturers across India.',
   metrics: [{
     value: 40,
     suffix: '%',
@@ -85,8 +85,7 @@ const PORTFOLIO = {
     label: 'Downloads · YourHour',
     sub: 'Play Store verified'
   }, {
-    value: 90,
-    suffix: '%',
+    text: 'Nationwide',
     label: 'Manufacturer adoption',
     sub: 'Aatmnirbhar logo · India'
   }],
@@ -145,8 +144,8 @@ const PORTFOLIO = {
     title: 'Aatmnirbhar',
     kicker: 'National identity · Government of India',
     tagline: 'One night. Zero brief. A national symbol.',
-    body: 'Drawn overnight. Adopted for PM SVANidhi. Now used by roughly 90% of Indian manufacturers.',
-    stats: [['90%', 'Adoption'], ['1 night', 'To ship'], ['PM SVANidhi', 'Official']],
+    body: 'Drawn overnight. Adopted for PM SVANidhi. Now used by a large number of manufacturers across India.',
+    stats: [['Nationwide', 'Adoption'], ['1 night', 'To ship'], ['PM SVANidhi', 'Official']],
     tags: ['Brand', 'Identity', 'Cultural'],
     image: '/assets/aatmnirbhar-cover.webp',
     href: 'case-aatmnirbhar.html'
@@ -232,7 +231,7 @@ const PORTFOLIO = {
     to: '2017',
     role: 'Product Design Consultant & Founder',
     org: 'The Artist Banda · Bengaluru, India',
-    body: 'Independent consultancy across brand, fintech and wellbeing, founded 2014. Designed the Repos Energy fuel-delivery UX and drew the Aatmnirbhar Bharat national logo overnight with no brief (later adopted by the Government of India).',
+    body: 'Independent consultancy across brand, fintech and wellbeing. Designed the Repos Energy fuel-delivery UX and drew the Aatmnirbhar Bharat national logo overnight with no brief (later adopted by the Government of India).',
     tags: ['Brand', 'Product Strategy', 'Wellbeing UX']
   }],
   skills: ['Behavioural UX', 'AI Interfaces', 'Generative AI Tools', 'Design Systems', 'Multi-audience Platforms', 'Data-dense Enterprise UX', 'A/B Testing', 'Experimentation', 'Cross-cultural', 'Figma', 'Motion', 'Conversion Rate Optimisation', 'Team Leadership', 'Product Strategy'],

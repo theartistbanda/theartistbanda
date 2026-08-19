@@ -313,7 +313,7 @@ function AHero() {
 // ─── METRICS ─────────────────────────────────────────────────────────────────
 // Extracted to avoid calling useCounter inside .map() (hooks-in-loop violation)
 function AMetricItem({ m, i, inView, bp }) {
-  const v = useCounter(m.value, inView, 1400 + i * 120);
+  const v = useCounter(m.value || 0, inView, 1400 + i * 120);
   return (
     <div style={{
       padding: bp.isMobile ? '20px 16px' : '24px 28px',
@@ -322,7 +322,7 @@ function AMetricItem({ m, i, inView, bp }) {
     }}>
       <div style={aStyles.mono}>0{i + 1} / 04</div>
       <div style={{ fontSize: bp.isMobile ? 40 : 56, fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1, color: A.ink, marginTop: 8 }}>
-        {fmt(v, { decimals: 0 })}<span style={{ color: A.accent }}>{m.suffix}</span>
+        {m.text ? m.text : <>{fmt(v, { decimals: 0 })}<span style={{ color: A.accent }}>{m.suffix}</span></>}
       </div>
       <div style={{ fontSize: 13, color: A.ink, marginTop: 8 }}>{m.label}</div>
       <div style={aStyles.mono}>{m.sub}</div>
@@ -512,7 +512,7 @@ function AOrigin() {
             marginTop: bp.isMobile ? 48 : bp.isTablet ? 48 : 0
           }}>
             {[
-              ['90%', 'Manufacturers using it'],
+              ['Nationwide', 'Manufacturers using it'],
               ['1 night', 'From blank to national'],
               ['PM SVANidhi', 'Official adoption'],
               ['0', 'Briefs received']

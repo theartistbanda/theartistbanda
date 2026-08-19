@@ -385,7 +385,7 @@ function AMetricItem({
   inView,
   bp
 }) {
-  const v = useCounter(m.value, inView, 1400 + i * 120);
+  const v = useCounter(m.value || 0, inView, 1400 + i * 120);
   return /*#__PURE__*/React.createElement("div", {
     style: {
       padding: bp.isMobile ? '20px 16px' : '24px 28px',
@@ -405,13 +405,13 @@ function AMetricItem({
       color: A.ink,
       marginTop: 8
     }
-  }, fmt(v, {
+  }, m.text ? m.text : /*#__PURE__*/React.createElement(React.Fragment, null, fmt(v, {
     decimals: 0
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.accent
     }
-  }, m.suffix)), /*#__PURE__*/React.createElement("div", {
+  }, m.suffix))), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       color: A.ink,
@@ -755,7 +755,7 @@ function AOrigin() {
       border: `1px solid rgba(244,241,236,0.12)`,
       marginTop: bp.isMobile ? 48 : bp.isTablet ? 48 : 0
     }
-  }, [['90%', 'Manufacturers using it'], ['1 night', 'From blank to national'], ['PM SVANidhi', 'Official adoption'], ['0', 'Briefs received']].map(([n, l], i) => /*#__PURE__*/React.createElement("div", {
+  }, [['Nationwide', 'Manufacturers using it'], ['1 night', 'From blank to national'], ['PM SVANidhi', 'Official adoption'], ['0', 'Briefs received']].map(([n, l], i) => /*#__PURE__*/React.createElement("div", {
     key: i,
     style: {
       padding: bp.isMobile ? '20px 16px' : 28,
