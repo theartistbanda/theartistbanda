@@ -68,7 +68,7 @@ const PORTFOLIO = {
   location: 'Nottingham, UK',
   years: 12,
   tagline: 'Designing for the humans behind the pixels.',
-  lead: 'Lead product designer behind enterprise AI cutting costs 20% for 35,000 daily users, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
+  lead: 'Lead product designer behind enterprise AI cutting costs 20% for around 35,000 daily users, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by 90% of Indian manufacturers.',
   metrics: [{
     value: 40,
     suffix: '%',
@@ -109,7 +109,7 @@ const PORTFOLIO = {
     title: 'TaskGPT',
     kicker: 'AI productivity · Enterprise · 35K DAU',
     tagline: 'An AI suite that paid for itself.',
-    body: 'End-to-end design on an OpenAI + PaLM 2 + LLaMA suite for 35,000 daily operators. Call handling time down 20%.',
+    body: 'End-to-end design on an OpenAI + PaLM 2 + LLaMA suite for around 35,000 daily operators. Call handling time down 20%.',
     stats: [['20%', 'Cost saved'], ['35K', 'Daily users'], ['14', 'Countries']],
     tags: ['AI Interface', 'Enterprise', 'Design Systems'],
     image: '/assets/taskgpt-cover.webp',
@@ -145,7 +145,7 @@ const PORTFOLIO = {
     title: 'Aatmnirbhar',
     kicker: 'National identity · Government of India',
     tagline: 'One night. Zero brief. A national symbol.',
-    body: 'Drawn overnight in May 2020. Adopted for PM SVANidhi. Now used by roughly 90% of Indian manufacturers.',
+    body: 'Drawn overnight. Adopted for PM SVANidhi. Now used by roughly 90% of Indian manufacturers.',
     stats: [['90%', 'Adoption'], ['1 night', 'To ship'], ['PM SVANidhi', 'Official']],
     tags: ['Brand', 'Identity', 'Cultural'],
     image: '/assets/aatmnirbhar-cover.webp',
@@ -217,7 +217,7 @@ const PORTFOLIO = {
     to: '2026',
     role: 'Lead Product Designer',
     org: 'TaskUs · Global BPO · Remote, UK',
-    body: 'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs (assessment platform: data-dense evaluation workflows, accuracy and speed up 17%), and the LevelUp gamification system. Authored PCAF, the Persona-Centric Analysis Framework, now adopted across all TaskUs products.',
+    body: 'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by around 35K daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs (assessment platform: data-dense evaluation workflows, accuracy and speed up 17%), and the LevelUp gamification system. Authored PCAF, the Persona-Centric Analysis Framework, now adopted across all TaskUs products.',
     tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Leadership'],
     current: false
   }, {

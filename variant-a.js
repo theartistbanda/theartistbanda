@@ -736,7 +736,7 @@ function AOrigin() {
       maxWidth: bp.isDesktop ? 480 : '100%',
       marginTop: 40
     }
-  }, "May 2020. India launches Aatmnirbhar Bharat. I open Illustrator. By morning, the logo is on government campaigns, manufacturer packaging and news tickers across the country. Officially adopted for PM SVANidhi. No brief. No client. No credit."), /*#__PURE__*/React.createElement("p", {
+  }, "India launches Aatmnirbhar Bharat. I open Illustrator. By morning, the logo is on government campaigns, manufacturer packaging and news tickers across the country. Officially adopted for PM SVANidhi. No brief. No client. No credit."), /*#__PURE__*/React.createElement("p", {
     style: {
       fontFamily: '"Fraunces", Georgia, serif',
       fontWeight: 300,
@@ -1252,7 +1252,13 @@ function AAbout() {
       color: A.ink2,
       lineHeight: 1.6
     }
-  }, "Remote \xB7 Hybrid \xB7 On-site \xB7 UK-wide"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
+  }, "Remote \xB7 Hybrid \xB7 On-site \xB7 UK-wide"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14,
+      color: A.ink2,
+      lineHeight: 1.6
+    }
+  }, "No sponsorship required"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',

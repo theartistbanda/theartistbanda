@@ -495,7 +495,7 @@ function AOrigin() {
               <span style={{ fontStyle: 'italic', color: A.accent }}>A national symbol.</span>
             </h2>
             <p style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(237,234,228,0.82)', maxWidth: bp.isDesktop ? 480 : '100%', marginTop: 40 }}>
-              May 2020. India launches Aatmnirbhar Bharat. I open Illustrator. By morning, the logo is on government
+              India launches Aatmnirbhar Bharat. I open Illustrator. By morning, the logo is on government
               campaigns, manufacturer packaging and news tickers across the country. Officially adopted for PM SVANidhi.
               No brief. No client. No credit.
             </p>
@@ -764,6 +764,7 @@ function AAbout() {
               <>
                 <div style={{ fontSize: 14, color: A.ink, lineHeight: 1.6 }}>Open to work · Immediate joiner</div>
                 <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>Remote · Hybrid · On-site · UK-wide</div>
+                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>No sponsorship required</div>
               </>
             ))}
             {sidebarRow('Experience', (
