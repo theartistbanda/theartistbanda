@@ -260,7 +260,6 @@ const PORTFOLIO = {
       org: 'TaskUs · Global BPO · Remote, UK',
       body:
         'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs (assessment platform: data-dense evaluation workflows, accuracy and speed up 17%), and the LevelUp gamification system. Authored PCAF, the Persona-Centric Analysis Framework, now adopted across all TaskUs products.',
-      nda: 'Full case studies protected by NDA, available for discussion in a confidential interview setting.',
       tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Leadership'],
       current: false,
     },
@@ -270,7 +269,7 @@ const PORTFOLIO = {
       role: 'Product Designer',
       org: 'Mindefy Technologies · Indore, India',
       body:
-        'Sole designer across fintech, payments and digital wellbeing. Shipped YourHour (independent product, 1M+ downloads, 70K+ reviews), the GreenBill paperless invoicing system, JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce).',
+        'Led design across fintech, payments and digital wellbeing, training three designers and mentoring two of them. Shipped YourHour (independent product, 1M+ downloads, 70K+ reviews), the GreenBill paperless invoicing system, JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce).',
       tags: ['Fintech', 'Mobile', 'Wellbeing UX'],
     },
     {
