@@ -235,13 +235,6 @@ const PORTFOLIO = {
     org: 'The Artist Banda · Bengaluru, India',
     body: 'Independent consultancy across brand, fintech and wellbeing, founded 2014. Designed the Repos Energy fuel-delivery UX and drew the Aatmnirbhar Bharat national logo overnight with no brief (later adopted by the Government of India).',
     tags: ['Brand', 'Product Strategy', 'Wellbeing UX']
-  }, {
-    from: '2012',
-    to: '2014',
-    role: 'AD3D Edge+ Diploma · Design, Animation & VFX',
-    org: 'MAAC Indore',
-    body: 'Formal training in interaction design, motion graphics and visual communication.',
-    tags: ['UI/UX', 'Motion']
   }],
   skills: ['Behavioural UX', 'AI Interfaces', 'Generative AI Tools', 'Design Systems', 'Multi-audience Platforms', 'Data-dense Enterprise UX', 'A/B Testing', 'Experimentation', 'Cross-cultural', 'Figma', 'Motion', 'Conversion Rate Optimisation', 'Team Leadership', 'Product Strategy'],
   notable: ['Aatmnirbhar Bharat national logo', 'YourHour · 4.6★ · 1M+ downloads', 'AWS Summit London 2025', 'Repos Energy fuel-delivery', '300+ user interviews'],

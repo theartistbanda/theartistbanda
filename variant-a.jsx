@@ -564,7 +564,7 @@ function APrinciples() {
               display: 'flex', flexDirection: 'column'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-                <span style={{ ...aStyles.mono, color: A.accent }}>Principle</span>
+                <span style={{ ...aStyles.mono, color: A.accent }}>Principle {p.n}</span>
                 <span style={{ width: 6, height: 6, borderRadius: 99, background: A.line }} />
               </div>
               <h3 style={{ fontSize: bp.isMobile ? 17 : 20, fontWeight: 500, letterSpacing: '-0.01em', lineHeight: 1.2, margin: 0, marginBottom: 16, color: A.ink }}>

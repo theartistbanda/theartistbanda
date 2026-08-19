@@ -282,14 +282,6 @@ const PORTFOLIO = {
         'Independent consultancy across brand, fintech and wellbeing, founded 2014. Designed the Repos Energy fuel-delivery UX and drew the Aatmnirbhar Bharat national logo overnight with no brief (later adopted by the Government of India).',
       tags: ['Brand', 'Product Strategy', 'Wellbeing UX'],
     },
-    {
-      from: '2012',
-      to: '2014',
-      role: 'AD3D Edge+ Diploma · Design, Animation & VFX',
-      org: 'MAAC Indore',
-      body: 'Formal training in interaction design, motion graphics and visual communication.',
-      tags: ['UI/UX', 'Motion'],
-    },
   ],
   skills: [
     'Behavioural UX',

@@ -862,7 +862,7 @@ function APrinciples() {
       ...aStyles.mono,
       color: A.accent
     }
-  }, "Principle"), /*#__PURE__*/React.createElement("span", {
+  }, "Principle ", p.n), /*#__PURE__*/React.createElement("span", {
     style: {
       width: 6,
       height: 6,
