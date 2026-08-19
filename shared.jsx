@@ -271,16 +271,16 @@ const PORTFOLIO = {
       role: 'Product Designer',
       org: 'Mindefy Technologies · Indore, India',
       body:
-        'Sole designer across fintech, payments and digital wellbeing. Shipped YourHour (independent product, 1M+ downloads, 70K+ reviews), the GreenBill paperless invoicing system, JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce).',
+        'Sole designer across fintech, payments and digital wellbeing. Shipped YourHour (independent product, 1M+ downloads, 70K+ reviews) and the GreenBill paperless invoicing system.',
       tags: ['Fintech', 'Mobile', 'Wellbeing UX'],
     },
     {
       from: '2014',
       to: '2017',
       role: 'Product Design Consultant & Founder',
-      org: 'The Artist Banda · Bengaluru, India',
+      org: 'The Artist Banda · Bengaluru, India · client work through 2022',
       body:
-        'Independent consultancy across brand, fintech and wellbeing, founded 2014. Designed the Repos Energy fuel-delivery UX and drew the Aatmnirbhar Bharat national logo overnight with no brief (later adopted by the Government of India).',
+        'Independent consultancy across brand, fintech and wellbeing; founded 2014, with selective client engagements continuing alongside later roles. Designed the Repos Energy fuel-delivery UX, drew the Aatmnirbhar Bharat national logo overnight with no brief (later adopted by the Government of India), and shipped JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce) as 2022 client projects for Mindefy Technologies.',
       tags: ['Brand', 'Product Strategy', 'Wellbeing UX'],
     },
     {
