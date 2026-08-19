@@ -121,8 +121,8 @@ const PORTFOLIO = {
     title: 'EvaluateUs',
     kicker: 'Assessment platform · Enterprise · TaskUs',
     tagline: 'Data-heavy evaluation, made humane.',
-    body: 'UX strategy and full redesign of an enterprise assessment platform: evaluation workflows, scoring criteria and results data. Result accuracy up 70%, saving clients about £9,500 a month.',
-    stats: [['70%', 'Accuracy lift'], ['£9.5K', 'Saved · client · month'], ['AA', 'WCAG 2.1']],
+    body: 'UX strategy and full redesign of an enterprise assessment platform: evaluation workflows, scoring criteria and results data. Accuracy and speed improved 17%.',
+    stats: [['17%', 'Accuracy lift'], ['AA', 'WCAG 2.1']],
     tags: ['Enterprise UX', 'Data-dense UI', 'Assessment'],
     image: '/assets/evaluateus-cover.webp',
     href: 'case-evaluateus.html'
@@ -217,7 +217,7 @@ const PORTFOLIO = {
     to: '2026',
     role: 'Lead Product Designer',
     org: 'TaskUs · Global BPO · Remote, UK',
-    body: 'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs (assessment platform: data-dense evaluation workflows, result accuracy up 70%, ~£9,500 saved per client per month), and the LevelUp gamification system. Authored PCAF, the Persona-Centric Analysis Framework, now adopted across all TaskUs products.',
+    body: 'Lead designer at one of the world\'s largest BPO companies (TaskUs serves Fortune 500 clients). Designed internal enterprise products used by 35K+ daily operators across 14 countries. Shipped TaskGPT (AI productivity suite), EvaluateUs (assessment platform: data-dense evaluation workflows, accuracy and speed up 17%), and the LevelUp gamification system. Authored PCAF, the Persona-Centric Analysis Framework, now adopted across all TaskUs products.',
     nda: 'Full case studies protected by NDA, available for discussion in a confidential interview setting.',
     tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Leadership'],
     current: false
