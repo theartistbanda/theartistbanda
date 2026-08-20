@@ -624,7 +624,11 @@ function ACareerItem({ c, i, bp }) {
           <div>
             <div style={{ fontSize: bp.isMobile ? 16 : 20, fontWeight: 500, letterSpacing: '-0.015em', lineHeight: 1.2 }}>{c.role}</div>
             <div style={{ fontSize: 13, color: A.accent, marginTop: 4 }}>{c.org}</div>
-            <p style={{ fontSize: 13, color: A.mute, lineHeight: 1.65, margin: '12px 0 0' }}>{c.body}</p>
+            <div style={{ fontSize: 13, color: A.mute, lineHeight: 1.65, margin: '12px 0 0' }}>
+              {c.body.map((para, pi) => (
+                <p key={pi} style={{ margin: pi === 0 ? 0 : '10px 0 0' }}>{para}</p>
+              ))}
+            </div>
             {c.nda && (
               <div style={{ marginTop: 10, display: 'flex', alignItems: 'flex-start', gap: 7 }}>
                 <span style={{ width: 5, height: 5, borderRadius: 99, background: A.accent, display: 'inline-block', flexShrink: 0, marginTop: 3 }} />
@@ -654,7 +658,11 @@ function ACareerItem({ c, i, bp }) {
       {/* Desktop: body + NDA note + tags in separate columns */}
       {bp.isDesktop && (
         <div>
-          <span style={{ fontSize: 13.5, color: A.mute, lineHeight: 1.65 }}>{c.body}</span>
+          <div style={{ fontSize: 13.5, color: A.mute, lineHeight: 1.65 }}>
+            {c.body.map((para, pi) => (
+              <p key={pi} style={{ margin: pi === 0 ? 0 : '12px 0 0' }}>{para}</p>
+            ))}
+          </div>
           {c.nda && (
             <div style={{ marginTop: 12, display: 'flex', alignItems: 'flex-start', gap: 7 }}>
               <span style={{ width: 5, height: 5, borderRadius: 99, background: A.accent, display: 'inline-block', flexShrink: 0, marginTop: 3 }} />

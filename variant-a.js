@@ -961,14 +961,19 @@ function ACareerItem({
       color: A.accent,
       marginTop: 4
     }
-  }, c.org), /*#__PURE__*/React.createElement("p", {
+  }, c.org), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       color: A.mute,
       lineHeight: 1.65,
       margin: '12px 0 0'
     }
-  }, c.body), c.nda && /*#__PURE__*/React.createElement("div", {
+  }, c.body.map((para, pi) => /*#__PURE__*/React.createElement("p", {
+    key: pi,
+    style: {
+      margin: pi === 0 ? 0 : '10px 0 0'
+    }
+  }, para))), c.nda && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 10,
       display: 'flex',
@@ -1025,13 +1030,18 @@ function ACareerItem({
       border: `1px solid ${A.line}`,
       color: A.ink2
     }
-  }, t))), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+  }, t))), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13.5,
       color: A.mute,
       lineHeight: 1.65
     }
-  }, c.body), c.nda && /*#__PURE__*/React.createElement("div", {
+  }, c.body.map((para, pi) => /*#__PURE__*/React.createElement("p", {
+    key: pi,
+    style: {
+      margin: pi === 0 ? 0 : '12px 0 0'
+    }
+  }, para))), c.nda && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 12,
       display: 'flex',
