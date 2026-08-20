@@ -736,7 +736,7 @@ function AOrigin() {
       maxWidth: bp.isDesktop ? 480 : '100%',
       marginTop: 40
     }
-  }, "India launches Aatmnirbhar Bharat. I open Illustrator. By morning, the logo is on government campaigns, manufacturer packaging and news tickers across the country. Officially adopted for PM SVANidhi. No brief. No client. No credit."), /*#__PURE__*/React.createElement("p", {
+  }, "I entered an open MyGov competition to design a mark for the Aatmnirbhar Bharat campaign: the Indian tricolour and Ashok Chakra fused with a golden bird, a reference to the country once being called sone ki chidiya. The competition was never formally decided. The mark was taken up by the PM SVANidhi scheme and used by manufacturers marking Indian-made goods, without credit."), /*#__PURE__*/React.createElement("p", {
     style: {
       fontFamily: '"Fraunces", Georgia, serif',
       fontWeight: 300,
@@ -755,27 +755,25 @@ function AOrigin() {
       border: `1px solid rgba(244,241,236,0.12)`,
       marginTop: bp.isMobile ? 48 : bp.isTablet ? 48 : 0
     }
-  }, [['Nationwide', 'Manufacturers using it'], ['1 night', 'From blank to national'], ['PM SVANidhi', 'Official adoption'], ['0', 'Briefs received']].map(([n, l], i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      padding: bp.isMobile ? '20px 16px' : 28,
-      borderRight: i % 2 === 0 ? `1px solid rgba(244,241,236,0.12)` : 'none',
-      borderBottom: i < 2 ? `1px solid rgba(244,241,236,0.12)` : 'none'
-    }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: bp.isMobile ? 28 : 40,
-      fontWeight: 500,
-      letterSpacing: '-0.03em',
-      lineHeight: 1
+      gridColumn: 'span 2',
+      background: '#F4F1EC',
+      padding: bp.isMobile ? '32px 24px' : '48px 40px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     }
-  }, n), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "/assets/aatmnirbhar-logo.webp",
+    alt: "The Aatmnirbhar Bharat logo: a saffron figure rising within the map of India, with the initiative name in Devanagari script",
     style: {
-      ...aStyles.mono,
-      color: 'rgba(237,234,228,0.70)',
-      marginTop: 12
+      width: bp.isMobile ? '60%' : '55%',
+      maxWidth: 260,
+      height: 'auto',
+      display: 'block'
     }
-  }, l))), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: 'span 2',
       padding: bp.isMobile ? '20px 16px' : 28,
