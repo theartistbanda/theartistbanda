@@ -66,7 +66,7 @@ const PORTFOLIO = {
   name: 'Dipesh Gurav',
   role: 'Lead Product Designer',
   location: 'Nottingham, UK',
-  years: 12,
+  years: 11,
   tagline: 'Designing for the humans behind the pixels.',
   lead: 'Lead product designer behind enterprise AI cutting costs 20% for around 35,000 daily users, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by a large number of manufacturers across India.',
   metrics: [{
@@ -227,7 +227,7 @@ const PORTFOLIO = {
     body: 'Led design across fintech, payments and digital wellbeing, training three designers and mentoring two of them. Shipped YourHour (independent product, 1M+ downloads, 70K+ reviews), the GreenBill paperless invoicing system, JEGO (UAE wellbeing platform) and EarlyFoods (UAE e-commerce).',
     tags: ['Fintech', 'Mobile', 'Wellbeing UX']
   }, {
-    from: '2014',
+    from: '2015',
     to: '2017',
     role: 'Product Design Consultant & Founder',
     org: 'The Artist Banda · Bengaluru, India',

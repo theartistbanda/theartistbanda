@@ -280,7 +280,7 @@ function AHero() {
       marginBottom: bp.isTablet ? 40 : 64,
       ...aStyles.mono
     }
-  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role, " \xB7 est. 2014"), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 Open UK-wide"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role, " \xB7 est. 2015"), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 Open UK-wide"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.accent
     }
@@ -1118,7 +1118,7 @@ function ACareer() {
       lineHeight: 1.05,
       margin: 0
     }
-  }, "Twelve years,", /*#__PURE__*/React.createElement("br", null), "four cities, millions of users.")), /*#__PURE__*/React.createElement("a", {
+  }, "Eleven years,", /*#__PURE__*/React.createElement("br", null), "four cities, millions of users.")), /*#__PURE__*/React.createElement("a", {
     href: "/dipesh-gurav-cv.pdf",
     download: true,
     "data-cursor": "hover",
@@ -1264,7 +1264,7 @@ function AAbout() {
       flexDirection: 'column',
       gap: 4
     }
-  }, ['12+ years', '14 countries', '1M+ downloads shipped'].map(v => /*#__PURE__*/React.createElement("div", {
+  }, ['11+ years', '14 countries', '1M+ downloads shipped'].map(v => /*#__PURE__*/React.createElement("div", {
     key: v,
     style: {
       fontSize: 14,

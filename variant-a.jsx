@@ -233,7 +233,7 @@ function AHero() {
             gridTemplateColumns: bp.isTablet ? '1fr 1fr' : 'repeat(4, 1fr)',
             gap: 24, marginBottom: bp.isTablet ? 40 : 64, ...aStyles.mono
           }}>
-            <div>{PORTFOLIO.role} · est. 2014</div>
+            <div>{PORTFOLIO.role} · est. 2015</div>
             <div>{PORTFOLIO.location} · Open UK-wide</div>
             {bp.isDesktop && <div>Portfolio / vol. MMXXVI</div>}
             {bp.isDesktop && (
@@ -695,7 +695,7 @@ function ACareer() {
             {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Curriculum vitae</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-              Twelve years,<br />four cities, millions of users.
+              Eleven years,<br />four cities, millions of users.
             </h2>
           </div>
           <a href="/dipesh-gurav-cv.pdf" download data-cursor="hover" style={{
@@ -769,7 +769,7 @@ function AAbout() {
             ))}
             {sidebarRow('Experience', (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                {['12+ years', '14 countries', '1M+ downloads shipped'].map((v) => (
+                {['11+ years', '14 countries', '1M+ downloads shipped'].map((v) => (
                   <div key={v} style={{ fontSize: 14, color: A.ink, lineHeight: 1.5 }}>{v}</div>
                 ))}
               </div>
