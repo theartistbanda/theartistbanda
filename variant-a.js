@@ -248,6 +248,8 @@ function ANav() {
 }
 
 // ─── HERO ────────────────────────────────────────────────────────────────────
+const SHOW_HERO_ACCENT_BOX = false; // toggle to bring back the orange block in the headline
+
 function AHero() {
   const bp = useBreakpoint();
   const [scroll, setScroll] = React.useState(0);
@@ -260,6 +262,10 @@ function AHero() {
   }, []);
   const reduceMotion = React.useMemo(() => matchMedia('(prefers-reduced-motion: reduce)').matches, []);
   const parallax = reduceMotion ? 0 : Math.min(scroll * 0.25, 80);
+  // Side-by-side headline/caption needs real breathing room - below this, fall back
+  // to the original full-width stacked headline so the 2-line break never gets
+  // squeezed into wrapping a 3rd line at the 1024px desktop breakpoint edge.
+  const wideLayout = bp.w >= 1360;
   const vPad = bp.isMobile ? '48px' : bp.isTablet ? '64px' : '80px';
   const side = sp(bp);
   return /*#__PURE__*/React.createElement("section", {
@@ -284,49 +290,61 @@ function AHero() {
     style: {
       color: A.accent
     }
-  }, "\u25CF"), " Open to work \xB7 immediate joiner")), /*#__PURE__*/React.createElement("h1", {
+  }, "\u25CF"), " Open to work \xB7 immediate joiner")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: wideLayout ? 'minmax(0, 1fr) 400px' : '1fr',
+      gap: wideLayout ? 56 : 24,
+      alignItems: wideLayout ? 'center' : 'start'
+    }
+  }, /*#__PURE__*/React.createElement("h1", {
     style: {
       fontFamily: '"Inter Tight", "Inter", sans-serif',
       fontWeight: 500,
-      fontSize: 'clamp(48px, 10vw, 168px)',
-      lineHeight: 0.92,
-      letterSpacing: '-0.04em',
+      fontSize: bp.isDesktop ? 'clamp(56px, 4.2vw, 68px)' : 'clamp(48px, 10vw, 168px)',
+      lineHeight: bp.isDesktop ? 1.06 : 0.92,
+      letterSpacing: bp.isDesktop ? '-0.03em' : '-0.04em',
       margin: 0,
       color: A.ink
     }
-  }, "Designing for", /*#__PURE__*/React.createElement("br", null), "the humans", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+  }, bp.isDesktop ? /*#__PURE__*/React.createElement(React.Fragment, null, "Designing for the", /*#__PURE__*/React.createElement("br", null), "humans behind the", ' ', SHOW_HERO_ACCENT_BOX && /*#__PURE__*/React.createElement("span", {
     style: {
-      display: 'inline-flex',
-      alignItems: 'baseline',
-      gap: bp.isMobile ? 12 : 24
+      display: 'inline-block',
+      width: 'clamp(32px, 5vw, 64px)',
+      height: 'clamp(24px, 3.6vw, 46px)',
+      background: A.accent,
+      verticalAlign: 'middle',
+      marginRight: 8,
+      transform: `translateY(${parallax * 0.3}px)`,
+      transition: 'transform 0.1s linear'
+    },
+    "aria-hidden": true
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontStyle: 'italic',
+      fontWeight: 400
     }
-  }, "behind the", /*#__PURE__*/React.createElement("span", {
+  }, "pixels.")) : /*#__PURE__*/React.createElement(React.Fragment, null, "Designing for", /*#__PURE__*/React.createElement("br", null), "the humans", /*#__PURE__*/React.createElement("br", null), "behind the", ' ', SHOW_HERO_ACCENT_BOX && /*#__PURE__*/React.createElement("span", {
     style: {
       display: 'inline-block',
       width: 'clamp(48px, 10vw, 160px)',
       height: 'clamp(34px, 7vw, 110px)',
       background: A.accent,
+      verticalAlign: 'middle',
+      marginRight: 12,
       transform: `translateY(${parallax * 0.3}px)`,
       transition: 'transform 0.1s linear'
     },
     "aria-hidden": true
-  })), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
     style: {
       fontStyle: 'italic',
       fontWeight: 400
     }
-  }, "pixels.")), /*#__PURE__*/React.createElement("div", {
+  }, "pixels."))), /*#__PURE__*/React.createElement("div", {
     style: {
-      display: 'grid',
-      gridTemplateColumns: bp.isMobile ? '1fr' : bp.isTablet ? '1fr 1fr' : 'repeat(12, 1fr)',
-      gap: 24,
-      marginTop: bp.isMobile ? 40 : 80,
-      alignItems: 'start'
+      marginTop: wideLayout ? 0 : 40
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: bp.isDesktop ? {
-      gridColumn: 'span 5'
-    } : {}
   }, /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: bp.isMobile ? 16 : 18,
@@ -335,13 +353,12 @@ function AHero() {
       margin: 0,
       color: A.ink2
     }
-  }, PORTFOLIO.lead)), /*#__PURE__*/React.createElement("div", {
+  }, PORTFOLIO.lead), /*#__PURE__*/React.createElement("div", {
     style: {
-      gridColumn: bp.isDesktop ? 'span 3' : undefined,
       display: 'flex',
       flexDirection: 'column',
       gap: 8,
-      marginTop: bp.isMobile ? 16 : 0
+      marginTop: 24
     }
   }, /*#__PURE__*/React.createElement("a", {
     href: "#work",
@@ -374,7 +391,7 @@ function AHero() {
     style: {
       color: A.accent
     }
-  }, "\u2192"))))));
+  }, "\u2192")))))));
 }
 
 // ─── METRICS ─────────────────────────────────────────────────────────────────
