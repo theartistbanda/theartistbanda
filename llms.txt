@@ -33,13 +33,13 @@ Dipesh Gurav is a Lead UX/UI Product Designer with 12 years of professional expe
 
 **EvaluateUs**: Enterprise assessment platform at TaskUs
 - UX strategy and full redesign of data-dense evaluation workflows
-- Result accuracy up 70%, saving clients about £9,500 per month
+- Accuracy and speed of evaluations up 17%
 - WCAG 2.1 AA applied throughout
 - Reviewers work across native iOS and Android apps and responsive web
 
 **Aatmnirbhar Bharat logo**: National identity mark, Government of India
 - Officially adopted for the PM SVANidhi scheme
-- Used by roughly 90% of Indian manufacturers
+- Used by a large number of manufacturers across India
 
 
 **YourHour**: Digital wellbeing / screen-time management app
