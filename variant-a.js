@@ -1246,7 +1246,11 @@ function AAbout() {
     style: {
       margin: 0
     }
-  }, "I grew up watching technology promise to make life easier, then complicate it. Forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on, and some of the products I have designed are now used by millions of people who write in to praise the experience."), /*#__PURE__*/React.createElement("p", {
+  }, "I have spent around eleven years in design, and I love what I do: solving problems in human-computer interaction. I grew up watching technology promise to make life easier, then complicate it. Forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16
+    }
+  }, "For most of my career I have been an individual contributor on projects with no clear brief. There was always an idea, a problem or a gap, and how and where to start was mine to decide. I preferred it that way. Co-founding a production house with college friends, and handling over 200 clients in under three years, removed every inch of hesitation I had about speaking to a room, winning people over to an idea and turning them into long-term stakeholders."), /*#__PURE__*/React.createElement("p", {
     style: {
       marginTop: 16
     }
