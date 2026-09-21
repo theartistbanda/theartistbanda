@@ -1246,15 +1246,15 @@ function AAbout() {
     style: {
       margin: 0
     }
-  }, "I grew up watching technology evolve, promising to make lives easier. A lot of it ended up doing the opposite: forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on, and some of the products I have designed are now used by millions of people who write in to praise the experience."), /*#__PURE__*/React.createElement("p", {
+  }, "I grew up watching technology promise to make life easier, then complicate it. Forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on, and some of the products I have designed are now used by millions of people who write in to praise the experience."), /*#__PURE__*/React.createElement("p", {
     style: {
       marginTop: 16
     }
-  }, "Screens are just a medium. How a product feels comes from what the person is feeling, where they are, what they are trying to do and what just happened to them. The screen comes later. Understanding people and their behaviour comes first, whether the product is enterprise AI, a wellbeing app, an e-commerce store or a national identity mark."), /*#__PURE__*/React.createElement("p", {
+  }, "Screens are just a medium. How a product feels comes from the person's experience, and the screen comes later. Understanding people and their behaviour comes first, whether I am designing an AI tool for operators on live calls, a wellbeing app, or a logo that ended up on Indian-made goods across the country."), /*#__PURE__*/React.createElement("p", {
     style: {
       marginTop: 16
     }
-  }, "I have designed for a billion-person market in India, for a Gulf audience shaped by faith and daily ritual, and for enterprise operators across 14 countries. Each taught me that \"intuitive\" carries a quiet question, ", /*#__PURE__*/React.createElement("em", null, "intuitive for whom"), ". Knowing beats assuming, so the answer comes from sitting alongside users and understanding their lives, not from a report."), /*#__PURE__*/React.createElement("p", {
+  }, "The work has taken me to a billion-person market in India, to Gulf users who read right to left, and to enterprise teams in 14 countries. YourHour, a wellbeing app I designed, ships in 22 languages and has passed a million downloads. Every one of those audiences taught me that \"intuitive\" carries a quiet question, ", /*#__PURE__*/React.createElement("em", null, "intuitive for whom"), ". Knowing beats assuming, so the answer comes from sitting alongside users, not from a report."), /*#__PURE__*/React.createElement("p", {
     style: {
       marginTop: 16
     }
@@ -1262,7 +1262,7 @@ function AAbout() {
     style: {
       marginTop: 16
     }
-  }, "Away from work, my wife and I share our home in Nottingham with three cats. I water plants, tidy rooms and keep a few simple rituals. They remind me why clarity matters as much in life as it does on the grid."))), /*#__PURE__*/React.createElement("div", {
+  }, "Away from work I read, and I lose hours to brain games. Both keep me practised at the thing design needs most: finding the pattern under the noise."))), /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: bp.isDesktop ? 'span 5' : undefined,
       marginTop: bp.isMobile || bp.isTablet ? 48 : 0,
