@@ -1246,19 +1246,23 @@ function AAbout() {
     style: {
       margin: 0
     }
-  }, "I grew up watching technology promise to make life simpler and then do the opposite, with forms that ran too long, menus that hid the one thing you needed and apps that helped and frustrated in equal measure. That gap between what technology promises and what it actually delivers is what pulled me into design, and it is still what keeps me here."), /*#__PURE__*/React.createElement("p", {
+  }, "I grew up watching technology evolve, promising to make lives easier. A lot of it ended up doing the opposite, with forms that run too long, menus that hide the one thing you need and apps that help and frustrate in equal measure. I thrive on closing that gap, and some of the products I have designed are now used by millions of people who write in to praise the experience."), /*#__PURE__*/React.createElement("p", {
     style: {
       marginTop: 16
     }
-  }, "Over eleven years the work has taken me through enterprise AI, consumer wellbeing, e-commerce, streaming and national identity, and the problem underneath has stayed the same: shorten the distance between what someone needs to do and what the product lets them do. The industry and the medium keep changing, but that brief never has."), /*#__PURE__*/React.createElement("p", {
+  }, "I believe screens are just a medium. So much of how a product feels comes from what the person is feeling, their environment, their current goal or a recent experience, and the screen comes later. That is why understanding people and their behaviour always comes first for me, whether the product is enterprise AI, a wellbeing app, an e-commerce store or a national identity mark."), /*#__PURE__*/React.createElement("p", {
     style: {
       marginTop: 16
     }
-  }, "I have designed for a billion-person market in India, for a Gulf audience shaped by faith and daily ritual, and for enterprise operators working across 14 countries. Each of them taught me that \"intuitive\" always comes with a quiet question attached, ", /*#__PURE__*/React.createElement("em", null, "intuitive for whom"), ", and the only honest way to answer it is to go and find out rather than assume."), /*#__PURE__*/React.createElement("p", {
+  }, "I have designed for a billion-person market in India, for a Gulf audience shaped by faith and daily ritual, and for enterprise operators across 14 countries. Each of them taught me that \"intuitive\" always comes with a quiet question attached, ", /*#__PURE__*/React.createElement("em", null, "intuitive for whom"), ". I believe in knowing rather than assuming, and I would rather sit alongside users and understand their lives than accept what a report says about them."), /*#__PURE__*/React.createElement("p", {
     style: {
       marginTop: 16
     }
-  }, "Away from work I water plants, tidy rooms and keep a few simple rituals, and they remind me why clarity matters as much in life as it does on the grid."))), /*#__PURE__*/React.createElement("div", {
+  }, "The simplest things are the hardest to create. Ask a room full of people what a product should have and they will list dozens of features, but ask them to prune that list and it gets difficult. Minimalism inspires me, and I leave no room for unnecessary friction in my layouts: clean on the surface, and built cleanly behind the scenes."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16
+    }
+  }, "Away from work, my wife and I share our home in Nottingham with three cats. I water plants, tidy rooms and keep a few simple rituals, and they remind me why clarity matters as much in life as it does on the grid."))), /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: bp.isDesktop ? 'span 5' : undefined,
       marginTop: bp.isMobile || bp.isTablet ? 48 : 0,
