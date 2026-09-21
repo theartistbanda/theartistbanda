@@ -776,10 +776,10 @@ function AAbout() {
               I became a designer because<br />technology is supposed to make<br />life <span style={{ fontStyle: 'italic' }}>easier</span>.
             </h2>
             <div style={{ fontSize: 15, lineHeight: 1.75, color: A.ink2, borderTop: `1px solid ${A.line}`, paddingTop: 32 }}>
-              <p style={{ margin: 0 }}>I grew up watching technology promise to simplify life, then complicate it. A form too long. A menu that hides the thing you need. An app that helps and frustrates in equal measure. That gap between what technology promises and what it actually does became my professional obsession.</p>
-              <p style={{ marginTop: 16 }}>The work has taken me across industries: enterprise AI, consumer wellbeing, e-commerce, national identity, but the design problem is always the same: reduce the distance between what someone needs to do and what the product lets them do. The medium changes. The brief does not.</p>
-              <p style={{ marginTop: 16 }}>I have designed for a billion-person market, a Gulf audience shaped by faith and cultural ritual, and enterprise operators in fourteen countries. Each taught me that the word "intuitive" carries an unspoken postscript: <em>intuitive for whom</em>. The answer is never assumed. It is always researched.</p>
-              <p style={{ marginTop: 16 }}>Off-hours I water plants, tidy rooms and keep simple rituals. They remind me why clarity matters, in life and in the grid.</p>
+              <p style={{ margin: 0 }}>I grew up watching technology promise to make life simpler and then do the opposite, with forms that ran too long, menus that hid the one thing you needed and apps that helped and frustrated in equal measure. That gap between what technology promises and what it actually delivers is what pulled me into design, and it is still what keeps me here.</p>
+              <p style={{ marginTop: 16 }}>Over eleven years the work has taken me through enterprise AI, consumer wellbeing, e-commerce, streaming and national identity, and the problem underneath has stayed the same: shorten the distance between what someone needs to do and what the product lets them do. The industry and the medium keep changing, but that brief never has.</p>
+              <p style={{ marginTop: 16 }}>I have designed for a billion-person market in India, for a Gulf audience shaped by faith and daily ritual, and for enterprise operators working across 14 countries. Each of them taught me that "intuitive" always comes with a quiet question attached, <em>intuitive for whom</em>, and the only honest way to answer it is to go and find out rather than assume.</p>
+              <p style={{ marginTop: 16 }}>Away from work I water plants, tidy rooms and keep a few simple rituals, and they remind me why clarity matters as much in life as it does on the grid.</p>
             </div>
           </div>
 
