@@ -977,8 +977,8 @@ function AContact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-                <div style={{ marginBottom: 8 }}>
+              <form onSubmit={submit} noValidate style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ marginBottom: 32 }}>
                   <div style={{ ...aStyles.mono, color: 'rgba(237,234,228,0.65)', marginBottom: 12 }}>Write to me</div>
                   <h3 style={{
                     fontSize: bp.isMobile ? 22 : 28,
@@ -988,24 +988,35 @@ function AContact() {
                     Or drop me a line directly.
                   </h3>
                 </div>
-                <AField label="Name" placeholder="Your name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name} />
-                <AField label="Email" type="email" placeholder="you@company.com" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email} />
-                <AField label="Message" multiline placeholder="What are we building?" value={form.msg} onChange={(v) => setForm({ ...form, msg: v })} error={errors.msg} />
-                {sendError && (
-                  <p style={{ ...aStyles.mono, color: A.accent, margin: 0 }}>
-                    Something went wrong. Try emailing me directly.
-                  </p>
-                )}
-                <button type="submit" data-cursor="hover" disabled={sending}
-                  style={{
-                    ...aStyles.cta, padding: '15px 20px',
-                    background: sending ? 'rgba(237,234,228,0.1)' : A.accent,
-                    color: sending ? A.ink : A.paper, border: 'none', cursor: sending ? 'default' : 'pointer',
-                    textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    transition: 'background .2s'
-                  }}>
-                  {sending ? 'Sending…' : 'Send transmission'} <span>→</span>
-                </button>
+                {/* Ruled sheet: hairline cells with crop marks at the corners, like a paper form */}
+                <div style={{ position: 'relative' }}>
+                  <ACropMarks reach={bp.isMobile ? 10 : 20} />
+                  <div style={{ border: `1px solid ${A_RULE}` }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: bp.isMobile ? '1fr' : '1fr 1fr' }}>
+                      <AField label="Name" placeholder="Your name" autoComplete="name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name}
+                        cellStyle={bp.isMobile ? {} : { borderRight: `1px solid ${A_RULE}` }} />
+                      <AField label="Email" type="email" placeholder="you@company.com" autoComplete="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email}
+                        cellStyle={bp.isMobile ? { borderTop: `1px solid ${A_RULE}` } : {}} />
+                    </div>
+                    <AField label="Message" multiline placeholder="What are we building?" value={form.msg} onChange={(v) => setForm({ ...form, msg: v })} error={errors.msg}
+                      cellStyle={{ borderTop: `1px solid ${A_RULE}` }} />
+                    {sendError && (
+                      <p style={{ ...aStyles.mono, color: A.accent, margin: 0, padding: '14px 20px', borderTop: `1px solid ${A_RULE}` }}>
+                        Something went wrong. Try emailing me directly.
+                      </p>
+                    )}
+                    <button type="submit" data-cursor="hover" disabled={sending}
+                      style={{
+                        ...aStyles.cta, padding: '18px 20px', width: '100%',
+                        background: sending ? 'rgba(237,234,228,0.1)' : A.accent,
+                        color: sending ? A.ink : A.paper, border: 'none', cursor: sending ? 'default' : 'pointer',
+                        textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                        transition: 'background .2s'
+                      }}>
+                      {sending ? 'Sending…' : 'Send transmission'} <span>→</span>
+                    </button>
+                  </div>
+                </div>
               </form>
             )}
           </div>
@@ -1015,14 +1026,33 @@ function AContact() {
   );
 }
 
-function AField({ label, type = 'text', value, onChange, error, multiline, placeholder }) {
+const A_RULE = 'rgba(237,234,228,0.16)';
+
+// Registration marks: hairlines that run past each corner of the sheet
+function ACropMarks({ reach }) {
+  const line = { position: 'absolute', background: A_RULE, pointerEvents: 'none' };
+  return (
+    <div aria-hidden="true">
+      <span style={{ ...line, height: 1, top: 0, left: -reach, right: -reach }} />
+      <span style={{ ...line, height: 1, bottom: 0, left: -reach, right: -reach }} />
+      <span style={{ ...line, width: 1, left: 0, top: -reach, bottom: -reach }} />
+      <span style={{ ...line, width: 1, right: 0, top: -reach, bottom: -reach }} />
+    </div>
+  );
+}
+
+function AField({ label, type = 'text', value, onChange, error, multiline, placeholder, autoComplete, cellStyle }) {
   const [focus, setFocus] = React.useState(false);
   const Tag = multiline ? 'textarea' : 'input';
   const id = `field-${label.toLowerCase().replace(/\s+/g, '-')}`;
   return (
-    <div>
-      <label htmlFor={id} style={{ display: 'flex', justifyContent: 'space-between', ...aStyles.mono, color: focus ? A.accent : 'rgba(237,234,228,0.75)', marginBottom: 8, transition: 'color .2s', cursor: 'text' }}>
-        <span>{label}</span>
+    <div style={{
+      padding: '16px 20px 14px', minWidth: 0,
+      background: focus ? 'rgba(224,83,32,0.05)' : 'transparent',
+      transition: 'background .2s', ...cellStyle
+    }}>
+      <label htmlFor={id} style={{ display: 'flex', justifyContent: 'space-between', gap: 12, ...aStyles.mono, color: focus ? A.accent : 'rgba(237,234,228,0.75)', marginBottom: 6, transition: 'color .2s', cursor: 'text' }}>
+        <span>{label}<span style={{ color: A.accent }}>*</span></span>
         {error && <span style={{ color: A.accent }}>✱ {error}</span>}
       </label>
       <Tag
@@ -1030,18 +1060,18 @@ function AField({ label, type = 'text', value, onChange, error, multiline, place
         type={type}
         value={value}
         placeholder={placeholder}
+        autoComplete={autoComplete}
+        aria-invalid={!!error}
         data-cursor="text"
         onChange={(e) => onChange(e.target.value)}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        rows={multiline ? 4 : undefined}
+        rows={multiline ? 5 : undefined}
         style={{
-          width: '100%',
-          background: focus ? 'rgba(224,83,32,0.05)' : 'rgba(237,234,228,0.04)',
-          border: `1px solid ${focus ? A.accent : 'rgba(237,234,228,0.16)'}`,
-          padding: '12px 14px', color: A.ink, fontSize: 16,
-          fontFamily: 'inherit', outline: 'none', resize: 'vertical',
-          transition: 'border-color .2s, background .2s'
+          display: 'block', width: '100%',
+          background: 'transparent', border: 'none',
+          padding: '4px 0', color: A.ink, fontSize: 16, lineHeight: 1.5,
+          fontFamily: 'inherit', outline: 'none', resize: multiline ? 'vertical' : 'none'
         }} />
     </div>
   );

@@ -1673,14 +1673,14 @@ function AContact() {
     }
   }, "\u2192"))) : /*#__PURE__*/React.createElement("form", {
     onSubmit: submit,
+    noValidate: true,
     style: {
       display: 'flex',
-      flexDirection: 'column',
-      gap: 24
+      flexDirection: 'column'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      marginBottom: 8
+      marginBottom: 32
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1697,26 +1697,49 @@ function AContact() {
       margin: 0,
       color: A.ink
     }
-  }, "Or drop me a line directly.")), /*#__PURE__*/React.createElement(AField, {
+  }, "Or drop me a line directly.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement(ACropMarks, {
+    reach: bp.isMobile ? 10 : 20
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      border: `1px solid ${A_RULE}`
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: bp.isMobile ? '1fr' : '1fr 1fr'
+    }
+  }, /*#__PURE__*/React.createElement(AField, {
     label: "Name",
     placeholder: "Your name",
+    autoComplete: "name",
     value: form.name,
     onChange: v => setForm({
       ...form,
       name: v
     }),
-    error: errors.name
+    error: errors.name,
+    cellStyle: bp.isMobile ? {} : {
+      borderRight: `1px solid ${A_RULE}`
+    }
   }), /*#__PURE__*/React.createElement(AField, {
     label: "Email",
     type: "email",
     placeholder: "you@company.com",
+    autoComplete: "email",
     value: form.email,
     onChange: v => setForm({
       ...form,
       email: v
     }),
-    error: errors.email
-  }), /*#__PURE__*/React.createElement(AField, {
+    error: errors.email,
+    cellStyle: bp.isMobile ? {
+      borderTop: `1px solid ${A_RULE}`
+    } : {}
+  })), /*#__PURE__*/React.createElement(AField, {
     label: "Message",
     multiline: true,
     placeholder: "What are we building?",
@@ -1725,12 +1748,17 @@ function AContact() {
       ...form,
       msg: v
     }),
-    error: errors.msg
+    error: errors.msg,
+    cellStyle: {
+      borderTop: `1px solid ${A_RULE}`
+    }
   }), sendError && /*#__PURE__*/React.createElement("p", {
     style: {
       ...aStyles.mono,
       color: A.accent,
-      margin: 0
+      margin: 0,
+      padding: '14px 20px',
+      borderTop: `1px solid ${A_RULE}`
     }
   }, "Something went wrong. Try emailing me directly."), /*#__PURE__*/React.createElement("button", {
     type: "submit",
@@ -1738,7 +1766,8 @@ function AContact() {
     disabled: sending,
     style: {
       ...aStyles.cta,
-      padding: '15px 20px',
+      padding: '18px 20px',
+      width: '100%',
       background: sending ? 'rgba(237,234,228,0.1)' : A.accent,
       color: sending ? A.ink : A.paper,
       border: 'none',
@@ -1749,7 +1778,54 @@ function AContact() {
       alignItems: 'center',
       transition: 'background .2s'
     }
-  }, sending ? 'Sending…' : 'Send transmission', " ", /*#__PURE__*/React.createElement("span", null, "\u2192")))))));
+  }, sending ? 'Sending…' : 'Send transmission', " ", /*#__PURE__*/React.createElement("span", null, "\u2192")))))))));
+}
+const A_RULE = 'rgba(237,234,228,0.16)';
+
+// Registration marks: hairlines that run past each corner of the sheet
+function ACropMarks({
+  reach
+}) {
+  const line = {
+    position: 'absolute',
+    background: A_RULE,
+    pointerEvents: 'none'
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...line,
+      height: 1,
+      top: 0,
+      left: -reach,
+      right: -reach
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...line,
+      height: 1,
+      bottom: 0,
+      left: -reach,
+      right: -reach
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...line,
+      width: 1,
+      left: 0,
+      top: -reach,
+      bottom: -reach
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...line,
+      width: 1,
+      right: 0,
+      top: -reach,
+      bottom: -reach
+    }
+  }));
 }
 function AField({
   label,
@@ -1758,23 +1834,38 @@ function AField({
   onChange,
   error,
   multiline,
-  placeholder
+  placeholder,
+  autoComplete,
+  cellStyle
 }) {
   const [focus, setFocus] = React.useState(false);
   const Tag = multiline ? 'textarea' : 'input';
   const id = `field-${label.toLowerCase().replace(/\s+/g, '-')}`;
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '16px 20px 14px',
+      minWidth: 0,
+      background: focus ? 'rgba(224,83,32,0.05)' : 'transparent',
+      transition: 'background .2s',
+      ...cellStyle
+    }
+  }, /*#__PURE__*/React.createElement("label", {
     htmlFor: id,
     style: {
       display: 'flex',
       justifyContent: 'space-between',
+      gap: 12,
       ...aStyles.mono,
       color: focus ? A.accent : 'rgba(237,234,228,0.75)',
-      marginBottom: 8,
+      marginBottom: 6,
       transition: 'color .2s',
       cursor: 'text'
     }
-  }, /*#__PURE__*/React.createElement("span", null, label), error && /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", null, label, /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: A.accent
+    }
+  }, "*")), error && /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.accent
     }
@@ -1783,22 +1874,25 @@ function AField({
     type: type,
     value: value,
     placeholder: placeholder,
+    autoComplete: autoComplete,
+    "aria-invalid": !!error,
     "data-cursor": "text",
     onChange: e => onChange(e.target.value),
     onFocus: () => setFocus(true),
     onBlur: () => setFocus(false),
-    rows: multiline ? 4 : undefined,
+    rows: multiline ? 5 : undefined,
     style: {
+      display: 'block',
       width: '100%',
-      background: focus ? 'rgba(224,83,32,0.05)' : 'rgba(237,234,228,0.04)',
-      border: `1px solid ${focus ? A.accent : 'rgba(237,234,228,0.16)'}`,
-      padding: '12px 14px',
+      background: 'transparent',
+      border: 'none',
+      padding: '4px 0',
       color: A.ink,
       fontSize: 16,
+      lineHeight: 1.5,
       fontFamily: 'inherit',
       outline: 'none',
-      resize: 'vertical',
-      transition: 'border-color .2s, background .2s'
+      resize: multiline ? 'vertical' : 'none'
     }
   }));
 }
