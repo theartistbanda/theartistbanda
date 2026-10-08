@@ -1,0 +1,6 @@
+# Repo-only files: keep them out of the public site
+README.md
+CLAUDE.md
+docs
+.claude
+skills-lock.json

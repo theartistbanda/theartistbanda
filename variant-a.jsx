@@ -69,7 +69,7 @@ function ABanner() {
         <span style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.72)', fontSize: bp.isMobile ? 9 : 10 }}>
           {bp.isMobile
             ? 'Right to work in the UK · Available now'
-            : 'Full right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'}
+            : 'Right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'}
         </span>
         <a href="#contact" data-cursor="hover" style={{
           ...aStyles.mono, fontSize: bp.isMobile ? 9 : 10, fontWeight: 500,
@@ -111,9 +111,9 @@ function ANav() {
 
   React.useEffect(() => {
     const tick = () => {
-      const d = new Date();
-      const p = (n) => String(n).padStart(2, '0');
-      setT(`${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())} UTC`);
+      // UK local time, so BST and GMT switch over on their own
+      const uk = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour12: false });
+      setT(`${uk} UK`);
     };
     tick();
     const i = setInterval(tick, 1000);
@@ -514,9 +514,9 @@ function AOrigin() {
               fontSize: 'clamp(36px, 7vw, 88px)',
               fontWeight: 500, lineHeight: 1, letterSpacing: '-0.03em', margin: 0
             }}>
-              One night.<br />
-              Zero brief.<br />
-              <span style={{ fontStyle: 'italic', color: A.accent }}>A national symbol.</span>
+              An open competition.<br />
+              A golden bird.<br />
+              <span style={{ fontStyle: 'italic', color: A.accent }}>A mark India picked up.</span>
             </h2>
             <p style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(237,234,228,0.82)', maxWidth: bp.isDesktop ? 480 : '100%', marginTop: 40 }}>
               I entered an open MyGov competition to design a mark for the Aatmnirbhar Bharat campaign: the Indian
@@ -544,7 +544,7 @@ function AOrigin() {
             }}>
               <img
                 src="/assets/aatmnirbhar-logo.webp"
-                alt="The Aatmnirbhar Bharat logo: a saffron figure rising within the map of India, with the initiative name in Devanagari script"
+                alt="The Aatmnirbhar Bharat mark: a bird with saffron, white and green wings rising around the Ashok Chakra, with Aatmnirbhar Bharat written in Devanagari below"
                 style={{ width: bp.isMobile ? '60%' : '55%', maxWidth: 260, height: 'auto', display: 'block' }}
               />
             </div>
@@ -725,7 +725,7 @@ function ACareer() {
             {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Curriculum vitae</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-              Eleven years,<br />four cities, millions of users.
+              Eleven years,<br />four cities, over a million downloads.
             </h2>
           </div>
           <a href="/dipesh-gurav-cv.pdf" download data-cursor="hover" style={{
@@ -801,7 +801,7 @@ function AAbout() {
             ))}
             {sidebarRow('Experience', (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                {['11+ years', '14 countries', '1M+ downloads shipped'].map((v) => (
+                {['11 years', '14 countries', '1M+ downloads shipped'].map((v) => (
                   <div key={v} style={{ fontSize: 14, color: A.ink, lineHeight: 1.5 }}>{v}</div>
                 ))}
               </div>
