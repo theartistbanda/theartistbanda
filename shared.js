@@ -177,7 +177,7 @@ const PORTFOLIO = {
   }, {
     id: 'job-app-assistant',
     index: '08',
-    year: 2025,
+    year: 2026,
     title: 'Job App Assistant',
     kicker: 'Generative AI · Solo build · Live product',
     tagline: 'Building the back room, from scratch.',

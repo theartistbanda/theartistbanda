@@ -77,7 +77,7 @@ function ABanner() {
       color: 'rgba(244,241,236,0.72)',
       fontSize: bp.isMobile ? 9 : 10
     }
-  }, bp.isMobile ? 'Right to work in the UK · Available now' : 'Full right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'), /*#__PURE__*/React.createElement("a", {
+  }, bp.isMobile ? 'Right to work in the UK · Available now' : 'Right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'), /*#__PURE__*/React.createElement("a", {
     href: "#contact",
     "data-cursor": "hover",
     style: {

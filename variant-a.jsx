@@ -69,7 +69,7 @@ function ABanner() {
         <span style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.72)', fontSize: bp.isMobile ? 9 : 10 }}>
           {bp.isMobile
             ? 'Right to work in the UK · Available now'
-            : 'Full right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'}
+            : 'Right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'}
         </span>
         <a href="#contact" data-cursor="hover" style={{
           ...aStyles.mono, fontSize: bp.isMobile ? 9 : 10, fontWeight: 500,
