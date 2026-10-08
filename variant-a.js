@@ -111,9 +111,12 @@ function ANav() {
   const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
     const tick = () => {
-      const d = new Date();
-      const p = n => String(n).padStart(2, '0');
-      setT(`${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())} UTC`);
+      // UK local time, so BST and GMT switch over on their own
+      const uk = new Date().toLocaleTimeString('en-GB', {
+        timeZone: 'Europe/London',
+        hour12: false
+      });
+      setT(`${uk} UK`);
     };
     tick();
     const i = setInterval(tick, 1000);
@@ -740,12 +743,12 @@ function AOrigin() {
       letterSpacing: '-0.03em',
       margin: 0
     }
-  }, "One night.", /*#__PURE__*/React.createElement("br", null), "Zero brief.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+  }, "An open competition.", /*#__PURE__*/React.createElement("br", null), "A golden bird.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
     style: {
       fontStyle: 'italic',
       color: A.accent
     }
-  }, "A national symbol.")), /*#__PURE__*/React.createElement("p", {
+  }, "A mark India picked up.")), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 16,
       lineHeight: 1.6,
@@ -783,7 +786,7 @@ function AOrigin() {
     }
   }, /*#__PURE__*/React.createElement("img", {
     src: "/assets/aatmnirbhar-logo.webp",
-    alt: "The Aatmnirbhar Bharat logo: a saffron figure rising within the map of India, with the initiative name in Devanagari script",
+    alt: "The Aatmnirbhar Bharat mark: a bird with saffron, white and green wings rising around the Ashok Chakra, with Aatmnirbhar Bharat written in Devanagari below",
     style: {
       width: bp.isMobile ? '60%' : '55%',
       maxWidth: 260,
@@ -1143,7 +1146,7 @@ function ACareer() {
       lineHeight: 1.05,
       margin: 0
     }
-  }, "Eleven years,", /*#__PURE__*/React.createElement("br", null), "four cities, millions of users.")), /*#__PURE__*/React.createElement("a", {
+  }, "Eleven years,", /*#__PURE__*/React.createElement("br", null), "four cities, over a million downloads.")), /*#__PURE__*/React.createElement("a", {
     href: "/dipesh-gurav-cv.pdf",
     download: true,
     "data-cursor": "hover",
@@ -1297,7 +1300,7 @@ function AAbout() {
       flexDirection: 'column',
       gap: 4
     }
-  }, ['11+ years', '14 countries', '1M+ downloads shipped'].map(v => /*#__PURE__*/React.createElement("div", {
+  }, ['11 years', '14 countries', '1M+ downloads shipped'].map(v => /*#__PURE__*/React.createElement("div", {
     key: v,
     style: {
       fontSize: 14,

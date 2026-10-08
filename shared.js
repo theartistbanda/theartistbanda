@@ -68,26 +68,27 @@ const PORTFOLIO = {
   location: 'Nottingham, UK',
   years: 11,
   tagline: 'Designing for the humans behind the pixels.',
-  lead: 'Lead product designer behind enterprise AI cutting costs 20% for around 35,000 daily users, a wellbeing app with 1M+ downloads in 22 languages, and a logo adopted as a national identity by a large number of manufacturers across India.',
+  lead: 'Lead product designer behind an enterprise AI suite that cut call-handling time and costs by 20%, products used by around 35,000 people a day in 14 countries, a wellbeing app with over a million downloads in 22 languages, and a mark manufacturers across India use on Indian-made goods.',
   metrics: [{
-    value: 40,
-    suffix: '%',
-    label: 'Engagement lift',
-    sub: 'LevelUp gamification'
-  }, {
     value: 20,
     suffix: '%',
-    label: 'Enterprise cost cut',
+    label: 'Call-handling time and cost cut',
     sub: 'TaskGPT @ TaskUs'
+  }, {
+    value: 17,
+    suffix: '%',
+    label: 'Assessment accuracy',
+    sub: 'EvaluateUs'
+  }, {
+    value: 33,
+    suffix: '%',
+    label: 'Sales in a month',
+    sub: 'EarlyFoods'
   }, {
     value: 1,
     suffix: 'M+',
     label: 'Downloads · YourHour',
     sub: 'Play Store verified'
-  }, {
-    text: 'Nationwide',
-    label: 'Manufacturer adoption',
-    sub: 'Aatmnirbhar logo · India'
   }],
   projects: [{
     id: 'levelup',
@@ -96,23 +97,23 @@ const PORTFOLIO = {
     title: 'LevelUp',
     kicker: 'Gamification · Enterprise SaaS · 3D',
     tagline: 'Work that plays like a game.',
-    body: 'An enterprise gamification platform serving two audiences at once: managers configure KPIs, challenges and rewards; agents live inside them as avatars, leaderboards and live wins. Daily engagement rose 40%; now the company standard.',
-    stats: [['40%', 'Engagement lift'], ['35K', 'Daily users'], ['2', 'Audiences, one system'], ['3D', 'Three.js characters']],
+    body: 'An enterprise gamification platform serving two audiences at once: managers configure KPIs, challenges and rewards; agents live inside them as avatars, leaderboards and live wins. It became the company standard and was showcased at AWS Summit London 2025.',
+    stats: [['AWS', 'Summit London 2025'], ['35K', 'Suite daily users'], ['2', 'Audiences, one system'], ['3D', 'Three.js characters']],
     tags: ['Gamification', 'Enterprise SaaS', 'Dual-audience', 'Design Systems'],
     image: '/assets/levelup-cover.webp',
-    href: 'case-levelup.html'
+    href: '/case-levelup'
   }, {
     id: 'taskgpt',
     index: '02',
     year: 2024,
     title: 'TaskGPT',
-    kicker: 'AI productivity · Enterprise · 35K DAU',
-    tagline: 'An AI suite that paid for itself.',
-    body: 'End-to-end design on an OpenAI + PaLM 2 + LLaMA suite for around 35,000 daily operators. Call handling time down 20%.',
-    stats: [['20%', 'Cost saved'], ['35K', 'Daily users'], ['14', 'Countries']],
+    kicker: 'AI productivity · Enterprise · 14 countries',
+    tagline: 'AI that works inside the live call.',
+    body: 'End-to-end design of an OpenAI + PaLM 2 + LLaMA suite for agents on live customer calls across 14 countries. Call-handling time and operational costs each down 20%.',
+    stats: [['20%', 'Less call-handling time'], ['35K', 'Suite daily users'], ['14', 'Countries']],
     tags: ['AI Interface', 'Enterprise', 'Design Systems'],
     image: '/assets/taskgpt-cover.webp',
-    href: 'case-taskgpt.html'
+    href: '/case-taskgpt'
   }, {
     id: 'evaluateus',
     index: '03',
@@ -120,11 +121,11 @@ const PORTFOLIO = {
     title: 'EvaluateUs',
     kicker: 'Assessment platform · Enterprise · TaskUs',
     tagline: 'Data-heavy evaluation, made humane.',
-    body: 'UX strategy and full redesign of an enterprise assessment platform: evaluation workflows, scoring criteria and results data. Accuracy and speed improved 17%.',
-    stats: [['17%', 'Accuracy lift'], ['AA', 'WCAG 2.1']],
+    body: 'UX strategy and full redesign of an enterprise assessment platform: evaluation workflows, scoring criteria and results data. Accuracy rose 17%.',
+    stats: [['17%', 'Accuracy lift'], ['AA', 'WCAG 2.2']],
     tags: ['Enterprise UX', 'Data-dense UI', 'Assessment'],
     image: '/assets/evaluateus-cover.webp',
-    href: 'case-evaluateus.html'
+    href: '/case-evaluateus'
   }, {
     id: 'yourhour',
     index: '04',
@@ -132,27 +133,27 @@ const PORTFOLIO = {
     title: 'YourHour',
     kicker: 'Digital wellbeing · India · 1M+ downloads',
     tagline: 'Breaking digital addiction at scale.',
-    body: 'Behavioural psychology and compassionate UX to help millions reclaim attention without becoming another addictive feed.',
+    body: 'Behavioural psychology and compassionate UX to help people reclaim their attention without becoming another addictive feed.',
     stats: [['1M+', 'Downloads'], ['70K+', 'Reviews'], ['22', 'Languages'], ['4.6★', 'Play Store']],
     tags: ['Behavioural Design', 'Digital Health', 'HealthTech', 'Android · iOS', 'Cross-cultural'],
     image: '/assets/yourhour-cover.webp',
-    href: 'case-yourhour.html'
+    href: '/case-yourhour'
   }, {
     id: 'aatmnirbhar',
     index: '05',
     year: 2020,
     title: 'Aatmnirbhar',
-    kicker: 'National identity · Government of India',
-    tagline: 'One night. Zero brief. A national symbol.',
-    body: 'Drawn overnight. Adopted for PM SVANidhi. Now used by a large number of manufacturers across India.',
-    stats: [['Nationwide', 'Adoption'], ['1 night', 'To ship'], ['PM SVANidhi', 'Official']],
+    kicker: 'Brand mark · Open MyGov competition',
+    tagline: 'A competition entry India picked up.',
+    body: 'An open MyGov competition entry, taken up by PM SVANidhi and used by manufacturers marking Indian-made goods.',
+    stats: [['Nationwide', 'Used on Indian-made goods'], ['MyGov', 'Open competition'], ['PM SVANidhi', 'Took up the mark']],
     tags: ['Brand', 'Identity', 'Cultural'],
     image: '/assets/aatmnirbhar-cover.webp',
-    href: 'case-aatmnirbhar.html'
+    href: '/case-aatmnirbhar'
   }, {
     id: 'jego',
     index: '06',
-    year: 2022,
+    year: '',
     title: 'JEGO',
     kicker: 'Wellbeing streaming · UAE',
     tagline: 'Mentors for the Gulf, designed with cultural nuance.',
@@ -160,19 +161,19 @@ const PORTFOLIO = {
     stats: [['UAE', 'Primary market'], ['RTL', 'First-class']],
     tags: ['Video UX', 'Streaming', 'Localisation'],
     image: '/assets/jego-cover.webp',
-    href: 'case-jego.html'
+    href: '/case-jego'
   }, {
     id: 'earlyfoods',
     index: '07',
-    year: 2022,
+    year: '',
     title: 'EarlyFoods',
-    kicker: 'E-commerce · Organic baby food · UAE',
+    kicker: 'E-commerce · Organic baby food',
     tagline: 'Designed for trust, not conversion.',
     body: 'A brand parents can feel safe with, because they are feeding it to their children. Emotional UX over checkout funnels.',
-    stats: [['UAE', 'Market'], ['Trust', 'KPI']],
+    stats: [['33%', 'Sales in a month'], ['Trust', 'KPI']],
     tags: ['E-commerce', 'Conversion Rate Optimisation', 'Emotional UX'],
     image: '/assets/earlyfoods-cover.webp',
-    href: 'case-earlyfoods.html'
+    href: '/case-earlyfoods'
   }, {
     id: 'job-app-assistant',
     index: '08',
@@ -184,7 +185,7 @@ const PORTFOLIO = {
     stats: [['1 day', 'Build time'], ['4', 'Files'], ['Live', 'Status']],
     tags: ['Generative AI Tools', 'AI Interfaces', 'Solo build'],
     image: '/assets/jaa-cover.webp',
-    href: 'case-job-app-assistant.html'
+    href: '/case-job-app-assistant'
   }],
   principles: [{
     n: '01',
@@ -197,7 +198,7 @@ const PORTFOLIO = {
   }, {
     n: '03',
     title: 'Cross-cultural design is a skill, not a checklist',
-    body: 'Intuitive is local. Shipping across India, the UAE and 14 other countries taught me: empathy is not assumed, it is researched.'
+    body: 'Intuitive is local. Shipping for India, the Gulf and enterprise teams in 14 countries taught me: empathy is not assumed, it is researched.'
   }, {
     n: '04',
     title: 'Emotion is a design material',
@@ -205,7 +206,7 @@ const PORTFOLIO = {
   }, {
     n: '05',
     title: 'Measure what you made',
-    body: 'Every project ties to a metric. 20% cost cut. 40% engagement. Good design earns its seat at the business table.'
+    body: 'Every project ties to a metric: 20% less call-handling time, 17% more accurate assessments, 33% more sales in a month. Good design earns its seat at the business table.'
   }, {
     n: '06',
     title: 'Simplicity is deeper understanding, not fewer features',
@@ -215,27 +216,27 @@ const PORTFOLIO = {
     from: '2021',
     to: '2026',
     role: 'Lead Product Designer',
-    org: 'TaskUs · Global BPO · Remote, UK',
-    body: ['My work spanned AI productivity, assessment platforms, gamification and design systems. I designed for two very different audiences: frontline operators using AI during live customer conversations, and administrators configuring the systems, quality standards and experiences behind them.', 'TaskGPT, AI suite for customer service teams. Content generation and regeneration, writing assistance, fake detection, and a set of extensions on top. Designed for two audiences at the same time, the operator using AI inside a live customer call and the administrator setting quality standards behind them, working across OpenAI, PaLM 2 and LLaMA. Moving it behind an encrypted wall and into the flow of the call solved the privacy problem and improved performance and speed by 20% in one go.', 'EvaluateUs, transforming complex hiring and training scoring, review and reporting workflows. Designed the whole thing: scoring criteria, review queues, results tables, and the reporting that came off them, built around how a reviewer actually moves through a case rather than how the rubric happens to be written down. Accuracy and speed improved by 17%.', 'LevelUp, gamification. A two-sided system. Managers set the KPIs and the rewards attached to them; agents meet the same system as 3D avatars and live leaderboards, built in Three.js. It was the first gamification work at TaskUs and became the standard other teams built on. Improved engagement by 40%.', 'Design system. I owned it from token architecture through to the shipped component libraries, keeping mobile and web consistent across 14 countries with accessibility built in rather than bolted on afterwards. As the only designer, the system was also the only way to scale myself.', 'AI in the workflow. Claude, Cursor, Figma Make and v0 to build several UX directions in parallel, which surfaced edge cases and let me test a mental model before a stakeholder review instead of after one. Time-to-concept down 60%.'],
-    tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Leadership'],
+    org: 'TaskUs · Global BPO · Remote',
+    body: ['I was the founding and only designer on TaskUs\'s Digital IT team. Every product we built was multi-tenant, sold to client companies on subscription, and used by around 35,000 people a day across 14 countries; around 20 of them went live. I designed for two very different audiences: agents using AI during live customer calls, and the administrators configuring the systems behind them. My first job was in a call centre, so for the agent tools, I used to be the user.', 'TaskGPT, an AI suite for agents on live customer calls, working across OpenAI, PaLM 2 and LLaMA. Much of it ran as a Chrome extension inside the tool agents already used, so nobody had to switch windows mid-call. I also designed how we measured it: usage, answer quality, token cost and agent feedback. Call-handling time and operational costs each fell 20%, and moving it behind an encrypted layer solved the privacy problem and made it 20% faster.', 'EvaluateUs, where an AI scored hiring, coaching and training assessments and one dashboard served three people. The candidate wanted to know how they did, the assessor needed to trust the AI\'s score enough to stand behind it, and the manager wanted to know if it was helping the team. I designed each view around that person\'s next decision. Accuracy rose 17%.', 'LevelUp, gamification. Managers set targets, challenges and rewards; agents play as their own 3D characters on live leaderboards, built in Three.js. Everyone who takes part wins something, and the best players go into a hall of fame. It was the first gamification work at TaskUs, became the company standard, and was showcased at AWS Summit London 2025.', 'Design system. I owned it from tokens through to shipped component libraries, keeping mobile and web consistent across 14 countries and built to WCAG 2.2 AA rather than patched afterwards. As the only designer, the system was also the only way to scale myself.', 'AI in the workflow. Claude, Cursor, Figma Make, v0 and Lovable let me build several UX directions in parallel, which surfaced edge cases and let me test a mental model before a stakeholder review instead of after one. Time to concept fell 60%.'],
+    tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Founding designer'],
     current: false
   }, {
     from: '2017',
     to: '2021',
     role: 'Product Designer',
     org: 'Mindefy Technologies · Indore, India',
-    body: ['At Mindefy, I designed products across digital wellbeing, finance, e-commerce, streaming and mentorship. This was where I developed my belief that good design is not just about simplifying screens, it is about understanding what people need emotionally, culturally and behaviourally.', 'Designed YourHour, a digital wellbeing app that reached more than 1 million downloads, with 70,000+ reviews, a 4.6-star rating and support for 22 languages. Based on more than 300 research sessions, the experience encouraged healthier digital habits through compassionate, non-punitive interventions.', 'EarlyFoods, e-commerce. A premium organic food brand for babies and young children. More than 400 interviews with parents showed the barrier was trust rather than price, so I rebuilt the buying experience around sourcing and provenance instead of discounting.', 'Redesigned JEGO, a video streaming, wellbeing and mentorship platform with an RTL-first approach shaped around Gulf cultural contexts. Usability satisfaction increased by 25%.', 'GreenBill, digital invoicing. A paperless receipt and invoicing system for supermarkets: OCR turns a paper receipt into a digital one, cutting operating cost and paper waste at the point of sale.', 'Kidster, School Diary: Developed the UI/UX for Kidster, a digital school diary that streamlines communication between parents, teachers, and students. I focused on creating an engaging and accessible interface to support easy access to schedules, reminders, and communication tools, making Kidster a valuable resource for schools and families.', 'YourSlice: A companion app to YourHour, focusing on enhancing productivity by helping users track and manage specific habits. Built with a cohesive design system that aligns with YourHour\'s branding, YourSlice offers users an extended platform for self-improvement and habit formation.', 'Mentored junior designers and established a structured design pipeline, enhancing project delivery speed and design quality.'],
+    body: ['I joined Mindefy as an intern and became its sole designer. At Mindefy, I designed products across digital wellbeing, finance, e-commerce, streaming and mentorship. This was where I developed my belief that good design is not just about simplifying screens, it is about understanding what people need emotionally, culturally and behaviourally.', 'Designed YourHour, a digital wellbeing app that reached more than 1 million downloads, with 70,000+ reviews, a 4.6-star rating and support for 22 languages. Based on more than 300 research sessions, the experience encouraged healthier digital habits through compassionate, non-punitive interventions.', 'Redesigned JEGO, a video streaming, wellbeing and mentorship platform with an RTL-first approach shaped around Gulf cultural contexts. Usability satisfaction increased by 25%.', 'GreenBill, paperless receipts and invoicing across four apps: one for shoppers, a web point of sale and a mobile app for merchants, and an admin console. Picture a shopkeeper ringing up a sale on their phone while the owner watches sales across every branch. The usability testing toolkit I built caught 85% of issues before development.', 'Kidster, a digital school diary for attendance, homework, parent-teacher meetings and notices. It found traction but not enough money, and the company rightly moved its focus to YourHour. It taught me to ask the money question as early as the user question.', 'YourSlice: A companion app to YourHour, focusing on enhancing productivity by helping users track and manage specific habits. Built with a cohesive design system that aligns with YourHour\'s branding, YourSlice offers users an extended platform for self-improvement and habit formation.', 'Hired and mentored junior and mid-level designers, for client products and for Mindefy\'s own.'],
     tags: ['Fintech', 'Mobile', 'Wellbeing UX']
   }, {
-    from: '2015',
+    from: '2014',
     to: '2017',
     role: 'Product Design Consultant & Founder',
     org: 'The Artist Banda · Bengaluru, India',
-    body: ['I co-founded a small studio helping new businesses start from nothing: identity, photography, design and the marketing that followed. I ran the team, the client conversations and the projects from onboarding through to delivery. Brand Identity design I still love the most.', 'I entered an open MyGov competition to design a mark for the Aatmnirbhar Bharat campaign: the Indian tricolour and Ashok Chakra fused with a golden bird, a reference to the country once being called sone ki chidiya. The competition was never formally decided. The mark was taken up by the PM SVANidhi scheme and used by manufacturers marking Indian-made goods, without credit.', 'Designed an end-to-end payment and energy mobility ecosystem across mobile app, web portal and field-operations dashboard for Repos Energy. The work connected real-time transactions with the practical needs of people working on the ground.', 'ZuQA, API testing tool. Postman had no low-code API testing at the time; a friend was building the concept and I joined as design hand. Progressive disclosure cut cognitive load and developer onboarding time by 15%.', 'Job App Assistant: A live AI web app designed, coded and deployed solo in one session (Node.js + Claude API): job-app-assistant.onrender.com'],
+    body: ['I co-founded a small studio helping new businesses start from nothing: identity, photography, design and the marketing that followed. I ran the team, the client conversations and the projects from onboarding through to delivery. Brand identity is still the work I love most.', 'EarlyFoods, food for expecting mothers and young children. The analytics and the founder both pointed at price; heatmaps and a survey with nearly 400 customer replies pointed at trust. I rebuilt the store around sourcing and certification before price, fixed buttons parents couldn\'t find and age filters that didn\'t match how they shop, and made reordering easy. Sales rose 33% in a month.', 'Designed an end-to-end payment and energy mobility ecosystem across mobile app, web portal and field-operations dashboard for Repos Energy. The work connected real-time transactions with the practical needs of people working on the ground.', 'ZuQA, API testing tool. Postman had no low-code API testing at the time; a friend was building the concept and I joined as design hand. Progressive disclosure cut cognitive load and developer onboarding time by 15%.'],
     tags: ['Brand', 'Product Strategy', 'Wellbeing UX']
   }],
-  skills: ['Behavioural UX', 'AI Interfaces', 'Generative AI Tools', 'Design Systems', 'Multi-audience Platforms', 'Data-dense Enterprise UX', 'A/B Testing', 'Experimentation', 'Cross-cultural', 'Figma', 'Motion', 'Conversion Rate Optimisation', 'Team Leadership', 'Product Strategy'],
-  notable: ['Aatmnirbhar Bharat national logo', 'YourHour · 4.6★ · 1M+ downloads', 'AWS Summit London 2025', 'Repos Energy fuel-delivery', '300+ user interviews'],
+  skills: ['Behavioural UX', 'AI Interfaces', 'Generative AI Tools', 'Design Systems', 'Multi-audience Platforms', 'Data-dense Enterprise UX', 'A/B Testing', 'Experimentation', 'Cross-cultural', 'Figma', 'Motion', 'Conversion Rate Optimisation', 'Hiring & mentoring', 'Accessibility · WCAG 2.2 AA', 'RTL-first', 'Product Strategy'],
+  notable: ['Aatmnirbhar Bharat mark, used on Indian-made goods', 'YourHour · 4.6★ · 1M+ downloads', 'LevelUp at AWS Summit London 2025', 'Repos Energy fuel-delivery', '300+ research sessions on YourHour'],
   links: [{
     label: 'Email',
     value: 'contact@dipeshgurav.com',
