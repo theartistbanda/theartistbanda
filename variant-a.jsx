@@ -859,7 +859,7 @@ const MAIL_DOMAINS_KEEP = ['mail.com', 'gmx.com', 'me.com', 'mac.com', 'ymail.co
 const contactRules = {
   name(v) {
     const s = v.trim();
-    if (!s) return 'Add your name so I know who is writing';
+    if (!s) return 'Tell me who\u2019s writing';
     if (s.length < 2 || !/\p{L}/u.test(s)) return 'That doesn’t look like a name';
     if (s.length > 80) return 'Keep it under 80 characters';
     if (LINK_RE.test(s)) return 'Links can go in the message';
