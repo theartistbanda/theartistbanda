@@ -847,25 +847,120 @@ function AContactIcon({ type }) {
   }
 }
 
+// Contact form rules. The Apps Script repeats them (docs/contact-form-apps-script.gs),
+// because a bot can post to APPS_SCRIPT_URL without loading this page.
+const MSG_MAX = 2000;
+const MIN_FILL_MS = 3000;
+const LINK_RE = /https?:\/\/|www\./i;
+const MAIL_DOMAINS = ['gmail.com', 'googlemail.com', 'hotmail.com', 'hotmail.co.uk', 'outlook.com', 'live.com', 'yahoo.com', 'yahoo.co.uk', 'icloud.com', 'proton.me', 'protonmail.com', 'btinternet.com'];
+// Real domains one letter away from the list above; never "correct" these
+const MAIL_DOMAINS_KEEP = ['mail.com', 'gmx.com', 'me.com', 'mac.com', 'ymail.com', 'aol.com', 'live.co.uk'];
+
+const contactRules = {
+  name(v) {
+    const s = v.trim();
+    if (!s) return 'Add your name so I know who is writing';
+    if (s.length < 2 || !/\p{L}/u.test(s)) return 'That doesn’t look like a name';
+    if (s.length > 80) return 'Keep it under 80 characters';
+    if (LINK_RE.test(s)) return 'Links can go in the message';
+    return '';
+  },
+  email(v) {
+    const s = v.trim();
+    if (!s) return 'Add your email so I can reply';
+    if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(s) || s.includes('..')) return 'Check the email, something’s missing';
+    return '';
+  },
+  msg(v) {
+    const s = v.trim();
+    const words = s.split(/\s+/).filter((w) => /\p{L}/u.test(w));
+    if (!s) return 'Tell me what you have in mind';
+    if (s.length < 20 || words.length < 3) return 'A sentence or two helps me reply properly';
+    if (s.length > MSG_MAX) return `Keep it under ${MSG_MAX.toLocaleString('en-GB')} characters`;
+    return '';
+  }
+};
+
+function editDistance(a, b) {
+  const row = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    let prev = row[0];
+    row[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      const tmp = row[j];
+      row[j] = Math.min(row[j] + 1, row[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = tmp;
+    }
+  }
+  return row[b.length];
+}
+
+// "name@gmial.com" → "name@gmail.com". A hint only; it never blocks sending.
+function suggestEmail(v) {
+  const s = v.trim().toLowerCase();
+  const at = s.lastIndexOf('@');
+  if (at < 1) return '';
+  const user = s.slice(0, at);
+  const domain = s.slice(at + 1);
+  if (!domain || MAIL_DOMAINS.includes(domain) || MAIL_DOMAINS_KEEP.includes(domain)) return '';
+  let best = '', bestDist = 3;
+  for (const d of MAIL_DOMAINS) {
+    const dist = editDistance(domain, d);
+    if (dist < bestDist) { best = d; bestDist = dist; }
+  }
+  if (best) return `${user}@${best}`;
+  const fixedTld = domain.replace(/\.(con|cmo|ocm|comm|cpm|vom|xom)$/, '.com');
+  return fixedTld !== domain ? `${user}@${fixedTld}` : '';
+}
+
 function AContact() {
   const bp = useBreakpoint();
   const side = sp(bp);
   const vPad = bp.isMobile ? '72px' : '120px';
-  const [form, setForm] = React.useState({ name: '', email: '', msg: '' });
+  const [form, setForm] = React.useState({ name: '', email: '', msg: '', website: '' });
   const [errors, setErrors] = React.useState({});
   const [sending, setSending] = React.useState(false);
   const [sent, setSent] = React.useState(false);
   const [senderName, setSenderName] = React.useState('');
   const [sendError, setSendError] = React.useState(false);
+  const openedAt = React.useRef(Date.now());
+  const emailHint = suggestEmail(form.email);
+
+  // Check a field when the visitor leaves it; once it shows an error, recheck as they type
+  const update = (key, v) => {
+    setForm((f) => ({ ...f, [key]: v }));
+    if (errors[key]) setErrors((e) => ({ ...e, [key]: contactRules[key](v) }));
+  };
+  const check = (key) => setErrors((e) => ({ ...e, [key]: contactRules[key](form[key]) }));
+
+  const finish = (name) => {
+    setSenderName(name.trim());
+    setForm({ name: '', email: '', msg: '', website: '' });
+    setErrors({});
+    setSent(true);
+  };
 
   const submit = async (e) => {
     e.preventDefault();
     const errs = {};
-    if (!form.name.trim()) errs.name = 'Required';
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email)) errs.email = 'Invalid email';
-    if (form.msg.trim().length < 8) errs.msg = 'Tell me a bit more';
+    for (const key of ['name', 'email', 'msg']) {
+      const err = contactRules[key](form[key]);
+      if (err) errs[key] = err;
+    }
     setErrors(errs);
-    if (Object.keys(errs).length) return;
+    if (Object.keys(errs).length) {
+      const first = ['name', 'email', 'msg'].find((k) => errs[k]);
+      document.getElementById(`field-${first}`)?.focus();
+      return;
+    }
+
+    // Hidden field filled in, or the form sent faster than a person can type: a bot.
+    // Show the normal thank-you so it learns nothing, and send nothing.
+    const elapsed = Date.now() - openedAt.current;
+    if (form.website || elapsed < MIN_FILL_MS) {
+      finish(form.name);
+      return;
+    }
 
     setSending(true);
     setSendError(false);
@@ -873,11 +968,12 @@ function AContact() {
       await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        body: new URLSearchParams({ name: form.name, email: form.email, message: form.msg })
+        body: new URLSearchParams({
+          name: form.name.trim(), email: form.email.trim(), message: form.msg.trim(),
+          website: form.website, elapsed: String(elapsed)
+        })
       });
-      setSenderName(form.name);
-      setForm({ name: '', email: '', msg: '' });
-      setSent(true);
+      finish(form.name);
     } catch {
       setSendError(true);
     } finally {
@@ -993,13 +1089,32 @@ function AContact() {
                   <ACropMarks reach={bp.isMobile ? 10 : 20} />
                   <div style={{ border: `1px solid ${A_RULE}` }}>
                     <div style={{ display: 'grid', gridTemplateColumns: bp.isMobile ? '1fr' : '1fr 1fr' }}>
-                      <AField label="Full Name" placeholder="Your full name" autoComplete="name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name}
+                      <AField id="field-name" label="Full Name" placeholder="Your full name" autoComplete="name" value={form.name}
+                        onChange={(v) => update('name', v)} onBlur={() => check('name')} error={errors.name}
                         cellStyle={bp.isMobile ? {} : { borderRight: `1px solid ${A_RULE}` }} />
-                      <AField label="Email" type="email" placeholder="you@company.com" autoComplete="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email}
+                      <AField id="field-email" label="Email" type="email" placeholder="you@company.com" autoComplete="email" value={form.email}
+                        onChange={(v) => update('email', v)} onBlur={() => check('email')} error={errors.email}
+                        hint={errors.email === '' && emailHint && (
+                          <span>
+                            Did you mean{' '}
+                            <button type="button" data-cursor="hover" onClick={() => update('email', emailHint)}
+                              style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', color: A.accent, textDecoration: 'underline', cursor: 'pointer', overflowWrap: 'anywhere', textAlign: 'left' }}>
+                              {emailHint}
+                            </button>?
+                          </span>
+                        )}
                         cellStyle={bp.isMobile ? { borderTop: `1px solid ${A_RULE}` } : {}} />
                     </div>
-                    <AField label="Message" multiline placeholder="What are we building?" value={form.msg} onChange={(v) => setForm({ ...form, msg: v })} error={errors.msg}
+                    <AField id="field-msg" label="Message" multiline placeholder="What are we building?" value={form.msg}
+                      onChange={(v) => update('msg', v)} onBlur={() => check('msg')} error={errors.msg}
+                      hint={form.msg.length > MSG_MAX * 0.8 && `${form.msg.length.toLocaleString('en-GB')} / ${MSG_MAX.toLocaleString('en-GB')}`}
                       cellStyle={{ borderTop: `1px solid ${A_RULE}` }} />
+                    {/* Trap for bots: hidden from people and screen readers, so only a bot fills it in */}
+                    <div aria-hidden="true" style={{ position: 'absolute', left: -10000, width: 1, height: 1, overflow: 'hidden' }}>
+                      <label htmlFor="field-website">Website</label>
+                      <input id="field-website" name="website" type="text" tabIndex={-1} autoComplete="off"
+                        value={form.website} onChange={(e) => setForm((f) => ({ ...f, website: e.target.value }))} />
+                    </div>
                     {sendError && (
                       <p style={{ ...aStyles.mono, color: A.accent, margin: 0, padding: '14px 20px', borderTop: `1px solid ${A_RULE}` }}>
                         Something went wrong. Try emailing me directly.
@@ -1041,10 +1156,10 @@ function ACropMarks({ reach }) {
   );
 }
 
-function AField({ label, type = 'text', value, onChange, error, multiline, placeholder, autoComplete, cellStyle }) {
+function AField({ id, label, type = 'text', value, onChange, onBlur, error, hint, multiline, placeholder, autoComplete, cellStyle }) {
   const [focus, setFocus] = React.useState(false);
   const Tag = multiline ? 'textarea' : 'input';
-  const id = `field-${label.toLowerCase().replace(/\s+/g, '-')}`;
+  const note = error || hint;
   return (
     <div style={{
       padding: '16px 20px 14px', minWidth: 0,
@@ -1053,7 +1168,6 @@ function AField({ label, type = 'text', value, onChange, error, multiline, place
     }}>
       <label htmlFor={id} style={{ display: 'flex', justifyContent: 'space-between', gap: 12, ...aStyles.mono, color: focus ? A.accent : 'rgba(237,234,228,0.75)', marginBottom: 6, transition: 'color .2s', cursor: 'text' }}>
         <span>{label}<span style={{ color: A.accent }}>*</span></span>
-        {error && <span style={{ color: A.accent }}>✱ {error}</span>}
       </label>
       <Tag
         id={id}
@@ -1061,11 +1175,13 @@ function AField({ label, type = 'text', value, onChange, error, multiline, place
         value={value}
         placeholder={placeholder}
         autoComplete={autoComplete}
+        aria-required="true"
         aria-invalid={!!error}
+        aria-describedby={`${id}-note`}
         data-cursor="text"
         onChange={(e) => onChange(e.target.value)}
         onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
+        onBlur={() => { setFocus(false); onBlur && onBlur(); }}
         rows={multiline ? 5 : undefined}
         style={{
           display: 'block', width: '100%',
@@ -1073,6 +1189,13 @@ function AField({ label, type = 'text', value, onChange, error, multiline, place
           padding: '4px 0', color: A.ink, fontSize: 16, lineHeight: 1.5,
           fontFamily: 'inherit', outline: 'none', resize: multiline ? 'vertical' : 'none'
         }} />
+      {/* Always rendered so screen readers announce errors as they appear */}
+      <div id={`${id}-note`} aria-live="polite" style={{
+        fontSize: 13, lineHeight: 1.4, marginTop: note ? 6 : 0,
+        color: error ? A.accent : 'rgba(237,234,228,0.65)'
+      }}>
+        {error ? `✱ ${error}` : hint}
+      </div>
     </div>
   );
 }
