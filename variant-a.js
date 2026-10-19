@@ -1716,8 +1716,8 @@ function AContact() {
       gridTemplateColumns: bp.isMobile ? '1fr' : '1fr 1fr'
     }
   }, /*#__PURE__*/React.createElement(AField, {
-    label: "Name",
-    placeholder: "Your name",
+    label: "Full Name",
+    placeholder: "Your full name",
     autoComplete: "name",
     value: form.name,
     onChange: v => setForm({

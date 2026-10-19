@@ -993,7 +993,7 @@ function AContact() {
                   <ACropMarks reach={bp.isMobile ? 10 : 20} />
                   <div style={{ border: `1px solid ${A_RULE}` }}>
                     <div style={{ display: 'grid', gridTemplateColumns: bp.isMobile ? '1fr' : '1fr 1fr' }}>
-                      <AField label="Name" placeholder="Your name" autoComplete="name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name}
+                      <AField label="Full Name" placeholder="Your full name" autoComplete="name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} error={errors.name}
                         cellStyle={bp.isMobile ? {} : { borderRight: `1px solid ${A_RULE}` }} />
                       <AField label="Email" type="email" placeholder="you@company.com" autoComplete="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} error={errors.email}
                         cellStyle={bp.isMobile ? { borderTop: `1px solid ${A_RULE}` } : {}} />
