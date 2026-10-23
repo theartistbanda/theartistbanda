@@ -258,6 +258,12 @@
   .figma-link:hover, .figma-link:focus-visible { background: #F26A3A; color: var(--paper); border-color: #F26A3A; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(224,83,32,0.28); }
   .figma-link:active { transform: translateY(0) scale(0.98); box-shadow: none; }
   @media (max-width: 639px) { .figma-cta { margin-top: 20px; } .figma-link { width: 100%; justify-content: space-between; } }
+  /* Laptops and up: centre the title block so it sits balanced over the full-width cover */
+  @media (min-width: 1024px) {
+    .hero h1 { text-align: center; margin-left: auto; margin-right: auto; }
+    .hero .figma-cta { text-align: center; }
+    .hero .lede { text-align: center; margin-left: auto; margin-right: auto; }
+  }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>

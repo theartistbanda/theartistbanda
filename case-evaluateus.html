@@ -187,6 +187,12 @@
     section.body { padding: 52px 0; }
     .section-head h2 { font-size: 24px; }
   }
+  /* Laptops and up: centre the title block so it sits balanced over the full-width cover */
+  @media (min-width: 1024px) {
+    .hero h1 { text-align: center; margin-left: auto; margin-right: auto; }
+    .hero .figma-cta { text-align: center; }
+    .hero .lede { text-align: center; margin-left: auto; margin-right: auto; }
+  }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
