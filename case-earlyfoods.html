@@ -151,7 +151,6 @@
     padding: 14px 22px; border: 1px solid var(--accent);
     transition: background 0.2s, color 0.2s;
   }
-  .figma-link:hover { background: var(--accent); color: var(--paper); }
 
   footer { background: var(--surf); color: rgba(var(--ink-rgb), 0.65); padding: 32px; text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
 
@@ -255,9 +254,7 @@
 
   /* Figma button sits right under the title, solid orange so nobody misses it */
   .figma-cta { padding: 0; margin-top: 28px; }
-  .figma-link { background: var(--accent); color: var(--paper); border-color: var(--accent); transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease; }
-  .figma-link:hover, .figma-link:focus-visible { background: var(--accent-hover); color: var(--paper); border-color: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(var(--accent-rgb), 0.28); }
-  .figma-link:active { transform: translateY(0) scale(0.98); box-shadow: none; }
+  .figma-link { background-color: var(--accent); color: var(--paper); border-color: var(--accent); }
   @media (max-width: 639px) { .figma-cta { margin-top: 20px; } .figma-link { width: 100%; justify-content: space-between; } }
   /* Laptops and up: centre the title block so it sits balanced over the full-width cover */
   @media (min-width: 1024px) {
@@ -297,7 +294,7 @@
     <h1>EarlyFoods, designed for <i>trust,</i> not conversion</h1>
     <p class="lede">A founder-led food brand for expecting mothers and young children, growing through Instagram reels. Everyone assumed price was what held parents back. The research said trust.</p>
     <div class="figma-cta">
-      <a href="https://www.figma.com/proto/rHNCAXumKEincNlL1m1rcz/AB?node-id=22-12206&viewport=426%2C150%2C0.04&t=iomC10jmr4FZVBLo-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2%3A33486&page-id=1%3A5423" target="_blank" rel="noopener noreferrer" class="figma-link">
+      <a href="https://www.figma.com/proto/rHNCAXumKEincNlL1m1rcz/AB?node-id=22-12206&viewport=426%2C150%2C0.04&t=iomC10jmr4FZVBLo-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2%3A33486&page-id=1%3A5423" target="_blank" rel="noopener noreferrer" class="figma-link wipe">
         View full case study in Figma <span aria-hidden="true">↗</span>
       <span class="sr-only"> (opens in new tab)</span></a>
     </div>

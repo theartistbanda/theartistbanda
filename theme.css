@@ -22,6 +22,8 @@
   --accent-tint: rgba(189, 63, 12, 0.07);
   --accent-soft: #F7E6DD;
   --on-accent: #FFFFFF;
+  --accent-wipe: #E05320;    /* the dark-mode orange */
+  --on-accent-wipe: #0F0D0B; /* white on #E05320 is 3.9:1, so text flips dark: 5:1 */
   --panel: #F4F1EB;   /* matches the background baked into aatmnirbhar-logo.webp */
   --placeholder: #6B655F;
 }
@@ -42,6 +44,8 @@ html[data-theme="dark"] {
   --accent-tint: rgba(194, 65, 12, 0.1);
   --accent-soft: #2A1208;
   --on-accent: #0F0D0B;
+  --accent-wipe: #F26A3A;    /* the existing lighter orange */
+  --on-accent-wipe: #0F0D0B; /* 6.4:1 */
   --panel: #F4F1EC;
   --placeholder: rgba(237, 234, 228, 0.5);
 }
@@ -57,3 +61,20 @@ html[data-theme="dark"] {
 html[data-theme="dark"] .theme-toggle .icon-moon, html[data-theme="dark"] .theme-toggle .label-to-dark { display: none; }
 html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 html[data-theme="dark"] .theme-toggle .label-to-light { display: inline; }
+
+/* Primary buttons: a lighter orange wipes across on hover and keyboard focus. No lift, no
+   shadow. The text flips to --on-accent-wipe so it stays AA on the lighter orange.
+   Pages zero transitions for reduced motion, so the wipe is then instant. */
+a.wipe, button.wipe {
+  background-image: linear-gradient(var(--accent-wipe), var(--accent-wipe));
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 100%;
+  transition: background-size .4s cubic-bezier(.65, 0, .35, 1), color .25s ease, border-color .4s ease;
+}
+a.wipe:hover, a.wipe:focus-visible,
+button.wipe:not(:disabled):hover, button.wipe:not(:disabled):focus-visible {
+  background-size: 100% 100%;
+  color: var(--on-accent-wipe) !important;
+  border-color: var(--accent-wipe) !important;
+}

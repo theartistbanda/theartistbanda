@@ -298,11 +298,11 @@ function ANav() {
   }, /*#__PURE__*/React.createElement(AThemeToggle, null), /*#__PURE__*/React.createElement("a", {
     href: "#contact",
     "data-cursor": "hover",
-    className: "cta cta-primary",
+    className: "cta cta-primary wipe",
     style: {
       ...aStyles.cta,
       color: A.paper,
-      background: A.accent,
+      backgroundColor: A.accent,
       padding: bp.isMobile ? '10px 12px' : '10px 16px',
       textDecoration: 'none',
       display: 'inline-flex',
@@ -1734,6 +1734,209 @@ function suggestEmail(v) {
   const fixedTld = domain.replace(/\.(con|cmo|ocm|comm|cpm|vom|xom)$/, '.com');
   return fixedTld !== domain ? `${user}@${fixedTld}` : '';
 }
+
+// ─── DIRECT LINES ────────────────────────────────────────────────────────────
+const lineRow = bp => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: bp.isMobile ? 12 : 16,
+  padding: '9px 0',
+  textDecoration: 'none',
+  color: A.ink,
+  transition: 'padding-left .2s'
+});
+const lineNudge = {
+  onMouseEnter: e => {
+    e.currentTarget.style.paddingLeft = '8px';
+  },
+  onMouseLeave: e => {
+    e.currentTarget.style.paddingLeft = '0';
+  }
+};
+
+// Icon, small label and value: shared by the links and the copy-email button
+function ALineBody({
+  l,
+  bp,
+  end
+}) {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      width: 36,
+      height: 36,
+      flexShrink: 0,
+      border: `1px solid rgba(var(--ink-rgb), 0.16)`,
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: A.accent
+    }
+  }, /*#__PURE__*/React.createElement(AContactIcon, {
+    type: l.label.split(' · ')[0]
+  })), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...aStyles.mono,
+      fontSize: 9
+    }
+  }, l.label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: bp.isMobile ? 15 : 17,
+      fontWeight: 500,
+      letterSpacing: '-0.01em',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8
+    }
+  }, l.flag && /*#__PURE__*/React.createElement(AFlag, {
+    code: l.flag
+  }), l.value)), /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      marginLeft: 'auto',
+      color: A.accent,
+      fontSize: 16,
+      flexShrink: 0,
+      display: 'inline-flex'
+    }
+  }, end));
+}
+
+// Phones open the dialler; profiles (LinkedIn, Dribbble, Behance) open in a new tab
+function ADirectLink({
+  l,
+  bp
+}) {
+  const external = /^https?:/.test(l.href);
+  return /*#__PURE__*/React.createElement("a", _extends({
+    href: l.href,
+    "data-cursor": "hover",
+    style: lineRow(bp)
+  }, lineNudge, external ? {
+    target: '_blank',
+    rel: 'noopener noreferrer'
+  } : {}), /*#__PURE__*/React.createElement(ALineBody, {
+    l: l,
+    bp: bp,
+    end: external ? '↗' : '→'
+  }), external && /*#__PURE__*/React.createElement("span", {
+    className: "sr-only"
+  }, " (opens in new tab)"));
+}
+
+// Email copies the address instead of opening a mail app. A tooltip on hover and keyboard
+// focus says "Click to copy", then "Copied"; a live region tells screen reader users.
+// Escape hides the tooltip (WCAG 1.4.13). If copying fails, it falls back to the mail app.
+function ACopyEmail({
+  l,
+  bp
+}) {
+  const [copied, setCopied] = React.useState(false);
+  const [tipHidden, setTipHidden] = React.useState(false);
+  const timer = React.useRef(null);
+  React.useEffect(() => () => clearTimeout(timer.current), []);
+  const copy = async () => {
+    let ok = false;
+    try {
+      await navigator.clipboard.writeText(l.value);
+      ok = true;
+    } catch (e) {
+      try {
+        const t = document.createElement('textarea');
+        t.value = l.value;
+        t.setAttribute('readonly', '');
+        t.style.position = 'fixed';
+        t.style.opacity = '0';
+        document.body.appendChild(t);
+        t.select();
+        ok = document.execCommand('copy');
+        t.remove();
+      } catch (e2) {
+        ok = false;
+      }
+    }
+    if (!ok) {
+      window.location.href = l.href;
+      return;
+    }
+    setTipHidden(false);
+    setCopied(true);
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setCopied(false), 2000);
+  };
+  const icon = {
+    width: 16,
+    height: 16,
+    display: 'block',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.5,
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round'
+  };
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    "data-cursor": "hover",
+    className: 'copy-email' + (copied ? ' is-copied' : '') + (tipHidden ? ' tip-hidden' : ''),
+    "aria-label": `Email ${l.value}, copy to clipboard`,
+    onClick: copy,
+    onKeyDown: e => {
+      if (e.key === 'Escape') setTipHidden(true);
+    },
+    onBlur: () => setTipHidden(false),
+    onMouseEnter: lineNudge.onMouseEnter,
+    onMouseLeave: e => {
+      setTipHidden(false);
+      lineNudge.onMouseLeave(e);
+    },
+    style: {
+      ...lineRow(bp),
+      position: 'relative',
+      width: '100%',
+      background: 'none',
+      border: 0,
+      font: 'inherit',
+      textAlign: 'left',
+      cursor: 'pointer'
+    }
+  }, /*#__PURE__*/React.createElement(ALineBody, {
+    l: l,
+    bp: bp,
+    end: copied ? /*#__PURE__*/React.createElement("svg", {
+      viewBox: "0 0 24 24",
+      style: icon
+    }, /*#__PURE__*/React.createElement("polyline", {
+      points: "5 12.5 10 17.5 19 7"
+    })) : /*#__PURE__*/React.createElement("svg", {
+      viewBox: "0 0 24 24",
+      style: icon
+    }, /*#__PURE__*/React.createElement("rect", {
+      x: "9",
+      y: "9",
+      width: "11",
+      height: "11",
+      rx: "1"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M5 15V5a1 1 0 0 1 1-1h10"
+    }))
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "copy-tip",
+    "aria-hidden": "true"
+  }, copied ? 'Copied' : 'Click to copy')), /*#__PURE__*/React.createElement("span", {
+    className: "sr-only",
+    "aria-live": "polite"
+  }, copied ? 'Email address copied' : ''));
+}
 function AContact() {
   const bp = useBreakpoint();
   const side = sp(bp);
@@ -2073,12 +2276,12 @@ function AContact() {
     type: "submit",
     "data-cursor": "hover",
     disabled: sending,
-    className: "cta cta-primary",
+    className: "cta cta-primary wipe",
     style: {
       ...aStyles.cta,
       padding: '18px 20px',
       width: '100%',
-      background: sending ? 'rgba(var(--ink-rgb), 0.1)' : A.accent,
+      backgroundColor: sending ? 'rgba(var(--ink-rgb), 0.1)' : A.accent,
       color: sending ? A.ink : A.paper,
       border: 'none',
       cursor: sending ? 'default' : 'pointer',
@@ -2106,69 +2309,15 @@ function AContact() {
       columnGap: 40,
       rowGap: 4
     }
-  }, PORTFOLIO.links.map(l => /*#__PURE__*/React.createElement("a", {
+  }, PORTFOLIO.links.map(l => l.label === 'Email' ? /*#__PURE__*/React.createElement(ACopyEmail, {
     key: l.label,
-    href: l.href,
-    "data-cursor": "hover",
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: bp.isMobile ? 12 : 16,
-      padding: '9px 0',
-      textDecoration: 'none',
-      color: A.ink,
-      transition: 'padding-left .2s'
-    },
-    onMouseEnter: e => e.currentTarget.style.paddingLeft = '8px',
-    onMouseLeave: e => e.currentTarget.style.paddingLeft = '0'
-  }, /*#__PURE__*/React.createElement("span", {
-    "aria-hidden": "true",
-    style: {
-      width: 36,
-      height: 36,
-      flexShrink: 0,
-      border: `1px solid rgba(var(--ink-rgb), 0.16)`,
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: A.accent
-    }
-  }, /*#__PURE__*/React.createElement(AContactIcon, {
-    type: l.label.split(' · ')[0]
-  })), /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 1,
-      minWidth: 0
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...aStyles.mono,
-      fontSize: 9
-    }
-  }, l.label), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: bp.isMobile ? 15 : 17,
-      fontWeight: 500,
-      letterSpacing: '-0.01em',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 8
-    }
-  }, l.flag && /*#__PURE__*/React.createElement(AFlag, {
-    code: l.flag
-  }), l.value)), /*#__PURE__*/React.createElement("span", {
-    style: {
-      marginLeft: 'auto',
-      color: A.accent,
-      fontSize: 16,
-      flexShrink: 0
-    }
-  }, "\u2192")))))));
+    l: l,
+    bp: bp
+  }) : /*#__PURE__*/React.createElement(ADirectLink, {
+    key: l.label,
+    l: l,
+    bp: bp
+  }))))));
 }
 
 // Field outlines at 3:1 or more against the sheet in both themes (WCAG 1.4.11)

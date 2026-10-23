@@ -217,8 +217,8 @@ function ANav() {
 
         <div style={{ display: 'flex', gap: bp.isMobile ? 8 : 12, alignItems: 'center' }}>
           <AThemeToggle />
-          <a href="#contact" data-cursor="hover" className="cta cta-primary" style={{
-            ...aStyles.cta, color: A.paper, background: A.accent,
+          <a href="#contact" data-cursor="hover" className="cta cta-primary wipe" style={{
+            ...aStyles.cta, color: A.paper, backgroundColor: A.accent,
             padding: bp.isMobile ? '10px 12px' : '10px 16px', textDecoration: 'none',
             display: 'inline-flex', gap: 8, alignItems: 'center', flexShrink: 0
           }}>
@@ -1013,6 +1013,106 @@ function suggestEmail(v) {
   return fixedTld !== domain ? `${user}@${fixedTld}` : '';
 }
 
+// ─── DIRECT LINES ────────────────────────────────────────────────────────────
+const lineRow = (bp) => ({
+  display: 'flex', alignItems: 'center', gap: bp.isMobile ? 12 : 16,
+  padding: '9px 0', textDecoration: 'none', color: A.ink, transition: 'padding-left .2s'
+});
+const lineNudge = {
+  onMouseEnter: (e) => { e.currentTarget.style.paddingLeft = '8px'; },
+  onMouseLeave: (e) => { e.currentTarget.style.paddingLeft = '0'; }
+};
+
+// Icon, small label and value: shared by the links and the copy-email button
+function ALineBody({ l, bp, end }) {
+  return (
+    <React.Fragment>
+      <span aria-hidden="true" style={{
+        width: 36, height: 36, flexShrink: 0,
+        border: `1px solid rgba(var(--ink-rgb), 0.16)`,
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        color: A.accent
+      }}>
+        <AContactIcon type={l.label.split(' · ')[0]} />
+      </span>
+      <span style={{ display: 'flex', flexDirection: 'column', gap: 1, minWidth: 0 }}>
+        <span style={{ ...aStyles.mono, fontSize: 9 }}>{l.label}</span>
+        <span style={{
+          fontSize: bp.isMobile ? 15 : 17, fontWeight: 500, letterSpacing: '-0.01em',
+          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+          display: 'flex', alignItems: 'center', gap: 8
+        }}>{l.flag && <AFlag code={l.flag} />}{l.value}</span>
+      </span>
+      <span aria-hidden="true" style={{ marginLeft: 'auto', color: A.accent, fontSize: 16, flexShrink: 0, display: 'inline-flex' }}>{end}</span>
+    </React.Fragment>
+  );
+}
+
+// Phones open the dialler; profiles (LinkedIn, Dribbble, Behance) open in a new tab
+function ADirectLink({ l, bp }) {
+  const external = /^https?:/.test(l.href);
+  return (
+    <a href={l.href} data-cursor="hover" style={lineRow(bp)} {...lineNudge}
+      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+      <ALineBody l={l} bp={bp} end={external ? '↗' : '→'} />
+      {external && <span className="sr-only"> (opens in new tab)</span>}
+    </a>
+  );
+}
+
+// Email copies the address instead of opening a mail app. A tooltip on hover and keyboard
+// focus says "Click to copy", then "Copied"; a live region tells screen reader users.
+// Escape hides the tooltip (WCAG 1.4.13). If copying fails, it falls back to the mail app.
+function ACopyEmail({ l, bp }) {
+  const [copied, setCopied] = React.useState(false);
+  const [tipHidden, setTipHidden] = React.useState(false);
+  const timer = React.useRef(null);
+  React.useEffect(() => () => clearTimeout(timer.current), []);
+
+  const copy = async () => {
+    let ok = false;
+    try {
+      await navigator.clipboard.writeText(l.value);
+      ok = true;
+    } catch (e) {
+      try {
+        const t = document.createElement('textarea');
+        t.value = l.value; t.setAttribute('readonly', '');
+        t.style.position = 'fixed'; t.style.opacity = '0';
+        document.body.appendChild(t); t.select();
+        ok = document.execCommand('copy');
+        t.remove();
+      } catch (e2) { ok = false; }
+    }
+    if (!ok) { window.location.href = l.href; return; }
+    setTipHidden(false);
+    setCopied(true);
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setCopied(false), 2000);
+  };
+
+  const icon = { width: 16, height: 16, display: 'block', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' };
+  return (
+    <React.Fragment>
+      <button type="button" data-cursor="hover"
+        className={'copy-email' + (copied ? ' is-copied' : '') + (tipHidden ? ' tip-hidden' : '')}
+        aria-label={`Email ${l.value}, copy to clipboard`}
+        onClick={copy}
+        onKeyDown={(e) => { if (e.key === 'Escape') setTipHidden(true); }}
+        onBlur={() => setTipHidden(false)}
+        onMouseEnter={lineNudge.onMouseEnter}
+        onMouseLeave={(e) => { setTipHidden(false); lineNudge.onMouseLeave(e); }}
+        style={{ ...lineRow(bp), position: 'relative', width: '100%', background: 'none', border: 0, font: 'inherit', textAlign: 'left', cursor: 'pointer' }}>
+        <ALineBody l={l} bp={bp} end={copied
+          ? <svg viewBox="0 0 24 24" style={icon}><polyline points="5 12.5 10 17.5 19 7" /></svg>
+          : <svg viewBox="0 0 24 24" style={icon}><rect x="9" y="9" width="11" height="11" rx="1" /><path d="M5 15V5a1 1 0 0 1 1-1h10" /></svg>} />
+        <span className="copy-tip" aria-hidden="true">{copied ? 'Copied' : 'Click to copy'}</span>
+      </button>
+      <span className="sr-only" aria-live="polite">{copied ? 'Email address copied' : ''}</span>
+    </React.Fragment>
+  );
+}
+
 function AContact() {
   const bp = useBreakpoint();
   const side = sp(bp);
@@ -1193,10 +1293,10 @@ function AContact() {
                         Something went wrong. Try emailing me directly.
                       </p>
                     )}
-                    <button type="submit" data-cursor="hover" disabled={sending} className="cta cta-primary"
+                    <button type="submit" data-cursor="hover" disabled={sending} className="cta cta-primary wipe"
                       style={{
                         ...aStyles.cta, padding: '18px 20px', width: '100%',
-                        background: sending ? 'rgba(var(--ink-rgb), 0.1)' : A.accent,
+                        backgroundColor: sending ? 'rgba(var(--ink-rgb), 0.1)' : A.accent,
                         color: sending ? A.ink : A.paper, border: 'none', cursor: sending ? 'default' : 'pointer',
                         textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
                       }}>
@@ -1218,34 +1318,9 @@ function AContact() {
             gridTemplateColumns: bp.isDesktop ? 'repeat(3, minmax(0, 1fr))' : bp.isTablet ? 'repeat(2, minmax(0, 1fr))' : '1fr',
             columnGap: 40, rowGap: 4
           }}>
-            {PORTFOLIO.links.map((l) => (
-              <a key={l.label} href={l.href} data-cursor="hover"
-                style={{
-                  display: 'flex', alignItems: 'center', gap: bp.isMobile ? 12 : 16,
-                  padding: '9px 0',
-                  textDecoration: 'none', color: A.ink, transition: 'padding-left .2s'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '8px'}
-                onMouseLeave={(e) => e.currentTarget.style.paddingLeft = '0'}>
-                <span aria-hidden="true" style={{
-                  width: 36, height: 36, flexShrink: 0,
-                  border: `1px solid rgba(var(--ink-rgb), 0.16)`,
-                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                  color: A.accent
-                }}>
-                  <AContactIcon type={l.label.split(' · ')[0]} />
-                </span>
-                <span style={{ display: 'flex', flexDirection: 'column', gap: 1, minWidth: 0 }}>
-                  <span style={{ ...aStyles.mono, fontSize: 9 }}>{l.label}</span>
-                  <span style={{
-                    fontSize: bp.isMobile ? 15 : 17, fontWeight: 500, letterSpacing: '-0.01em',
-                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                    display: 'flex', alignItems: 'center', gap: 8
-                  }}>{l.flag && <AFlag code={l.flag} />}{l.value}</span>
-                </span>
-                <span style={{ marginLeft: 'auto', color: A.accent, fontSize: 16, flexShrink: 0 }}>→</span>
-              </a>
-            ))}
+            {PORTFOLIO.links.map((l) => (l.label === 'Email'
+              ? <ACopyEmail key={l.label} l={l} bp={bp} />
+              : <ADirectLink key={l.label} l={l} bp={bp} />))}
           </div>
         </div>
       </div>
