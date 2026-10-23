@@ -104,7 +104,7 @@ const PORTFOLIO = {
         ['14', 'Countries'],
       ],
       tags: ['AI Interface', 'Enterprise', 'Design Systems'],
-      image: '/assets/taskgpt-cover.webp',
+      image: '/assets/taskgpt-dashboard.webp',
       href: '/case-taskgpt',
     },
     {

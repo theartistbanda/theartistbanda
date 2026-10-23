@@ -112,7 +112,7 @@ const PORTFOLIO = {
     body: 'End-to-end design of an OpenAI + PaLM 2 + LLaMA suite for agents on live customer calls across 14 countries. Call-handling time and operational costs each down 20%.',
     stats: [['20%', 'Less call-handling time'], ['35K', 'Suite daily users'], ['14', 'Countries']],
     tags: ['AI Interface', 'Enterprise', 'Design Systems'],
-    image: '/assets/taskgpt-cover.webp',
+    image: '/assets/taskgpt-dashboard.webp',
     href: '/case-taskgpt'
   }, {
     id: 'evaluateus',
