@@ -14,7 +14,7 @@ Dipesh Gurav is a Lead Product Designer with 11 years of experience, based in No
 - Design systems from tokens to shipped components, built to WCAG 2.2 AA
 - RTL-first and cross-cultural design (India, the Gulf, the UK)
 - Research: surveys, heatmaps, interviews and usability testing
-- AI-augmented workflow: Claude, Cursor, Figma Make, v0, Lovable
+- AI-augmented workflow: Claude connected to Figma, Claude Code, Cursor, Figma Make, v0, Lovable
 
 ## Notable Projects
 
@@ -29,6 +29,10 @@ Dipesh Gurav is a Lead Product Designer with 11 years of experience, based in No
 **LevelUp** (TaskUs): Enterprise gamification with 3D characters built in Three.js, live leaderboards and rewards
 - Became the TaskUs company standard for gamification
 - Showcased at AWS Summit London 2025
+
+**AutoQA** (TaskUs): Automated review of agent calls, held to its goal of getting flagged agents into training and one-to-ones
+
+**Maestro** (TaskUs): An AI assistant inside Google Chat; team leads ask plain questions and get a summary, charts and a next action such as booking coaching
 
 **YourHour** (Mindefy): Digital wellbeing app
 - Over a million downloads, 22 languages, 4.6 stars, 70,000+ reviews on Google Play

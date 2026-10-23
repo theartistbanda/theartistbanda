@@ -504,7 +504,7 @@ function AWork() {
       color: A.accent,
       marginBottom: 16
     }
-  }, "Selected Work \xB7 2020\u20132025"), /*#__PURE__*/React.createElement("h2", {
+  }, "Selected Work \xB7 2018\u20132026"), /*#__PURE__*/React.createElement("h2", {
     style: {
       fontSize: bp.isMobile ? 28 : 44,
       fontWeight: 500,

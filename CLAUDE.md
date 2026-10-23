@@ -1,80 +1,86 @@
 # dipeshgurav.com: rules for Claude
 
-Static portfolio site, deployed to Vercel from `main`. This file is excluded from the public site by `.vercelignore`.
+Static portfolio site, deployed to Vercel from `main`. This file is excluded from the public site by `.vercelignore`. Rules and facts below were last refreshed from Dipesh's content brief of 22 Oct 2026; his CV (`dipesh-gurav-cv.pdf`, 21 Oct 2026) is the reference for wording.
 
-- Homepage copy lives in `shared.jsx` and `variant-a.jsx`. Edit those, then run `npm run build` to regenerate `shared.js` and `variant-a.js`. Never hand-edit only the compiled files.
+- Homepage copy lives in `shared.jsx` and `variant-a.jsx`. Edit those, then run `npm run build` to regenerate `shared.js` and `variant-a.js`. Never hand-edit only the compiled files. Babel writes `·` and `–` as escapes (`\xB7`, `–`) in the compiled files, so grep for a plain fragment when checking.
 - Case studies are the static `case-*.html` pages. Link to them with clean URLs (`/case-levelup`).
 - Work on a branch and check the Vercel preview before merging to `main`. `main` is the live site.
+- `cv/dipesh-gurav-cv.html` is an old, unpublished CV source (excluded in `.vercelignore`). It still carries retired claims; never republish it as is.
+- The contact form posts to a Google Apps Script. Its spam guard lives in `docs/contact-form-apps-script.gs` and must match the form rules in `variant-a.jsx`.
 
 ## 2. Hard content rules
 
-1. **11 years** of experience. Never 12, never "12+", and use "11 years" rather than "11+".
-2. **EvaluateUs: accuracy up 17%.** Say "accuracy", not "accuracy and speed". Never 70%. Never mention any £9,500 per month figure.
-3. **LevelUp has no engagement figure.** The "40% engagement lift" is not real. Remove it everywhere, along with "attrition dropped" (also unverified).
-4. **Never mention PCAF** (the "Persona-Centric Analysis Framework"). Dipesh doesn't recognise it.
-5. **WCAG 2.2 AA**, never 2.1. Where a page says just "WCAG AA" for older work (YourHour, JEGO), leaving out the version is fine.
-6. **YourHour: over a million downloads** ("1M+" is fine), 22 languages, 4.6 stars, 70,000+ reviews, 300+ research sessions. Never "millions" of anything about Dipesh's reach.
-7. **EarlyFoods: nearly 400 customer survey responses** (394 replies from 500+ sent), sales up **33% in a month**. Never "400 interviews", "400+ parents" or "400+ parent interviews".
-8. **Aatmnirbhar Bharat mark:** an entry to an **open MyGov competition**. Design: the Indian tricolour and Ashok Chakra fused with a golden bird, a reference to India once being called *sone ki chidiya*. The competition was **never formally decided**. The mark was **taken up by the PM SVANidhi scheme** (a micro-credit scheme for street vendors) and **used by manufacturers marking Indian-made goods, without credit**. Never say "no brief", "zero brief", "officially adopted", "official government adoption" or "national identity" as if it were an official commission. Don't say "one night" or "by morning" unless Dipesh confirms it (see decisions in the fixes file).
-9. **No years on EarlyFoods or JEGO.** Their real dates fall inside the TaskUs period, so a year there contradicts the career timeline.
-10. **AutoQA on public pages:** don't say a senior leader turned a requirements document into a front end with AI, and don't say fixes were planned into a version two.
-11. **Right to work and sponsorship:** keep it on the website as "Right to work in the UK", never "Full" (banner, availability card, meta, noscript, llms.txt). Leave it off the CV. (Decided 8 Oct 2026.)
-12. **No em dashes. No double hyphens in text.** Use commas, full stops, colons or semicolons. En dashes in year ranges (2023–2024) and the existing → arrows are fine.
-13. **Names:** Manish Pandya (never Pandeya), Bryce Maddock, Yahya Hussain.
-14. **Management:** Dipesh has **0 years of formal line management**. He **hired and mentored junior and mid-level designers at Mindefy**. Say exactly that. Don't use "Team Leadership" or "Leadership" in a way that implies he managed a team at TaskUs, where he was the only designer.
-15. **Don't invent.** Earlier versions of this site were partly AI-written and picked up details nobody verified. Add no number, place, date, client type or claim that isn't in section 3 or 4. When unsure, cut rather than embellish.
-16. **No dates after April 2021 on non-TaskUs work.** He joined TaskUs in April 2021. Mindefy and Artist Banda client projects (EarlyFoods, JEGO) carry no years, so nothing reads like moonlighting. EarlyFoods sits under The Artist Banda, JEGO under Mindefy.
-17. **UAE belongs to JEGO only.** EarlyFoods has no stated market.
-18. **Repos and YourSlice:** leave their copy alone unless Dipesh asks.
-19. **Stories a stranger can picture.** Explain work through who used it and what changed for them, not stacked jargon.
+1. **11 years** of experience. Never 12, "12+" or "11+".
+2. **EvaluateUs: accuracy up 17%.** Just "accuracy", never "accuracy and speed", never 70%, never any £9,500 figure.
+3. **LevelUp has no percentage.** No "40% engagement", no "attrition dropped".
+4. **Never mention PCAF.**
+5. **WCAG 2.2 AA**, never 2.1. Plain "WCAG AA" is fine on older work (YourHour, JEGO).
+6. **YourHour:** over a million downloads ("1M+" is fine), 4.6 stars, 70,000+ reviews, 22 languages, 300+ research sessions. Never "millions", never 80,000 reviews.
+7. **14 countries belongs to TaskUs; 22 languages belongs to YourHour.** Never blend them. Never "used by millions".
+8. **EarlyFoods:** nearly 400 customer survey replies (394 of 500+ sent), sales up 33% in a month. Never "400 interviews" or "400+ parents". **Never put UAE on EarlyFoods; UAE belongs only to JEGO.**
+9. **No years on EarlyFoods or JEGO.** Their real dates fall inside the TaskUs period.
+10. **Aatmnirbhar Bharat mark:** an entry to an open MyGov competition (tricolour and Ashok Chakra fused with a golden bird, a nod to *sone ki chidiya*). The competition was never formally decided. The mark was taken up by the PM SVANidhi scheme (micro-credit for street vendors) and used by manufacturers marking Indian-made goods, without credit. Never "no brief", "officially adopted", "overnight", "one night", "by morning" or "national identity" as if it were a commission.
+11. **AutoQA in public copy:** never say a senior leader turned a requirements document into a front end with AI, and never say fixes were planned into a version two.
+12. **Design system:** he extended and scaled an existing global foundation; he did not build it from scratch. Don't write "I owned it from tokens".
+13. **Management:** 0 years of formal line management. He hired and mentored junior and mid-level designers at Mindefy. At TaskUs he was the founding and only designer. No "Team Leadership".
+14. **Names:** Manish Pandya (never Pandeya), Bryce Maddock, Yahya Hussain.
+15. **No em dashes, no double hyphens** in any text, alt text or meta. Use commas, full stops, colons or semicolons. En dashes in year ranges and the existing → arrows are fine.
+16. **No faith or religion claims** about any audience. The JEGO faith points came from an AI conversation, not research; they were removed on 22 Oct 2026. Never reintroduce "Islamic", "secular", "spiritual", "faith", "ritual", "blessings" or anything like them.
+17. **Don't invent.** Earlier versions of this site were partly AI-written and picked up details nobody verified. Add no number, place, client type or claim that isn't in section 3. When unsure, cut rather than embellish.
+18. **Stories a stranger can picture:** who used it and what changed for them, not stacked jargon.
+19. **Right to work:** keep it on the website as "Right to work in the UK · No sponsorship required", never "Full" (banner, availability card, meta, noscript, llms.txt). Don't add it anywhere new, and leave it off the CV. (Decided 8 Oct 2026, confirmed 22 Oct.)
+20. **The Artist Banda:** he *founded* it. "Co-founded" only ever refers to the earlier production house. **Repos Energy** is the company; **Repos Pay** is the product he worked on. Never describe "a payment and energy mobility ecosystem".
 
-## 3. Verified facts (the only numbers to use)
+## 3. Verified facts (the only numbers and claims to use)
 
 | Topic | Fact |
 |---|---|
 | Experience | 11 years in design (counted from 2015) |
-| TaskUs | Lead Product Designer, Apr 2021 to Jul 2026, location "Remote" (not "Remote, UK") |
-| TaskUs role | Founding and only designer of the Digital IT team. Hired by Manish Pandya. |
-| TaskUs products | Multi-tenant, owned by TaskUs, sold to client companies on subscription. Around 35,000 daily users across 14 countries (this figure is for the product suite, not TaskGPT alone). Around 20 products went live, not counting individual TaskGPT tools. |
-| TaskGPT | Call-handling time down 20%; operational costs down 20%. Moving it behind an encrypted layer solved the privacy problem and made it 20% faster. Models: OpenAI, PaLM 2, LLaMA (already on the site; fine to keep). |
-| EvaluateUs | Accuracy up 17% |
-| LevelUp | No percentage. Company-wide standard for gamification. Showcased at AWS Summit London 2025. 18 fully rigged 3D characters built in Three.js. Launch date 31 January 2024 is on the current page from Dipesh's own material; fine to keep. |
-| Design system | Tokens to shipped components, mobile and web, 14 countries, WCAG 2.2 AA |
-| AI workflow | Time to concept down 60%. Tools: Claude, Cursor, Figma Make, v0, Lovable. Claude connected to Figma. |
-| YourHour | Over a million downloads, 22 languages, 4.6 stars, 70,000+ reviews, 300+ research sessions. A Mindefy product. Sole designer end to end. |
-| EarlyFoods | Nearly 400 survey responses (394 of 500+ sent). Sales up 33% in a month. Shown under The Artist Banda. No year, no market. |
-| JEGO | Usability satisfaction up 25%. RTL-first for Gulf audiences. A Mindefy client project. No year. |
-| GreenBill | Four apps. Usability testing toolkit caught 85% of issues before development. |
-| ZuQA | Developer onboarding time down 15% |
-| Production house | Co-founded with college friends; over 200 clients in under three years |
-| Mindefy Technologies | Mar 2017 to Feb 2021, Indore, India. Joined as an intern, became sole designer, later hired and mentored designers. |
-| The Artist Banda | 2014 to 2017 (decided; drop any "clients to 2022") |
-| Contact | contact@dipeshgurav.com · +44 7352 673152 · linkedin.com/in/dipeshgurav-design |
-| Dribbble | **dribbble.com/dipeshgurav9** (correct and live; `dribbble.com/theartistbanda` returns 404, so don't "fix" it) |
-| Behance | behance.net/theartistbanda |
+| Headline title | Senior Product Designer (LinkedIn and CV). The site keeps "Lead Product Designer", his actual TaskUs title, and "est. 2015". |
+| TaskUs | Lead Product Designer, Apr 2021 to Jul 2026, "Remote" (not "Remote, UK"). Founding and only designer of the Digital IT team, hired by Manish Pandya. |
+| TaskUs products | Multi-tenant, owned by TaskUs, sold to client companies on subscription. Around 35,000 daily users across 14 countries (the suite, not one product). Around 20 products went live, not counting individual TaskGPT tools. |
+| TaskGPT | AI for agents on live calls, across OpenAI, PaLM 2 and LLaMA. Much of it a Chrome extension inside the tool agents already used. A multi-tenant admin where clients were onboarded and each campaign got its own tools, AI model and knowledge base. Kept AI-suggested labels only where they matched the business's own terms. Instrumentation: usage, answer quality and guardrails, token cost, agent feedback. Call-handling time and operational costs each down 20%. Moving it behind an encrypted layer solved the privacy problem and made it 20% faster (kept on the site by Dipesh, 22 Oct 2026). |
+| EvaluateUs | AI-scored hiring, coaching and training assessments; one result, three readers (candidate, assessor, manager). Reporting was the real value. Accuracy up 17%. Got its own theme so it could be sold to external clients. |
+| LevelUp | Managers set targets, challenges and rewards; agents compete as their own 3D characters (18 fully rigged, Three.js) on live leaderboards. Everyone who takes part wins something. First gamification work at TaskUs, became the company standard, showcased at AWS Summit London 2025. Launched 31 January 2024. |
+| AutoQA | Last TaskUs product, automated review of agent calls. First build surfaced insight but didn't help anyone act; he held it to its own goal (flagged agents into training and one-to-ones), wrote a UX review, worked with the SVP, director and dev manager to break fixes into small steps, cut what phase one didn't need to protect a three-month timeline. AI hunted edge cases; his review began where it ran out. |
+| Maestro | An AI assistant inside Google Chat. Team leads asked plain questions (who was late on shift, which agent had the most flagged calls) and got a summary, charts and a next action such as booking coaching, instead of logging into several reporting tools. He took it from proof of concept to product and demoed it to clients alongside VPs and directors. Approved for the site 22 Oct 2026; not on the CV or LinkedIn. No numbers (see held back). |
+| Design system | Extended the global foundation across around 20 shipped products, adding a TaskGPT component layer and a separate EvaluateUs theme. Mobile and web, 14 countries, WCAG 2.2 AA. "As the only designer, it was the only way to scale myself." |
+| AI workflow | Claude connected to Figma, Claude Code, Cursor, Figma Make, v0, Lovable. Explores several directions in parallel and prototypes in code. Time to concept down 60%. |
+| Mindefy Technologies | Product Designer, Mar 2017 to Feb 2021, Indore, India (formerly Mind-e-fy Solutions). Intern to sole product designer. Hired and mentored junior and mid-level designers. |
+| YourHour | 2018 to 2020, at Mindefy. Sole designer end to end. Awareness and small wins instead of shame. Figures in rule 6. "I'd rather earn a habit than engineer a compulsion." |
+| YourSlice | Companion app to YourHour for tracking and managing specific habits, on the same design system. |
+| GreenBill | Paperless receipts and invoicing, four apps on one system (shoppers, merchant web point of sale, merchant mobile, admin). Usability testing toolkit caught 85% of issues before development. |
+| JEGO | Mindefy client project, UAE. Wellbeing and mentorship video streaming, redesigned right-to-left first for Gulf audiences. Usability satisfaction up 25%. From his own project notes: mentor profiles shown up front so people trust the person behind each course; "Jego Mastery" let mentors set course sequences so people knew where to start. |
+| Kidster | Digital school diary (attendance, homework, parent-teacher meetings, notices). Traction but not enough money; focus moved to YourHour. |
+| The Artist Banda | Product Design Consultant & Founder, 2014 to 2017, Bengaluru. He founded it (independent consultancy). Earlier co-ran a production house with college friends: 200+ clients in under three years. |
+| EarlyFoods | Food for expecting mothers and young children, founder-led, growing through Instagram reels, Shopify. Analytics and founder said price; heatmaps and nearly 400 survey replies said trust. Rebuilt around sourcing and certification, fixed hidden buttons and age filters, easy reorder. Sales up 33% in a month, confirmed by a follow-up survey. Sits under The Artist Banda. No market stated. |
+| Repos Pay | A product of Repos Energy (the company). Credit platform for fuel delivery: pump owners extend credit; businesses apply for and draw it down. Sits under The Artist Banda. |
+| ZuQA | API testing tool; progressive disclosure cut developer onboarding time 15%. |
+| Job App Assistant | Designed, coded and deployed solo in one session (Node.js, Claude API), 2026. job-app-assistant.onrender.com (sleeps when idle; open it once before checking links). |
+| Education | Interaction Design Foundation, UX, UI and Interaction Design, 2015 to 2017. MAAC, AD3D Edge+ Diploma: Design, Animation and VFX, 2012 to 2014. B.Com with Computer Science, 2011 to 2014. |
+| Contact | contact@dipeshgurav.com · +44 7352 673152 · linkedin.com/in/dipeshgurav-design · dribbble.com/dipeshgurav9 (correct; `theartistbanda` 404s on Dribbble, so don't "fix" it) · behance.net/theartistbanda |
+| Keywords | Dipesh confirmed on 22 Oct 2026 that he stands behind "A/B Testing", "Experimentation", "Conversion Rate Optimisation", "Digital Health" and "HealthTech" in skills chips and meta. Keep them. |
 
-**Held back until Dipesh confirms:** some EvaluateUs and Maestro figures exist but are not cleared for the site. Don't publish any number not in the table above.
+**Held back, never publish without Dipesh's say-so:** EvaluateUs coaching and training numbers up 38% and knowledge transfer 23% faster; Maestro's 29% and 23%.
 
-## 6. Retired claims (grep list)
+## 4. Retired claims (grep list)
 
-Search the whole repo (HTML, JSX, compiled JS, llms.txt, meta tags, alt text, JSON-LD, noscript) for each of these. Every hit must be fixed or consciously kept, with the reason given to Dipesh.
+Search the whole repo (HTML, JSX, compiled JS, llms.txt, meta, alt text, JSON-LD, noscript). Every hit must be fixed or consciously kept, with the reason given to Dipesh. Hits inside `cv/dipesh-gurav-cv.html` (unpublished) and `README.md` (repo-only) are known and can be ignored.
 
-- `40%`, `40 <` (split stat markup), `engagement lift`, `attrition`
+- `40%`, `engagement lift`, `attrition`
 - `PCAF`, `Persona-Centric`
 - `2.1` (WCAG)
 - `12 years`, `12+`, `11+`
-- `70%`, `9,500`
-- `400+`, `400 interviews`, `parent interviews`
-- `millions`, `used by millions`
-- `no brief`, `No brief`, `Zero brief`, `zero brief`, `Briefs received`
-- `officially adopted`, `Officially adopted`, `Official government adoption`, `national identity`
-- `One night`, `one night`, `By morning`, `1 Night`
-- `Repos Energy` (kept on purpose, see rule 18)
-- `UAE` on EarlyFoods
-- `Remote, UK`
-- `Independent Project`
-- `Pandeya`
-- `Team Leadership`
+- `70%`, `9,500`, `accuracy and speed`, `Accuracy & speed`
+- `400+`, `400 interviews`, `parent interviews`, `80,000`
+- `millions`, `used by millions`, `22 countries`
+- `no brief`, `No brief`, `Zero brief`, `Briefs received`, `officially adopted`, `Official government adoption`, `national identity`, `overnight`, `One night`, `By morning`
+- `Repos Energy`: may appear only as the company behind Repos Pay, never as "a payment and energy mobility ecosystem"
+- `Full right to work`
+- `Remote, UK`, `Independent Project`, `Pandeya`, `Team Leadership`
+- `owned it from tokens`, `co-founded`
+- Faith or religion anywhere on the site: `Islam`, `secular`, `spiritual`, `faith`, `ritual`, `blessing`, `civilisational`
+- On `case-earlyfoods.html` only: `UAE`
+- `insurance claims`, `2020–2025`, `2021` next to YourHour
 - Em dash: use your Grep tool (ripgrep) with the pattern `\x{2014}`, or in the terminal `rg -n "\x{2014}" .` (macOS grep has no `-P`, so don't rely on it)
 - Double hyphen in prose: Grep tool or `rg -n "\s-{2}\s" -g "*.html" -g "*.jsx" -g "*.txt" .` (ignore CSS custom properties and HTML comments)
-
