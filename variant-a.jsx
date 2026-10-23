@@ -93,10 +93,10 @@ function VariantA() {
         <AHero />
         <AMetrics />
         <AWork />
-        <AOrigin />
         <APrinciples />
         <ACareer />
         <AAbout />
+        <AOrigin />
         <AContact />
       </main>
       <AFooter />
@@ -122,7 +122,7 @@ function ANav() {
     return () => clearInterval(i);
   }, []);
 
-  const links = ['Work', 'Origin', 'Principles', 'Career', 'Studio'];
+  const links = ['Work', 'Principles', 'Career', 'Studio', 'Origin'];
 
   return (
     <nav style={{
@@ -542,6 +542,8 @@ function AOrigin() {
           <div style={{
             gridColumn: bp.isDesktop ? 'span 5' : undefined,
             display: 'grid', gridTemplateColumns: '1fr 1fr',
+            // Logo row takes any spare height so the quote row never gapes below its line
+            gridTemplateRows: '1fr auto',
             border: `1px solid rgba(244,241,236,0.12)`,
             marginTop: bp.isMobile ? 48 : bp.isTablet ? 48 : 0
           }}>

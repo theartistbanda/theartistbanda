@@ -110,7 +110,7 @@ function VariantA() {
     style: {
       outline: 'none'
     }
-  }, /*#__PURE__*/React.createElement(AHero, null), /*#__PURE__*/React.createElement(AMetrics, null), /*#__PURE__*/React.createElement(AWork, null), /*#__PURE__*/React.createElement(AOrigin, null), /*#__PURE__*/React.createElement(APrinciples, null), /*#__PURE__*/React.createElement(ACareer, null), /*#__PURE__*/React.createElement(AAbout, null), /*#__PURE__*/React.createElement(AContact, null)), /*#__PURE__*/React.createElement(AFooter, null));
+  }, /*#__PURE__*/React.createElement(AHero, null), /*#__PURE__*/React.createElement(AMetrics, null), /*#__PURE__*/React.createElement(AWork, null), /*#__PURE__*/React.createElement(APrinciples, null), /*#__PURE__*/React.createElement(ACareer, null), /*#__PURE__*/React.createElement(AAbout, null), /*#__PURE__*/React.createElement(AOrigin, null), /*#__PURE__*/React.createElement(AContact, null)), /*#__PURE__*/React.createElement(AFooter, null));
 }
 
 // ─── NAV ─────────────────────────────────────────────────────────────────────
@@ -134,7 +134,7 @@ function ANav() {
     const i = setInterval(tick, 15000);
     return () => clearInterval(i);
   }, []);
-  const links = ['Work', 'Origin', 'Principles', 'Career', 'Studio'];
+  const links = ['Work', 'Principles', 'Career', 'Studio', 'Origin'];
   return /*#__PURE__*/React.createElement("nav", {
     style: {
       background: 'rgba(15,13,11,0.92)',
@@ -801,6 +801,8 @@ function AOrigin() {
       gridColumn: bp.isDesktop ? 'span 5' : undefined,
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
+      // Logo row takes any spare height so the quote row never gapes below its line
+      gridTemplateRows: '1fr auto',
       border: `1px solid rgba(244,241,236,0.12)`,
       marginTop: bp.isMobile ? 48 : bp.isTablet ? 48 : 0
     }
