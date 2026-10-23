@@ -230,7 +230,7 @@
   /* Type and spacing pass (Oct 2026): calmer headings, and the title, intro and top of the cover fit on a laptop screen without scrolling */
   .hero { padding: 40px 0 40px; }
   .meta { margin-bottom: 40px; }
-  h1 { font-size: clamp(40px, 5.2vw, 80px); line-height: 1.02; letter-spacing: -0.03em; max-width: 16ch; }
+  h1 { font-size: clamp(40px, 5.2vw, 76px); line-height: 1.02; letter-spacing: -0.03em; max-width: none; text-wrap: balance; }
   .lede { margin-top: 24px; font-size: 18px; max-width: 64ch; }
   .cover { margin-top: 40px; }
   section.body { padding: 80px 0; }
@@ -252,18 +252,12 @@
     .section-head h2 { font-size: 24px; }
   }
 
-  /* Figma case study button: always visible in the sticky nav */
-  .nav-right { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
-  .nav-figma { background: var(--accent); color: var(--paper); font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 10px 14px; display: inline-flex; align-items: center; gap: 8px; transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease; }
-  .nav-figma:hover, .nav-figma:focus-visible { background: #F26A3A; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(224,83,32,0.28); }
-  .nav-figma:active { transform: translateY(0) scale(0.98); box-shadow: none; }
-  .nav-figma .sm { display: none; }
-  @media (max-width: 639px) {
-    .nav-right { gap: 12px; }
-    .nav-figma { padding: 8px 10px; font-size: 10px; }
-    .nav-figma .lg { display: none; }
-    .nav-figma .sm { display: inline; }
-  }
+  /* Figma button sits right under the title, solid orange so nobody misses it */
+  .figma-cta { padding: 0; margin-top: 28px; }
+  .figma-link { background: var(--accent); color: var(--paper); border-color: var(--accent); transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+  .figma-link:hover, .figma-link:focus-visible { background: #F26A3A; color: var(--paper); border-color: #F26A3A; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(224,83,32,0.28); }
+  .figma-link:active { transform: translateY(0) scale(0.98); box-shadow: none; }
+  @media (max-width: 639px) { .figma-cta { margin-top: 20px; } .figma-link { width: 100%; justify-content: space-between; } }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -274,10 +268,7 @@
   <div>
     <a href="/" class="back">← Portfolio</a>
     <span class="mono nav-label"><span style="color:var(--ink)">●</span> EarlyFoods</span>
-    <div class="nav-right">
-      <a href="https://www.figma.com/proto/rHNCAXumKEincNlL1m1rcz/AB?node-id=22-12206&viewport=426%2C150%2C0.04&t=iomC10jmr4FZVBLo-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2%3A33486&page-id=1%3A5423" target="_blank" rel="noopener noreferrer" class="nav-figma"><span class="lg">View case study in Figma</span><span class="sm">Figma</span> <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a>
-      <a href="mailto:contact@dipeshgurav.com" class="back">Contact →</a>
-    </div>
+    <a href="mailto:contact@dipeshgurav.com" class="back">Contact →</a>
   </div>
 </nav>
 
@@ -289,7 +280,12 @@
       <div>Role / <span>UX / UI · Brand · Sole Designer</span></div>
       <div>Context / <span>Client Project · Organic E-commerce</span></div>
     </div>
-    <h1>EarlyFoods.<br>Designed for<br><i>trust,</i> not conversion.</h1>
+    <h1>EarlyFoods. Designed for <i>trust,</i> not conversion.</h1>
+    <div class="figma-cta">
+      <a href="https://www.figma.com/proto/rHNCAXumKEincNlL1m1rcz/AB?node-id=22-12206&viewport=426%2C150%2C0.04&t=iomC10jmr4FZVBLo-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2%3A33486&page-id=1%3A5423" target="_blank" rel="noopener noreferrer" class="figma-link">
+        View full case study in Figma <span aria-hidden="true">↗</span>
+      <span class="sr-only"> (opens in new tab)</span></a>
+    </div>
     <p class="lede">A founder-led food brand for expecting mothers and young children, growing through Instagram reels. Everyone assumed price was what held parents back. The research said trust.</p>
 
     <div class="cover">
@@ -301,11 +297,6 @@
       <div class="stat"><div class="mono" style="margin-bottom:8px">Sales</div><div class="ns">+33% in a month</div></div>
       <div class="stat"><div class="mono" style="margin-bottom:8px">Survey replies</div><div class="ns">Nearly 400</div></div>
       <div class="stat"><div class="mono" style="margin-bottom:8px">Platform</div><div class="ns">Shopify · Mobile</div></div>
-    </div>
-    <div class="figma-cta">
-      <a href="https://www.figma.com/proto/rHNCAXumKEincNlL1m1rcz/AB?node-id=22-12206&viewport=426%2C150%2C0.04&t=iomC10jmr4FZVBLo-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2%3A33486&page-id=1%3A5423" target="_blank" rel="noopener noreferrer" class="figma-link">
-        View full case study in Figma →
-      <span class="sr-only"> (opens in new tab)</span></a>
     </div>
   </div>
 </section>

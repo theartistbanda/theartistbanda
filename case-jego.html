@@ -208,7 +208,7 @@
   /* Type and spacing pass (Oct 2026): calmer headings, and the title, intro and top of the cover fit on a laptop screen without scrolling */
   .hero { padding: 40px 0 40px; }
   .meta { margin-bottom: 40px; }
-  h1 { font-size: clamp(40px, 5.2vw, 80px); line-height: 1.02; letter-spacing: -0.03em; max-width: 16ch; }
+  h1 { font-size: clamp(40px, 5.2vw, 76px); line-height: 1.02; letter-spacing: -0.03em; max-width: none; text-wrap: balance; }
   .lede { margin-top: 24px; font-size: 18px; max-width: 64ch; }
   .cover { margin-top: 40px; }
   section.body { padding: 80px 0; }
@@ -230,18 +230,12 @@
     .section-head h2 { font-size: 24px; }
   }
 
-  /* Figma case study button: always visible in the sticky nav */
-  .nav-right { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
-  .nav-figma { background: var(--accent); color: var(--paper); font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 10px 14px; display: inline-flex; align-items: center; gap: 8px; transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease; }
-  .nav-figma:hover, .nav-figma:focus-visible { background: #F26A3A; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(224,83,32,0.28); }
-  .nav-figma:active { transform: translateY(0) scale(0.98); box-shadow: none; }
-  .nav-figma .sm { display: none; }
-  @media (max-width: 639px) {
-    .nav-right { gap: 12px; }
-    .nav-figma { padding: 8px 10px; font-size: 10px; }
-    .nav-figma .lg { display: none; }
-    .nav-figma .sm { display: inline; }
-  }
+  /* Figma button sits right under the title, solid orange so nobody misses it */
+  .figma-cta { padding: 0; margin-top: 28px; }
+  .figma-link { background: var(--accent); color: var(--paper); border-color: var(--accent); transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+  .figma-link:hover, .figma-link:focus-visible { background: #F26A3A; color: var(--paper); border-color: #F26A3A; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(224,83,32,0.28); }
+  .figma-link:active { transform: translateY(0) scale(0.98); box-shadow: none; }
+  @media (max-width: 639px) { .figma-cta { margin-top: 20px; } .figma-link { width: 100%; justify-content: space-between; } }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -252,10 +246,7 @@
   <div>
     <a href="/" class="back">← Portfolio</a>
     <span class="mono nav-label"><span style="color:var(--ink)">●</span> JEGO</span>
-    <div class="nav-right">
-      <a href="https://www.figma.com/proto/rHNCAXumKEincNlL1m1rcz/AB?node-id=34-16535&viewport=426%2C150%2C0.04&t=JKCpWAh9h6Qdy6gG-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2%3A33486&page-id=1%3A5423" target="_blank" rel="noopener noreferrer" class="nav-figma"><span class="lg">View case study in Figma</span><span class="sm">Figma</span> <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a>
-      <a href="mailto:contact@dipeshgurav.com" class="back">Contact →</a>
-    </div>
+    <a href="mailto:contact@dipeshgurav.com" class="back">Contact →</a>
   </div>
 </nav>
 
@@ -268,7 +259,12 @@
       <div>Role / <span>Lead Product Design · Sole Designer</span></div>
       <div>Context / <span>Client Project · UAE · Wellbeing Streaming</span></div>
     </div>
-    <h1>JEGO.<br>Mentors for<br>the Gulf, designed <i>with nuance.</i></h1>
+    <h1>JEGO. Mentors for the Gulf, designed <i>with nuance.</i></h1>
+    <div class="figma-cta">
+      <a href="https://www.figma.com/proto/rHNCAXumKEincNlL1m1rcz/AB?node-id=34-16535&viewport=426%2C150%2C0.04&t=JKCpWAh9h6Qdy6gG-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2%3A33486&page-id=1%3A5423" target="_blank" rel="noopener noreferrer" class="figma-link">
+        View full case study in Figma <span aria-hidden="true">↗</span>
+      <span class="sr-only"> (opens in new tab)</span></a>
+    </div>
     <p class="lede">A wellbeing and mentorship streaming platform for the Gulf, redesigned right-to-left first for Arabic speakers. Usability satisfaction rose 25%.</p>
 
     <div class="cover">
@@ -280,11 +276,6 @@
       <div class="stat"><div class="mono" style="margin-bottom:8px">RTL Support</div><div class="ns">First-class Arabic</div></div>
       <div class="stat"><div class="mono" style="margin-bottom:8px">Usability satisfaction</div><div class="n">+25<i>%</i></div></div>
       <div class="stat"><div class="mono" style="margin-bottom:8px">Category</div><div class="ns">Wellbeing · Mentorship</div></div>
-    </div>
-    <div class="figma-cta">
-      <a href="https://www.figma.com/proto/rHNCAXumKEincNlL1m1rcz/AB?node-id=34-16535&viewport=426%2C150%2C0.04&t=JKCpWAh9h6Qdy6gG-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2%3A33486&page-id=1%3A5423" target="_blank" rel="noopener noreferrer" class="figma-link">
-        View full case study in Figma →
-      <span class="sr-only"> (opens in new tab)</span></a>
     </div>
   </div>
 </section>
