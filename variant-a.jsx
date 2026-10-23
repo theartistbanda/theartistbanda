@@ -419,7 +419,7 @@ function AWork() {
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Selected Work · 2018–2026</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
               Eight products, four markets,<br />
-              <span style={{ color: A.mute }}>measurable behaviour change</span>
+              measurable behaviour change
             </h2>
           </div>
           {bp.isDesktop && (
@@ -1110,42 +1110,9 @@ function AContact() {
                 Open to senior product design roles, consulting, and conversations with people who care about the humans behind the pixels.
               </p>
             </div>
-            {/* Spacer: pushes links to bottom on desktop */}
-            {bp.isDesktop && <div style={{ flex: 1 }} />}
-            <div style={{ marginTop: bp.isDesktop ? 0 : 40 }}>
-              <div style={{ ...aStyles.mono, color: 'rgba(var(--ink-rgb), 0.65)', marginBottom: 10 }}>Direct lines</div>
-              {PORTFOLIO.links.map((l) => (
-                <a key={l.label} href={l.href} data-cursor="hover"
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: bp.isMobile ? 12 : 16,
-                    padding: '9px 0',
-                    textDecoration: 'none', color: A.ink, transition: 'padding-left .2s'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '8px'}
-                  onMouseLeave={(e) => e.currentTarget.style.paddingLeft = '0'}>
-                  <span aria-hidden="true" style={{
-                    width: 36, height: 36, flexShrink: 0,
-                    border: `1px solid rgba(var(--ink-rgb), 0.16)`,
-                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                    color: A.accent
-                  }}>
-                    <AContactIcon type={l.label.split(' · ')[0]} />
-                  </span>
-                  <span style={{ display: 'flex', flexDirection: 'column', gap: 1, minWidth: 0 }}>
-                    <span style={{ ...aStyles.mono, fontSize: 9 }}>{l.label}</span>
-                    <span style={{
-                      fontSize: bp.isMobile ? 15 : 17, fontWeight: 500, letterSpacing: '-0.01em',
-                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                      display: 'flex', alignItems: 'center', gap: 8
-                    }}>{l.flag && <AFlag code={l.flag} />}{l.value}</span>
-                  </span>
-                  <span style={{ marginLeft: 'auto', color: A.accent, fontSize: 16, flexShrink: 0 }}>→</span>
-                </a>
-              ))}
-            </div>
           </div>
 
-          {/* Right: form pinned to bottom, aligning with first link */}
+          {/* Right: form, starting level with the intro */}
           <div style={{
             display: 'flex', flexDirection: 'column',
             justifyContent: 'flex-start',
@@ -1239,6 +1206,46 @@ function AContact() {
                 </div>
               </form>
             )}
+          </div>
+        </div>
+
+        {/* Direct lines: full width under the intro and form. Three across on desktop
+            (email and phones, then profiles), two on tablet, one on phones. */}
+        <div style={{ marginTop: bp.isMobile ? 48 : 64 }}>
+          <div style={{ ...aStyles.mono, color: 'rgba(var(--ink-rgb), 0.65)', marginBottom: 12 }}>Direct lines</div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: bp.isDesktop ? 'repeat(3, minmax(0, 1fr))' : bp.isTablet ? 'repeat(2, minmax(0, 1fr))' : '1fr',
+            columnGap: 40, rowGap: 4
+          }}>
+            {PORTFOLIO.links.map((l) => (
+              <a key={l.label} href={l.href} data-cursor="hover"
+                style={{
+                  display: 'flex', alignItems: 'center', gap: bp.isMobile ? 12 : 16,
+                  padding: '9px 0',
+                  textDecoration: 'none', color: A.ink, transition: 'padding-left .2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.paddingLeft = '8px'}
+                onMouseLeave={(e) => e.currentTarget.style.paddingLeft = '0'}>
+                <span aria-hidden="true" style={{
+                  width: 36, height: 36, flexShrink: 0,
+                  border: `1px solid rgba(var(--ink-rgb), 0.16)`,
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  color: A.accent
+                }}>
+                  <AContactIcon type={l.label.split(' · ')[0]} />
+                </span>
+                <span style={{ display: 'flex', flexDirection: 'column', gap: 1, minWidth: 0 }}>
+                  <span style={{ ...aStyles.mono, fontSize: 9 }}>{l.label}</span>
+                  <span style={{
+                    fontSize: bp.isMobile ? 15 : 17, fontWeight: 500, letterSpacing: '-0.01em',
+                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                    display: 'flex', alignItems: 'center', gap: 8
+                  }}>{l.flag && <AFlag code={l.flag} />}{l.value}</span>
+                </span>
+                <span style={{ marginLeft: 'auto', color: A.accent, fontSize: 16, flexShrink: 0 }}>→</span>
+              </a>
+            ))}
           </div>
         </div>
       </div>

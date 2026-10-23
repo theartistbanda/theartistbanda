@@ -605,11 +605,7 @@ function AWork() {
       lineHeight: 1.05,
       margin: 0
     }
-  }, "Eight products, four markets,", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: A.mute
-    }
-  }, "measurable behaviour change"))), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
+  }, "Eight products, four markets,", /*#__PURE__*/React.createElement("br", null), "measurable behaviour change")), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: 'span 4',
       alignSelf: 'end',
@@ -1883,83 +1879,7 @@ function AContact() {
       maxWidth: bp.isDesktop ? 460 : '100%',
       marginTop: 32
     }
-  }, "Open to senior product design roles, consulting, and conversations with people who care about the humans behind the pixels.")), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: bp.isDesktop ? 0 : 40
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...aStyles.mono,
-      color: 'rgba(var(--ink-rgb), 0.65)',
-      marginBottom: 10
-    }
-  }, "Direct lines"), PORTFOLIO.links.map(l => /*#__PURE__*/React.createElement("a", {
-    key: l.label,
-    href: l.href,
-    "data-cursor": "hover",
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: bp.isMobile ? 12 : 16,
-      padding: '9px 0',
-      textDecoration: 'none',
-      color: A.ink,
-      transition: 'padding-left .2s'
-    },
-    onMouseEnter: e => e.currentTarget.style.paddingLeft = '8px',
-    onMouseLeave: e => e.currentTarget.style.paddingLeft = '0'
-  }, /*#__PURE__*/React.createElement("span", {
-    "aria-hidden": "true",
-    style: {
-      width: 36,
-      height: 36,
-      flexShrink: 0,
-      border: `1px solid rgba(var(--ink-rgb), 0.16)`,
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: A.accent
-    }
-  }, /*#__PURE__*/React.createElement(AContactIcon, {
-    type: l.label.split(' · ')[0]
-  })), /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 1,
-      minWidth: 0
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...aStyles.mono,
-      fontSize: 9
-    }
-  }, l.label), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: bp.isMobile ? 15 : 17,
-      fontWeight: 500,
-      letterSpacing: '-0.01em',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 8
-    }
-  }, l.flag && /*#__PURE__*/React.createElement(AFlag, {
-    code: l.flag
-  }), l.value)), /*#__PURE__*/React.createElement("span", {
-    style: {
-      marginLeft: 'auto',
-      color: A.accent,
-      fontSize: 16,
-      flexShrink: 0
-    }
-  }, "\u2192"))))), /*#__PURE__*/React.createElement("div", {
+  }, "Open to senior product design roles, consulting, and conversations with people who care about the humans behind the pixels."))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2169,7 +2089,86 @@ function AContact() {
     }
   }, sending ? 'Sending…' : 'Send', " ", /*#__PURE__*/React.createElement("span", {
     className: "cta-arrow"
-  }, "\u2192")))))))));
+  }, "\u2192"))))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: bp.isMobile ? 48 : 64
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...aStyles.mono,
+      color: 'rgba(var(--ink-rgb), 0.65)',
+      marginBottom: 12
+    }
+  }, "Direct lines"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: bp.isDesktop ? 'repeat(3, minmax(0, 1fr))' : bp.isTablet ? 'repeat(2, minmax(0, 1fr))' : '1fr',
+      columnGap: 40,
+      rowGap: 4
+    }
+  }, PORTFOLIO.links.map(l => /*#__PURE__*/React.createElement("a", {
+    key: l.label,
+    href: l.href,
+    "data-cursor": "hover",
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: bp.isMobile ? 12 : 16,
+      padding: '9px 0',
+      textDecoration: 'none',
+      color: A.ink,
+      transition: 'padding-left .2s'
+    },
+    onMouseEnter: e => e.currentTarget.style.paddingLeft = '8px',
+    onMouseLeave: e => e.currentTarget.style.paddingLeft = '0'
+  }, /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    style: {
+      width: 36,
+      height: 36,
+      flexShrink: 0,
+      border: `1px solid rgba(var(--ink-rgb), 0.16)`,
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: A.accent
+    }
+  }, /*#__PURE__*/React.createElement(AContactIcon, {
+    type: l.label.split(' · ')[0]
+  })), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      ...aStyles.mono,
+      fontSize: 9
+    }
+  }, l.label), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: bp.isMobile ? 15 : 17,
+      fontWeight: 500,
+      letterSpacing: '-0.01em',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8
+    }
+  }, l.flag && /*#__PURE__*/React.createElement(AFlag, {
+    code: l.flag
+  }), l.value)), /*#__PURE__*/React.createElement("span", {
+    style: {
+      marginLeft: 'auto',
+      color: A.accent,
+      fontSize: 16,
+      flexShrink: 0
+    }
+  }, "\u2192")))))));
 }
 
 // Field outlines at 3:1 or more against the sheet in both themes (WCAG 1.4.11)
