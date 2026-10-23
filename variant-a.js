@@ -381,7 +381,8 @@ function AHero() {
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontStyle: 'italic',
-      fontWeight: 400
+      fontWeight: 400,
+      color: A.accent
     }
   }, "pixels.")) : /*#__PURE__*/React.createElement(React.Fragment, null, "Designing for", /*#__PURE__*/React.createElement("br", null), "the humans", /*#__PURE__*/React.createElement("br", null), "behind the", ' ', SHOW_HERO_ACCENT_BOX && /*#__PURE__*/React.createElement("span", {
     style: {
@@ -398,7 +399,8 @@ function AHero() {
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
     style: {
       fontStyle: 'italic',
-      fontWeight: 400
+      fontWeight: 400,
+      color: A.accent
     }
   }, "pixels."))), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -981,6 +983,64 @@ function APrinciples() {
 
 // ─── CAREER ──────────────────────────────────────────────────────────────────
 // Extracted to avoid calling useReveal inside .map() (hooks-in-loop violation)
+// First paragraph always shows; the rest opens on request, so the CV section stays short.
+// One button under the text switches between "Read more" and "Show less". The hidden
+// paragraphs stay in the page (hidden attribute), so search engines still read them.
+function ACareerBody({
+  c,
+  i,
+  gap
+}) {
+  const [open, setOpen] = React.useState(false);
+  const ref = React.useRef(null);
+  const [first, ...rest] = c.body;
+  const restId = `career-more-${i}`;
+  const orgName = c.org.split(' · ')[0];
+  const toggle = () => {
+    // Collapsing removes a lot of text: bring the role back into view if its top has scrolled away
+    if (open && ref.current && ref.current.getBoundingClientRect().top < 104) {
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      ref.current.scrollIntoView({
+        block: 'start',
+        behavior: reduce ? 'auto' : 'smooth'
+      });
+    }
+    setOpen(o => !o);
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    ref: ref,
+    style: {
+      fontSize: 15,
+      color: A.ink2,
+      lineHeight: 1.7
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: 0
+    }
+  }, first), rest.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    id: restId,
+    className: "cv-more",
+    hidden: !open
+  }, rest.map((para, pi) => /*#__PURE__*/React.createElement("p", {
+    key: pi,
+    style: {
+      margin: `${gap}px 0 0`
+    }
+  }, para))), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "cv-toggle",
+    "data-cursor": "hover",
+    "aria-expanded": open,
+    "aria-controls": restId,
+    onClick: toggle
+  }, open ? 'Show less' : 'Read more', /*#__PURE__*/React.createElement("span", {
+    className: "sr-only"
+  }, " about my role at ", orgName), /*#__PURE__*/React.createElement("span", {
+    className: "cv-toggle-icon",
+    "aria-hidden": "true"
+  }, open ? '↑' : '↓'))));
+}
 function ACareerItem({
   c,
   i,
@@ -1055,17 +1115,13 @@ function ACareerItem({
     }
   }, c.org), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 15,
-      color: A.ink2,
-      lineHeight: 1.7,
-      margin: '12px 0 0'
+      marginTop: 12
     }
-  }, c.body.map((para, pi) => /*#__PURE__*/React.createElement("p", {
-    key: pi,
-    style: {
-      margin: pi === 0 ? 0 : '10px 0 0'
-    }
-  }, para))), c.nda && /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(ACareerBody, {
+    c: c,
+    i: i,
+    gap: 10
+  })), c.nda && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 10,
       display: 'flex',
@@ -1122,18 +1178,11 @@ function ACareerItem({
       border: `1px solid ${A.line}`,
       color: A.ink2
     }
-  }, t))), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 15,
-      color: A.ink2,
-      lineHeight: 1.7
-    }
-  }, c.body.map((para, pi) => /*#__PURE__*/React.createElement("p", {
-    key: pi,
-    style: {
-      margin: pi === 0 ? 0 : '12px 0 0'
-    }
-  }, para))), c.nda && /*#__PURE__*/React.createElement("div", {
+  }, t))), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(ACareerBody, {
+    c: c,
+    i: i,
+    gap: 12
+  }), c.nda && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 12,
       display: 'flex',

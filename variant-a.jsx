@@ -301,7 +301,7 @@ function AHero() {
                     transition: 'transform 0.1s linear'
                   }} aria-hidden />
                 )}
-                <span style={{ fontStyle: 'italic', fontWeight: 400 }}>pixels.</span>
+                <span style={{ fontStyle: 'italic', fontWeight: 400, color: A.accent }}>pixels.</span>
               </>
             ) : (
               <>
@@ -321,7 +321,7 @@ function AHero() {
                   }} aria-hidden />
                 )}
                 <br />
-                <span style={{ fontStyle: 'italic', fontWeight: 400 }}>pixels.</span>
+                <span style={{ fontStyle: 'italic', fontWeight: 400, color: A.accent }}>pixels.</span>
               </>
             )}
           </h1>
@@ -630,6 +630,47 @@ function APrinciples() {
 
 // ─── CAREER ──────────────────────────────────────────────────────────────────
 // Extracted to avoid calling useReveal inside .map() (hooks-in-loop violation)
+// First paragraph always shows; the rest opens on request, so the CV section stays short.
+// One button under the text switches between "Read more" and "Show less". The hidden
+// paragraphs stay in the page (hidden attribute), so search engines still read them.
+function ACareerBody({ c, i, gap }) {
+  const [open, setOpen] = React.useState(false);
+  const ref = React.useRef(null);
+  const [first, ...rest] = c.body;
+  const restId = `career-more-${i}`;
+  const orgName = c.org.split(' · ')[0];
+
+  const toggle = () => {
+    // Collapsing removes a lot of text: bring the role back into view if its top has scrolled away
+    if (open && ref.current && ref.current.getBoundingClientRect().top < 104) {
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      ref.current.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+    }
+    setOpen((o) => !o);
+  };
+
+  return (
+    <div ref={ref} style={{ fontSize: 15, color: A.ink2, lineHeight: 1.7 }}>
+      <p style={{ margin: 0 }}>{first}</p>
+      {rest.length > 0 && (
+        <React.Fragment>
+          <div id={restId} className="cv-more" hidden={!open}>
+            {rest.map((para, pi) => (
+              <p key={pi} style={{ margin: `${gap}px 0 0` }}>{para}</p>
+            ))}
+          </div>
+          <button type="button" className="cv-toggle" data-cursor="hover"
+            aria-expanded={open} aria-controls={restId} onClick={toggle}>
+            {open ? 'Show less' : 'Read more'}
+            <span className="sr-only"> about my role at {orgName}</span>
+            <span className="cv-toggle-icon" aria-hidden="true">{open ? '↑' : '↓'}</span>
+          </button>
+        </React.Fragment>
+      )}
+    </div>
+  );
+}
+
 function ACareerItem({ c, i, bp }) {
   const [ref, inView] = useReveal();
 
@@ -675,10 +716,8 @@ function ACareerItem({ c, i, bp }) {
           <div>
             <div style={{ fontSize: bp.isMobile ? 16 : 20, fontWeight: 500, letterSpacing: '-0.015em', lineHeight: 1.2 }}>{c.role}</div>
             <div style={{ fontSize: 14, color: A.accent, marginTop: 4 }}>{c.org}</div>
-            <div style={{ fontSize: 15, color: A.ink2, lineHeight: 1.7, margin: '12px 0 0' }}>
-              {c.body.map((para, pi) => (
-                <p key={pi} style={{ margin: pi === 0 ? 0 : '10px 0 0' }}>{para}</p>
-              ))}
+            <div style={{ marginTop: 12 }}>
+              <ACareerBody c={c} i={i} gap={10} />
             </div>
             {c.nda && (
               <div style={{ marginTop: 10, display: 'flex', alignItems: 'flex-start', gap: 7 }}>
@@ -709,11 +748,7 @@ function ACareerItem({ c, i, bp }) {
       {/* Desktop: body + NDA note + tags in separate columns */}
       {bp.isDesktop && (
         <div>
-          <div style={{ fontSize: 15, color: A.ink2, lineHeight: 1.7 }}>
-            {c.body.map((para, pi) => (
-              <p key={pi} style={{ margin: pi === 0 ? 0 : '12px 0 0' }}>{para}</p>
-            ))}
-          </div>
+          <ACareerBody c={c} i={i} gap={12} />
           {c.nda && (
             <div style={{ marginTop: 12, display: 'flex', alignItems: 'flex-start', gap: 7 }}>
               <span style={{ width: 5, height: 5, borderRadius: 99, background: A.accent, display: 'inline-block', flexShrink: 0, marginTop: 3 }} />
