@@ -60,14 +60,14 @@ const PORTFOLIO = {
   role: 'Lead Product Designer',
   location: 'Nottingham, UK',
   years: 11,
-  tagline: 'Designing for the humans behind the pixels.',
+  tagline: 'Designing for the humans behind the pixels',
   lead:
-    'Lead product designer behind an enterprise AI suite that cut call-handling time and costs by 20%, products used by around 35,000 people a day in 14 countries, a wellbeing app with over a million downloads in 22 languages, and a mark manufacturers across India use on Indian-made goods.',
+    'Product designer behind an enterprise AI suite that cut call-handling time and costs by 20%, products used by around 35,000 people a day in 14 countries, a wellbeing app with over a million downloads in 22 languages, and a mark manufacturers across India use on Indian-made goods.',
   metrics: [
+    { value: 1, suffix: 'M+', label: 'Downloads · YourHour', sub: 'Play Store verified' },
     { value: 20, suffix: '%', label: 'Call-handling time and cost cut', sub: 'TaskGPT @ TaskUs' },
     { value: 17, suffix: '%', label: 'Assessment accuracy', sub: 'EvaluateUs' },
     { value: 33, suffix: '%', label: 'Sales in a month', sub: 'EarlyFoods' },
-    { value: 1, suffix: 'M+', label: 'Downloads · YourHour', sub: 'Play Store verified' },
   ],
   projects: [
     {
@@ -76,7 +76,7 @@ const PORTFOLIO = {
       year: 2024,
       title: 'LevelUp',
       kicker: 'Gamification · Enterprise SaaS · 3D',
-      tagline: 'Work that plays like a game.',
+      tagline: 'Work that plays like a game',
       body:
         'An enterprise gamification platform serving two audiences at once: managers configure KPIs, challenges and rewards; agents live inside them as avatars, leaderboards and live wins. It became the company standard and was showcased at AWS Summit London 2025.',
       stats: [
@@ -95,7 +95,7 @@ const PORTFOLIO = {
       year: 2024,
       title: 'TaskGPT',
       kicker: 'AI productivity · Enterprise · 14 countries',
-      tagline: 'AI that works inside the live call.',
+      tagline: 'AI that works inside the live call',
       body:
         'End-to-end design of an OpenAI + PaLM 2 + LLaMA suite for agents on live customer calls across 14 countries. Call-handling time and operational costs each down 20%.',
       stats: [
@@ -113,7 +113,7 @@ const PORTFOLIO = {
       year: 2023,
       title: 'EvaluateUs',
       kicker: 'Assessment platform · Enterprise · TaskUs',
-      tagline: 'Data-heavy evaluation, made humane.',
+      tagline: 'Data-heavy evaluation, made humane',
       body:
         'UX strategy and full redesign of an enterprise assessment platform: evaluation workflows, scoring criteria and results data. Accuracy rose 17%.',
       stats: [
@@ -130,7 +130,7 @@ const PORTFOLIO = {
       year: '2018–2020',
       title: 'YourHour',
       kicker: 'Digital wellbeing · India · 1M+ downloads',
-      tagline: 'Breaking digital addiction at scale.',
+      tagline: 'Breaking digital addiction at scale',
       body:
         'Behavioural psychology and compassionate UX to help people reclaim their attention without becoming another addictive feed.',
       stats: [
@@ -149,7 +149,7 @@ const PORTFOLIO = {
       year: 2020,
       title: 'Aatmnirbhar',
       kicker: 'Brand mark · Open MyGov competition',
-      tagline: 'A competition entry India picked up.',
+      tagline: 'A competition entry India picked up',
       body:
         'An open MyGov competition entry, taken up by PM SVANidhi and used by manufacturers marking Indian-made goods.',
       stats: [
@@ -167,7 +167,7 @@ const PORTFOLIO = {
       year: '',
       title: 'JEGO',
       kicker: 'Wellbeing streaming · UAE',
-      tagline: 'Mentors for the Gulf, designed with cultural nuance.',
+      tagline: 'Mentors for the Gulf, designed with cultural nuance',
       body:
         'A video platform connecting Gulf users with world-class mentors. Typography, RTL patterns and trust-led onboarding built for the UAE market.',
       stats: [
@@ -184,7 +184,7 @@ const PORTFOLIO = {
       year: '',
       title: 'EarlyFoods',
       kicker: 'E-commerce · Organic baby food',
-      tagline: 'Designed for trust, not conversion.',
+      tagline: 'Designed for trust, not conversion',
       body:
         'A brand parents can feel safe with, because they are feeding it to their children. Emotional UX over checkout funnels.',
       stats: [
@@ -201,7 +201,7 @@ const PORTFOLIO = {
       year: 2026,
       title: 'Job App Assistant',
       kicker: 'Generative AI · Solo build · Live product',
-      tagline: 'Building the back room, from scratch.',
+      tagline: 'Building the back room, from scratch',
       body:
         'A working AI web application: designed, coded, and deployed in a single session. Node.js, Claude API, real server. Not a prototype.',
       stats: [
@@ -328,7 +328,8 @@ const PORTFOLIO = {
   ],
   links: [
     { label: 'Email', value: 'contact@dipeshgurav.com', href: 'mailto:contact@dipeshgurav.com' },
-    { label: 'Phone', value: '+44 7352 673152', href: 'tel:+447352673152' },
+    { label: 'Phone · UK', value: '+44 7352 673152', href: 'tel:+447352673152', flag: 'gb' },
+    { label: 'Phone · India', value: '+91 90094 80090', href: 'tel:+919009480090', flag: 'in' },
     { label: 'LinkedIn', value: 'in/dipeshgurav-design', href: 'https://www.linkedin.com/in/dipeshgurav-design/' },
     { label: 'Dribbble', value: 'dipeshgurav9', href: 'https://dribbble.com/dipeshgurav9' },
     { label: 'Behance', value: 'theartistbanda', href: 'https://www.behance.net/theartistbanda' },

@@ -171,7 +171,7 @@
   }
 
   /* Type and spacing pass (Oct 2026): calmer headings, and the title, intro and top of the cover fit on a laptop screen without scrolling */
-  .hero { padding: 40px 0 40px; }
+  .hero { padding: 24px 0 40px; }
   .meta { margin-bottom: 40px; }
   h1 { font-size: clamp(40px, 5.2vw, 76px); line-height: 1.02; letter-spacing: -0.03em; max-width: none; text-wrap: balance; }
   .lede { margin-top: 24px; font-size: 18px; max-width: 1080px; }
@@ -180,13 +180,13 @@
   .section-head h2 { font-size: 32px; line-height: 1.2; letter-spacing: -0.015em; max-width: 28ch; }
   .next .nt { font-size: clamp(28px, 4vw, 56px); line-height: 1.05; }
   @media (min-width: 640px) and (max-width: 1023px) {
-    .hero { padding: 40px 0 32px; }
+    .hero { padding: 24px 0 32px; }
     .meta { margin-bottom: 32px; }
     section.body { padding: 64px 0; }
     .section-head h2 { font-size: 28px; }
   }
   @media (max-width: 639px) {
-    .hero { padding: 32px 0 28px; }
+    .hero { padding: 20px 0 28px; }
     .meta { margin-bottom: 24px; }
     h1 { font-size: clamp(34px, 10vw, 44px); }
     .lede { font-size: 16px; margin-top: 20px; }
@@ -230,7 +230,7 @@
       <div>Role / <span>Designer · Developer · Product</span></div>
       <div>Context / <span>Solo build · One session · Live product</span></div>
     </div>
-    <h1>Job App Assistant. Building the back room. <i>From scratch.</i></h1>
+    <h1>Job App Assistant, building the back room <i>from scratch</i></h1>
     <p class="lede">A working AI web application: designed, coded, and deployed in a single session. Not a prototype. Not a Figma file. A live product with a real URL, a real server, and a real API key that never once appeared in the wrong place.</p>
 
     <div class="cover">
@@ -262,7 +262,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="mono">The question</span>
-      <h2>I didn't know what happened <i>after the click.</i></h2>
+      <h2>I didn't know what happened <i>after the click</i></h2>
     </div>
     <div class="prose">
       <p>I've been designing AI-powered products for three years. TaskGPT. Generative workflows. Claude as a design collaborator. But if you'd asked me what actually happens when a user clicks Generate on an AI tool, not conceptually, but at every literal step, I couldn't have told you.</p>
@@ -278,7 +278,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="mono">The mental model</span>
-      <h2>It's a print shop. <i>Once you see it, you can't unsee it.</i></h2>
+      <h2>It's a print shop, <i>once you see it, you can't unsee it</i></h2>
     </div>
     <div class="prose">
       <p>Before writing a single line of code, I needed an analogy that made the architecture legible. Imagine a print shop. A customer walks in through the front door, places an order. The counter person takes it to the back room, uses the machine, brings the shirt back out. The customer never touches the machine. They never see the access code to the back room.</p>
@@ -296,7 +296,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="mono">What I built</span>
-      <h2>A job application assistant. <i>Genuinely useful, genuinely shipped.</i></h2>
+      <h2>A job application assistant, <i>genuinely useful, genuinely shipped</i></h2>
     </div>
     <div class="prose">
       <p>Paste a job description, upload your resume, select what you need (cover letter, fit score with honest flags, Q&A answers, contact outreach template) and get a full application package back in seconds. Four files. Three separate concerns.</p>
@@ -339,7 +339,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="mono">The design decisions</span>
-      <h2>Design decides first. <i>Code follows.</i></h2>
+      <h2>Design decides first, <i>code follows</i></h2>
     </div>
     <div class="prose">
       <p>The code executes intent. The intent is always a design decision first.</p>
@@ -378,7 +378,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="mono">The pipeline</span>
-      <h2>From code on a laptop <i>to a URL you can share.</i></h2>
+      <h2>From code on a laptop <i>to a URL you can share</i></h2>
     </div>
     <div class="prose">
       <p>The deployment loop, once understood, is almost embarrassingly simple. Write code locally. The API key lives in a <code>.env</code> file that never gets committed; <code>.gitignore</code> makes that permanent. Push to GitHub. Render watches the repository and redeploys automatically. The API key is set once in Render's dashboard, read at runtime, never visible in the codebase.</p>
@@ -406,7 +406,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="mono">Outcome</span>
-      <h2>A working product. <i>And a mental model that won't leave.</i></h2>
+      <h2>A working product, <i>and a mental model that won't leave</i></h2>
     </div>
     <div class="prose">
       <p>The app is live at <a href="https://job-app-assistant.onrender.com" target="_blank" rel="noopener">job-app-assistant.onrender.com<span class="sr-only"> (opens in new tab)</span></a>. It generates cover letters, fit scores, Q&A answers, and contact outreach templates: all structured, all copyable, all downloadable as PDF.</p>
@@ -422,7 +422,7 @@
   <div class="wrap">
     <div class="mono next-label">You have reached the end. Start from the beginning.</div>
     <a href="/case-levelup">
-      <span class="nt">LevelUp: <i>work that plays like a game.</i></span>
+      <span class="nt">LevelUp: <i>work that plays like a game</i></span>
       <span class="arrow">→</span>
     </a>
   </div>
@@ -430,9 +430,10 @@
 
 </main>
 <footer>
-  © MMXXVI · Dipesh Gurav · Nottingham, UK · Designed with purpose, not just pixels · <a href="mailto:contact@dipeshgurav.com">contact@dipeshgurav.com</a> · <a href="tel:+447352673152">+44 7352 673152</a>
+  © MMXXVI · Dipesh Gurav · Nottingham, UK · Designed with purpose, not just pixels · <a href="mailto:contact@dipeshgurav.com">contact@dipeshgurav.com</a> · <a href="tel:+447352673152">+44 7352 673152</a> · <a href="tel:+919009480090">+91 90094 80090</a>
 </footer>
 
 <script src="/theme.js" defer></script>
+<script src="/case-nav.js" defer></script>
 </body>
 </html>

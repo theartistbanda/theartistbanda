@@ -67,9 +67,14 @@ const PORTFOLIO = {
   role: 'Lead Product Designer',
   location: 'Nottingham, UK',
   years: 11,
-  tagline: 'Designing for the humans behind the pixels.',
-  lead: 'Lead product designer behind an enterprise AI suite that cut call-handling time and costs by 20%, products used by around 35,000 people a day in 14 countries, a wellbeing app with over a million downloads in 22 languages, and a mark manufacturers across India use on Indian-made goods.',
+  tagline: 'Designing for the humans behind the pixels',
+  lead: 'Product designer behind an enterprise AI suite that cut call-handling time and costs by 20%, products used by around 35,000 people a day in 14 countries, a wellbeing app with over a million downloads in 22 languages, and a mark manufacturers across India use on Indian-made goods.',
   metrics: [{
+    value: 1,
+    suffix: 'M+',
+    label: 'Downloads · YourHour',
+    sub: 'Play Store verified'
+  }, {
     value: 20,
     suffix: '%',
     label: 'Call-handling time and cost cut',
@@ -84,11 +89,6 @@ const PORTFOLIO = {
     suffix: '%',
     label: 'Sales in a month',
     sub: 'EarlyFoods'
-  }, {
-    value: 1,
-    suffix: 'M+',
-    label: 'Downloads · YourHour',
-    sub: 'Play Store verified'
   }],
   projects: [{
     id: 'levelup',
@@ -96,7 +96,7 @@ const PORTFOLIO = {
     year: 2024,
     title: 'LevelUp',
     kicker: 'Gamification · Enterprise SaaS · 3D',
-    tagline: 'Work that plays like a game.',
+    tagline: 'Work that plays like a game',
     body: 'An enterprise gamification platform serving two audiences at once: managers configure KPIs, challenges and rewards; agents live inside them as avatars, leaderboards and live wins. It became the company standard and was showcased at AWS Summit London 2025.',
     stats: [['AWS', 'Summit London 2025'], ['35K', 'Suite daily users'], ['2', 'Audiences, one system'], ['3D', 'Three.js characters']],
     tags: ['Gamification', 'Enterprise SaaS', 'Dual-audience', 'Design Systems'],
@@ -108,7 +108,7 @@ const PORTFOLIO = {
     year: 2024,
     title: 'TaskGPT',
     kicker: 'AI productivity · Enterprise · 14 countries',
-    tagline: 'AI that works inside the live call.',
+    tagline: 'AI that works inside the live call',
     body: 'End-to-end design of an OpenAI + PaLM 2 + LLaMA suite for agents on live customer calls across 14 countries. Call-handling time and operational costs each down 20%.',
     stats: [['20%', 'Less call-handling time'], ['35K', 'Suite daily users'], ['14', 'Countries']],
     tags: ['AI Interface', 'Enterprise', 'Design Systems'],
@@ -120,7 +120,7 @@ const PORTFOLIO = {
     year: 2023,
     title: 'EvaluateUs',
     kicker: 'Assessment platform · Enterprise · TaskUs',
-    tagline: 'Data-heavy evaluation, made humane.',
+    tagline: 'Data-heavy evaluation, made humane',
     body: 'UX strategy and full redesign of an enterprise assessment platform: evaluation workflows, scoring criteria and results data. Accuracy rose 17%.',
     stats: [['17%', 'Accuracy lift'], ['AA', 'WCAG 2.2']],
     tags: ['Enterprise UX', 'Data-dense UI', 'Assessment'],
@@ -132,7 +132,7 @@ const PORTFOLIO = {
     year: '2018–2020',
     title: 'YourHour',
     kicker: 'Digital wellbeing · India · 1M+ downloads',
-    tagline: 'Breaking digital addiction at scale.',
+    tagline: 'Breaking digital addiction at scale',
     body: 'Behavioural psychology and compassionate UX to help people reclaim their attention without becoming another addictive feed.',
     stats: [['1M+', 'Downloads'], ['70K+', 'Reviews'], ['22', 'Languages'], ['4.6★', 'Play Store']],
     tags: ['Behavioural Design', 'Digital Health', 'HealthTech', 'Android · iOS', 'Cross-cultural'],
@@ -144,7 +144,7 @@ const PORTFOLIO = {
     year: 2020,
     title: 'Aatmnirbhar',
     kicker: 'Brand mark · Open MyGov competition',
-    tagline: 'A competition entry India picked up.',
+    tagline: 'A competition entry India picked up',
     body: 'An open MyGov competition entry, taken up by PM SVANidhi and used by manufacturers marking Indian-made goods.',
     stats: [['Nationwide', 'Used on Indian-made goods'], ['MyGov', 'Open competition'], ['PM SVANidhi', 'Took up the mark']],
     tags: ['Brand', 'Identity', 'Cultural'],
@@ -156,7 +156,7 @@ const PORTFOLIO = {
     year: '',
     title: 'JEGO',
     kicker: 'Wellbeing streaming · UAE',
-    tagline: 'Mentors for the Gulf, designed with cultural nuance.',
+    tagline: 'Mentors for the Gulf, designed with cultural nuance',
     body: 'A video platform connecting Gulf users with world-class mentors. Typography, RTL patterns and trust-led onboarding built for the UAE market.',
     stats: [['UAE', 'Primary market'], ['RTL', 'First-class']],
     tags: ['Video UX', 'Streaming', 'Localisation'],
@@ -168,7 +168,7 @@ const PORTFOLIO = {
     year: '',
     title: 'EarlyFoods',
     kicker: 'E-commerce · Organic baby food',
-    tagline: 'Designed for trust, not conversion.',
+    tagline: 'Designed for trust, not conversion',
     body: 'A brand parents can feel safe with, because they are feeding it to their children. Emotional UX over checkout funnels.',
     stats: [['33%', 'Sales in a month'], ['Trust', 'KPI']],
     tags: ['E-commerce', 'Conversion Rate Optimisation', 'Emotional UX'],
@@ -180,7 +180,7 @@ const PORTFOLIO = {
     year: 2026,
     title: 'Job App Assistant',
     kicker: 'Generative AI · Solo build · Live product',
-    tagline: 'Building the back room, from scratch.',
+    tagline: 'Building the back room, from scratch',
     body: 'A working AI web application: designed, coded, and deployed in a single session. Node.js, Claude API, real server. Not a prototype.',
     stats: [['1 day', 'Build time'], ['4', 'Files'], ['Live', 'Status']],
     tags: ['Generative AI Tools', 'AI Interfaces', 'Solo build'],
@@ -242,9 +242,15 @@ const PORTFOLIO = {
     value: 'contact@dipeshgurav.com',
     href: 'mailto:contact@dipeshgurav.com'
   }, {
-    label: 'Phone',
+    label: 'Phone · UK',
     value: '+44 7352 673152',
-    href: 'tel:+447352673152'
+    href: 'tel:+447352673152',
+    flag: 'gb'
+  }, {
+    label: 'Phone · India',
+    value: '+91 90094 80090',
+    href: 'tel:+919009480090',
+    flag: 'in'
   }, {
     label: 'LinkedIn',
     value: 'in/dipeshgurav-design',

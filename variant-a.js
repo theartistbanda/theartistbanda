@@ -91,7 +91,43 @@ function ABanner() {
     }
   }, "Get in touch \u2192")));
 }
+
+// Back from a case study should land where the visitor left the homepage, not at the top.
+// React renders after load, so the browser's own scroll restore fires before the content
+// exists. Remember the position ourselves and restore it once the page has rendered.
+const HOME_SCROLL_KEY = 'home-scroll-y';
+function useHomeScrollMemory() {
+  React.useEffect(() => {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    const save = () => {
+      try {
+        sessionStorage.setItem(HOME_SCROLL_KEY, String(Math.round(window.scrollY)));
+      } catch (e) {}
+    };
+    window.addEventListener('pagehide', save);
+    let y = 0;
+    try {
+      const nav = performance.getEntriesByType('navigation')[0];
+      // Browser Back, or the "← Portfolio" link on a case page (it sets home-restore)
+      if (nav && nav.type === 'back_forward' || sessionStorage.getItem('home-restore') === '1') {
+        y = Number(sessionStorage.getItem(HOME_SCROLL_KEY)) || 0;
+      }
+      sessionStorage.removeItem('home-restore');
+    } catch (e) {}
+    const target = location.hash && document.getElementById(location.hash.slice(1));
+    const go = () => {
+      if (y) window.scrollTo(0, y);else if (target) target.scrollIntoView();
+    };
+    if (y || target) {
+      requestAnimationFrame(() => requestAnimationFrame(go));
+      // Web fonts can shift the layout slightly; settle once more when they are ready
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
+    }
+    return () => window.removeEventListener('pagehide', save);
+  }, []);
+}
 function VariantA() {
+  useHomeScrollMemory();
   return /*#__PURE__*/React.createElement("div", {
     style: aStyles.root
   }, /*#__PURE__*/React.createElement("a", {
@@ -192,12 +228,26 @@ function ANav() {
       height: 56,
       gap: bp.isMobile ? 10 : 16
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "/",
+    "data-cursor": "hover",
+    "aria-label": "Dipesh Gurav, back to top",
+    onClick: e => {
+      e.preventDefault();
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({
+        top: 0,
+        behavior: reduce ? 'auto' : 'smooth'
+      });
+      if (location.hash) history.replaceState(null, '', location.pathname);
+    },
     style: {
       display: 'flex',
       alignItems: 'baseline',
       gap: 10,
-      flexShrink: 0
+      flexShrink: 0,
+      color: 'inherit',
+      textDecoration: 'none'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -312,7 +362,10 @@ const SHOW_HERO_ACCENT_BOX = false; // toggle to bring back the orange block in 
 function AHero() {
   const bp = useBreakpoint();
   const [scroll, setScroll] = React.useState(0);
+
+  // Only needed for the optional orange block in the headline; skip the scroll work when it's off
   React.useEffect(() => {
+    if (!SHOW_HERO_ACCENT_BOX) return;
     const on = () => setScroll(window.scrollY);
     window.addEventListener('scroll', on, {
       passive: true
@@ -321,15 +374,24 @@ function AHero() {
   }, []);
   const reduceMotion = React.useMemo(() => matchMedia('(prefers-reduced-motion: reduce)').matches, []);
   const parallax = reduceMotion ? 0 : Math.min(scroll * 0.25, 80);
-  // Side-by-side headline/caption needs real breathing room - below this, fall back
-  // to the original full-width stacked headline so the 2-line break never gets
-  // squeezed into wrapping a 3rd line at the 1024px desktop breakpoint edge.
-  const wideLayout = bp.w >= 1360;
-  const vPad = bp.isMobile ? '48px' : bp.isTablet ? '64px' : '80px';
+  // Tight top padding so the stat tiles below are on screen without scrolling on a laptop
+  const padTop = bp.isMobile ? '28px' : bp.isTablet ? '36px' : '32px';
+  const padBottom = bp.isMobile ? '40px' : '48px';
   const side = sp(bp);
+  const btn = {
+    ...aStyles.cta,
+    padding: '13px 18px',
+    border: `1px solid rgba(var(--ink-rgb), 0.2)`,
+    textDecoration: 'none',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 24,
+    minWidth: bp.isMobile ? 0 : 220
+  };
   return /*#__PURE__*/React.createElement("section", {
     style: {
-      padding: `${vPad} ${side} ${bp.isMobile ? '40px' : '48px'}`,
+      padding: `${padTop} ${side} ${padBottom}`,
       borderBottom: `1px solid ${A.line}`
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -342,31 +404,31 @@ function AHero() {
       display: 'grid',
       gridTemplateColumns: bp.isTablet ? '1fr 1fr' : 'repeat(4, 1fr)',
       gap: 24,
-      marginBottom: bp.isTablet ? 40 : 64,
+      marginBottom: bp.isTablet ? 32 : 44,
       ...aStyles.mono
     }
-  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role, " \xB7 est. 2015"), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 Open UK-wide"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 Open UK-wide"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.accent
     }
   }, "\u25CF"), " Open to work \xB7 immediate joiner")), /*#__PURE__*/React.createElement("div", {
     style: {
-      display: 'grid',
-      gridTemplateColumns: wideLayout ? 'minmax(0, 1fr) 400px' : '1fr',
-      gap: wideLayout ? 56 : 24,
-      alignItems: wideLayout ? 'center' : 'start'
+      textAlign: bp.isMobile ? 'left' : 'center',
+      maxWidth: 1040,
+      margin: '0 auto'
     }
   }, /*#__PURE__*/React.createElement("h1", {
     style: {
       fontFamily: '"Inter Tight", "Inter", sans-serif',
       fontWeight: 500,
-      fontSize: bp.isDesktop ? 'clamp(56px, 4.2vw, 68px)' : 'clamp(48px, 10vw, 168px)',
-      lineHeight: bp.isDesktop ? 1.06 : 0.92,
-      letterSpacing: bp.isDesktop ? '-0.03em' : '-0.04em',
+      fontSize: bp.isMobile ? 'clamp(40px, 11vw, 56px)' : 'clamp(52px, 5.2vw, 84px)',
+      lineHeight: 1.04,
+      letterSpacing: '-0.035em',
+      textWrap: 'balance',
       margin: 0,
       color: A.ink
     }
-  }, bp.isDesktop ? /*#__PURE__*/React.createElement(React.Fragment, null, "Designing for the", /*#__PURE__*/React.createElement("br", null), "humans behind the", ' ', SHOW_HERO_ACCENT_BOX && /*#__PURE__*/React.createElement("span", {
+  }, "Designing for the humans behind the", ' ', SHOW_HERO_ACCENT_BOX && /*#__PURE__*/React.createElement("span", {
     style: {
       display: 'inline-block',
       width: 'clamp(32px, 5vw, 64px)',
@@ -384,56 +446,30 @@ function AHero() {
       fontWeight: 400,
       color: A.accent
     }
-  }, "pixels.")) : /*#__PURE__*/React.createElement(React.Fragment, null, "Designing for", /*#__PURE__*/React.createElement("br", null), "the humans", /*#__PURE__*/React.createElement("br", null), "behind the", ' ', SHOW_HERO_ACCENT_BOX && /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'inline-block',
-      width: 'clamp(48px, 10vw, 160px)',
-      height: 'clamp(34px, 7vw, 110px)',
-      background: A.accent,
-      verticalAlign: 'middle',
-      marginRight: 12,
-      transform: `translateY(${parallax * 0.3}px)`,
-      transition: 'transform 0.1s linear'
-    },
-    "aria-hidden": true
-  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontStyle: 'italic',
-      fontWeight: 400,
-      color: A.accent
-    }
-  }, "pixels."))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: wideLayout ? 0 : 40
-    }
-  }, /*#__PURE__*/React.createElement("p", {
+  }, "pixels")), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: bp.isMobile ? 16 : 18,
-      lineHeight: 1.45,
+      lineHeight: 1.55,
       letterSpacing: '-0.01em',
-      margin: 0,
-      color: A.ink2
+      color: A.ink2,
+      maxWidth: 760,
+      margin: `${bp.isMobile ? 20 : 28}px auto 0`
     }
   }, PORTFOLIO.lead), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
-      flexDirection: 'column',
-      gap: 8,
-      marginTop: 24
+      flexDirection: bp.isMobile ? 'column' : 'row',
+      justifyContent: 'center',
+      gap: 12,
+      marginTop: bp.isMobile ? 24 : 32
     }
   }, /*#__PURE__*/React.createElement("a", {
     href: "#work",
     "data-cursor": "hover",
     className: "cta cta-outline",
     style: {
-      ...aStyles.cta,
-      padding: '13px 16px',
-      border: `1px solid rgba(var(--ink-rgb), 0.2)`,
-      color: A.accent,
-      textDecoration: 'none',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center'
+      ...btn,
+      color: A.accent
     }
   }, "View the index ", /*#__PURE__*/React.createElement("span", {
     className: "cta-arrow"
@@ -442,22 +478,16 @@ function AHero() {
     "data-cursor": "hover",
     className: "cta cta-outline",
     style: {
-      ...aStyles.cta,
+      ...btn,
       fontWeight: 500,
-      padding: '13px 16px',
-      border: `1px solid rgba(var(--ink-rgb), 0.2)`,
-      color: A.ink,
-      textDecoration: 'none',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center'
+      color: A.ink
     }
   }, "Start a project ", /*#__PURE__*/React.createElement("span", {
     className: "cta-arrow",
     style: {
       color: A.accent
     }
-  }, "\u2192")))))));
+  }, "\u2192"))))));
 }
 
 // ─── METRICS ─────────────────────────────────────────────────────────────────
@@ -575,11 +605,11 @@ function AWork() {
       lineHeight: 1.05,
       margin: 0
     }
-  }, "Eight products. Four markets.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+  }, "Eight products, four markets,", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.mute
     }
-  }, "Measurable behaviour change."))), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
+  }, "measurable behaviour change"))), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: 'span 4',
       alignSelf: 'end',
@@ -815,12 +845,12 @@ function AOrigin() {
       letterSpacing: '-0.03em',
       margin: 0
     }
-  }, "An open competition.", /*#__PURE__*/React.createElement("br", null), "A golden bird.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+  }, "An open competition,", /*#__PURE__*/React.createElement("br", null), "a golden bird,", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
     style: {
       fontStyle: 'italic',
       color: A.accent
     }
-  }, "A mark India picked up.")), /*#__PURE__*/React.createElement("p", {
+  }, "a mark India picked up")), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 16,
       lineHeight: 1.6,
@@ -925,7 +955,7 @@ function APrinciples() {
       lineHeight: 1.05,
       margin: 0
     }
-  }, "Six beliefs that decide", /*#__PURE__*/React.createElement("br", null), "every design call.")), /*#__PURE__*/React.createElement("div", {
+  }, "Six beliefs that decide", /*#__PURE__*/React.createElement("br", null), "every design call")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: cols,
@@ -1267,7 +1297,7 @@ function ACareer() {
       lineHeight: 1.05,
       margin: 0
     }
-  }, "Eleven years,", /*#__PURE__*/React.createElement("br", null), "four cities, over a million downloads.")), /*#__PURE__*/React.createElement("a", {
+  }, "Eleven years,", /*#__PURE__*/React.createElement("br", null), "four cities, over a million downloads")), /*#__PURE__*/React.createElement("a", {
     href: "/dipesh-gurav-cv.pdf",
     download: true,
     "data-cursor": "hover",
@@ -1360,7 +1390,7 @@ function AAbout() {
     style: {
       fontStyle: 'italic'
     }
-  }, "easier"), "."), /*#__PURE__*/React.createElement("div", {
+  }, "easier")), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 15,
       lineHeight: 1.75,
@@ -1473,6 +1503,82 @@ function AAbout() {
 }
 
 // ─── CONTACT ─────────────────────────────────────────────────────────────────
+// Small flags for the phone numbers. SVG rather than emoji: Windows renders flag emoji as letters.
+function AFlag({
+  code
+}) {
+  const s = {
+    width: 18,
+    height: 12,
+    display: 'block',
+    flexShrink: 0,
+    boxShadow: '0 0 0 1px rgba(var(--ink-rgb), 0.15)'
+  };
+  if (code === 'gb') {
+    return /*#__PURE__*/React.createElement("svg", {
+      style: s,
+      viewBox: "0 0 60 30",
+      "aria-hidden": "true",
+      preserveAspectRatio: "none"
+    }, /*#__PURE__*/React.createElement("clipPath", {
+      id: "flag-gb-t"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"
+    })), /*#__PURE__*/React.createElement("rect", {
+      width: "60",
+      height: "30",
+      fill: "#012169"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M0,0 L60,30 M60,0 L0,30",
+      stroke: "#fff",
+      strokeWidth: "6"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M0,0 L60,30 M60,0 L0,30",
+      clipPath: "url(#flag-gb-t)",
+      stroke: "#C8102E",
+      strokeWidth: "4"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M30,0 v30 M0,15 h60",
+      stroke: "#fff",
+      strokeWidth: "10"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M30,0 v30 M0,15 h60",
+      stroke: "#C8102E",
+      strokeWidth: "6"
+    }));
+  }
+  return /*#__PURE__*/React.createElement("svg", {
+    style: s,
+    viewBox: "0 0 30 20",
+    "aria-hidden": "true",
+    preserveAspectRatio: "none"
+  }, /*#__PURE__*/React.createElement("rect", {
+    width: "30",
+    height: "20",
+    fill: "#fff"
+  }), /*#__PURE__*/React.createElement("rect", {
+    width: "30",
+    height: "6.67",
+    fill: "#FF9933"
+  }), /*#__PURE__*/React.createElement("rect", {
+    y: "13.33",
+    width: "30",
+    height: "6.67",
+    fill: "#138808"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "15",
+    cy: "10",
+    r: "2.6",
+    fill: "none",
+    stroke: "#000080",
+    strokeWidth: "0.8"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "15",
+    cy: "10",
+    r: "0.7",
+    fill: "#000080"
+  }));
+}
 function AContactIcon({
   type
 }) {
@@ -1769,7 +1875,7 @@ function AContact() {
       fontStyle: 'italic',
       color: A.accent
     }
-  }, "meaningful.")), /*#__PURE__*/React.createElement("p", {
+  }, "meaningful")), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 15,
       lineHeight: 1.7,
@@ -1819,7 +1925,7 @@ function AContact() {
       color: A.accent
     }
   }, /*#__PURE__*/React.createElement(AContactIcon, {
-    type: l.label
+    type: l.label.split(' · ')[0]
   })), /*#__PURE__*/React.createElement("span", {
     style: {
       display: 'flex',
@@ -1839,9 +1945,14 @@ function AContact() {
       letterSpacing: '-0.01em',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap'
+      whiteSpace: 'nowrap',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8
     }
-  }, l.value)), /*#__PURE__*/React.createElement("span", {
+  }, l.flag && /*#__PURE__*/React.createElement(AFlag, {
+    code: l.flag
+  }), l.value)), /*#__PURE__*/React.createElement("span", {
     style: {
       marginLeft: 'auto',
       color: A.accent,
@@ -1852,7 +1963,9 @@ function AContact() {
     style: {
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: bp.isDesktop ? 'flex-end' : 'flex-start'
+      justifyContent: 'flex-start',
+      // Matches the 12px spacer above "Let's work together" so both columns start level
+      paddingTop: bp.isDesktop ? 12 : 0
     }
   }, sent ? /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1879,7 +1992,7 @@ function AContact() {
       margin: 0,
       color: A.ink
     }
-  }, "Thanks, ", senderName, ".", /*#__PURE__*/React.createElement("br", null), "I'll be in touch.")), /*#__PURE__*/React.createElement("p", {
+  }, "Thanks, ", senderName, /*#__PURE__*/React.createElement("br", null), "I'll be in touch")), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 15,
       lineHeight: 1.7,
@@ -1937,7 +2050,7 @@ function AContact() {
       margin: 0,
       color: A.ink
     }
-  }, "Or drop me a line directly.")), /*#__PURE__*/React.createElement("div", {
+  }, "Or drop me a line directly")), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'relative'
     }
@@ -2054,7 +2167,7 @@ function AContact() {
       justifyContent: 'space-between',
       alignItems: 'center'
     }
-  }, sending ? 'Sending…' : 'Send transmission', " ", /*#__PURE__*/React.createElement("span", {
+  }, sending ? 'Sending…' : 'Send', " ", /*#__PURE__*/React.createElement("span", {
     className: "cta-arrow"
   }, "\u2192")))))))));
 }
@@ -2237,7 +2350,12 @@ function AFooter() {
     style: {
       color: 'inherit'
     }
-  }, "+44 7352 673152"))), /*#__PURE__*/React.createElement("div", {
+  }, "+44 7352 673152"), ' · ', /*#__PURE__*/React.createElement("a", {
+    href: "tel:+919009480090",
+    style: {
+      color: 'inherit'
+    }
+  }, "+91 90094 80090"))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',

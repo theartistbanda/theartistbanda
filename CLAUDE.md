@@ -32,6 +32,7 @@ Static portfolio site, deployed to Vercel from `main`. This file is excluded fro
 16. **No faith or religion claims** about any audience. The JEGO faith points came from an AI conversation, not research; they were removed on 22 Oct 2026. Never reintroduce "Islamic", "secular", "spiritual", "faith", "ritual", "blessings" or anything like them.
 17. **Don't invent.** Earlier versions of this site were partly AI-written and picked up details nobody verified. Add no number, place, client type or claim that isn't in section 3. When unsure, cut rather than embellish.
 18. **Stories a stranger can picture:** who used it and what changed for them, not stacked jargon.
+21. **No full stops in headings, sub headings or short taglines** (Dipesh, 23 Oct 2026). Join fragments with commas, e.g. "TaskGPT, the AI that works inside the call". Body text keeps normal punctuation.
 19. **Right to work:** keep it on the website as "Right to work in the UK · No sponsorship required", never "Full" (banner, availability card, meta, noscript, llms.txt). Don't add it anywhere new, and leave it off the CV. (Decided 8 Oct 2026, confirmed 22 Oct.)
 20. **The Artist Banda:** he *founded* it. "Co-founded" only ever refers to the earlier production house. **Repos Energy** is the company; **Repos Pay** is the product he worked on. Never describe "a payment and energy mobility ecosystem".
 
@@ -40,7 +41,7 @@ Static portfolio site, deployed to Vercel from `main`. This file is excluded fro
 | Topic | Fact |
 |---|---|
 | Experience | 11 years in design (counted from 2015) |
-| Headline title | Senior Product Designer (LinkedIn and CV). The site keeps "Lead Product Designer", his actual TaskUs title, and "est. 2015". |
+| Headline title | Senior Product Designer (LinkedIn and CV). The hero details row keeps "Lead Product Designer", his actual TaskUs title. "est. 2015" was removed and the hero summary opens "Product designer behind…" (Dipesh, 23 Oct 2026). |
 | TaskUs | Lead Product Designer, Apr 2021 to Jul 2026, "Remote" (not "Remote, UK"). Founding and only designer of the Digital IT team, hired by Manish Pandya. |
 | TaskUs products | Multi-tenant, owned by TaskUs, sold to client companies on subscription. Around 35,000 daily users across 14 countries (the suite, not one product). Around 20 products went live, not counting individual TaskGPT tools. |
 | TaskGPT | AI for agents on live calls, across OpenAI, PaLM 2 and LLaMA. Much of it a Chrome extension inside the tool agents already used. A multi-tenant admin where clients were onboarded and each campaign got its own tools, AI model and knowledge base. Kept AI-suggested labels only where they matched the business's own terms. Instrumentation: usage, answer quality and guardrails, token cost, agent feedback. Call-handling time and operational costs each down 20%. Moving it behind an encrypted layer solved the privacy problem and made it 20% faster (kept on the site by Dipesh, 22 Oct 2026). |
@@ -62,7 +63,7 @@ Static portfolio site, deployed to Vercel from `main`. This file is excluded fro
 | ZuQA | API testing tool; progressive disclosure cut developer onboarding time 15%. |
 | Job App Assistant | Designed, coded and deployed solo in one session (Node.js, Claude API), 2026. job-app-assistant.onrender.com (sleeps when idle; open it once before checking links). |
 | Education | Interaction Design Foundation, UX, UI and Interaction Design, 2015 to 2017. MAAC, AD3D Edge+ Diploma: Design, Animation and VFX, 2012 to 2014. B.Com with Computer Science, 2011 to 2014. |
-| Contact | contact@dipeshgurav.com · +44 7352 673152 · linkedin.com/in/dipeshgurav-design · dribbble.com/dipeshgurav9 (correct; `theartistbanda` 404s on Dribbble, so don't "fix" it) · behance.net/theartistbanda |
+| Contact | contact@dipeshgurav.com · +44 7352 673152 (UK) · +91 90094 80090 (India, added 23 Oct 2026 at Dipesh's request) · linkedin.com/in/dipeshgurav-design · dribbble.com/dipeshgurav9 (correct; `theartistbanda` 404s on Dribbble, so don't "fix" it) · behance.net/theartistbanda |
 | Keywords | Dipesh confirmed on 22 Oct 2026 that he stands behind "A/B Testing", "Experimentation", "Conversion Rate Optimisation", "Digital Health" and "HealthTech" in skills chips and meta. Keep them. |
 
 **Held back, never publish without Dipesh's say-so:** EvaluateUs coaching and training numbers up 38% and knowledge transfer 23% faster; Maestro's 29% and 23%.

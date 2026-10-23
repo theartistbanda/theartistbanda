@@ -81,7 +81,39 @@ function ABanner() {
   );
 }
 
+// Back from a case study should land where the visitor left the homepage, not at the top.
+// React renders after load, so the browser's own scroll restore fires before the content
+// exists. Remember the position ourselves and restore it once the page has rendered.
+const HOME_SCROLL_KEY = 'home-scroll-y';
+function useHomeScrollMemory() {
+  React.useEffect(() => {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    const save = () => { try { sessionStorage.setItem(HOME_SCROLL_KEY, String(Math.round(window.scrollY))); } catch (e) {} };
+    window.addEventListener('pagehide', save);
+
+    let y = 0;
+    try {
+      const nav = performance.getEntriesByType('navigation')[0];
+      // Browser Back, or the "← Portfolio" link on a case page (it sets home-restore)
+      if ((nav && nav.type === 'back_forward') || sessionStorage.getItem('home-restore') === '1') {
+        y = Number(sessionStorage.getItem(HOME_SCROLL_KEY)) || 0;
+      }
+      sessionStorage.removeItem('home-restore');
+    } catch (e) {}
+
+    const target = location.hash && document.getElementById(location.hash.slice(1));
+    const go = () => { if (y) window.scrollTo(0, y); else if (target) target.scrollIntoView(); };
+    if (y || target) {
+      requestAnimationFrame(() => requestAnimationFrame(go));
+      // Web fonts can shift the layout slightly; settle once more when they are ready
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
+    }
+    return () => window.removeEventListener('pagehide', save);
+  }, []);
+}
+
 function VariantA() {
+  useHomeScrollMemory();
   return (
     <div style={aStyles.root}>
       <a href="#main" className="skip-link">Skip to content</a>
@@ -149,11 +181,18 @@ function ANav() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         height: 56, gap: bp.isMobile ? 10 : 16
       }}>
-        {/* Logo */}
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexShrink: 0 }}>
+        {/* Logo: back to the top of the page */}
+        <a href="/" data-cursor="hover" aria-label="Dipesh Gurav, back to top"
+          onClick={(e) => {
+            e.preventDefault();
+            const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+            if (location.hash) history.replaceState(null, '', location.pathname);
+          }}
+          style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexShrink: 0, color: 'inherit', textDecoration: 'none' }}>
           <span style={{ width: 6, height: 6, borderRadius: 99, background: A.accent, display: 'inline-block', flexShrink: 0 }} />
           <span style={{ fontWeight: 600, letterSpacing: '-0.01em' }}>Dipesh Gurav</span>
-        </div>
+        </a>
 
         {/* Desktop nav links */}
         {bp.isDesktop && (
@@ -231,7 +270,9 @@ function AHero() {
   const bp = useBreakpoint();
   const [scroll, setScroll] = React.useState(0);
 
+  // Only needed for the optional orange block in the headline; skip the scroll work when it's off
   React.useEffect(() => {
+    if (!SHOW_HERO_ACCENT_BOX) return;
     const on = () => setScroll(window.scrollY);
     window.addEventListener('scroll', on, { passive: true });
     return () => window.removeEventListener('scroll', on);
@@ -239,15 +280,18 @@ function AHero() {
 
   const reduceMotion = React.useMemo(() => matchMedia('(prefers-reduced-motion: reduce)').matches, []);
   const parallax = reduceMotion ? 0 : Math.min(scroll * 0.25, 80);
-  // Side-by-side headline/caption needs real breathing room - below this, fall back
-  // to the original full-width stacked headline so the 2-line break never gets
-  // squeezed into wrapping a 3rd line at the 1024px desktop breakpoint edge.
-  const wideLayout = bp.w >= 1360;
-  const vPad = bp.isMobile ? '48px' : bp.isTablet ? '64px' : '80px';
+  // Tight top padding so the stat tiles below are on screen without scrolling on a laptop
+  const padTop = bp.isMobile ? '28px' : bp.isTablet ? '36px' : '32px';
+  const padBottom = bp.isMobile ? '40px' : '48px';
   const side = sp(bp);
+  const btn = {
+    ...aStyles.cta, padding: '13px 18px', border: `1px solid rgba(var(--ink-rgb), 0.2)`,
+    textDecoration: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+    gap: 24, minWidth: bp.isMobile ? 0 : 220
+  };
 
   return (
-    <section style={{ padding: `${vPad} ${side} ${bp.isMobile ? '40px' : '48px'}`, borderBottom: `1px solid ${A.line}` }}>
+    <section style={{ padding: `${padTop} ${side} ${padBottom}`, borderBottom: `1px solid ${A.line}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
 
         {/* Meta row: hidden on mobile */}
@@ -255,9 +299,9 @@ function AHero() {
           <div style={{
             display: 'grid',
             gridTemplateColumns: bp.isTablet ? '1fr 1fr' : 'repeat(4, 1fr)',
-            gap: 24, marginBottom: bp.isTablet ? 40 : 64, ...aStyles.mono
+            gap: 24, marginBottom: bp.isTablet ? 32 : 44, ...aStyles.mono
           }}>
-            <div>{PORTFOLIO.role} · est. 2015</div>
+            <div>{PORTFOLIO.role}</div>
             <div>{PORTFOLIO.location} · Open UK-wide</div>
             {bp.isDesktop && <div>Portfolio / vol. MMXXVI</div>}
             {bp.isDesktop && (
@@ -268,83 +312,51 @@ function AHero() {
           </div>
         )}
 
-        {/* Headline + caption: side-by-side on desktop so the headline's freed-up
-            space (now 2 lines instead of 4) gets used instead of sitting empty */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: wideLayout ? 'minmax(0, 1fr) 400px' : '1fr',
-          gap: wideLayout ? 56 : 24,
-          alignItems: wideLayout ? 'center' : 'start'
-        }}>
+        {/* Centred headline, the summary under it, then the two actions side by side */}
+        <div style={{ textAlign: bp.isMobile ? 'left' : 'center', maxWidth: 1040, margin: '0 auto' }}>
           <h1 style={{
             fontFamily: '"Inter Tight", "Inter", sans-serif',
             fontWeight: 500,
-            fontSize: bp.isDesktop ? 'clamp(56px, 4.2vw, 68px)' : 'clamp(48px, 10vw, 168px)',
-            lineHeight: bp.isDesktop ? 1.06 : 0.92,
-            letterSpacing: bp.isDesktop ? '-0.03em' : '-0.04em',
+            fontSize: bp.isMobile ? 'clamp(40px, 11vw, 56px)' : 'clamp(52px, 5.2vw, 84px)',
+            lineHeight: 1.04,
+            letterSpacing: '-0.035em',
+            textWrap: 'balance',
             margin: 0,
             color: A.ink
           }}>
-            {bp.isDesktop ? (
-              <>
-                Designing for the<br />
-                humans behind the{' '}
-                {SHOW_HERO_ACCENT_BOX && (
-                  <span style={{
-                    display: 'inline-block',
-                    width: 'clamp(32px, 5vw, 64px)',
-                    height: 'clamp(24px, 3.6vw, 46px)',
-                    background: A.accent,
-                    verticalAlign: 'middle',
-                    marginRight: 8,
-                    transform: `translateY(${parallax * 0.3}px)`,
-                    transition: 'transform 0.1s linear'
-                  }} aria-hidden />
-                )}
-                <span style={{ fontStyle: 'italic', fontWeight: 400, color: A.accent }}>pixels.</span>
-              </>
-            ) : (
-              <>
-                Designing for<br />
-                the humans<br />
-                behind the{' '}
-                {SHOW_HERO_ACCENT_BOX && (
-                  <span style={{
-                    display: 'inline-block',
-                    width: 'clamp(48px, 10vw, 160px)',
-                    height: 'clamp(34px, 7vw, 110px)',
-                    background: A.accent,
-                    verticalAlign: 'middle',
-                    marginRight: 12,
-                    transform: `translateY(${parallax * 0.3}px)`,
-                    transition: 'transform 0.1s linear'
-                  }} aria-hidden />
-                )}
-                <br />
-                <span style={{ fontStyle: 'italic', fontWeight: 400, color: A.accent }}>pixels.</span>
-              </>
+            Designing for the humans behind the{' '}
+            {SHOW_HERO_ACCENT_BOX && (
+              <span style={{
+                display: 'inline-block',
+                width: 'clamp(32px, 5vw, 64px)',
+                height: 'clamp(24px, 3.6vw, 46px)',
+                background: A.accent,
+                verticalAlign: 'middle',
+                marginRight: 8,
+                transform: `translateY(${parallax * 0.3}px)`,
+                transition: 'transform 0.1s linear'
+              }} aria-hidden />
             )}
+            <span style={{ fontStyle: 'italic', fontWeight: 400, color: A.accent }}>pixels</span>
           </h1>
 
-          <div style={{ marginTop: wideLayout ? 0 : 40 }}>
-            <p style={{ fontSize: bp.isMobile ? 16 : 18, lineHeight: 1.45, letterSpacing: '-0.01em', margin: 0, color: A.ink2 }}>
-              {PORTFOLIO.lead}
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 24 }}>
-              <a href="#work" data-cursor="hover" className="cta cta-outline" style={{
-                ...aStyles.cta, padding: '13px 16px', border: `1px solid rgba(var(--ink-rgb), 0.2)`,
-                color: A.accent,
-                textDecoration: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-              }}>
-                View the index <span className="cta-arrow">→</span>
-              </a>
-              <a href="#contact" data-cursor="hover" className="cta cta-outline" style={{
-                ...aStyles.cta, fontWeight: 500, padding: '13px 16px', border: `1px solid rgba(var(--ink-rgb), 0.2)`,
-                color: A.ink, textDecoration: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-              }}>
-                Start a project <span className="cta-arrow" style={{ color: A.accent }}>→</span>
-              </a>
-            </div>
+          <p style={{
+            fontSize: bp.isMobile ? 16 : 18, lineHeight: 1.55, letterSpacing: '-0.01em',
+            color: A.ink2, maxWidth: 760, margin: `${bp.isMobile ? 20 : 28}px auto 0`
+          }}>
+            {PORTFOLIO.lead}
+          </p>
+
+          <div style={{
+            display: 'flex', flexDirection: bp.isMobile ? 'column' : 'row',
+            justifyContent: 'center', gap: 12, marginTop: bp.isMobile ? 24 : 32
+          }}>
+            <a href="#work" data-cursor="hover" className="cta cta-outline" style={{ ...btn, color: A.accent }}>
+              View the index <span className="cta-arrow">→</span>
+            </a>
+            <a href="#contact" data-cursor="hover" className="cta cta-outline" style={{ ...btn, fontWeight: 500, color: A.ink }}>
+              Start a project <span className="cta-arrow" style={{ color: A.accent }}>→</span>
+            </a>
           </div>
         </div>
       </div>
@@ -406,8 +418,8 @@ function AWork() {
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Selected Work · 2018–2026</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-              Eight products. Four markets.<br />
-              <span style={{ color: A.mute }}>Measurable behaviour change.</span>
+              Eight products, four markets,<br />
+              <span style={{ color: A.mute }}>measurable behaviour change</span>
             </h2>
           </div>
           {bp.isDesktop && (
@@ -539,9 +551,9 @@ function AOrigin() {
               fontSize: 'clamp(36px, 7vw, 88px)',
               fontWeight: 500, lineHeight: 1, letterSpacing: '-0.03em', margin: 0
             }}>
-              An open competition.<br />
-              A golden bird.<br />
-              <span style={{ fontStyle: 'italic', color: A.accent }}>A mark India picked up.</span>
+              An open competition,<br />
+              a golden bird,<br />
+              <span style={{ fontStyle: 'italic', color: A.accent }}>a mark India picked up</span>
             </h2>
             <p style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(var(--ink-rgb), 0.82)', maxWidth: bp.isDesktop ? 480 : '100%', marginTop: 40 }}>
               I entered an open MyGov competition to design a mark for the Aatmnirbhar Bharat campaign: the Indian
@@ -601,7 +613,7 @@ function APrinciples() {
           {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
           <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Operating principles</div>
           <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-            Six beliefs that decide<br />every design call.
+            Six beliefs that decide<br />every design call
           </h2>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: cols, borderTop: `1px solid ${A.line}`, borderLeft: `1px solid ${A.line}` }}>
@@ -787,7 +799,7 @@ function ACareer() {
             {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Curriculum vitae</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-              Eleven years,<br />four cities, over a million downloads.
+              Eleven years,<br />four cities, over a million downloads
             </h2>
           </div>
           <a href="/dipesh-gurav-cv.pdf" download data-cursor="hover" className="cta cta-outline" style={{
@@ -835,7 +847,7 @@ function AAbout() {
             {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>The person behind the work</div>
             <h2 style={{ fontSize: bp.isMobile ? 26 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0, marginBottom: 40 }}>
-              I became a designer because<br />technology is supposed to make<br />life <span style={{ fontStyle: 'italic' }}>easier</span>.
+              I became a designer because<br />technology is supposed to make<br />life <span style={{ fontStyle: 'italic' }}>easier</span>
             </h2>
             <div style={{ fontSize: 15, lineHeight: 1.75, color: A.ink2, borderTop: `1px solid ${A.line}`, paddingTop: 32 }}>
               <p style={{ margin: 0 }}>I have spent around eleven years in design, and I love what I do: solving problems in human-computer interaction. I grew up watching technology promise to make life easier, then complicate it. Forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on.</p>
@@ -892,6 +904,32 @@ function AAbout() {
 }
 
 // ─── CONTACT ─────────────────────────────────────────────────────────────────
+// Small flags for the phone numbers. SVG rather than emoji: Windows renders flag emoji as letters.
+function AFlag({ code }) {
+  const s = { width: 18, height: 12, display: 'block', flexShrink: 0, boxShadow: '0 0 0 1px rgba(var(--ink-rgb), 0.15)' };
+  if (code === 'gb') {
+    return (
+      <svg style={s} viewBox="0 0 60 30" aria-hidden="true" preserveAspectRatio="none">
+        <clipPath id="flag-gb-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" /></clipPath>
+        <rect width="60" height="30" fill="#012169" />
+        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" />
+        <path d="M0,0 L60,30 M60,0 L0,30" clipPath="url(#flag-gb-t)" stroke="#C8102E" strokeWidth="4" />
+        <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10" />
+        <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6" />
+      </svg>
+    );
+  }
+  return (
+    <svg style={s} viewBox="0 0 30 20" aria-hidden="true" preserveAspectRatio="none">
+      <rect width="30" height="20" fill="#fff" />
+      <rect width="30" height="6.67" fill="#FF9933" />
+      <rect y="13.33" width="30" height="6.67" fill="#138808" />
+      <circle cx="15" cy="10" r="2.6" fill="none" stroke="#000080" strokeWidth="0.8" />
+      <circle cx="15" cy="10" r="0.7" fill="#000080" />
+    </svg>
+  );
+}
+
 function AContactIcon({ type }) {
   const s = { width: 16, height: 16, display: 'block' };
   const p = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' };
@@ -1066,7 +1104,7 @@ function AContact() {
                 fontWeight: 500, lineHeight: 1, letterSpacing: '-0.03em', margin: 0
               }}>
                 Let's build<br />
-                something <span style={{ fontStyle: 'italic', color: A.accent }}>meaningful.</span>
+                something <span style={{ fontStyle: 'italic', color: A.accent }}>meaningful</span>
               </h2>
               <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(var(--ink-rgb), 0.80)', maxWidth: bp.isDesktop ? 460 : '100%', marginTop: 32 }}>
                 Open to senior product design roles, consulting, and conversations with people who care about the humans behind the pixels.
@@ -1091,14 +1129,15 @@ function AContact() {
                     display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                     color: A.accent
                   }}>
-                    <AContactIcon type={l.label} />
+                    <AContactIcon type={l.label.split(' · ')[0]} />
                   </span>
                   <span style={{ display: 'flex', flexDirection: 'column', gap: 1, minWidth: 0 }}>
                     <span style={{ ...aStyles.mono, fontSize: 9 }}>{l.label}</span>
                     <span style={{
                       fontSize: bp.isMobile ? 15 : 17, fontWeight: 500, letterSpacing: '-0.01em',
-                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'
-                    }}>{l.value}</span>
+                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                      display: 'flex', alignItems: 'center', gap: 8
+                    }}>{l.flag && <AFlag code={l.flag} />}{l.value}</span>
                   </span>
                   <span style={{ marginLeft: 'auto', color: A.accent, fontSize: 16, flexShrink: 0 }}>→</span>
                 </a>
@@ -1109,7 +1148,9 @@ function AContact() {
           {/* Right: form pinned to bottom, aligning with first link */}
           <div style={{
             display: 'flex', flexDirection: 'column',
-            justifyContent: bp.isDesktop ? 'flex-end' : 'flex-start'
+            justifyContent: 'flex-start',
+            // Matches the 12px spacer above "Let's work together" so both columns start level
+            paddingTop: bp.isDesktop ? 12 : 0
           }}>
             {sent ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
@@ -1120,7 +1161,7 @@ function AContact() {
                     fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.2,
                     margin: 0, color: A.ink
                   }}>
-                    Thanks, {senderName}.<br />I'll be in touch.
+                    Thanks, {senderName}<br />I'll be in touch
                   </h3>
                 </div>
                 <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(var(--ink-rgb), 0.80)', margin: 0 }}>
@@ -1146,7 +1187,7 @@ function AContact() {
                     fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1,
                     margin: 0, color: A.ink
                   }}>
-                    Or drop me a line directly.
+                    Or drop me a line directly
                   </h3>
                 </div>
                 {/* Ruled sheet: hairline cells with crop marks at the corners, like a paper form */}
@@ -1192,7 +1233,7 @@ function AContact() {
                         color: sending ? A.ink : A.paper, border: 'none', cursor: sending ? 'default' : 'pointer',
                         textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
                       }}>
-                      {sending ? 'Sending…' : 'Send transmission'} <span className="cta-arrow">→</span>
+                      {sending ? 'Sending…' : 'Send'} <span className="cta-arrow">→</span>
                     </button>
                   </div>
                 </div>
@@ -1287,6 +1328,8 @@ function AFooter() {
             <a href="mailto:contact@dipeshgurav.com" style={{ color: 'inherit' }}>contact@dipeshgurav.com</a>
             {' · '}
             <a href="tel:+447352673152" style={{ color: 'inherit' }}>+44 7352 673152</a>
+            {' · '}
+            <a href="tel:+919009480090" style={{ color: 'inherit' }}>+91 90094 80090</a>
           </span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12, textAlign: bp.isMobile ? 'left' : 'right' }}>
