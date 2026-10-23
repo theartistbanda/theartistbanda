@@ -6,6 +6,7 @@ Static portfolio site, deployed to Vercel from `main`. This file is excluded fro
 - Case studies are the static `case-*.html` pages. Link to them with clean URLs (`/case-levelup`).
 - Work on a branch and check the Vercel preview before merging to `main`. `main` is the live site.
 - `cv/dipesh-gurav-cv.html` is an old, unpublished CV source (excluded in `.vercelignore`). It still carries retired claims; never republish it as is.
+- **Accessibility:** the site was audited to WCAG 2.2 AA on 23 Oct 2026 (axe-core clean on all nine pages, plus manual keyboard, reflow and contrast checks). Keep it that way: never hide the system cursor (the orange ring is decoration only), keep the skip links and `scroll-padding-top`, keep text at 4.5:1 and UI outlines at 3:1, no ticking or endlessly looping motion, and check new headlines at 320px wide. Re-run axe after layout changes.
 - The contact form posts to a Google Apps Script. Its spam guard lives in `docs/contact-form-apps-script.gs` and must match the form rules in `variant-a.jsx`.
 
 ## 2. Hard content rules

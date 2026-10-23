@@ -64,7 +64,7 @@ function ABanner() {
         <span style={{
           width: 6, height: 6, borderRadius: 99, background: A.accent,
           display: 'inline-block', flexShrink: 0,
-          animation: 'abPulse 2s ease-in-out infinite'
+          animation: 'abPulse 2s ease-in-out 3'
         }} />
         <span style={{ ...aStyles.mono, color: 'rgba(244,241,236,0.72)', fontSize: bp.isMobile ? 9 : 10 }}>
           {bp.isMobile
@@ -83,12 +83,13 @@ function ABanner() {
 function VariantA() {
   return (
     <div style={aStyles.root}>
+      <a href="#main" className="skip-link">Skip to content</a>
       <CustomCursor accent={A.accent} />
-      <div style={{ position: 'sticky', top: 0, zIndex: 82 }}>
+      <header style={{ position: 'sticky', top: 0, zIndex: 82 }}>
         <ABanner />
         <ANav />
-      </div>
-      <main>
+      </header>
+      <main id="main" tabIndex={-1} style={{ outline: 'none' }}>
         <AHero />
         <AMetrics />
         <AWork />
@@ -112,11 +113,12 @@ function ANav() {
   React.useEffect(() => {
     const tick = () => {
       // UK local time, so BST and GMT switch over on their own
-      const uk = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour12: false });
+      // Hours and minutes only, so it changes once a minute instead of ticking (WCAG 2.2.2)
+      const uk = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', hour12: false });
       setT(`${uk} UK`);
     };
     tick();
-    const i = setInterval(tick, 1000);
+    const i = setInterval(tick, 15000);
     return () => clearInterval(i);
   }, []);
 
@@ -411,6 +413,13 @@ function AProjectRow({ p }) {
   const bp = useBreakpoint();
   const [ref, inView] = useReveal();
   const [hover, setHover] = React.useState(false);
+  // The preview covers the rows below, so Escape must hide it (WCAG 1.4.13)
+  React.useEffect(() => {
+    if (!hover) return;
+    const onKey = (e) => { if (e.key === 'Escape') setHover(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [hover]);
 
   const baseStyle = {
     textDecoration: 'none', color: A.ink,
@@ -931,7 +940,11 @@ function AContact() {
     setForm((f) => ({ ...f, [key]: v }));
     if (errors[key]) setErrors((e) => ({ ...e, [key]: contactRules[key](v) }));
   };
-  const check = (key) => setErrors((e) => ({ ...e, [key]: contactRules[key](form[key]) }));
+  // Skip empty fields the visitor only tabbed through; Send still checks everything
+  const check = (key) => {
+    if (!form[key].trim() && !errors[key]) return;
+    setErrors((e) => ({ ...e, [key]: contactRules[key](form[key]) }));
+  };
 
   const finish = (name) => {
     setSenderName(name.trim());
@@ -1141,7 +1154,8 @@ function AContact() {
   );
 }
 
-const A_RULE = 'rgba(237,234,228,0.16)';
+// 0.4 keeps the field outlines at 3.3:1 against the sheet (WCAG 1.4.11)
+const A_RULE = 'rgba(237,234,228,0.4)';
 
 // Registration marks: hairlines that run past each corner of the sheet
 function ACropMarks({ reach }) {
@@ -1161,7 +1175,7 @@ function AField({ id, label, type = 'text', value, onChange, onBlur, error, hint
   const Tag = multiline ? 'textarea' : 'input';
   const note = error || hint;
   return (
-    <div style={{
+    <div className="a-field" style={{
       padding: '16px 20px 14px', minWidth: 0,
       background: focus ? 'rgba(224,83,32,0.05)' : 'transparent',
       transition: 'background .2s', ...cellStyle

@@ -302,18 +302,19 @@ function Placeholder({
   }, label));
 }
 
-// Custom cursor: renders a small ink dot and a larger ring that lags behind.
+// Custom cursor: a ring that trails the system pointer as decoration.
+// The system pointer always stays visible, so people who enlarge or recolour
+// it in their accessibility settings keep it. Off for touch and reduced motion.
 // Respects a data-cursor="hover|text" attribute on hovered elements.
 function CustomCursor({
   accent = '#C2410C'
 }) {
-  const dot = React.useRef(null);
   const ring = React.useRef(null);
   const modeRef = React.useRef('default');
   const [mode, setMode] = React.useState('default');
-  const coarse = React.useMemo(() => matchMedia('(pointer: coarse)').matches, []);
+  const off = React.useMemo(() => matchMedia('(pointer: coarse), (prefers-reduced-motion: reduce)').matches, []);
   React.useEffect(() => {
-    if (coarse) return;
+    if (off) return;
     let rx = 0,
       ry = 0,
       dx = 0,
@@ -321,7 +322,6 @@ function CustomCursor({
     const onMove = e => {
       dx = e.clientX;
       dy = e.clientY;
-      if (dot.current) dot.current.style.transform = `translate(${dx - 3}px, ${dy - 3}px)`;
       const t = e.target.closest?.('[data-cursor]');
       const next = t ? t.getAttribute('data-cursor') : 'default';
       if (next !== modeRef.current) {
@@ -344,23 +344,8 @@ function CustomCursor({
     };
   }, []);
   const ringSize = mode === 'hover' ? 48 : mode === 'text' ? 4 : 32;
-  if (coarse) return null;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    ref: dot,
-    "aria-hidden": "true",
-    style: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: 6,
-      height: 6,
-      borderRadius: 99,
-      background: accent,
-      pointerEvents: 'none',
-      zIndex: 9999,
-      mixBlendMode: mode === 'text' ? 'normal' : 'difference'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
+  if (off) return null;
+  return /*#__PURE__*/React.createElement("div", {
     ref: ring,
     "aria-hidden": "true",
     style: {
@@ -377,7 +362,7 @@ function CustomCursor({
       marginLeft: (32 - ringSize) / 2,
       marginTop: (32 - ringSize) / 2
     }
-  }));
+  });
 }
 
 // Responsive breakpoint hook

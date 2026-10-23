@@ -155,6 +155,12 @@
     footer { padding: 24px 16px; }
   }
 
+  /* Skip link, and focused items kept clear of the sticky nav (WCAG 2.4.1, 2.4.11) */
+  html { scroll-padding-top: 72px; }
+  .skip-link { position: absolute; left: 16px; top: -100px; z-index: 100; background: var(--accent); color: var(--paper); padding: 12px 18px; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
+  .skip-link:focus { top: 12px; }
+  main:focus { outline: none; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
   /* Reduced motion: honour the user's OS-level preference */
@@ -166,6 +172,7 @@
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <nav>
   <div>
@@ -175,7 +182,7 @@
   </div>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
 <section class="hero">
   <div class="wrap">
     <div class="meta">
@@ -206,7 +213,7 @@
       </div>
       <div class="stat">
         <div class="mono" style="margin-bottom:8px">Status</div>
-        <div class="n"><a href="https://job-app-assistant.onrender.com" target="_blank" rel="noopener">Live<i> ↗</i></a></div>
+        <div class="n"><a href="https://job-app-assistant.onrender.com" target="_blank" rel="noopener">Live<i> ↗</i><span class="sr-only"> (opens in new tab)</span></a></div>
       </div>
     </div>
   </div>
@@ -363,7 +370,7 @@
       <h2>A working product. <i>And a mental model that won't leave.</i></h2>
     </div>
     <div class="prose">
-      <p>The app is live at <a href="https://job-app-assistant.onrender.com" target="_blank" rel="noopener">job-app-assistant.onrender.com</a>. It generates cover letters, fit scores, Q&A answers, and contact outreach templates: all structured, all copyable, all downloadable as PDF.</p>
+      <p>The app is live at <a href="https://job-app-assistant.onrender.com" target="_blank" rel="noopener">job-app-assistant.onrender.com<span class="sr-only"> (opens in new tab)</span></a>. It generates cover letters, fit scores, Q&A answers, and contact outreach templates: all structured, all copyable, all downloadable as PDF.</p>
       <p>But the more durable outcome is the picture in my head. I now know what the back room looks like. I know where the key lives, why it matters, what each file owns and why that separation is worth defending. I know the difference between a concept that lives in a deck and a product that lives on a server.</p>
       <p>For a designer who works at the intersection of human judgement and AI tools, that picture changes what's possible.</p>
     </div>

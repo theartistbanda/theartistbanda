@@ -125,12 +125,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,wght@1,300;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   html, body { margin: 0; padding: 0; background: #0F0D0B; }
+  /* Keeps focused items clear of the sticky banner and nav (WCAG 2.4.11) */
+  html { scroll-padding-top: 104px; }
   * { box-sizing: border-box; }
-  body, body * { cursor: none; }
-  input, textarea { cursor: text !important; }
-  @media (pointer: coarse) { body, body * { cursor: auto; } }
-  input::placeholder, textarea::placeholder { color: rgba(237,234,228,0.35); opacity: 1; }
+  /* 0.5 gives placeholders 4.6:1 (WCAG 1.4.3) */
+  input::placeholder, textarea::placeholder { color: rgba(237,234,228,0.5); opacity: 1; }
   a:focus-visible, button:focus-visible { outline: 2px solid #E05320; outline-offset: 3px; }
+  /* Contact form: ring the whole cell while its field has focus (WCAG 2.4.7) */
+  .a-field:focus-within { outline: 2px solid #E05320; outline-offset: -2px; }
+  .skip-link { position: absolute; left: 16px; top: -100px; z-index: 10000; background: #E05320; color: #0F0D0B; padding: 12px 18px; font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
+  .skip-link:focus { top: 12px; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   }

@@ -69,7 +69,7 @@ function ABanner() {
       background: A.accent,
       display: 'inline-block',
       flexShrink: 0,
-      animation: 'abPulse 2s ease-in-out infinite'
+      animation: 'abPulse 2s ease-in-out 3'
     }
   }), /*#__PURE__*/React.createElement("span", {
     style: {
@@ -93,15 +93,24 @@ function ABanner() {
 function VariantA() {
   return /*#__PURE__*/React.createElement("div", {
     style: aStyles.root
-  }, /*#__PURE__*/React.createElement(CustomCursor, {
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "#main",
+    className: "skip-link"
+  }, "Skip to content"), /*#__PURE__*/React.createElement(CustomCursor, {
     accent: A.accent
-  }), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("header", {
     style: {
       position: 'sticky',
       top: 0,
       zIndex: 82
     }
-  }, /*#__PURE__*/React.createElement(ABanner, null), /*#__PURE__*/React.createElement(ANav, null)), /*#__PURE__*/React.createElement("main", null, /*#__PURE__*/React.createElement(AHero, null), /*#__PURE__*/React.createElement(AMetrics, null), /*#__PURE__*/React.createElement(AWork, null), /*#__PURE__*/React.createElement(AOrigin, null), /*#__PURE__*/React.createElement(APrinciples, null), /*#__PURE__*/React.createElement(ACareer, null), /*#__PURE__*/React.createElement(AAbout, null), /*#__PURE__*/React.createElement(AContact, null)), /*#__PURE__*/React.createElement(AFooter, null));
+  }, /*#__PURE__*/React.createElement(ABanner, null), /*#__PURE__*/React.createElement(ANav, null)), /*#__PURE__*/React.createElement("main", {
+    id: "main",
+    tabIndex: -1,
+    style: {
+      outline: 'none'
+    }
+  }, /*#__PURE__*/React.createElement(AHero, null), /*#__PURE__*/React.createElement(AMetrics, null), /*#__PURE__*/React.createElement(AWork, null), /*#__PURE__*/React.createElement(AOrigin, null), /*#__PURE__*/React.createElement(APrinciples, null), /*#__PURE__*/React.createElement(ACareer, null), /*#__PURE__*/React.createElement(AAbout, null), /*#__PURE__*/React.createElement(AContact, null)), /*#__PURE__*/React.createElement(AFooter, null));
 }
 
 // ─── NAV ─────────────────────────────────────────────────────────────────────
@@ -112,14 +121,17 @@ function ANav() {
   React.useEffect(() => {
     const tick = () => {
       // UK local time, so BST and GMT switch over on their own
+      // Hours and minutes only, so it changes once a minute instead of ticking (WCAG 2.2.2)
       const uk = new Date().toLocaleTimeString('en-GB', {
         timeZone: 'Europe/London',
+        hour: '2-digit',
+        minute: '2-digit',
         hour12: false
       });
       setT(`${uk} UK`);
     };
     tick();
-    const i = setInterval(tick, 1000);
+    const i = setInterval(tick, 15000);
     return () => clearInterval(i);
   }, []);
   const links = ['Work', 'Origin', 'Principles', 'Career', 'Studio'];
@@ -538,6 +550,15 @@ function AProjectRow({
   const bp = useBreakpoint();
   const [ref, inView] = useReveal();
   const [hover, setHover] = React.useState(false);
+  // The preview covers the rows below, so Escape must hide it (WCAG 1.4.13)
+  React.useEffect(() => {
+    if (!hover) return;
+    const onKey = e => {
+      if (e.key === 'Escape') setHover(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [hover]);
   const baseStyle = {
     textDecoration: 'none',
     color: A.ink,
@@ -1538,10 +1559,14 @@ function AContact() {
       [key]: contactRules[key](v)
     }));
   };
-  const check = key => setErrors(e => ({
-    ...e,
-    [key]: contactRules[key](form[key])
-  }));
+  // Skip empty fields the visitor only tabbed through; Send still checks everything
+  const check = key => {
+    if (!form[key].trim() && !errors[key]) return;
+    setErrors(e => ({
+      ...e,
+      [key]: contactRules[key](form[key])
+    }));
+  };
   const finish = name => {
     setSenderName(name.trim());
     setForm({
@@ -1928,7 +1953,9 @@ function AContact() {
     }
   }, sending ? 'Sending…' : 'Send transmission', " ", /*#__PURE__*/React.createElement("span", null, "\u2192")))))))));
 }
-const A_RULE = 'rgba(237,234,228,0.16)';
+
+// 0.4 keeps the field outlines at 3.3:1 against the sheet (WCAG 1.4.11)
+const A_RULE = 'rgba(237,234,228,0.4)';
 
 // Registration marks: hairlines that run past each corner of the sheet
 function ACropMarks({
@@ -1993,6 +2020,7 @@ function AField({
   const Tag = multiline ? 'textarea' : 'input';
   const note = error || hint;
   return /*#__PURE__*/React.createElement("div", {
+    className: "a-field",
     style: {
       padding: '16px 20px 14px',
       minWidth: 0,
