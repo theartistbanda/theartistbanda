@@ -1,0 +1,59 @@
+/* Site colours, shared by every page. Light is the default; html[data-theme="dark"] switches.
+   Every text pairing below is checked to WCAG 2.2 AA (4.5:1) in both themes. Change colours
+   here, never in page files: pages only reference these variables.
+   --paper  page background       --surf    banded sections (banner, origin, contact, footer)
+   --paper2 raised and hover      --ink     main text        --ink2  body text   --mute  labels
+   --line   hairlines             --rule    form field outlines (3:1, WCAG 1.4.11)
+   --accent links, fills, labels  --on-accent text on accent fills
+   *-rgb triplets are for tints: rgba(var(--ink-rgb), 0.2) */
+:root {
+  color-scheme: light;
+  --paper: #FFFFFF;   --paper-rgb: 255, 255, 255;
+  --paper2: #F3F1ED;
+  --surf: #F6F4F0;
+  --ink: #16130F;     --ink-rgb: 22, 19, 15;
+  --ink2: #57524C;
+  --mute: #6B655F;
+  --line: rgba(22, 19, 15, 0.10);
+  --rule: rgba(22, 19, 15, 0.5);
+  --accent: #BD3F0C;  --accent-rgb: 189, 63, 12;
+  --accent-hover: #9A3412;
+  --accent-strong: #9A3412;
+  --accent-tint: rgba(189, 63, 12, 0.07);
+  --accent-soft: #F7E6DD;
+  --on-accent: #FFFFFF;
+  --panel: #F4F1EB;   /* matches the background baked into aatmnirbhar-logo.webp */
+  --placeholder: #6B655F;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0F0D0B;   --paper-rgb: 15, 13, 11;
+  --paper2: #1C1916;
+  --surf: #080604;
+  --ink: #EDEAE4;     --ink-rgb: 237, 234, 228;
+  --ink2: #9A948D;
+  --mute: #8C8680;
+  --line: rgba(237, 234, 228, 0.09);
+  --rule: rgba(237, 234, 228, 0.4);
+  --accent: #E05320;  --accent-rgb: 224, 83, 32;
+  --accent-hover: #F26A3A;
+  --accent-strong: #E05320;
+  --accent-tint: rgba(194, 65, 12, 0.1);
+  --accent-soft: #2A1208;
+  --on-accent: #0F0D0B;
+  --panel: #F4F1EC;
+  --placeholder: rgba(237, 234, 228, 0.5);
+}
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Theme toggle in the header. The icon shows what you switch to; the label follows suit. */
+.nav-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.theme-toggle { width: 36px; height: 36px; padding: 0; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; background: transparent; color: var(--ink); border: 1px solid rgba(var(--ink-rgb), 0.2); cursor: pointer; transition: border-color .2s ease, background-color .2s ease; }
+.theme-toggle:hover, .theme-toggle:focus-visible { border-color: var(--accent); background-color: rgba(var(--accent-rgb), 0.08); }
+.theme-toggle svg { width: 16px; height: 16px; display: block; }
+.theme-toggle .icon-sun, .theme-toggle .label-to-light { display: none; }
+html[data-theme="dark"] .theme-toggle .icon-moon, html[data-theme="dark"] .theme-toggle .label-to-dark { display: none; }
+html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+html[data-theme="dark"] .theme-toggle .label-to-light { display: inline; }

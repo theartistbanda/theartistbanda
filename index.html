@@ -123,25 +123,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,wght@1,300;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')==='dark'?'dark':'light')}catch(e){document.documentElement.setAttribute('data-theme','light')}</script>
+<link rel="stylesheet" href="/theme.css">
 <style>
-  html, body { margin: 0; padding: 0; background: #0F0D0B; }
+  html, body { margin: 0; padding: 0; background: var(--paper); }
   /* Keeps focused items clear of the sticky banner and nav (WCAG 2.4.11) */
   html { scroll-padding-top: 104px; }
   * { box-sizing: border-box; }
   /* 0.5 gives placeholders 4.6:1 (WCAG 1.4.3) */
-  input::placeholder, textarea::placeholder { color: rgba(237,234,228,0.5); opacity: 1; }
-  a:focus-visible, button:focus-visible { outline: 2px solid #E05320; outline-offset: 3px; }
+  input::placeholder, textarea::placeholder { color: var(--placeholder); opacity: 1; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   /* Contact form: ring the whole cell while its field has focus (WCAG 2.4.7) */
-  .a-field:focus-within { outline: 2px solid #E05320; outline-offset: -2px; }
+  .a-field:focus-within { outline: 2px solid var(--accent); outline-offset: -2px; }
   /* Button micro-interactions. Keyboard focus gets the same treatment as hover. */
   .cta { transition: background-color .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
   .cta .cta-arrow { display: inline-block; transition: transform .2s ease; }
   .cta:hover .cta-arrow, .cta:focus-visible .cta-arrow { transform: translateX(4px); }
-  .cta-primary:not(:disabled):hover, .cta-primary:not(:disabled):focus-visible { background-color: #F26A3A !important; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(224,83,32,0.28); }
+  .cta-primary:not(:disabled):hover, .cta-primary:not(:disabled):focus-visible { background-color: var(--accent-hover) !important; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(var(--accent-rgb), 0.28); }
   .cta-primary:not(:disabled):active { transform: translateY(0) scale(0.98); box-shadow: none; }
-  .cta-outline:hover, .cta-outline:focus-visible { border-color: #E05320 !important; background-color: rgba(224,83,32,0.08) !important; }
+  .cta-outline:hover, .cta-outline:focus-visible { border-color: var(--accent) !important; background-color: rgba(var(--accent-rgb), 0.08) !important; }
   .cta-outline:active { transform: scale(0.98); }
-  .skip-link { position: absolute; left: 16px; top: -100px; z-index: 10000; background: #E05320; color: #0F0D0B; padding: 12px 18px; font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
+  .skip-link { position: absolute; left: 16px; top: -100px; z-index: 10000; background: var(--accent); color: var(--on-accent); padding: 12px 18px; font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
   .skip-link:focus { top: 12px; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -154,7 +156,7 @@
 
 <!-- Fallback content for crawlers that do not execute JavaScript -->
 <noscript>
-  <main style="font-family:sans-serif;max-width:800px;margin:40px auto;padding:0 24px;color:#EDEAE4;background:#0F0D0B;">
+  <main style="font-family:sans-serif;max-width:800px;margin:40px auto;padding:0 24px;color:var(--ink);background:var(--paper);">
     <h1>Dipesh Gurav | Lead Product Designer</h1>
     <p>Lead Product Designer with 11 years of experience. Founding designer on the Digital IT team at TaskUs, designing enterprise AI tools used by around 35,000 people a day across 14 countries. Open to work as an immediate joiner. Right to work in the UK, no sponsorship required.</p>
     <h2>Selected Work</h2>
@@ -184,5 +186,6 @@
 <script defer src="shared.js"></script>
 <script defer src="variant-a.js"></script>
 <script defer src="init.js"></script>
+<script defer src="/theme.js"></script>
 </body>
 </html>

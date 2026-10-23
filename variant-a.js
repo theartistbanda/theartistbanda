@@ -5,15 +5,16 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 // Paste your deployed Google Apps Script URL here after setup:
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhhi3HmoZQ5Omybk_s424iDbCbdbDDXTCOFfGYhl9jjVqny_VoS9q0g-WLwCW6-5sX/exec';
 const A = {
-  paper: '#0F0D0B',
-  paper2: '#1C1916',
-  ink: '#EDEAE4',
-  ink2: '#9A948D',
-  mute: '#8C8680',
-  line: 'rgba(237,234,228,0.09)',
-  accent: '#E05320',
-  accentSoft: '#2A1208',
-  surf: '#080604'
+  // Colours come from /theme.css so the light/dark toggle can swap them
+  paper: 'var(--paper)',
+  paper2: 'var(--paper2)',
+  ink: 'var(--ink)',
+  ink2: 'var(--ink2)',
+  mute: 'var(--mute)',
+  line: 'var(--line)',
+  accent: 'var(--accent)',
+  accentSoft: 'var(--accent-soft)',
+  surf: 'var(--surf)'
 };
 const aStyles = {
   root: {
@@ -54,7 +55,7 @@ function ABanner() {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, `@keyframes abPulse{0%,100%{opacity:1}50%{opacity:.35}}`), /*#__PURE__*/React.createElement("div", {
     style: {
       background: A.surf,
-      borderBottom: '1px solid rgba(237,234,228,0.1)',
+      borderBottom: '1px solid rgba(var(--ink-rgb), 0.1)',
       padding: `9px ${side}`,
       display: 'flex',
       alignItems: 'center',
@@ -74,7 +75,7 @@ function ABanner() {
   }), /*#__PURE__*/React.createElement("span", {
     style: {
       ...aStyles.mono,
-      color: 'rgba(244,241,236,0.72)',
+      color: 'rgba(var(--ink-rgb), 0.72)',
       fontSize: bp.isMobile ? 9 : 10
     }
   }, bp.isMobile ? 'Right to work in the UK · Available now' : 'Right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'), /*#__PURE__*/React.createElement("a", {
@@ -114,6 +115,45 @@ function VariantA() {
 }
 
 // ─── NAV ─────────────────────────────────────────────────────────────────────
+// Light/dark switch. /theme.js handles the click and remembers the choice;
+// /theme.css swaps the icon and the screen reader label to match the theme.
+function AThemeToggle() {
+  return /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "theme-toggle",
+    "data-theme-toggle": "",
+    "data-cursor": "hover"
+  }, /*#__PURE__*/React.createElement("svg", {
+    className: "icon-moon",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.6",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"
+  })), /*#__PURE__*/React.createElement("svg", {
+    className: "icon-sun",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.6",
+    strokeLinecap: "round",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "12",
+    cy: "12",
+    r: "4"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "sr-only label-to-dark"
+  }, "Switch to dark theme"), /*#__PURE__*/React.createElement("span", {
+    className: "sr-only label-to-light"
+  }, "Switch to light theme"));
+}
 function ANav() {
   const bp = useBreakpoint();
   const [t, setT] = React.useState('');
@@ -137,7 +177,7 @@ function ANav() {
   const links = ['Work', 'Principles', 'Career', 'Studio', 'Origin'];
   return /*#__PURE__*/React.createElement("nav", {
     style: {
-      background: 'rgba(15,13,11,0.92)',
+      background: 'rgba(var(--paper-rgb), 0.92)',
       backdropFilter: 'blur(12px)',
       borderBottom: `1px solid ${A.line}`
     }
@@ -150,7 +190,7 @@ function ANav() {
       alignItems: 'center',
       justifyContent: 'space-between',
       height: 56,
-      gap: 16
+      gap: bp.isMobile ? 10 : 16
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -202,10 +242,10 @@ function ANav() {
   }, "\u25CF "), t), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
-      gap: 12,
+      gap: bp.isMobile ? 8 : 12,
       alignItems: 'center'
     }
-  }, /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement(AThemeToggle, null), /*#__PURE__*/React.createElement("a", {
     href: "#contact",
     "data-cursor": "hover",
     className: "cta cta-primary",
@@ -213,7 +253,7 @@ function ANav() {
       ...aStyles.cta,
       color: A.paper,
       background: A.accent,
-      padding: '10px 16px',
+      padding: bp.isMobile ? '10px 12px' : '10px 16px',
       textDecoration: 'none',
       display: 'inline-flex',
       gap: 8,
@@ -224,7 +264,8 @@ function ANav() {
     className: "cta-arrow"
   }, "\u2192")), !bp.isDesktop && /*#__PURE__*/React.createElement("button", {
     onClick: () => setOpen(o => !o),
-    "aria-label": "Toggle menu",
+    "aria-label": "Menu",
+    "aria-expanded": open,
     style: {
       background: 'none',
       border: `1px solid ${A.line}`,
@@ -385,7 +426,7 @@ function AHero() {
     style: {
       ...aStyles.cta,
       padding: '13px 16px',
-      border: `1px solid rgba(237,234,228,0.2)`,
+      border: `1px solid rgba(var(--ink-rgb), 0.2)`,
       color: A.accent,
       textDecoration: 'none',
       display: 'flex',
@@ -402,7 +443,7 @@ function AHero() {
       ...aStyles.cta,
       fontWeight: 500,
       padding: '13px 16px',
-      border: `1px solid rgba(237,234,228,0.2)`,
+      border: `1px solid rgba(var(--ink-rgb), 0.2)`,
       color: A.ink,
       textDecoration: 'none',
       display: 'flex',
@@ -781,7 +822,7 @@ function AOrigin() {
     style: {
       fontSize: 16,
       lineHeight: 1.6,
-      color: 'rgba(237,234,228,0.82)',
+      color: 'rgba(var(--ink-rgb), 0.82)',
       maxWidth: bp.isDesktop ? 480 : '100%',
       marginTop: 40
     }
@@ -803,13 +844,13 @@ function AOrigin() {
       gridTemplateColumns: '1fr 1fr',
       // Logo row takes any spare height so the quote row never gapes below its line
       gridTemplateRows: '1fr auto',
-      border: `1px solid rgba(244,241,236,0.12)`,
+      border: `1px solid rgba(var(--ink-rgb), 0.12)`,
       marginTop: bp.isMobile ? 48 : bp.isTablet ? 48 : 0
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: 'span 2',
-      background: '#F4F1EC',
+      background: 'var(--panel)',
       padding: bp.isMobile ? '32px 24px' : '48px 40px',
       display: 'flex',
       alignItems: 'center',
@@ -828,8 +869,8 @@ function AOrigin() {
     style: {
       gridColumn: 'span 2',
       padding: bp.isMobile ? '20px 16px' : 28,
-      background: 'rgba(194,65,12,0.1)',
-      borderTop: `1px solid rgba(244,241,236,0.08)`
+      background: 'var(--accent-tint)',
+      borderTop: `1px solid rgba(var(--ink-rgb), 0.08)`
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -837,7 +878,7 @@ function AOrigin() {
       fontWeight: 300,
       fontStyle: 'italic',
       fontSize: bp.isMobile ? 18 : 22,
-      color: A.accent,
+      color: 'var(--accent-strong)',
       letterSpacing: '-0.01em'
     }
   }, "Design captures culture, not just pixels."))))));
@@ -1186,7 +1227,7 @@ function ACareer() {
       ...aStyles.cta,
       fontWeight: 500,
       padding: '12px 16px',
-      border: `1px solid rgba(237,234,228,0.2)`,
+      border: `1px solid rgba(var(--ink-rgb), 0.2)`,
       color: A.ink,
       textDecoration: 'none',
       flexShrink: 0,
@@ -1683,7 +1724,7 @@ function AContact() {
     style: {
       fontSize: 15,
       lineHeight: 1.7,
-      color: 'rgba(237,234,228,0.80)',
+      color: 'rgba(var(--ink-rgb), 0.80)',
       maxWidth: bp.isDesktop ? 460 : '100%',
       marginTop: 32
     }
@@ -1698,7 +1739,7 @@ function AContact() {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       ...aStyles.mono,
-      color: 'rgba(237,234,228,0.65)',
+      color: 'rgba(var(--ink-rgb), 0.65)',
       marginBottom: 10
     }
   }, "Direct lines"), PORTFOLIO.links.map(l => /*#__PURE__*/React.createElement("a", {
@@ -1722,7 +1763,7 @@ function AContact() {
       width: 36,
       height: 36,
       flexShrink: 0,
-      border: `1px solid rgba(244,241,236,0.16)`,
+      border: `1px solid rgba(var(--ink-rgb), 0.16)`,
       display: 'inline-flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -1793,7 +1834,7 @@ function AContact() {
     style: {
       fontSize: 15,
       lineHeight: 1.7,
-      color: 'rgba(237,234,228,0.80)',
+      color: 'rgba(var(--ink-rgb), 0.80)',
       margin: 0
     }
   }, "Your message landed safely. I read every enquiry personally and typically reply within 48 hours."), /*#__PURE__*/React.createElement("button", {
@@ -1809,7 +1850,7 @@ function AContact() {
       padding: '14px 20px',
       background: 'transparent',
       color: A.ink,
-      border: `1px solid rgba(237,234,228,0.2)`,
+      border: `1px solid rgba(var(--ink-rgb), 0.2)`,
       cursor: 'pointer',
       textAlign: 'left',
       display: 'flex',
@@ -1835,7 +1876,7 @@ function AContact() {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       ...aStyles.mono,
-      color: 'rgba(237,234,228,0.65)',
+      color: 'rgba(var(--ink-rgb), 0.65)',
       marginBottom: 12
     }
   }, "Write to me"), /*#__PURE__*/React.createElement("h3", {
@@ -1955,7 +1996,7 @@ function AContact() {
       ...aStyles.cta,
       padding: '18px 20px',
       width: '100%',
-      background: sending ? 'rgba(237,234,228,0.1)' : A.accent,
+      background: sending ? 'rgba(var(--ink-rgb), 0.1)' : A.accent,
       color: sending ? A.ink : A.paper,
       border: 'none',
       cursor: sending ? 'default' : 'pointer',
@@ -1969,8 +2010,8 @@ function AContact() {
   }, "\u2192")))))))));
 }
 
-// 0.4 keeps the field outlines at 3.3:1 against the sheet (WCAG 1.4.11)
-const A_RULE = 'rgba(237,234,228,0.4)';
+// Field outlines at 3:1 or more against the sheet in both themes (WCAG 1.4.11)
+const A_RULE = 'var(--rule)';
 
 // Registration marks: hairlines that run past each corner of the sheet
 function ACropMarks({
@@ -2039,7 +2080,7 @@ function AField({
     style: {
       padding: '16px 20px 14px',
       minWidth: 0,
-      background: focus ? 'rgba(224,83,32,0.05)' : 'transparent',
+      background: focus ? 'rgba(var(--accent-rgb), 0.05)' : 'transparent',
       transition: 'background .2s',
       ...cellStyle
     }
@@ -2050,7 +2091,7 @@ function AField({
       justifyContent: 'space-between',
       gap: 12,
       ...aStyles.mono,
-      color: focus ? A.accent : 'rgba(237,234,228,0.75)',
+      color: focus ? A.accent : 'rgba(var(--ink-rgb), 0.75)',
       marginBottom: 6,
       transition: 'color .2s',
       cursor: 'text'
@@ -2096,7 +2137,7 @@ function AField({
       fontSize: 13,
       lineHeight: 1.4,
       marginTop: note ? 6 : 0,
-      color: error ? A.accent : 'rgba(237,234,228,0.65)'
+      color: error ? A.accent : 'rgba(var(--ink-rgb), 0.65)'
     }
   }, error ? `✱ ${error}` : hint));
 }
@@ -2107,14 +2148,14 @@ function AFooter() {
   const side = sp(bp);
   const monoLight = {
     ...aStyles.mono,
-    color: 'rgba(237,234,228,0.65)'
+    color: 'rgba(var(--ink-rgb), 0.65)'
   };
   return /*#__PURE__*/React.createElement("footer", {
     style: {
       background: A.surf,
       padding: `72px ${side} 64px`,
-      color: 'rgba(237,234,228,0.65)',
-      borderTop: `1px solid rgba(237,234,228,0.10)`
+      color: 'rgba(var(--ink-rgb), 0.65)',
+      borderTop: `1px solid rgba(var(--ink-rgb), 0.10)`
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {

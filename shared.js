@@ -269,13 +269,13 @@ function Placeholder({
   style
 }) {
   const colors = tone === 'ink' ? {
-    bg: '#080604',
-    fg: 'rgba(237,234,228,0.55)',
-    line: 'rgba(237,234,228,0.08)'
+    bg: 'var(--surf)',
+    fg: 'rgba(var(--ink-rgb), 0.55)',
+    line: 'rgba(var(--ink-rgb), 0.08)'
   } : {
-    bg: '#1C1916',
-    fg: 'rgba(237,234,228,0.35)',
-    line: 'rgba(237,234,228,0.06)'
+    bg: 'var(--paper2)',
+    fg: 'rgba(var(--ink-rgb), 0.35)',
+    line: 'rgba(var(--ink-rgb), 0.06)'
   };
   return /*#__PURE__*/React.createElement("div", {
     style: {
@@ -307,7 +307,7 @@ function Placeholder({
 // it in their accessibility settings keep it. Off for touch and reduced motion.
 // Respects a data-cursor="hover|text" attribute on hovered elements.
 function CustomCursor({
-  accent = '#C2410C'
+  accent = 'var(--accent)'
 }) {
   const ring = React.useRef(null);
   const modeRef = React.useRef('default');
