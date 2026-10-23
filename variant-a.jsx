@@ -163,12 +163,12 @@ function ANav() {
         )}
 
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <a href="#contact" data-cursor="hover" style={{
+          <a href="#contact" data-cursor="hover" className="cta cta-primary" style={{
             ...aStyles.cta, color: A.paper, background: A.accent,
             padding: '10px 16px', textDecoration: 'none',
             display: 'inline-flex', gap: 8, alignItems: 'center', flexShrink: 0
           }}>
-            {bp.isMobile ? 'Hire me →' : 'Available for work →'}
+            {bp.isMobile ? 'Hire me' : 'Available for work'} <span className="cta-arrow">→</span>
           </a>
 
           {/* Hamburger: tablet + mobile */}
@@ -315,18 +315,18 @@ function AHero() {
               {PORTFOLIO.lead}
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 24 }}>
-              <a href="#work" data-cursor="hover" style={{
+              <a href="#work" data-cursor="hover" className="cta cta-outline" style={{
                 ...aStyles.cta, padding: '13px 16px', border: `1px solid rgba(237,234,228,0.2)`,
                 color: A.accent,
                 textDecoration: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
               }}>
-                View the index <span>→</span>
+                View the index <span className="cta-arrow">→</span>
               </a>
-              <a href="#contact" data-cursor="hover" style={{
+              <a href="#contact" data-cursor="hover" className="cta cta-outline" style={{
                 ...aStyles.cta, fontWeight: 500, padding: '13px 16px', border: `1px solid rgba(237,234,228,0.2)`,
                 color: A.ink, textDecoration: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
               }}>
-                Start a project <span style={{ color: A.accent }}>→</span>
+                Start a project <span className="cta-arrow" style={{ color: A.accent }}>→</span>
               </a>
             </div>
           </div>
@@ -650,14 +650,14 @@ function ACareerItem({ c, i, bp }) {
         {bp.isDesktop && (
           <span style={{ fontSize: 22, fontWeight: 500, letterSpacing: '-0.015em', lineHeight: 1.2 }}>
             {c.role}<br />
-            <span style={{ fontSize: 13, color: A.accent, fontWeight: 400, letterSpacing: 0 }}>{c.org}</span>
+            <span style={{ fontSize: 14, color: A.accent, fontWeight: 400, letterSpacing: 0 }}>{c.org}</span>
           </span>
         )}
         {!bp.isDesktop && (
           <div>
             <div style={{ fontSize: bp.isMobile ? 16 : 20, fontWeight: 500, letterSpacing: '-0.015em', lineHeight: 1.2 }}>{c.role}</div>
-            <div style={{ fontSize: 13, color: A.accent, marginTop: 4 }}>{c.org}</div>
-            <div style={{ fontSize: 13, color: A.mute, lineHeight: 1.65, margin: '12px 0 0' }}>
+            <div style={{ fontSize: 14, color: A.accent, marginTop: 4 }}>{c.org}</div>
+            <div style={{ fontSize: 15, color: A.ink2, lineHeight: 1.7, margin: '12px 0 0' }}>
               {c.body.map((para, pi) => (
                 <p key={pi} style={{ margin: pi === 0 ? 0 : '10px 0 0' }}>{para}</p>
               ))}
@@ -671,7 +671,7 @@ function ACareerItem({ c, i, bp }) {
             {bp.isMobile && (
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 12 }}>
                 {c.tags.map((t) => (
-                  <span key={t} style={{ ...aStyles.mono, fontSize: 9, padding: '4px 7px', border: `1px solid ${A.line}`, color: A.ink2 }}>{t}</span>
+                  <span key={t} style={{ ...aStyles.mono, fontSize: 10, padding: '4px 7px', border: `1px solid ${A.line}`, color: A.ink2 }}>{t}</span>
                 ))}
               </div>
             )}
@@ -683,7 +683,7 @@ function ACareerItem({ c, i, bp }) {
       {bp.isTablet && (
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, alignItems: 'flex-start', paddingTop: 4 }}>
           {c.tags.map((t) => (
-            <span key={t} style={{ ...aStyles.mono, fontSize: 9, padding: '4px 7px', border: `1px solid ${A.line}`, color: A.ink2 }}>{t}</span>
+            <span key={t} style={{ ...aStyles.mono, fontSize: 10, padding: '4px 7px', border: `1px solid ${A.line}`, color: A.ink2 }}>{t}</span>
           ))}
         </div>
       )}
@@ -691,7 +691,7 @@ function ACareerItem({ c, i, bp }) {
       {/* Desktop: body + NDA note + tags in separate columns */}
       {bp.isDesktop && (
         <div>
-          <div style={{ fontSize: 13.5, color: A.mute, lineHeight: 1.65 }}>
+          <div style={{ fontSize: 15, color: A.ink2, lineHeight: 1.7 }}>
             {c.body.map((para, pi) => (
               <p key={pi} style={{ margin: pi === 0 ? 0 : '12px 0 0' }}>{para}</p>
             ))}
@@ -707,7 +707,7 @@ function ACareerItem({ c, i, bp }) {
       {bp.isDesktop && (
         <span style={{ display: 'flex', flexWrap: 'wrap', gap: 4, alignItems: 'flex-start' }}>
           {c.tags.map((t) => (
-            <span key={t} style={{ ...aStyles.mono, fontSize: 9, padding: '4px 7px', border: `1px solid ${A.line}`, color: A.ink2, textTransform: 'uppercase' }}>{t}</span>
+            <span key={t} style={{ ...aStyles.mono, fontSize: 10, padding: '4px 7px', border: `1px solid ${A.line}`, color: A.ink2, textTransform: 'uppercase' }}>{t}</span>
           ))}
         </span>
       )}
@@ -737,12 +737,12 @@ function ACareer() {
               Eleven years,<br />four cities, over a million downloads.
             </h2>
           </div>
-          <a href="/dipesh-gurav-cv.pdf" download data-cursor="hover" style={{
+          <a href="/dipesh-gurav-cv.pdf" download data-cursor="hover" className="cta cta-outline" style={{
             ...aStyles.cta, fontWeight: 500, padding: '12px 16px', border: `1px solid rgba(237,234,228,0.2)`,
             color: A.ink, textDecoration: 'none', flexShrink: 0,
             display: 'inline-flex', gap: 10, alignItems: 'center'
           }}>
-            Download PDF résumé <span style={{ color: A.accent }}>→</span>
+            Download PDF résumé <span className="cta-arrow" style={{ color: A.accent }}>→</span>
           </a>
         </div>
         <div>
@@ -1073,16 +1073,15 @@ function AContact() {
                 <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(237,234,228,0.80)', margin: 0 }}>
                   Your message landed safely. I read every enquiry personally and typically reply within 48 hours.
                 </p>
-                <button onClick={() => { setSent(false); setSendError(false); }} data-cursor="hover"
+                <button onClick={() => { setSent(false); setSendError(false); }} data-cursor="hover" className="cta cta-outline"
                   style={{
                     ...aStyles.cta, fontWeight: 500, padding: '14px 20px',
                     background: 'transparent', color: A.ink,
                     border: `1px solid rgba(237,234,228,0.2)`,
                     cursor: 'pointer', textAlign: 'left',
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    transition: 'border-color .2s'
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center'
                   }}>
-                  Send another message <span style={{ color: A.accent }}>→</span>
+                  Send another message <span className="cta-arrow" style={{ color: A.accent }}>→</span>
                 </button>
               </div>
             ) : (
@@ -1133,15 +1132,14 @@ function AContact() {
                         Something went wrong. Try emailing me directly.
                       </p>
                     )}
-                    <button type="submit" data-cursor="hover" disabled={sending}
+                    <button type="submit" data-cursor="hover" disabled={sending} className="cta cta-primary"
                       style={{
                         ...aStyles.cta, padding: '18px 20px', width: '100%',
                         background: sending ? 'rgba(237,234,228,0.1)' : A.accent,
                         color: sending ? A.ink : A.paper, border: 'none', cursor: sending ? 'default' : 'pointer',
-                        textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                        transition: 'background .2s'
+                        textAlign: 'left', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
                       }}>
-                      {sending ? 'Sending…' : 'Send transmission'} <span>→</span>
+                      {sending ? 'Sending…' : 'Send transmission'} <span className="cta-arrow">→</span>
                     </button>
                   </div>
                 </div>

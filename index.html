@@ -133,6 +133,14 @@
   a:focus-visible, button:focus-visible { outline: 2px solid #E05320; outline-offset: 3px; }
   /* Contact form: ring the whole cell while its field has focus (WCAG 2.4.7) */
   .a-field:focus-within { outline: 2px solid #E05320; outline-offset: -2px; }
+  /* Button micro-interactions. Keyboard focus gets the same treatment as hover. */
+  .cta { transition: background-color .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+  .cta .cta-arrow { display: inline-block; transition: transform .2s ease; }
+  .cta:hover .cta-arrow, .cta:focus-visible .cta-arrow { transform: translateX(4px); }
+  .cta-primary:not(:disabled):hover, .cta-primary:not(:disabled):focus-visible { background-color: #F26A3A !important; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(224,83,32,0.28); }
+  .cta-primary:not(:disabled):active { transform: translateY(0) scale(0.98); box-shadow: none; }
+  .cta-outline:hover, .cta-outline:focus-visible { border-color: #E05320 !important; background-color: rgba(224,83,32,0.08) !important; }
+  .cta-outline:active { transform: scale(0.98); }
   .skip-link { position: absolute; left: 16px; top: -100px; z-index: 10000; background: #E05320; color: #0F0D0B; padding: 12px 18px; font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
   .skip-link:focus { top: 12px; }
   @media (prefers-reduced-motion: reduce) {

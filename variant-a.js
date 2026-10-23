@@ -208,6 +208,7 @@ function ANav() {
   }, /*#__PURE__*/React.createElement("a", {
     href: "#contact",
     "data-cursor": "hover",
+    className: "cta cta-primary",
     style: {
       ...aStyles.cta,
       color: A.paper,
@@ -219,7 +220,9 @@ function ANav() {
       alignItems: 'center',
       flexShrink: 0
     }
-  }, bp.isMobile ? 'Hire me →' : 'Available for work →'), !bp.isDesktop && /*#__PURE__*/React.createElement("button", {
+  }, bp.isMobile ? 'Hire me' : 'Available for work', " ", /*#__PURE__*/React.createElement("span", {
+    className: "cta-arrow"
+  }, "\u2192")), !bp.isDesktop && /*#__PURE__*/React.createElement("button", {
     onClick: () => setOpen(o => !o),
     "aria-label": "Toggle menu",
     style: {
@@ -378,6 +381,7 @@ function AHero() {
   }, /*#__PURE__*/React.createElement("a", {
     href: "#work",
     "data-cursor": "hover",
+    className: "cta cta-outline",
     style: {
       ...aStyles.cta,
       padding: '13px 16px',
@@ -388,9 +392,12 @@ function AHero() {
       justifyContent: 'space-between',
       alignItems: 'center'
     }
-  }, "View the index ", /*#__PURE__*/React.createElement("span", null, "\u2192")), /*#__PURE__*/React.createElement("a", {
+  }, "View the index ", /*#__PURE__*/React.createElement("span", {
+    className: "cta-arrow"
+  }, "\u2192")), /*#__PURE__*/React.createElement("a", {
     href: "#contact",
     "data-cursor": "hover",
+    className: "cta cta-outline",
     style: {
       ...aStyles.cta,
       fontWeight: 500,
@@ -403,6 +410,7 @@ function AHero() {
       alignItems: 'center'
     }
   }, "Start a project ", /*#__PURE__*/React.createElement("span", {
+    className: "cta-arrow",
     style: {
       color: A.accent
     }
@@ -984,7 +992,7 @@ function ACareerItem({
     }
   }, c.role, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: 13,
+      fontSize: 14,
       color: A.accent,
       fontWeight: 400,
       letterSpacing: 0
@@ -998,15 +1006,15 @@ function ACareerItem({
     }
   }, c.role), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
+      fontSize: 14,
       color: A.accent,
       marginTop: 4
     }
   }, c.org), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13,
-      color: A.mute,
-      lineHeight: 1.65,
+      fontSize: 15,
+      color: A.ink2,
+      lineHeight: 1.7,
       margin: '12px 0 0'
     }
   }, c.body.map((para, pi) => /*#__PURE__*/React.createElement("p", {
@@ -1049,7 +1057,7 @@ function ACareerItem({
     key: t,
     style: {
       ...aStyles.mono,
-      fontSize: 9,
+      fontSize: 10,
       padding: '4px 7px',
       border: `1px solid ${A.line}`,
       color: A.ink2
@@ -1066,16 +1074,16 @@ function ACareerItem({
     key: t,
     style: {
       ...aStyles.mono,
-      fontSize: 9,
+      fontSize: 10,
       padding: '4px 7px',
       border: `1px solid ${A.line}`,
       color: A.ink2
     }
   }, t))), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 13.5,
-      color: A.mute,
-      lineHeight: 1.65
+      fontSize: 15,
+      color: A.ink2,
+      lineHeight: 1.7
     }
   }, c.body.map((para, pi) => /*#__PURE__*/React.createElement("p", {
     key: pi,
@@ -1117,7 +1125,7 @@ function ACareerItem({
     key: t,
     style: {
       ...aStyles.mono,
-      fontSize: 9,
+      fontSize: 10,
       padding: '4px 7px',
       border: `1px solid ${A.line}`,
       color: A.ink2,
@@ -1171,6 +1179,7 @@ function ACareer() {
     href: "/dipesh-gurav-cv.pdf",
     download: true,
     "data-cursor": "hover",
+    className: "cta cta-outline",
     style: {
       ...aStyles.cta,
       fontWeight: 500,
@@ -1184,6 +1193,7 @@ function ACareer() {
       alignItems: 'center'
     }
   }, "Download PDF r\xE9sum\xE9 ", /*#__PURE__*/React.createElement("span", {
+    className: "cta-arrow",
     style: {
       color: A.accent
     }
@@ -1790,6 +1800,7 @@ function AContact() {
       setSendError(false);
     },
     "data-cursor": "hover",
+    className: "cta cta-outline",
     style: {
       ...aStyles.cta,
       fontWeight: 500,
@@ -1801,10 +1812,10 @@ function AContact() {
       textAlign: 'left',
       display: 'flex',
       justifyContent: 'space-between',
-      alignItems: 'center',
-      transition: 'border-color .2s'
+      alignItems: 'center'
     }
   }, "Send another message ", /*#__PURE__*/React.createElement("span", {
+    className: "cta-arrow",
     style: {
       color: A.accent
     }
@@ -1937,6 +1948,7 @@ function AContact() {
     type: "submit",
     "data-cursor": "hover",
     disabled: sending,
+    className: "cta cta-primary",
     style: {
       ...aStyles.cta,
       padding: '18px 20px',
@@ -1948,10 +1960,11 @@ function AContact() {
       textAlign: 'left',
       display: 'flex',
       justifyContent: 'space-between',
-      alignItems: 'center',
-      transition: 'background .2s'
+      alignItems: 'center'
     }
-  }, sending ? 'Sending…' : 'Send transmission', " ", /*#__PURE__*/React.createElement("span", null, "\u2192")))))))));
+  }, sending ? 'Sending…' : 'Send transmission', " ", /*#__PURE__*/React.createElement("span", {
+    className: "cta-arrow"
+  }, "\u2192")))))))));
 }
 
 // 0.4 keeps the field outlines at 3.3:1 against the sheet (WCAG 1.4.11)
