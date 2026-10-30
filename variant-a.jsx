@@ -674,7 +674,7 @@ function ACareerBody({ c, i, gap }) {
           <button type="button" className="cv-toggle" data-cursor="hover"
             aria-expanded={open} aria-controls={restId} onClick={toggle}>
             {open ? 'Show less' : 'Read more'}
-            <span className="sr-only"> about my role at {orgName}</span>
+            <span className="sr-only"> about {c.about || `my role at ${orgName}`}</span>
             <span className="cv-toggle-icon" aria-hidden="true">{open ? '↑' : '↓'}</span>
           </button>
         </React.Fragment>
@@ -706,8 +706,8 @@ function ACareerItem({ c, i, bp }) {
     }}>
       {/* Date range */}
       <span style={{ ...aStyles.mono, display: 'flex', flexDirection: 'column', gap: 4 }}>
-        <span style={{ color: A.ink }}>{c.from}</span>
-        <span>→ {c.to}</span>
+        {c.from && <span style={{ color: A.ink }}>{c.from}</span>}
+        {c.to && <span>→ {c.to}</span>}
         {c.current && (
           <span style={{ color: A.accent, marginTop: 4 }}>
             <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: 99, background: A.accent, marginRight: 4 }} />

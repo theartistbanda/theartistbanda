@@ -1062,7 +1062,7 @@ function ACareerBody({
     onClick: toggle
   }, open ? 'Show less' : 'Read more', /*#__PURE__*/React.createElement("span", {
     className: "sr-only"
-  }, " about my role at ", orgName), /*#__PURE__*/React.createElement("span", {
+  }, " about ", c.about || `my role at ${orgName}`), /*#__PURE__*/React.createElement("span", {
     className: "cv-toggle-icon",
     "aria-hidden": "true"
   }, open ? '↑' : '↓'))));
@@ -1094,11 +1094,11 @@ function ACareerItem({
       flexDirection: 'column',
       gap: 4
     }
-  }, /*#__PURE__*/React.createElement("span", {
+  }, c.from && /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.ink
     }
-  }, c.from), /*#__PURE__*/React.createElement("span", null, "\u2192 ", c.to), c.current && /*#__PURE__*/React.createElement("span", {
+  }, c.from), c.to && /*#__PURE__*/React.createElement("span", null, "\u2192 ", c.to), c.current && /*#__PURE__*/React.createElement("span", {
     style: {
       color: A.accent,
       marginTop: 4

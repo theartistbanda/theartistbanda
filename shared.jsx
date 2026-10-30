@@ -288,17 +288,28 @@ const PORTFOLIO = {
       tags: ['Fintech', 'Mobile', 'Wellbeing UX'],
     },
     {
-      from: '2014',
+      from: '2015',
       to: '2017',
       role: 'Product Design Consultant & Founder',
       org: 'The Artist Banda · Bengaluru, India',
       body: [
         'I founded The Artist Banda, a small consultancy helping new businesses start from nothing: identity, photography, design and the marketing that followed. I ran the team, the client conversations and the projects from onboarding through to delivery. Brand identity is still the work I love most.',
-        'EarlyFoods, food for expecting mothers and young children. The analytics and the founder both pointed at price; heatmaps and a survey with nearly 400 customer replies pointed at trust. I rebuilt the store around sourcing and certification before price, fixed buttons parents couldn\'t find and age filters that didn\'t match how they shop, and made reordering easy. Sales rose 33% in a month.',
-        'Repos Pay, Repos Energy\'s credit platform for fuel delivery. One app let fuel pump owners extend credit; the other let businesses apply for it and draw it down. Two sides trusting one system for opposite reasons.',
         'ZuQA, API testing tool. Postman had no low-code API testing at the time; a friend was building the concept and I joined as design hand. Progressive disclosure cut cognitive load and developer onboarding time by 15%.',
       ],
-      tags: ['Brand', 'Fintech', 'E-commerce'],
+      tags: ['Brand', 'Consultancy', 'Developer tools'],
+    },
+    {
+      // Client work shown as its own block, as on the CV: no dates, Repos Pay first
+      from: '',
+      to: '',
+      role: 'Selected client projects',
+      org: 'Fintech · E-commerce',
+      about: 'these client projects',
+      body: [
+        'Repos Pay, Repos Energy\'s credit platform for fuel delivery. One app let fuel pump owners extend credit; the other let businesses apply for it and draw it down. Two sides trusting one system for opposite reasons.',
+        'EarlyFoods, food for expecting mothers and young children. The analytics and the founder both pointed at price; heatmaps and a survey with nearly 400 customer replies pointed at trust. I rebuilt the store around sourcing and certification before price, fixed buttons parents couldn\'t find and age filters that didn\'t match how they shop, and made reordering easy. Sales rose 33% in a month.',
+      ],
+      tags: ['Fintech', 'E-commerce', 'Brand'],
     },
   ],
   skills: [
