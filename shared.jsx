@@ -67,7 +67,7 @@ const PORTFOLIO = {
     { value: 1, suffix: 'M+', label: 'Downloads · YourHour', sub: 'Play Store verified' },
     { value: 20, suffix: '%', label: 'Call-handling time and cost cut', sub: 'TaskGPT @ TaskUs' },
     { value: 17, suffix: '%', label: 'Assessment accuracy', sub: 'EvaluateUs' },
-    { value: 33, suffix: '%', label: 'Sales in a month', sub: 'EarlyFoods' },
+    { value: 33, suffix: '%', label: 'Sales in two months', sub: 'EarlyFoods' },
   ],
   projects: [
     {
@@ -188,7 +188,7 @@ const PORTFOLIO = {
       body:
         'A brand parents can feel safe with, because they are feeding it to their children. Emotional UX over checkout funnels.',
       stats: [
-        ['33%', 'Sales in a month'],
+        ['33%', 'Sales in two months'],
         ['Trust', 'KPI'],
       ],
       tags: ['E-commerce', 'Conversion Rate Optimisation', 'Emotional UX'],
@@ -243,7 +243,7 @@ const PORTFOLIO = {
       n: '05',
       title: 'Measure what you made',
       body:
-        'Every project ties to a metric: 20% less call-handling time, 17% more accurate assessments, 33% more sales in a month. Good design earns its seat at the business table.',
+        'Every project ties to a metric: 20% less call-handling time, 17% more accurate assessments, 33% more sales within two months. Good design earns its seat at the business table.',
     },
     {
       n: '06',
@@ -307,7 +307,7 @@ const PORTFOLIO = {
       about: 'these client projects',
       body: [
         'Repos Pay, Repos Energy\'s credit platform for fuel delivery. One app let fuel pump owners extend credit; the other let businesses apply for it and draw it down. Two sides trusting one system for opposite reasons.',
-        'EarlyFoods, food for expecting mothers and young children. The analytics and the founder both pointed at price; heatmaps and a survey with nearly 400 customer replies pointed at trust. I rebuilt the store around sourcing and certification before price, fixed buttons parents couldn\'t find and age filters that didn\'t match how they shop, and made reordering easy. Sales rose 33% in a month.',
+        'EarlyFoods, food for expecting mothers and young children. The analytics and the founder both pointed at price; heatmaps and a survey with nearly 400 customer replies pointed at trust. I rebuilt the store around sourcing and certification before price, fixed buttons parents couldn\'t find and age filters that didn\'t match how they shop, and made reordering easy. Sales rose 33% within two months.',
       ],
       tags: ['Fintech', 'E-commerce', 'Brand'],
     },

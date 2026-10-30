@@ -87,7 +87,7 @@ const PORTFOLIO = {
   }, {
     value: 33,
     suffix: '%',
-    label: 'Sales in a month',
+    label: 'Sales in two months',
     sub: 'EarlyFoods'
   }],
   projects: [{
@@ -170,7 +170,7 @@ const PORTFOLIO = {
     kicker: 'E-commerce · Organic baby food',
     tagline: 'Designed for trust, not conversion',
     body: 'A brand parents can feel safe with, because they are feeding it to their children. Emotional UX over checkout funnels.',
-    stats: [['33%', 'Sales in a month'], ['Trust', 'KPI']],
+    stats: [['33%', 'Sales in two months'], ['Trust', 'KPI']],
     tags: ['E-commerce', 'Conversion Rate Optimisation', 'Emotional UX'],
     image: '/assets/earlyfoods-cover.webp',
     href: '/case-earlyfoods'
@@ -206,7 +206,7 @@ const PORTFOLIO = {
   }, {
     n: '05',
     title: 'Measure what you made',
-    body: 'Every project ties to a metric: 20% less call-handling time, 17% more accurate assessments, 33% more sales in a month. Good design earns its seat at the business table.'
+    body: 'Every project ties to a metric: 20% less call-handling time, 17% more accurate assessments, 33% more sales within two months. Good design earns its seat at the business table.'
   }, {
     n: '06',
     title: 'Simplicity is deeper understanding, not fewer features',
@@ -241,7 +241,7 @@ const PORTFOLIO = {
     role: 'Selected client projects',
     org: 'Fintech · E-commerce',
     about: 'these client projects',
-    body: ['Repos Pay, Repos Energy\'s credit platform for fuel delivery. One app let fuel pump owners extend credit; the other let businesses apply for it and draw it down. Two sides trusting one system for opposite reasons.', 'EarlyFoods, food for expecting mothers and young children. The analytics and the founder both pointed at price; heatmaps and a survey with nearly 400 customer replies pointed at trust. I rebuilt the store around sourcing and certification before price, fixed buttons parents couldn\'t find and age filters that didn\'t match how they shop, and made reordering easy. Sales rose 33% in a month.'],
+    body: ['Repos Pay, Repos Energy\'s credit platform for fuel delivery. One app let fuel pump owners extend credit; the other let businesses apply for it and draw it down. Two sides trusting one system for opposite reasons.', 'EarlyFoods, food for expecting mothers and young children. The analytics and the founder both pointed at price; heatmaps and a survey with nearly 400 customer replies pointed at trust. I rebuilt the store around sourcing and certification before price, fixed buttons parents couldn\'t find and age filters that didn\'t match how they shop, and made reordering easy. Sales rose 33% within two months.'],
     tags: ['Fintech', 'E-commerce', 'Brand']
   }],
   skills: ['Behavioural UX', 'AI Interfaces', 'Generative AI Tools', 'Design Systems', 'Multi-audience Platforms', 'Data-dense Enterprise UX', 'A/B Testing', 'Experimentation', 'Cross-cultural', 'Figma', 'Motion', 'Conversion Rate Optimisation', 'Hiring & mentoring', 'Accessibility · WCAG 2.2 AA', 'RTL-first', 'Product Strategy'],
