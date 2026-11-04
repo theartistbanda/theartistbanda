@@ -799,7 +799,7 @@ function ACareer() {
             {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Curriculum vitae</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-              Eleven years,<br />four cities, over a million downloads
+              Nine years,<br />four cities, over a million downloads
             </h2>
           </div>
           <a href="/dipesh-gurav-cv.pdf" download data-cursor="hover" className="cta cta-outline" style={{
@@ -850,8 +850,8 @@ function AAbout() {
               I became a designer because<br />technology is supposed to make<br />life <span style={{ fontStyle: 'italic' }}>easier</span>
             </h2>
             <div style={{ fontSize: 15, lineHeight: 1.75, color: A.ink2, borderTop: `1px solid ${A.line}`, paddingTop: 32 }}>
-              <p style={{ margin: 0 }}>I have spent around eleven years in design, and I love what I do: solving problems in human-computer interaction. I grew up watching technology promise to make life easier, then complicate it. Forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on.</p>
-              <p style={{ marginTop: 16 }}>For most of my career I have been an individual contributor on projects with no clear brief. There was always an idea, a problem or a gap, and how and where to start was mine to decide. I preferred it that way. Co-founding a production house with college friends, and handling over 200 clients in under three years, removed every inch of hesitation I had about speaking to a room, winning people over to an idea and turning them into long-term stakeholders.</p>
+              <p style={{ margin: 0 }}>I have spent nine years in product design, and I love what I do: solving problems in human-computer interaction. I grew up watching technology promise to make life easier, then complicate it. Forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on.</p>
+              <p style={{ marginTop: 16 }}>For most of my career I have been an individual contributor on projects with no clear brief. There was always an idea, a problem or a gap, and how and where to start was mine to decide. I preferred it that way.</p>
               <p style={{ marginTop: 16 }}>Screens are just a medium. How a product feels comes from the person's experience, and the screen comes later. Understanding people and their behaviour comes first, whether I am designing an AI tool for operators on live calls, a wellbeing app, or a logo that ended up on Indian-made goods across the country.</p>
               <p style={{ marginTop: 16 }}>The work has taken me to a billion-person market in India, to Gulf users who read right to left, and to enterprise teams in 14 countries. YourHour, a wellbeing app I designed, ships in 22 languages and has passed a million downloads. Every one of those audiences taught me that "intuitive" carries a quiet question, <em>intuitive for whom</em>. Knowing beats assuming, so the answer comes from sitting alongside users, not from a report.</p>
               <p style={{ marginTop: 16 }}>The simplest things are the hardest to create. Ask a room full of people what a product should have and they will list dozens of features. Ask them to prune the list and the room goes quiet. Minimalism inspires me, and my layouts leave no room for unnecessary friction: clean on the surface, built cleanly behind the scenes.</p>
@@ -875,7 +875,7 @@ function AAbout() {
             ))}
             {sidebarRow('Experience', (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                {['11 years', '14 countries', '1M+ downloads shipped'].map((v) => (
+                {['9 years', '14 countries', '1M+ downloads shipped'].map((v) => (
                   <div key={v} style={{ fontSize: 14, color: A.ink, lineHeight: 1.5 }}>{v}</div>
                 ))}
               </div>

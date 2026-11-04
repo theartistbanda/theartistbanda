@@ -1293,7 +1293,7 @@ function ACareer() {
       lineHeight: 1.05,
       margin: 0
     }
-  }, "Eleven years,", /*#__PURE__*/React.createElement("br", null), "four cities, over a million downloads")), /*#__PURE__*/React.createElement("a", {
+  }, "Nine years,", /*#__PURE__*/React.createElement("br", null), "four cities, over a million downloads")), /*#__PURE__*/React.createElement("a", {
     href: "/dipesh-gurav-cv.pdf",
     download: true,
     "data-cursor": "hover",
@@ -1398,11 +1398,11 @@ function AAbout() {
     style: {
       margin: 0
     }
-  }, "I have spent around eleven years in design, and I love what I do: solving problems in human-computer interaction. I grew up watching technology promise to make life easier, then complicate it. Forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on."), /*#__PURE__*/React.createElement("p", {
+  }, "I have spent nine years in product design, and I love what I do: solving problems in human-computer interaction. I grew up watching technology promise to make life easier, then complicate it. Forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on."), /*#__PURE__*/React.createElement("p", {
     style: {
       marginTop: 16
     }
-  }, "For most of my career I have been an individual contributor on projects with no clear brief. There was always an idea, a problem or a gap, and how and where to start was mine to decide. I preferred it that way. Co-founding a production house with college friends, and handling over 200 clients in under three years, removed every inch of hesitation I had about speaking to a room, winning people over to an idea and turning them into long-term stakeholders."), /*#__PURE__*/React.createElement("p", {
+  }, "For most of my career I have been an individual contributor on projects with no clear brief. There was always an idea, a problem or a gap, and how and where to start was mine to decide. I preferred it that way."), /*#__PURE__*/React.createElement("p", {
     style: {
       marginTop: 16
     }
@@ -1449,7 +1449,7 @@ function AAbout() {
       flexDirection: 'column',
       gap: 4
     }
-  }, ['11 years', '14 countries', '1M+ downloads shipped'].map(v => /*#__PURE__*/React.createElement("div", {
+  }, ['9 years', '14 countries', '1M+ downloads shipped'].map(v => /*#__PURE__*/React.createElement("div", {
     key: v,
     style: {
       fontSize: 14,

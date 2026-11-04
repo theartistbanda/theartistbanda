@@ -1,6 +1,6 @@
 # dipeshgurav.com: rules for Claude
 
-Static portfolio site, deployed to Vercel from `main`. This file is excluded from the public site by `.vercelignore`. Rules and facts below were last refreshed from Dipesh's content brief of 22 Oct 2026; his CV (`dipesh-gurav-cv.pdf`, 21 Oct 2026) is the reference for wording.
+Static portfolio site, deployed to Vercel from `main`. This file is excluded from the public site by `.vercelignore`. Rules and facts below were last refreshed from Dipesh's 9-year brief of 4 Nov 2026; his CV (`dipesh-gurav-cv.pdf`, 4 Nov 2026) is the reference for wording. The CV, LinkedIn and the site must say the same thing.
 
 - Homepage copy lives in `shared.jsx` and `variant-a.jsx`. Edit those, then run `npm run build` to regenerate `shared.js` and `variant-a.js`. Never hand-edit only the compiled files. Babel writes `·` and `–` as escapes (`\xB7`, `–`) in the compiled files, so grep for a plain fragment when checking.
 - Case studies are the static `case-*.html` pages. Link to them with clean URLs (`/case-levelup`).
@@ -9,12 +9,12 @@ Static portfolio site, deployed to Vercel from `main`. This file is excluded fro
 - **Accessibility:** the site was audited to WCAG 2.2 AA on 23 Oct 2026 (axe-core clean on all nine pages, plus manual keyboard, reflow and contrast checks). Keep it that way: never hide the system cursor (the orange ring is decoration only), keep the skip links and `scroll-padding-top`, keep text at 4.5:1 and UI outlines at 3:1, no ticking or endlessly looping motion, and check new headlines at 320px wide. Re-run axe after layout changes.
 - **Colours and themes:** every colour lives in `theme.css` as a variable (light is the default, `html[data-theme="dark"]` is the toggle). Pages and JSX only reference variables (`var(--ink)`, or `rgba(var(--ink-rgb), 0.2)` for tints); never hard-code a hex or rgba value in a page. The accent differs per theme (#BD3F0C light, #E05320 dark) because #E05320 is only 3.9:1 on white. `theme.js` runs the header toggle and remembers the choice; a two-line script at the top of each page applies it before render. Check both themes with axe after any colour change.
 - **TaskGPT images:** since 23 Oct 2026 the page shows only `taskgpt-dashboard.webp` (cover, homepage card and link preview `taskgpt-dashboard.jpg`) and `taskgpt-feedback.webp`, both cut from `taskgpt-overview.webp`. The config, report and old cover screens are hidden in an HTML comment on `case-taskgpt.html` while Dipesh revamps them; restore from there.
-- **Case page type scale:** each case page ends its `<style>` with a "Type and spacing pass" block (h1 up to 80px, h2 32px, tighter hero). Edit that block rather than the older rules above it. Pages with a Figma prototype also carry a sticky orange "View case study in Figma" button in the nav (`.nav-figma`).
+- **Case page type scale:** each case page ends its `<style>` with a "Type and spacing pass" block (h1 up to 80px, h2 32px, tighter hero). Edit that block rather than the older rules above it. Pages with a Figma prototype show a solid orange `.figma-link` button below the intro paragraph.
 - The contact form posts to a Google Apps Script. Its spam guard lives in `docs/contact-form-apps-script.gs` and must match the form rules in `variant-a.jsx`.
 
 ## 2. Hard content rules
 
-1. **11 years** of experience. Never 12, "12+" or "11+".
+1. **9 years** of experience, counted from March 2017 when he joined Mindefy. Never 11, 12, "12+", "11+" or "9+".
 2. **EvaluateUs: accuracy up 17%.** Just "accuracy", never "accuracy and speed", never 70%, never any £9,500 figure.
 3. **LevelUp has no percentage.** No "40% engagement", no "attrition dropped".
 4. **Never mention PCAF.**
@@ -34,13 +34,13 @@ Static portfolio site, deployed to Vercel from `main`. This file is excluded fro
 18. **Stories a stranger can picture:** who used it and what changed for them, not stacked jargon.
 21. **No full stops in headings, sub headings or short taglines** (Dipesh, 23 Oct 2026). Join fragments with commas, e.g. "TaskGPT, the AI that works inside the call". Body text keeps normal punctuation.
 19. **Right to work:** keep it on the website as "Right to work in the UK · No sponsorship required", never "Full" (banner, availability card, meta, noscript, llms.txt). Don't add it anywhere new, and leave it off the CV. (Decided 8 Oct 2026, confirmed 22 Oct.)
-20. **The Artist Banda:** he *founded* it. "Co-founded" only ever refers to the earlier production house. **Repos Energy** is the company; **Repos Pay** is the product he worked on. Never describe "a payment and energy mobility ecosystem".
+20. **The Artist Banda is not part of the career story** (Dipesh, 4 Nov 2026): no role, dates or mention anywhere. The Behance handle `theartistbanda` stays; it is only a username. The production house is gone too: no founding story, no client count (Dipesh, 4 Nov 2026). Work from before Mindefy lives only in the undated Selected projects block. **Repos Energy** is the company; **Repos Pay** is the product he worked on. Never describe "a payment and energy mobility ecosystem".
 
 ## 3. Verified facts (the only numbers and claims to use)
 
 | Topic | Fact |
 |---|---|
-| Experience | 11 years in design (counted from 2015) |
+| Experience | 9 years (counted from March 2017, when he joined Mindefy) |
 | Headline title | Senior Product Designer (LinkedIn and CV). The hero details row keeps "Lead Product Designer", his actual TaskUs title. "est. 2015" was removed and the hero summary opens "Product designer behind…" (Dipesh, 23 Oct 2026). |
 | TaskUs | Lead Product Designer, Apr 2021 to Jul 2026, "Remote" (not "Remote, UK"). Founding and only designer of the Digital IT team, hired by Manish Pandya. |
 | TaskUs products | Multi-tenant, owned by TaskUs, sold to client companies on subscription. Around 35,000 daily users across 14 countries (the suite, not one product). Around 20 products went live, not counting individual TaskGPT tools. |
@@ -57,10 +57,9 @@ Static portfolio site, deployed to Vercel from `main`. This file is excluded fro
 | GreenBill | Paperless receipts and invoicing, four apps on one system (shoppers, merchant web point of sale, merchant mobile, admin). Usability testing toolkit caught 85% of issues before development. |
 | JEGO | Mindefy client project, UAE. Wellbeing and mentorship video streaming, redesigned right-to-left first for Gulf audiences. Usability satisfaction up 25%. From his own project notes: mentor profiles shown up front so people trust the person behind each course; "Jego Mastery" let mentors set course sequences so people knew where to start. |
 | Kidster | Digital school diary (attendance, homework, parent-teacher meetings, notices). Traction but not enough money; focus moved to YourHour. |
-| The Artist Banda | Product Design Consultant & Founder, 2015 to 2017 on the website (changed from 2014 by Dipesh, 30 Oct 2026; the CV PDF matches), Bengaluru. He founded it (independent consultancy). Earlier co-ran a production house with college friends: 200+ clients in under three years. |
-| EarlyFoods | Food for expecting mothers and young children, founder-led, growing through Instagram reels, Shopify. Analytics and founder said price; heatmaps and nearly 400 survey replies said trust. Rebuilt around sourcing and certification, fixed hidden buttons and age filters, easy reorder. Sales up 33% within two months, confirmed by a follow-up survey. Sits under The Artist Banda. No market stated. |
-| Repos Pay | A product of Repos Energy (the company). Credit platform for fuel delivery: pump owners extend credit; businesses apply for and draw it down. Sits under The Artist Banda. |
-| ZuQA | API testing tool; progressive disclosure cut developer onboarding time 15%. |
+| EarlyFoods | Food for expecting mothers and young children, founder-led, growing through Instagram reels, Shopify. Analytics and founder said price; heatmaps and nearly 400 survey replies said trust. Rebuilt around sourcing and certification, fixed hidden buttons and age filters, easy reorder. Sales up 33% within two months, confirmed by a follow-up survey. Sits under Mindefy. No market stated. |
+| Repos Pay | A product of Repos Energy (the company). Credit platform for fuel delivery: pump owners extend credit; businesses apply for and draw it down. Undated, in Selected projects. |
+| ZuQA | API testing tool; progressive disclosure cut developer onboarding time 15%. Undated, in Selected projects. |
 | Job App Assistant | Designed, coded and deployed solo in one session (Node.js, Claude API), 2026. job-app-assistant.onrender.com (sleeps when idle; open it once before checking links). |
 | Education | Interaction Design Foundation, UX, UI and Interaction Design, 2015 to 2017. MAAC, AD3D Edge+ Diploma: Design, Animation and VFX, 2012 to 2014. B.Com with Computer Science, 2011 to 2014. |
 | Contact | contact@dipeshgurav.com · +44 7352 673152 (UK) · +91 90094 80090 (India, added 23 Oct 2026 at Dipesh's request) · linkedin.com/in/dipeshgurav-design · dribbble.com/dipeshgurav9 (correct; `theartistbanda` 404s on Dribbble, so don't "fix" it) · behance.net/theartistbanda |
@@ -75,7 +74,8 @@ Search the whole repo (HTML, JSX, compiled JS, llms.txt, meta, alt text, JSON-LD
 - `40%`, `engagement lift`, `attrition`
 - `PCAF`, `Persona-Centric`
 - `2.1` (WCAG)
-- `12 years`, `12+`, `11+`
+- `11 years`, `Eleven years`, `11 yrs`, `12 years`, `12+`, `11+`
+- `Artist Banda`, `Bengaluru`, `Consultancy` (the Behance handle `theartistbanda` is fine)
 - `70%`, `9,500`, `accuracy and speed`, `Accuracy & speed`
 - `400+`, `400 interviews`, `parent interviews`, `80,000`
 - `millions`, `used by millions`, `22 countries`
@@ -83,7 +83,7 @@ Search the whole repo (HTML, JSX, compiled JS, llms.txt, meta, alt text, JSON-LD
 - `Repos Energy`: may appear only as the company behind Repos Pay, never as "a payment and energy mobility ecosystem"
 - `Full right to work`
 - `Remote, UK`, `Independent Project`, `Pandeya`, `Team Leadership`
-- `owned it from tokens`, `co-founded`
+- `owned it from tokens`, `co-founded`, `Co-founding`, `production house`, `200 clients`, `200+`
 - Faith or religion anywhere on the site: `Islam`, `secular`, `spiritual`, `faith`, `ritual`, `blessing`, `civilisational`
 - On `case-earlyfoods.html` only: `UAE`
 - `insurance claims`, `2020–2025`, `2021` next to YourHour
