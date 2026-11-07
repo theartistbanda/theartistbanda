@@ -310,7 +310,7 @@ function ANav() {
       alignItems: 'center',
       flexShrink: 0
     }
-  }, bp.isMobile ? 'Hire me' : 'Available for work', " ", /*#__PURE__*/React.createElement("span", {
+  }, bp.isMobile ? 'Contact' : 'Get in touch', " ", /*#__PURE__*/React.createElement("span", {
     className: "cta-arrow"
   }, "\u2192")), !bp.isDesktop && /*#__PURE__*/React.createElement("button", {
     onClick: () => setOpen(o => !o),
@@ -402,16 +402,12 @@ function AHero() {
   }, !bp.isMobile && /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
-      gridTemplateColumns: bp.isTablet ? '1fr 1fr' : 'repeat(4, 1fr)',
+      gridTemplateColumns: bp.isTablet ? '1fr 1fr' : 'repeat(3, 1fr)',
       gap: 24,
       marginBottom: bp.isTablet ? 32 : 44,
       ...aStyles.mono
     }
-  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 Open UK-wide"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: A.accent
-    }
-  }, "\u25CF"), " Open to work \xB7 immediate joiner")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 Open UK-wide"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI")), /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: bp.isMobile ? 'left' : 'center',
       maxWidth: 1040,

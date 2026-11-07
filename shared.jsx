@@ -57,7 +57,7 @@ function fmt(n, opts = {}) {
 // -----------------------------------------------------------------------------
 const PORTFOLIO = {
   name: 'Dipesh Gurav',
-  role: 'Lead Product Designer',
+  role: 'Product Designer',
   location: 'Nottingham, UK',
   years: 9,
   tagline: 'Designing for the humans behind the pixels',
@@ -260,13 +260,13 @@ const PORTFOLIO = {
       org: 'TaskUs · Global BPO · Remote',
       body: [
         'I was the founding and only designer on TaskUs\'s Digital IT team. Every product we built was multi-tenant, sold to client companies on subscription, and used by around 35,000 people a day across 14 countries; around 20 of them went live. I designed for two very different audiences: agents using AI during live customer calls, and the administrators configuring the systems behind them. My first job was in a call centre, so for the agent tools, I used to be the user.',
-        'TaskGPT, an AI suite for agents on live customer calls, working across OpenAI, PaLM 2 and LLaMA. Much of it ran as a Chrome extension inside the tool agents already used, so nobody had to switch windows mid-call. I also designed how we measured it: usage, answer quality, token cost and agent feedback. Call-handling time and operational costs each fell 20%, and moving it behind an encrypted layer solved the privacy problem and made it 20% faster.',
+        'TaskGPT, an AI suite for agents on live customer calls, working across OpenAI, PaLM 2 and LLaMA. Much of it ran as a Chrome extension inside the tool agents already used, so nobody had to switch windows mid-call. I also designed how we measured it: usage, answer quality, token cost and agent feedback. Call-handling time and operational costs each fell 20%, and moving it behind an encrypted layer solved the privacy problem.',
         'EvaluateUs, where an AI scored hiring, coaching and training assessments and one dashboard served three people. The candidate wanted to know how they did, the assessor needed to trust the AI\'s score enough to stand behind it, and the manager wanted to know if it was helping the team. I designed each view around that person\'s next decision. Accuracy rose 17%.',
         'LevelUp, gamification. Managers set targets, challenges and rewards; agents play as their own 3D characters on live leaderboards, built in Three.js. Everyone who takes part wins something, and the best players go into a hall of fame. It was the first gamification work at TaskUs, became the company standard, and was showcased at AWS Summit London 2025.',
         'AutoQA, automated review of agent calls and my last product at TaskUs. The first build surfaced insight but didn\'t help anyone act, so I held it to its own goal: getting the agents with the most flagged calls into training and one-to-ones. I wrote a UX review, then worked with the SVP, director and development manager to break the fixes into small steps, cutting what phase one didn\'t need to protect a three-month timeline. AI hunted edge cases; my review began where it ran out.',
         'Maestro, an AI assistant inside Google Chat. Team leads asked plain questions, like who was late on shift or which agent had the most flagged calls, and got a summary, charts and a next action such as booking coaching, instead of logging into several reporting tools. I took it from proof of concept to product and demoed it to clients alongside VPs and directors.',
         'Design system. I extended TaskUs\'s global foundation across around 20 shipped products, adding a component layer for TaskGPT\'s multi-tenant admin and a separate theme so EvaluateUs could be sold to external clients. Mobile and web stayed consistent across 14 countries, built to WCAG 2.2 AA rather than patched afterwards. As the only designer, the system was also the only way to scale myself.',
-        'AI in the workflow. Claude connected to Figma, Claude Code, Cursor, Figma Make, v0 and Lovable let me build several UX directions in parallel and prototype in code, which surfaced edge cases and let me test a mental model before a stakeholder review instead of after one. Time to concept fell 60%.',
+        'AI in the workflow. Claude connected to Figma, Claude Code, Cursor, Figma Make, v0 and Lovable let me build several UX directions in parallel and prototype in code, which surfaced edge cases and let me test a mental model before a stakeholder review instead of after one.',
       ],
       tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Founding designer'],
       current: false,

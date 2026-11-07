@@ -222,7 +222,7 @@ function ANav() {
             padding: bp.isMobile ? '10px 12px' : '10px 16px', textDecoration: 'none',
             display: 'inline-flex', gap: 8, alignItems: 'center', flexShrink: 0
           }}>
-            {bp.isMobile ? 'Hire me' : 'Available for work'} <span className="cta-arrow">→</span>
+            {bp.isMobile ? 'Contact' : 'Get in touch'} <span className="cta-arrow">→</span>
           </a>
 
           {/* Hamburger: tablet + mobile */}
@@ -298,17 +298,12 @@ function AHero() {
         {!bp.isMobile && (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: bp.isTablet ? '1fr 1fr' : 'repeat(4, 1fr)',
+            gridTemplateColumns: bp.isTablet ? '1fr 1fr' : 'repeat(3, 1fr)',
             gap: 24, marginBottom: bp.isTablet ? 32 : 44, ...aStyles.mono
           }}>
             <div>{PORTFOLIO.role}</div>
             <div>{PORTFOLIO.location} · Open UK-wide</div>
             {bp.isDesktop && <div>Portfolio / vol. MMXXVI</div>}
-            {bp.isDesktop && (
-              <div>
-                <span style={{ color: A.accent }}>●</span> Open to work · immediate joiner
-              </div>
-            )}
           </div>
         )}
 
