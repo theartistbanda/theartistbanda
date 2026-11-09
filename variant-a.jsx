@@ -34,7 +34,7 @@ const aStyles = {
     color: A.mute
   },
   // CTA type scale: readable at arm's length, unlike the 10px meta labels.
-  // Primary pairs dark ink text on accent (~5:1, AA) or paper on ink (~15:1).
+  // Primary pairs paper text on the ink-coloured accent (about 17:1 or more).
   cta: {
     fontFamily: '"JetBrains Mono", ui-monospace, "IBM Plex Mono", Menlo, monospace',
     fontSize: 12,
@@ -264,13 +264,13 @@ function ANav() {
 }
 
 // ─── HERO ────────────────────────────────────────────────────────────────────
-const SHOW_HERO_ACCENT_BOX = false; // toggle to bring back the orange block in the headline
+const SHOW_HERO_ACCENT_BOX = false; // toggle to bring back the solid block in the headline
 
 function AHero() {
   const bp = useBreakpoint();
   const [scroll, setScroll] = React.useState(0);
 
-  // Only needed for the optional orange block in the headline; skip the scroll work when it's off
+  // Only needed for the optional solid block in the headline; skip the scroll work when it's off
   React.useEffect(() => {
     if (!SHOW_HERO_ACCENT_BOX) return;
     const on = () => setScroll(window.scrollY);
@@ -1375,7 +1375,7 @@ function AField({ id, label, type = 'text', value, onChange, onBlur, error, hint
       {/* Always rendered so screen readers announce errors as they appear */}
       <div id={`${id}-note`} aria-live="polite" style={{
         fontSize: 13, lineHeight: 1.4, marginTop: note ? 6 : 0,
-        color: error ? A.accent : 'rgba(var(--ink-rgb), 0.65)'
+        color: error ? A.accent : 'rgba(var(--ink-rgb), 0.65)', fontWeight: error ? 500 : 400
       }}>
         {error ? `✱ ${error}` : hint}
       </div>

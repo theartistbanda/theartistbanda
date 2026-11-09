@@ -1,53 +1,56 @@
 /* Site colours, shared by every page. Light is the default; html[data-theme="dark"] switches.
+   Monochrome since 9 Nov 2026: the interface is black, white and neutral greys, and colour
+   comes only from photos, screenshots and logos. No orange, no warm tints.
    Every text pairing below is checked to WCAG 2.2 AA (4.5:1) in both themes. Change colours
    here, never in page files: pages only reference these variables.
    --paper  page background       --surf    banded sections (banner, origin, contact, footer)
    --paper2 raised and hover      --ink     main text        --ink2  body text   --mute  labels
    --line   hairlines             --rule    form field outlines (3:1, WCAG 1.4.11)
-   --accent links, fills, labels  --on-accent text on accent fills
+   --accent emphasis, fills, labels (the name stays from the orange days; it is now ink)
+   --on-accent text on accent fills
    *-rgb triplets are for tints: rgba(var(--ink-rgb), 0.2) */
 :root {
   color-scheme: light;
   --paper: #FFFFFF;   --paper-rgb: 255, 255, 255;
-  --paper2: #F3F1ED;
-  --surf: #F6F4F0;
-  --ink: #16130F;     --ink-rgb: 22, 19, 15;
-  --ink2: #57524C;
-  --mute: #6B655F;
-  --line: rgba(22, 19, 15, 0.10);
-  --rule: rgba(22, 19, 15, 0.5);
-  --accent: #BD3F0C;  --accent-rgb: 189, 63, 12;
-  --accent-hover: #9A3412;
-  --accent-strong: #9A3412;
-  --accent-tint: rgba(189, 63, 12, 0.07);
-  --accent-soft: #F7E6DD;
+  --paper2: #EFEFEF;
+  --surf: #F5F5F5;
+  --ink: #111111;     --ink-rgb: 17, 17, 17;          /* 18.9:1 on paper */
+  --ink2: #4A4A4A;                                     /* 8.9:1 */
+  --mute: #6B6B6B;                                     /* 5.3:1 on paper, 4.9:1 on surf */
+  --line: rgba(17, 17, 17, 0.10);
+  --rule: rgba(17, 17, 17, 0.5);
+  --accent: #111111;  --accent-rgb: 17, 17, 17;
+  --accent-hover: #3D3D3D;
+  --accent-strong: #111111;
+  --accent-tint: rgba(17, 17, 17, 0.04);
+  --accent-soft: #EFEFEF;
   --on-accent: #FFFFFF;
-  --accent-wipe: #E05320;    /* the dark-mode orange */
-  --on-accent-wipe: #0F0D0B; /* white on #E05320 is 3.9:1, so text flips dark: 5:1 */
+  --accent-wipe: #3D3D3D;    /* charcoal wipes across the black button */
+  --on-accent-wipe: #FFFFFF; /* 10.9:1 */
   --panel: #F4F1EB;   /* matches the background baked into aatmnirbhar-logo.webp */
-  --placeholder: #6B655F;
+  --placeholder: #6B6B6B;
 }
 
 html[data-theme="dark"] {
   color-scheme: dark;
-  --paper: #0F0D0B;   --paper-rgb: 15, 13, 11;
-  --paper2: #1C1916;
-  --surf: #080604;
-  --ink: #EDEAE4;     --ink-rgb: 237, 234, 228;
-  --ink2: #9A948D;
-  --mute: #8C8680;
-  --line: rgba(237, 234, 228, 0.09);
-  --rule: rgba(237, 234, 228, 0.4);
-  --accent: #E05320;  --accent-rgb: 224, 83, 32;
-  --accent-hover: #F26A3A;
-  --accent-strong: #E05320;
-  --accent-tint: rgba(194, 65, 12, 0.1);
-  --accent-soft: #2A1208;
-  --on-accent: #0F0D0B;
-  --accent-wipe: #F26A3A;    /* the existing lighter orange */
-  --on-accent-wipe: #0F0D0B; /* 6.4:1 */
+  --paper: #0E0E0E;   --paper-rgb: 14, 14, 14;
+  --paper2: #1C1C1C;
+  --surf: #000000;
+  --ink: #F0F0F0;     --ink-rgb: 240, 240, 240;       /* 16.9:1 on paper */
+  --ink2: #A6A6A6;                                     /* 7.9:1 */
+  --mute: #8F8F8F;                                     /* 6.0:1 on paper, 5.3:1 on paper2 */
+  --line: rgba(240, 240, 240, 0.09);
+  --rule: rgba(240, 240, 240, 0.4);
+  --accent: #F0F0F0;  --accent-rgb: 240, 240, 240;
+  --accent-hover: #C4C4C4;
+  --accent-strong: #F0F0F0;
+  --accent-tint: rgba(240, 240, 240, 0.05);
+  --accent-soft: #1C1C1C;
+  --on-accent: #0E0E0E;
+  --accent-wipe: #C4C4C4;    /* light grey wipes across the white button */
+  --on-accent-wipe: #0E0E0E; /* 11.1:1 */
   --panel: #F4F1EC;
-  --placeholder: rgba(237, 234, 228, 0.5);
+  --placeholder: #8F8F8F;
 }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -62,8 +65,8 @@ html[data-theme="dark"] .theme-toggle .icon-moon, html[data-theme="dark"] .theme
 html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 html[data-theme="dark"] .theme-toggle .label-to-light { display: inline; }
 
-/* Primary buttons: a lighter orange wipes across on hover and keyboard focus. No lift, no
-   shadow. The text flips to --on-accent-wipe so it stays AA on the lighter orange.
+/* Primary buttons: a lighter grey wipes across on hover and keyboard focus. No lift, no
+   shadow. The text flips to --on-accent-wipe so it stays AA on the lighter grey.
    Pages zero transitions for reduced motion, so the wipe is then instant. */
 a.wipe, button.wipe {
   background-image: linear-gradient(var(--accent-wipe), var(--accent-wipe));
