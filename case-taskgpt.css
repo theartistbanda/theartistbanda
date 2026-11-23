@@ -66,7 +66,9 @@ section.body { padding: 80px 0; border-bottom: 1px solid var(--line); }
 .hub-body > p { max-width: 760px; }
 .hub-body > p + p { margin-top: 16px; }
 .hub-body strong { color: var(--ink); font-weight: 600; }
-.hub-body > p a, .story-body a, .context-box a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+/* Links in running text. Not links styled as buttons: this rule outranks .btn-primary, and once
+   painted the "Read the full case study" button's text in its own background colour. */
+.hub-body > p a:not(.btn), .story-body a:not(.btn), .context-box a:not(.btn) { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .more-link { margin-top: 24px !important; }
 .more-link a, .own-page a { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 .end-cta { margin-top: 32px !important; }
