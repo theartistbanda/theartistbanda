@@ -82,7 +82,9 @@ def page(slug, P):
     assert len(c['desc']) <= 160, (slug, len(c['desc']))
     url = f'{SITE}/{slug}'
     ld = json.dumps({'@context': 'https://schema.org', '@type': c['schema'], 'name': c['name'], 'url': url,
-                     'mainEntity': {'@type': 'Person', 'name': P['name'], 'url': SITE}}, indent=2)
+                     'mainEntity': {'@type': 'Person', 'name': P['name'],
+                                    # His old name, signed on some Behance projects (Dipesh, 23 Nov 2026)
+                                    'alternateName': 'The Artist Banda', 'url': SITE}}, indent=2)
     body = noscript_about(P)
     out = f'''<!DOCTYPE html>
 <html lang="en">

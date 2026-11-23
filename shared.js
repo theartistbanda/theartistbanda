@@ -315,8 +315,8 @@ const PORTFOLIO = {
     href: 'https://dribbble.com/dipeshgurav9'
   }, {
     label: 'Behance',
-    value: 'theartistbanda',
-    href: 'https://www.behance.net/theartistbanda'
+    value: 'dipesh_gurav',
+    href: 'https://www.behance.net/dipesh_gurav'
   }]
 };
 

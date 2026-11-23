@@ -1461,13 +1461,14 @@ function AContact() {
           </div>
         </div>
 
-        {/* Direct lines: full width under the intro and form. Three across on desktop, two on
-            tablet, one on phones. The India phone tile left on 23 Nov 2026 (Dipesh). */}
-        <div style={{ marginTop: bp.isMobile ? 48 : 64 }}>
+        {/* Direct lines under the form. The India phone tile left on 23 Nov 2026 (Dipesh). */}
+        {/* As wide as the form above it, so the last tile ends where the form ends (Dipesh, 23 Nov 2026) */}
+        <div style={{ marginTop: bp.isMobile ? 48 : 64, maxWidth: 760 }}>
           <div style={{ ...aStyles.mono, color: 'rgba(var(--ink-rgb), 0.65)', marginBottom: 12 }}>Direct lines</div>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: bp.isDesktop ? 'repeat(3, minmax(0, 1fr))' : bp.isTablet ? 'repeat(2, minmax(0, 1fr))' : '1fr',
+            // Two across within the form's width (three cut the email and LinkedIn short); one on phones
+            gridTemplateColumns: bp.isMobile ? '1fr' : 'repeat(2, minmax(0, 1fr))',
             columnGap: 40, rowGap: 4
           }}>
             {PORTFOLIO.links.map((l) => (l.label === 'Email'

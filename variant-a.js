@@ -2618,7 +2618,8 @@ function AContact() {
       className: "cta-arrow"
     }, "\u2192"))))))), /*#__PURE__*/React.createElement("div", {
       style: {
-        marginTop: bp.isMobile ? 48 : 64
+        marginTop: bp.isMobile ? 48 : 64,
+        maxWidth: 760
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -2629,7 +2630,8 @@ function AContact() {
     }, "Direct lines"), /*#__PURE__*/React.createElement("div", {
       style: {
         display: 'grid',
-        gridTemplateColumns: bp.isDesktop ? 'repeat(3, minmax(0, 1fr))' : bp.isTablet ? 'repeat(2, minmax(0, 1fr))' : '1fr',
+        // Two across within the form's width (three cut the email and LinkedIn short); one on phones
+        gridTemplateColumns: bp.isMobile ? '1fr' : 'repeat(2, minmax(0, 1fr))',
         columnGap: 40,
         rowGap: 4
       }
