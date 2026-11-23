@@ -1,0 +1,70 @@
+/* Shared by index.html, about.html and career.html (the React pages). Colours come from /theme.css. */
+html, body { margin: 0; padding: 0; background: var(--paper); }
+/* Keeps focused items clear of the sticky banner and nav (WCAG 2.4.11) */
+html { scroll-padding-top: 104px; }
+* { box-sizing: border-box; }
+/* 0.5 gives placeholders 4.6:1 (WCAG 1.4.3) */
+input::placeholder, textarea::placeholder { color: var(--placeholder); opacity: 1; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+/* Contact form: ring the whole cell while its field has focus (WCAG 2.4.7) */
+.a-field:focus-within { outline: 2px solid var(--accent); outline-offset: -2px; }
+/* Button micro-interactions. Keyboard focus gets the same treatment as hover. */
+.cta-outline { transition: background-color .2s ease, border-color .2s ease, transform .2s ease; }
+.cta .cta-arrow { display: inline-block; transition: transform .2s ease; }
+.cta-outline:hover .cta-arrow, .cta-outline:focus-visible .cta-arrow { transform: translateX(4px); }
+.cta-outline:hover, .cta-outline:focus-visible { border-color: var(--accent) !important; background-color: rgba(var(--accent-rgb), 0.08) !important; }
+.cta-outline:active { transform: scale(0.98); }
+/* CV section: "Read more" / "Show less" link button under each role */
+.cv-toggle { margin-top: 14px; padding: 6px 0; background: none; border: none; cursor: pointer; color: var(--accent); font: 500 12px/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: text-decoration-color .2s ease; }
+.cv-toggle:hover, .cv-toggle:focus-visible { text-decoration-color: currentColor; }
+.cv-toggle-icon { display: inline-block; transition: transform .2s ease; }
+.cv-toggle:hover .cv-toggle-icon, .cv-toggle:focus-visible .cv-toggle-icon { transform: translateY(2px); }
+.cv-toggle[aria-expanded="true"]:hover .cv-toggle-icon, .cv-toggle[aria-expanded="true"]:focus-visible .cv-toggle-icon { transform: translateY(-2px); }
+@keyframes cvReveal { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.cv-more:not([hidden]) { animation: cvReveal .35s ease both; }
+/* Direct lines: the email copies on click. Tooltip on hover and keyboard focus; stays put while
+   hovered (WCAG 1.4.13), Escape hides it, and it shows "Copied" on touch screens too. */
+.copy-tip { position: absolute; left: 52px; bottom: calc(100% - 4px); z-index: 5; padding: 7px 10px; white-space: nowrap; background: var(--ink); color: var(--paper); font: 500 11px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity .15s ease, transform .15s ease; }
+.copy-tip::after { content: ""; position: absolute; left: 14px; top: 100%; border: 5px solid transparent; border-top-color: var(--ink); }
+.copy-email:hover .copy-tip, .copy-email:focus-visible .copy-tip, .copy-email.is-copied .copy-tip { opacity: 1; transform: none; pointer-events: auto; }
+.copy-email.tip-hidden .copy-tip { opacity: 0; pointer-events: none; }
+.copy-email.is-copied .copy-tip { background: var(--accent); color: var(--on-accent); }
+.copy-email.is-copied .copy-tip::after { border-top-color: var(--accent); }
+.skip-link { position: absolute; left: 16px; top: -100px; z-index: 10000; background: var(--accent); color: var(--on-accent); padding: 12px 18px; font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
+.skip-link:focus { top: 12px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+/* Homepage hello: the two lines fade in once, one after the other. Off with reduced motion. */
+@keyframes helloIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.hello { animation: helloIn 1.1s cubic-bezier(.2, .7, .2, 1) both; }
+.hello-2 { animation-delay: .5s; }
+/* Homepage hero: fills the screen below the sticky header (--header-h, set by the page) */
+.hero-full { min-height: calc(100vh - var(--header-h, 90px)); min-height: calc(100svh - var(--header-h, 90px)); }
+.hand { font-family: "Caveat", "Bradley Hand", "Segoe Print", cursive; }
+/* A hand-drawn line under the hero's last word. It draws itself once, after the words arrive. */
+.scribble-wrap { position: relative; display: inline-block; white-space: nowrap; }
+.scribble { position: absolute; left: -3%; bottom: -0.06em; width: 110%; height: 0.2em; overflow: visible; color: var(--ink2); }
+.scribble path { stroke-dasharray: 1; stroke-dashoffset: 0; animation: scribbleIn .9s cubic-bezier(.6, 0, .3, 1) 1.5s both; }
+@keyframes scribbleIn { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+/* TaskGPT products under its row: one sideways rail of cards. The padding keeps focus rings unclipped. */
+.rail { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: 6px 64px; padding: 6px 6px 18px; margin: 0 -6px; scrollbar-width: thin; scrollbar-color: rgba(var(--ink-rgb), 0.25) transparent; }
+.rail-card { display: flex; flex-direction: column; gap: 8px; width: 100%; color: var(--ink); text-decoration: none; scroll-snap-align: start; }
+.rail-thumb { display: block; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--line); background: var(--surf); margin-bottom: 6px; }
+.rail-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; transition: transform .3s ease; }
+.rail-card:hover .rail-thumb img, .rail-card:focus-visible .rail-thumb img { transform: scale(1.03); }
+.rail-name { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color .15s ease; }
+.rail-card:hover .rail-name, .rail-card:focus-visible .rail-name { text-decoration-color: currentColor; }
+.rail-line { font-size: 13px; line-height: 1.5; color: var(--ink2); }
+/* Arrow buttons beside the rail, drawn like the theme switch */
+.rail-btn { width: 40px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: transparent; color: var(--ink); border: 1px solid rgba(var(--ink-rgb), 0.2); cursor: pointer; font: 500 16px/1 "JetBrains Mono", ui-monospace, monospace; transition: border-color .2s ease, background-color .2s ease; }
+.rail-btn:hover:not(:disabled), .rail-btn:focus-visible { border-color: var(--accent); background-color: rgba(var(--accent-rgb), 0.08); }
+.rail-btn:disabled { color: var(--mute); opacity: .5; cursor: default; }
+/* Links in a list (the TaskGPT products under its row): underline on hover and focus */
+.sub-link { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: text-decoration-color .15s ease; }
+.sub-link:hover, .sub-link:focus-visible { text-decoration-color: currentColor; }
+/* Nav: the page you are on */
+.nav-current { text-decoration: underline; text-underline-offset: 6px; }
+@media (prefers-reduced-motion: reduce) {
+  .hello, .scribble path { animation: none; }
+}

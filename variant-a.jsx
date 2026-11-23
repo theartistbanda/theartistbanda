@@ -50,7 +50,34 @@ function sp(bp) {
 }
 
 // ─── AVAILABILITY BANNER ─────────────────────────────────────────────────────
-function ABanner() {
+// The contact form lives at the bottom of /about; other pages link to it there
+function contactHref(page) {
+  return page === 'about' ? '#contact' : '/about#contact';
+}
+
+// React draws the page after load, so the browser cannot jump to a #section by itself.
+// Jump once the page has rendered, and again when web fonts have settled the layout.
+function useHashTarget() {
+  React.useEffect(() => {
+    const target = location.hash && document.getElementById(location.hash.slice(1));
+    if (!target) return;
+    const go = () => target.scrollIntoView();
+    requestAnimationFrame(() => requestAnimationFrame(go));
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
+  }, []);
+}
+
+// "Built with AI" (Job App Assistant, Pattern Desk) is hidden until it has proper context
+// (Dipesh, 23 Nov 2026). Its section, cards, data and nav link stay in the code: set to true to show.
+const SHOW_BUILT = false;
+
+// Old links to homepage sections that moved on 23 Nov 2026 go to their new pages
+const MOVED_SECTIONS = {
+  '#contact': '/about#contact', '#origin': '/about#origin', '#studio': '/about#studio',
+  '#principles': '/about#principles', '#career': '/career',
+};
+
+function ABanner({ page = 'home' }) {
   const bp = useBreakpoint();
   const side = sp(bp);
   return (
@@ -72,7 +99,7 @@ function ABanner() {
             ? 'Right to work in the UK · Available now'
             : 'Right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'}
         </span>
-        <a href="#contact" data-cursor="hover" style={{
+        <a href={contactHref(page)} data-cursor="hover" style={{
           ...aStyles.mono, fontSize: bp.isMobile ? 9 : 10, fontWeight: 500,
           color: A.accent, textDecoration: 'none', flexShrink: 0
         }}>Get in touch →</a>
@@ -112,28 +139,75 @@ function useHomeScrollMemory() {
   }, []);
 }
 
-function VariantA() {
-  useHomeScrollMemory();
+// Header, main and footer shared by the three React pages (home, /about, /career)
+function ASiteShell({ page, children }) {
+  // The homepage hero fills the screen below the sticky header: share the header's height
+  const headerRef = React.useRef(null);
+  React.useLayoutEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const set = () => document.documentElement.style.setProperty('--header-h', `${el.offsetHeight}px`);
+    set();
+    if (!('ResizeObserver' in window)) return;
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
   return (
     <div style={aStyles.root}>
       <a href="#main" className="skip-link">Skip to content</a>
       <CustomCursor accent={A.accent} />
-      <header style={{ position: 'sticky', top: 0, zIndex: 82 }}>
-        <ABanner />
-        <ANav />
+      <header ref={headerRef} style={{ position: 'sticky', top: 0, zIndex: 82 }}>
+        <ABanner page={page} />
+        <ANav page={page} />
       </header>
       <main id="main" tabIndex={-1} style={{ outline: 'none' }}>
-        <AHero />
-        <AMetrics />
-        <AWork />
-        <APrinciples />
-        <ACareer />
-        <AAbout />
-        <AOrigin />
-        <AContact />
+        {children}
       </main>
       <AFooter />
     </div>
+  );
+}
+
+// Homepage, kept short (Dipesh, 23 Nov 2026): the hello, the work (TaskGPT first, with its products
+// as cards) and what he has built with AI. The numbers, beliefs,
+// bio, origin story and contact live on /about, the CV on /career.
+function VariantA() {
+  const moved = MOVED_SECTIONS[location.hash];
+  React.useLayoutEffect(() => { if (moved) location.replace(moved); }, []);
+  useHomeScrollMemory();
+  return (
+    <ASiteShell page="home">
+      <AHero />
+      <AWork />
+      {SHOW_BUILT && <ABuilt />}
+    </ASiteShell>
+  );
+}
+
+// /about: intro, the four numbers, the six beliefs, the full bio, then the origin story and contact
+function AboutPage() {
+  useHashTarget();
+  return (
+    <ASiteShell page="about">
+      <AAboutIntro />
+      <AMetrics />
+      <APrinciples />
+      <AAbout />
+      <AOrigin />
+      <AContact />
+    </ASiteShell>
+  );
+}
+
+// /career: the CV
+function CareerPage() {
+  useHashTarget();
+  return (
+    <ASiteShell page="career">
+      <ACareer first />
+      <ANextBand links={[['About me', '/about'], ['Get in touch', '/about#contact']]} />
+    </ASiteShell>
   );
 }
 
@@ -151,7 +225,17 @@ function AThemeToggle() {
   );
 }
 
-function ANav() {
+// About and Career are pages; Experience is a section of the homepage, Origin a section of /about
+const NAV_LINKS = [
+  { label: 'Experience', anchor: '#work', on: 'home' },
+  { label: 'Built with AI', anchor: '#built', on: 'home', hidden: !SHOW_BUILT },
+  { label: 'About', page: 'about', href: '/about' },
+  { label: 'Origin', anchor: '#origin', on: 'about' },
+  { label: 'Career', page: 'career', href: '/career' },
+];
+const PAGE_PATH = { home: '/', about: '/about', career: '/career' };
+
+function ANav({ page = 'home' }) {
   const bp = useBreakpoint();
   const [t, setT] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -168,7 +252,12 @@ function ANav() {
     return () => clearInterval(i);
   }, []);
 
-  const links = ['Work', 'Principles', 'Career', 'Studio', 'Origin'];
+  const links = NAV_LINKS.filter((l) => !l.hidden).map((l) => ({
+    ...l,
+    href: l.anchor ? (page === l.on ? l.anchor : `${PAGE_PATH[l.on]}${l.anchor}`) : l.href,
+    current: l.page === page,
+  }));
+  const isHome = page === 'home';
 
   return (
     <nav style={{
@@ -181,9 +270,10 @@ function ANav() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         height: 56, gap: bp.isMobile ? 10 : 16
       }}>
-        {/* Logo: back to the top of the page */}
-        <a href="/" data-cursor="hover" aria-label="Dipesh Gurav, back to top"
+        {/* Logo: back to the top of the homepage, or to the homepage from another page */}
+        <a href="/" data-cursor="hover" aria-label={isHome ? 'Dipesh Gurav, back to top' : 'Dipesh Gurav, home'}
           onClick={(e) => {
+            if (!isHome) return;
             e.preventDefault();
             const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
             window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
@@ -197,11 +287,12 @@ function ANav() {
         {/* Desktop nav links */}
         {bp.isDesktop && (
           <ul style={{ display: 'flex', gap: 28, listStyle: 'none', padding: 0, margin: 0, ...aStyles.mono }}>
-            {links.map((x, i) => (
-              <li key={x}>
-                <a href={`#${x.toLowerCase()}`} data-cursor="hover"
-                  style={{ color: A.mute, textDecoration: 'none', display: 'flex', gap: 6 }}>
-                  {x}
+            {links.map((x) => (
+              <li key={x.label}>
+                <a href={x.href} data-cursor="hover" aria-current={x.current ? 'page' : undefined}
+                  className={x.current ? 'nav-current' : undefined}
+                  style={{ color: x.current ? A.ink : A.mute, textDecoration: x.current ? undefined : 'none', display: 'flex', gap: 6 }}>
+                  {x.label}
                 </a>
               </li>
             ))}
@@ -217,7 +308,7 @@ function ANav() {
 
         <div style={{ display: 'flex', gap: bp.isMobile ? 8 : 12, alignItems: 'center' }}>
           <AThemeToggle />
-          <a href="#contact" data-cursor="hover" className="cta cta-primary wipe" style={{
+          <a href={contactHref(page)} data-cursor="hover" className="cta cta-primary wipe" style={{
             ...aStyles.cta, color: A.paper, backgroundColor: A.accent,
             padding: bp.isMobile ? '10px 12px' : '10px 16px', textDecoration: 'none',
             display: 'inline-flex', gap: 8, alignItems: 'center', flexShrink: 0
@@ -248,13 +339,15 @@ function ANav() {
       {!bp.isDesktop && open && (
         <div style={{ background: A.paper, borderTop: `1px solid ${A.line}`, padding: `8px ${sp(bp)} 16px` }}>
           {links.map((x) => (
-            <a key={x} href={`#${x.toLowerCase()}`} onClick={() => setOpen(false)}
+            <a key={x.label} href={x.href} onClick={() => setOpen(false)}
+              aria-current={x.current ? 'page' : undefined}
               style={{
                 ...aStyles.mono, display: 'flex', justifyContent: 'space-between',
                 padding: '14px 0', color: A.ink, textDecoration: 'none',
+                fontWeight: x.current ? 600 : undefined,
                 borderBottom: `1px solid ${A.line}`
               }}>
-              {x} <span>→</span>
+              {x.label} <span aria-hidden="true">→</span>
             </a>
           ))}
         </div>
@@ -264,96 +357,108 @@ function ANav() {
 }
 
 // ─── HERO ────────────────────────────────────────────────────────────────────
-const SHOW_HERO_ACCENT_BOX = false; // toggle to bring back the solid block in the headline
-
+// Dipesh, 23 Nov 2026: only the hello, filling the screen below the header on every size.
+// Left aligned and large enough to span the width, in a hand-drawn face (Caveat) for warmth,
+// with a hand-drawn line under the last word. No title row, no buttons. The two lines fade in
+// once and the line draws itself once (.hello, .scribble in /site.css); with reduced motion
+// everything is simply there.
 function AHero() {
   const bp = useBreakpoint();
-  const [scroll, setScroll] = React.useState(0);
+  const side = sp(bp);
+  const [hi, line] = PORTFOLIO.hello;
+  const words = line.split(' ');
+  const last = words.pop();
+  // As large as the screen allows. In Caveat "conversations" is about 4.6 times the font size wide,
+  // so on phones the size follows the width and that word always fits on its line.
+  // On short screens (a phone on its side, a small laptop) the height caps the size too, so the
+  // whole hello always fits in the first screen.
+  const room = 'calc(100vh - var(--header-h, 90px))';
+  const bigW = bp.isMobile ? 'clamp(44px, calc((100vw - 32px) * 0.19), 88px)'
+    : bp.isTablet ? 'clamp(76px, calc((100vw - 48px) * 0.135), 124px)'
+    : 'clamp(100px, 9.6vw, 172px)';
+  const smallW = bp.isMobile ? 'clamp(30px, 10vw, 46px)' : bp.isTablet ? 'clamp(44px, 6.4vw, 64px)' : 'clamp(52px, 4.4vw, 76px)';
+  const big = `min(${bigW}, ${room} * 0.2)`;
+  const small = `min(${smallW}, ${room} * 0.1)`;
 
-  // Only needed for the optional solid block in the headline; skip the scroll work when it's off
-  React.useEffect(() => {
-    if (!SHOW_HERO_ACCENT_BOX) return;
-    const on = () => setScroll(window.scrollY);
-    window.addEventListener('scroll', on, { passive: true });
-    return () => window.removeEventListener('scroll', on);
-  }, []);
+  return (
+    <section className="hero-full" style={{
+      padding: `${bp.isMobile ? 40 : 64}px ${side}`, borderBottom: `1px solid ${A.line}`,
+      display: 'flex', alignItems: 'center'
+    }}>
+      <div style={{ maxWidth: 1360, margin: '0 auto', width: '100%' }}>
+        <h1 className="hello hand" style={{
+          fontSize: small, fontWeight: 500, lineHeight: 1, letterSpacing: 0,
+          color: A.ink2, margin: 0
+        }}>
+          {hi}
+        </h1>
+        <p className="hello hello-2 hand" style={{
+          fontSize: big, fontWeight: 600, lineHeight: 0.98, letterSpacing: '-0.005em',
+          color: A.ink, margin: `${bp.isMobile ? 16 : 20}px 0 0`, textWrap: 'pretty'
+        }}>
+          {words.join(' ')}{' '}
+          <span className="scribble-wrap">
+            {last}
+            <svg className="scribble" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path d="M4 15 C 52 6, 98 20, 150 12 S 246 5, 296 13" pathLength="1" fill="none"
+                stroke="currentColor" strokeWidth={bp.isMobile ? 3 : 5} strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+            </svg>
+          </span>
+        </p>
+      </div>
+    </section>
+  );
+}
 
-  const reduceMotion = React.useMemo(() => matchMedia('(prefers-reduced-motion: reduce)').matches, []);
-  const parallax = reduceMotion ? 0 : Math.min(scroll * 0.25, 80);
-  // Tight top padding so the stat tiles below are on screen without scrolling on a laptop
-  const padTop = bp.isMobile ? '28px' : bp.isTablet ? '36px' : '32px';
-  const padBottom = bp.isMobile ? '40px' : '48px';
+// ─── ABOUT INTRO (/about) ────────────────────────────────────────────────────
+// The tagline and summary that used to open the homepage, followed on the page by the numbers
+function AAboutIntro() {
+  const bp = useBreakpoint();
+  const side = sp(bp);
+  return (
+    <section style={{ padding: `${bp.isMobile ? '48px' : '88px'} ${side} ${bp.isMobile ? '40px' : '64px'}` }}>
+      <div style={{ maxWidth: 1360, margin: '0 auto' }}>
+        <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 20 }}>About</div>
+        <h1 style={{
+          fontFamily: '"Inter Tight", "Inter", sans-serif',
+          fontWeight: 500,
+          fontSize: bp.isMobile ? 'clamp(36px, 10vw, 52px)' : 'clamp(48px, 5vw, 80px)',
+          lineHeight: 1.04, letterSpacing: '-0.035em', textWrap: 'balance',
+          margin: 0, maxWidth: 1000, color: A.ink
+        }}>
+          Designing for the humans behind the <span style={{ fontStyle: 'italic', fontWeight: 400 }}>pixels</span>
+        </h1>
+        <p style={{
+          fontSize: bp.isMobile ? 16 : 18, lineHeight: 1.55, letterSpacing: '-0.01em',
+          color: A.ink2, maxWidth: 760, margin: `${bp.isMobile ? 20 : 28}px 0 0`
+        }}>
+          {PORTFOLIO.lead}
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// ─── NEXT (end of /about and /career) ────────────────────────────────────────
+function ANextBand({ links }) {
+  const bp = useBreakpoint();
   const side = sp(bp);
   const btn = {
     ...aStyles.cta, padding: '13px 18px', border: `1px solid rgba(var(--ink-rgb), 0.2)`,
     textDecoration: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-    gap: 24, minWidth: bp.isMobile ? 0 : 220
+    gap: 24, minWidth: bp.isMobile ? 0 : 220, color: A.ink, fontWeight: 500
   };
-
   return (
-    <section style={{ padding: `${padTop} ${side} ${padBottom}`, borderBottom: `1px solid ${A.line}` }}>
-      <div style={{ maxWidth: 1360, margin: '0 auto' }}>
-
-        {/* Meta row: hidden on mobile */}
-        {!bp.isMobile && (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: bp.isTablet ? '1fr 1fr' : 'repeat(3, 1fr)',
-            gap: 24, marginBottom: bp.isTablet ? 32 : 44, ...aStyles.mono
-          }}>
-            <div>{PORTFOLIO.role}</div>
-            <div>{PORTFOLIO.location} · Open UK-wide</div>
-            {bp.isDesktop && <div>Portfolio / vol. MMXXVI</div>}
-          </div>
-        )}
-
-        {/* Centred headline, the summary under it, then the two actions side by side */}
-        <div style={{ textAlign: bp.isMobile ? 'left' : 'center', maxWidth: 1040, margin: '0 auto' }}>
-          <h1 style={{
-            fontFamily: '"Inter Tight", "Inter", sans-serif',
-            fontWeight: 500,
-            fontSize: bp.isMobile ? 'clamp(40px, 11vw, 56px)' : 'clamp(52px, 5.2vw, 84px)',
-            lineHeight: 1.04,
-            letterSpacing: '-0.035em',
-            textWrap: 'balance',
-            margin: 0,
-            color: A.ink
-          }}>
-            Designing for the humans behind the{' '}
-            {SHOW_HERO_ACCENT_BOX && (
-              <span style={{
-                display: 'inline-block',
-                width: 'clamp(32px, 5vw, 64px)',
-                height: 'clamp(24px, 3.6vw, 46px)',
-                background: A.accent,
-                verticalAlign: 'middle',
-                marginRight: 8,
-                transform: `translateY(${parallax * 0.3}px)`,
-                transition: 'transform 0.1s linear'
-              }} aria-hidden />
-            )}
-            <span style={{ fontStyle: 'italic', fontWeight: 400, color: A.accent }}>pixels</span>
-          </h1>
-
-          <p style={{
-            fontSize: bp.isMobile ? 16 : 18, lineHeight: 1.55, letterSpacing: '-0.01em',
-            color: A.ink2, maxWidth: 760, margin: `${bp.isMobile ? 20 : 28}px auto 0`
-          }}>
-            {PORTFOLIO.lead}
-          </p>
-
-          <div style={{
-            display: 'flex', flexDirection: bp.isMobile ? 'column' : 'row',
-            justifyContent: 'center', gap: 12, marginTop: bp.isMobile ? 24 : 32
-          }}>
-            <a href="#work" data-cursor="hover" className="cta cta-outline" style={{ ...btn, color: A.accent }}>
-              View the index <span className="cta-arrow">→</span>
-            </a>
-            <a href="#contact" data-cursor="hover" className="cta cta-outline" style={{ ...btn, fontWeight: 500, color: A.ink }}>
-              Start a project <span className="cta-arrow" style={{ color: A.accent }}>→</span>
-            </a>
-          </div>
-        </div>
+    <section aria-label="Where next" style={{ padding: `${bp.isMobile ? '48px' : '72px'} ${side}`, background: A.surf }}>
+      <div style={{
+        maxWidth: 1360, margin: '0 auto', display: 'flex',
+        flexDirection: bp.isMobile ? 'column' : 'row', gap: 12
+      }}>
+        {links.map(([label, href]) => (
+          <a key={href} href={href} data-cursor="hover" className="cta cta-outline" style={btn}>
+            {label} <span className="cta-arrow" style={{ color: A.accent }}>→</span>
+          </a>
+        ))}
       </div>
     </section>
   );
@@ -411,7 +516,7 @@ function AWork() {
           gap: 24, marginBottom: bp.isMobile ? 32 : 64
         }}>
           <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
-            <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Selected Work · 2018–2026</div>
+            <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Experience · 2018–2026</div>
             <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
               Eight products, four markets,<br />
               measurable behaviour change
@@ -425,14 +530,193 @@ function AWork() {
         </div>
 
         <div style={{ borderTop: `1px solid ${A.line}` }}>
-          {PORTFOLIO.projects.filter(p => p.selected !== false).map((p) => <AProjectRow key={p.id} p={p} />)}
+          {PORTFOLIO.projects.filter(p => p.selected !== false).map((p) => (
+            p.groups
+              ? <React.Fragment key={p.id}><AProjectRow p={p} joined /><AProductRail p={p} /></React.Fragment>
+              : <AProjectRow key={p.id} p={p} />
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function AProjectRow({ p }) {
+// TaskGPT's own case studies as cards under its row (Dipesh, 23 Nov 2026), in the hub's groups.
+// One sideways-scrolling rail; thin vertical lines divide the groups. Swipe, scroll, Tab
+// through the cards, or use the arrow buttons. Fades at an edge show there is more.
+function AProductRail({ p }) {
+  const bp = useBreakpoint();
+  const [ref, inView] = useReveal();
+  const rail = React.useRef(null);
+  const [edge, setEdge] = React.useState({ start: true, end: false });
+  const update = React.useCallback(() => {
+    const el = rail.current;
+    if (!el) return;
+    setEdge({ start: el.scrollLeft <= 2, end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 2 });
+  }, []);
+  React.useEffect(() => {
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, [update]);
+  const go = (dir) => {
+    const el = rail.current;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollBy({ left: dir * Math.round(el.clientWidth * 0.8), behavior: reduce ? 'auto' : 'smooth' });
+  };
+
+  const count = p.groups.reduce((n, g) => n + g.items.length, 0);
+  const cardW = bp.isMobile ? 228 : 264;
+  const fade = 40;
+  const mask = `linear-gradient(to right, ${edge.start ? '#000' : 'transparent'} 0, #000 ${fade}px, #000 calc(100% - ${fade}px), ${edge.end ? '#000' : 'transparent'} 100%)`;
+  const arrow = (dir, label, disabled) => (
+    <button type="button" className="rail-btn" data-cursor="hover" aria-label={label} disabled={disabled}
+      onClick={() => go(dir)}>
+      <span aria-hidden="true">{dir < 0 ? '←' : '→'}</span>
+    </button>
+  );
+
+  return (
+    <div ref={ref} style={{
+      borderBottom: `1px solid ${A.line}`,
+      padding: bp.isMobile ? '4px 0 32px' : '4px 8px 40px',
+      opacity: inView ? 1 : 0, transform: inView ? 'none' : 'translateY(16px)',
+      transition: 'opacity .6s, transform .6s'
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, marginBottom: 20, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 16, flexWrap: 'wrap' }}>
+          <span style={aStyles.mono}>Inside {p.title} · {count} case studies</span>
+          <a href={p.full} data-cursor="hover" className="sub-link" style={{ ...aStyles.mono, color: A.ink, fontWeight: 500 }}>
+            The full case study <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        {!bp.isMobile && (
+          <div style={{ display: 'flex', gap: 8 }}>
+            {arrow(-1, `Scroll ${p.title} products back`, edge.start)}
+            {arrow(1, `Scroll ${p.title} products forward`, edge.end)}
+          </div>
+        )}
+      </div>
+
+      <div ref={rail} className="rail" onScroll={update} role="region" aria-label={`${p.title} products`}
+        style={{ maskImage: mask, WebkitMaskImage: mask }}>
+        {p.groups.map((g, gi) => {
+          const id = `${p.id}-group-${g.label.toLowerCase().replace(/[^a-z]+/g, '-')}`;
+          return (
+            <div key={g.label} style={{
+              flex: '0 0 auto',
+              paddingLeft: gi ? 24 : 0, marginLeft: gi ? 24 : 0,
+              borderLeft: gi ? `1px solid ${A.line}` : 'none'
+            }}>
+              <p id={id} style={{ ...aStyles.mono, margin: '0 0 12px' }}>{g.label} · {g.items.length}</p>
+              <ul aria-labelledby={id} style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', gap: 16 }}>
+                {g.items.map(([name, href, img, line]) => (
+                  <li key={href} style={{ flex: `0 0 ${cardW}px`, display: 'flex' }}>
+                    <a href={href} data-cursor="hover" className="rail-card">
+                      <span className="rail-thumb">
+                        <img src={`/assets/${img}.webp`} alt="" loading="lazy" decoding="async" />
+                      </span>
+                      <span className="rail-name">{name}</span>
+                      <span className="rail-line">{line}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─── BUILT WITH AI ───────────────────────────────────────────────────────────
+// Working tools Dipesh designed and built with AI (Dipesh, 23 Nov 2026). Data: PORTFOLIO.builds.
+function ABuilt() {
+  const bp = useBreakpoint();
+  const side = sp(bp);
+  const vPad = bp.isMobile ? '56px' : '96px';
+  return (
+    <section id="built" style={{ padding: `${vPad} ${side}`, borderBottom: `1px solid ${A.line}` }}>
+      <div style={{ maxWidth: 1360, margin: '0 auto' }}>
+        <div style={{ marginBottom: bp.isMobile ? 32 : 48, maxWidth: 760 }}>
+          <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Built with AI · 2026</div>
+          <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
+            I design it, then I build it
+          </h2>
+          <p style={{ fontSize: bp.isMobile ? 15 : 17, lineHeight: 1.6, color: A.ink2, margin: '20px 0 0' }}>
+            The same product thinking, taken all the way to working software with Claude.
+          </p>
+        </div>
+        <div style={{
+          display: 'grid', gap: 24,
+          gridTemplateColumns: bp.isDesktop ? 'repeat(2, minmax(0, 1fr))' : '1fr'
+        }}>
+          {PORTFOLIO.builds.map((b) => <ABuildCard key={b.id} b={b} />)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ABuildCard({ b }) {
+  const bp = useBreakpoint();
+  const [ref, inView] = useReveal();
+  const titleId = `build-${b.id}`;
+  return (
+    <article ref={ref} aria-labelledby={titleId} style={{
+      border: `1px solid ${A.line}`, display: 'flex', flexDirection: 'column',
+      opacity: inView ? 1 : 0, transform: inView ? 'none' : 'translateY(16px)',
+      transition: 'opacity .6s, transform .6s'
+    }}>
+      <div style={{ aspectRatio: '16 / 9', background: A.surf, borderBottom: `1px solid ${A.line}`, overflow: 'hidden' }}>
+        {b.image ? (
+          <img src={b.image} alt="" loading="lazy" decoding="async"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
+        ) : (
+          // No screenshot of a private build: its markets, set as type
+          <div aria-hidden="true" style={{
+            height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center',
+            gap: bp.isMobile ? 6 : 10, padding: bp.isMobile ? 24 : 40
+          }}>
+            {(b.markets || []).map((m) => (
+              <div key={m} style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+                borderBottom: `1px solid ${A.line}`, paddingBottom: bp.isMobile ? 6 : 10
+              }}>
+                <span style={{ fontSize: bp.isMobile ? 22 : 34, fontWeight: 500, letterSpacing: '-0.02em', color: A.ink }}>{m}</span>
+                <span style={aStyles.mono}>Signal board</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      <div style={{ padding: bp.isMobile ? 20 : 28, display: 'flex', flexDirection: 'column', gap: 14, flex: 1 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
+          <h3 id={titleId} style={{ fontSize: bp.isMobile ? 22 : 28, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1, margin: 0 }}>{b.title}</h3>
+          <span style={aStyles.mono}>{b.status} · {b.year}</span>
+        </div>
+        <p style={{ fontSize: 15, lineHeight: 1.6, color: A.ink2, margin: 0 }}>{b.line}</p>
+        <p style={{ ...aStyles.mono, margin: 0 }}>{b.stack}</p>
+        {b.links.length > 0 && (
+          <ul style={{ listStyle: 'none', padding: 0, margin: 'auto 0 0', display: 'flex', flexWrap: 'wrap', gap: '8px 20px' }}>
+            {b.links.map(([label, href]) => (
+              <li key={href}>
+                <a href={href} data-cursor="hover" className="sub-link"
+                  style={{ ...aStyles.mono, color: A.ink, fontWeight: 500, display: 'inline-block', padding: '6px 0' }}>
+                  {label} <span aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+        {b.note && <p style={{ fontSize: 12.5, color: A.mute, margin: 0 }}>{b.note}</p>}
+      </div>
+    </article>
+  );
+}
+
+function AProjectRow({ p, joined }) {
   const bp = useBreakpoint();
   const [ref, inView] = useReveal();
   const [hover, setHover] = React.useState(false);
@@ -448,7 +732,8 @@ function AProjectRow({ p }) {
     textDecoration: 'none', color: A.ink,
     opacity: inView ? 1 : 0, transform: inView ? 'none' : 'translateY(16px)',
     transition: 'opacity .6s, transform .6s, background .18s',
-    borderBottom: `1px solid ${A.line}`
+    // A row with its product list below it: the list carries the dividing line
+    borderBottom: joined ? 'none' : `1px solid ${A.line}`
   };
 
   // Mobile: simple two-column card
@@ -551,10 +836,7 @@ function AOrigin() {
               <span style={{ fontStyle: 'italic', color: A.accent }}>a mark India picked up</span>
             </h2>
             <p style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(var(--ink-rgb), 0.82)', maxWidth: bp.isDesktop ? 480 : '100%', marginTop: 40 }}>
-              I entered an open MyGov competition to design a mark for the Aatmnirbhar Bharat campaign: the Indian
-              tricolour and Ashok Chakra fused with a golden bird, a reference to the country once being called sone
-              ki chidiya. The competition was never formally decided. The mark was taken up by the PM SVANidhi scheme
-              and used by manufacturers marking Indian-made goods, without credit.
+              {PORTFOLIO.origin}
             </p>
             <p style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 300, fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, lineHeight: 1.4, color: A.ink, marginTop: 32, maxWidth: bp.isDesktop ? 520 : '100%' }}>
               "Good design does not ask permission; it simply works for people."
@@ -775,13 +1057,16 @@ function ACareerItem({ c, i, bp }) {
   );
 }
 
-function ACareer() {
+// `first`: the section opens its own page (/career), so its heading is the page's h1
+function ACareer({ first = false }) {
   const bp = useBreakpoint();
   const side = sp(bp);
   const vPad = bp.isMobile ? '72px' : '120px';
+  const topPad = first ? (bp.isMobile ? '48px' : '88px') : vPad;
+  const Heading = first ? 'h1' : 'h2';
 
   return (
-    <section id="career" style={{ padding: `${vPad} ${side}`, borderBottom: `1px solid ${A.line}` }}>
+    <section id="career" style={{ padding: `${topPad} ${side} ${vPad}`, borderBottom: `1px solid ${A.line}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
         <div style={{
           display: 'flex',
@@ -793,9 +1078,9 @@ function ACareer() {
           <div>
             {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
             <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Curriculum vitae</div>
-            <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
+            <Heading style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
               Nine years,<br />four cities, over a million downloads
-            </h2>
+            </Heading>
           </div>
           <a href="/dipesh-gurav-cv.pdf" download data-cursor="hover" className="cta cta-outline" style={{
             ...aStyles.cta, fontWeight: 500, padding: '12px 16px', border: `1px solid rgba(var(--ink-rgb), 0.2)`,
@@ -845,12 +1130,11 @@ function AAbout() {
               I became a designer because<br />technology is supposed to make<br />life <span style={{ fontStyle: 'italic' }}>easier</span>
             </h2>
             <div style={{ fontSize: 15, lineHeight: 1.75, color: A.ink2, borderTop: `1px solid ${A.line}`, paddingTop: 32 }}>
-              <p style={{ margin: 0 }}>I have spent nine years in product design, and I love what I do: solving problems in human-computer interaction. I grew up watching technology promise to make life easier, then complicate it. Forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on.</p>
-              <p style={{ marginTop: 16 }}>For most of my career I have been an individual contributor on projects with no clear brief. There was always an idea, a problem or a gap, and how and where to start was mine to decide. I preferred it that way.</p>
-              <p style={{ marginTop: 16 }}>Screens are just a medium. How a product feels comes from the person's experience, and the screen comes later. Understanding people and their behaviour comes first, whether I am designing an AI tool for operators on live calls, a wellbeing app, or a logo that ended up on Indian-made goods across the country.</p>
-              <p style={{ marginTop: 16 }}>The work has taken me to a billion-person market in India, to Gulf users who read right to left, and to enterprise teams in 14 countries. YourHour, a wellbeing app I designed, ships in 22 languages and has passed a million downloads. Every one of those audiences taught me that "intuitive" carries a quiet question, <em>intuitive for whom</em>. Knowing beats assuming, so the answer comes from sitting alongside users, not from a report.</p>
-              <p style={{ marginTop: 16 }}>The simplest things are the hardest to create. Ask a room full of people what a product should have and they will list dozens of features. Ask them to prune the list and the room goes quiet. Minimalism inspires me, and my layouts leave no room for unnecessary friction: clean on the surface, built cleanly behind the scenes.</p>
-              <p style={{ marginTop: 16 }}>Away from work I read, and I lose hours to brain games. Both keep me practised at the thing design needs most: finding the pattern under the noise.</p>
+              {PORTFOLIO.bio.map((para, i) => (
+                <p key={i} style={{ margin: i ? '16px 0 0' : 0 }}>
+                  {para.split(/\*(.+?)\*/).map((part, j) => (j % 2 ? <em key={j}>{part}</em> : part))}
+                </p>
+              ))}
             </div>
           </div>
 
@@ -1418,4 +1702,4 @@ function AFooter() {
   );
 }
 
-Object.assign(window, { VariantA, ABanner, ANav, AHero, AMetrics, AWork, AOrigin, APrinciples, ACareer, AAbout, AContact, AFooter });
+Object.assign(window, { VariantA, AboutPage, CareerPage, ABuilt, ABanner, ANav, AHero, AMetrics, AWork, AOrigin, APrinciples, ACareer, AAbout, AContact, AFooter });

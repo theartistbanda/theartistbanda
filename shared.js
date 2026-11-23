@@ -68,7 +68,13 @@ const PORTFOLIO = {
   location: 'Nottingham, UK',
   years: 9,
   tagline: 'Designing for the humans behind the pixels',
+  // The homepage hero, two lines, no full stops (rule 21). Dipesh, 23 Nov 2026.
+  hello: ['Hi, I\'m Dipesh', 'I make conversations with technology feel human'],
   lead: 'Product designer behind an enterprise AI suite that cut call-handling time and costs by 20%, products used by around 35,000 people a day in 14 countries, a wellbeing app with over a million downloads in 22 languages, and a mark manufacturers across India use on Indian-made goods.',
+  // The origin story on /about (Aatmnirbhar Bharat; see CLAUDE.md rule 10 before changing it)
+  origin: 'I entered an open MyGov competition to design a mark for the Aatmnirbhar Bharat campaign: the Indian tricolour and Ashok Chakra fused with a golden bird, a reference to the country once being called sone ki chidiya. The competition was never formally decided. The mark was taken up by the PM SVANidhi scheme and used by manufacturers marking Indian-made goods, without credit.',
+  // The full About text, at the bottom of /about. *Asterisks* mark italics.
+  bio: ['I have spent nine years in product design, and I love what I do: solving problems in human-computer interaction. I grew up watching technology promise to make life easier, then complicate it. Forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on.', 'For most of my career I have been an individual contributor on projects with no clear brief. There was always an idea, a problem or a gap, and how and where to start was mine to decide. I preferred it that way.', 'Screens are just a medium. How a product feels comes from the person\'s experience, and the screen comes later. Understanding people and their behaviour comes first, whether I am designing an AI tool for operators on live calls, a wellbeing app, or a logo that ended up on Indian-made goods across the country.', 'The work has taken me to a billion-person market in India, to Gulf users who read right to left, and to enterprise teams in 14 countries. YourHour, a wellbeing app I designed, ships in 22 languages and has passed a million downloads. Every one of those audiences taught me that "intuitive" carries a quiet question, *intuitive for whom*. Knowing beats assuming, so the answer comes from sitting alongside users, not from a report.', 'The simplest things are the hardest to create. Ask a room full of people what a product should have and they will list dozens of features. Ask them to prune the list and the room goes quiet. Minimalism inspires me, and my layouts leave no room for unnecessary friction: clean on the surface, built cleanly behind the scenes.', 'Away from work I read, and I lose hours to brain games. Both keep me practised at the thing design needs most: finding the pattern under the noise.'],
   metrics: [{
     value: 1,
     suffix: 'M+',
@@ -91,8 +97,40 @@ const PORTFOLIO = {
     sub: 'EarlyFoods'
   }],
   projects: [{
-    id: 'levelup',
+    id: 'taskgpt',
     index: '01',
+    year: '2022–2025',
+    title: 'TaskGPT',
+    kicker: 'AI productivity · Enterprise · 14 countries',
+    tagline: 'AI that works inside the live call',
+    body: 'End-to-end design of an OpenAI + PaLM 2 + LLaMA suite for agents on live customer calls across 14 countries. Call-handling time and operational costs each down 20%.',
+    stats: [['20%', 'Less call-handling time'], ['35K', 'Suite daily users'], ['14', 'Countries']],
+    tags: ['AI Interface', 'Enterprise', 'Design Systems'],
+    image: '/assets/taskgpt-dashboard.webp',
+    href: '/case-taskgpt',
+    // Every TaskGPT case study, as scrollable cards under its row on the homepage (Dipesh, 23 Nov 2026).
+    // Same groups, names, opening sentence and thumbnail as the products section of /case-taskgpt:
+    // [name, link, image in /assets (webp), one line].
+    groups: [{
+      label: 'Use',
+      items: [['AssistAI', '/case-taskgpt-assistai', 'taskgpt-assistai-1', 'The first TaskGPT chatbot.'], ['AuthorAI', '/case-taskgpt-authorai', 'taskgpt-authorai-1', 'One-click writing help, planned from a survey of how people used TaskGPT: summaries, tone, emails and action items.'], ['Document Search', '/case-taskgpt-document-search', 'taskgpt-document-search-1', 'One question across more than 50 long client documents.'], ['Home Page', '/case-taskgpt-home', 'taskgpt-home-1', 'One front door to every product and every client instance, with admin settings that feel like a product, not a control panel.']]
+    }, {
+      label: 'Measure',
+      items: [['TaskGPT Dashboard', '/case-taskgpt-dashboard', 'taskgpt-hub-cover', 'Is the AI used, is it right, and what does it cost?'], ['Observability', '/case-taskgpt-observability', 'taskgpt-observability-1', 'Every query, through 16 steps from masking to the model and back.'], ['Reports', '/case-taskgpt-reports', 'taskgpt-reports-1', 'One form for the rows behind the numbers: conversation history, audit logs, adoption and feedback, and daily active users.']]
+    }, {
+      label: 'Set up',
+      items: [['Chatbotify', '/case-taskgpt-chatbotify', 'taskgpt-chatbotify-1', 'A client\'s chatbot without code: knowledge base, model, masking and small talk.'], ['KnowledgeBase Utility', '/case-taskgpt-knowledgebase', 'taskgpt-knowledgebase-1', 'Client content managers write and version the answers the chatbots use, in a branch model like GitHub.'], ['Agentic AI', '/case-taskgpt-agentic-ai', 'taskgpt-agentic-ai-1', 'Anyone can build an agent: start from a ready-made instance, add tools and connectors, and watch its chain of thought in a live preview.']]
+    }, {
+      label: 'Protect',
+      items: [['BCP (Business Continuity Plan)', '/case-taskgpt-bcp', 'taskgpt-bcp-1', 'When the main AI provider goes down, one action moves every chatbot to a backup engine the client chose, and every screen says so.']]
+    }, {
+      label: 'Chrome extensions',
+      items: [['TranslateBuddy', '/case-taskgpt-translatebuddy', 'taskgpt-translatebuddy-1', 'From a standalone translator to a Zendesk panel that detects the language and prepares the reply, so agents only review, edit and send.'], ['Shield', '/case-taskgpt-shield', 'taskgpt-shield-2', 'A wellbeing extension for content moderators.'], ['Shield Co-Pilot', '/case-taskgpt-shield-copilot', 'taskgpt-shield-copilot-1', 'An AI co-pilot inside the moderation tool.'], ['Deepfake Detection', '/case-taskgpt-deepfake-detection', 'taskgpt-deepfake-detection-1', 'A side panel that checks images in fake claim calls and fake articles, with a score and a breakdown by method.'], ['Productivity Tracker', '/case-taskgpt-productivity-tracker', 'taskgpt-productivity-tracker-2', 'Sessions, breaks and time on each task.']]
+    }],
+    full: '/case-taskgpt-full'
+  }, {
+    id: 'levelup',
+    index: '02',
     year: 2024,
     title: 'LevelUp',
     kicker: 'Gamification · Enterprise SaaS · 3D',
@@ -102,18 +140,6 @@ const PORTFOLIO = {
     tags: ['Gamification', 'Enterprise SaaS', 'Dual-audience', 'Design Systems'],
     image: '/assets/levelup-cover.webp',
     href: '/case-levelup'
-  }, {
-    id: 'taskgpt',
-    index: '02',
-    year: '2022–2025',
-    title: 'TaskGPT',
-    kicker: 'AI productivity · Enterprise · 14 countries',
-    tagline: 'AI that works inside the live call',
-    body: 'End-to-end design of an OpenAI + PaLM 2 + LLaMA suite for agents on live customer calls across 14 countries. Call-handling time and operational costs each down 20%.',
-    stats: [['20%', 'Less call-handling time'], ['35K', 'Suite daily users'], ['14', 'Countries']],
-    tags: ['AI Interface', 'Enterprise', 'Design Systems'],
-    image: '/assets/taskgpt-dashboard.webp',
-    href: '/case-taskgpt'
   }, {
     id: 'evaluateus',
     index: '03',
@@ -127,8 +153,21 @@ const PORTFOLIO = {
     image: '/assets/evaluateus-cover.webp',
     href: '/case-evaluateus'
   }, {
-    id: 'yourhour',
+    // In Experience below EvaluateUs (Dipesh, 23 Nov 2026)
+    id: 'job-app-assistant',
     index: '04',
+    year: 2026,
+    title: 'Job App Assistant',
+    kicker: 'Generative AI · Solo build · Live product',
+    tagline: 'Building the back room, from scratch',
+    body: 'A working AI web application: designed, coded, and deployed in a single session. Node.js, Claude API, real server. Not a prototype.',
+    stats: [['1 day', 'Build time'], ['4', 'Files'], ['Live', 'Status']],
+    tags: ['Generative AI Tools', 'AI Interfaces', 'Solo build'],
+    image: '/assets/jaa-cover.webp',
+    href: '/case-job-app-assistant'
+  }, {
+    id: 'yourhour',
+    index: '05',
     year: '2018–2020',
     title: 'YourHour',
     kicker: 'Digital wellbeing · India · 1M+ downloads',
@@ -140,7 +179,7 @@ const PORTFOLIO = {
     href: '/case-yourhour'
   }, {
     id: 'aatmnirbhar',
-    index: '05',
+    index: '06',
     year: 2020,
     title: 'Aatmnirbhar',
     kicker: 'Brand mark · Open MyGov competition',
@@ -152,7 +191,7 @@ const PORTFOLIO = {
     href: '/case-aatmnirbhar'
   }, {
     id: 'jego',
-    index: '06',
+    index: '07',
     year: '',
     title: 'JEGO',
     kicker: 'Wellbeing streaming · UAE',
@@ -164,7 +203,7 @@ const PORTFOLIO = {
     href: '/case-jego'
   }, {
     id: 'earlyfoods',
-    index: '07',
+    index: '08',
     year: '',
     title: 'EarlyFoods',
     kicker: 'E-commerce · Organic baby food',
@@ -174,18 +213,29 @@ const PORTFOLIO = {
     tags: ['E-commerce', 'Conversion Rate Optimisation', 'Emotional UX'],
     image: '/assets/earlyfoods-cover.webp',
     href: '/case-earlyfoods'
-  }, {
+  }],
+  // "Built with AI" on the homepage (Dipesh, 23 Nov 2026): working tools he designed and built with AI.
+  // Facts only from CLAUDE.md section 3. Pattern Desk is a private Claude artifact, so it has no link.
+  builds: [{
     id: 'job-app-assistant',
-    index: '08',
-    year: 2026,
     title: 'Job App Assistant',
-    kicker: 'Generative AI · Solo build · Live product',
-    tagline: 'Building the back room, from scratch',
-    body: 'A working AI web application: designed, coded, and deployed in a single session. Node.js, Claude API, real server. Not a prototype.',
-    stats: [['1 day', 'Build time'], ['4', 'Files'], ['Live', 'Status']],
-    tags: ['Generative AI Tools', 'AI Interfaces', 'Solo build'],
-    image: '/assets/jaa-cover.webp',
-    href: '/case-job-app-assistant'
+    year: 2026,
+    status: 'Live',
+    line: 'A live AI web app that I designed, coded and deployed alone in one session.',
+    stack: 'Node.js · Claude API',
+    // Not jaa-cover: its sample cover letter says "10+ years"
+    image: '/assets/jaa-mobile-views.webp',
+    links: [['Read the case study', '/case-job-app-assistant'], ['Open the app', 'https://job-app-assistant.onrender.com'], ['Code on GitHub', 'https://github.com/theartistbanda/job-app-assistant']],
+    note: 'The app sleeps when idle, so its first load is slow.'
+  }, {
+    id: 'pattern-desk',
+    title: 'Pattern Desk',
+    year: 2026,
+    status: 'Private build',
+    line: 'India and the UK in focus, the world in view. A market desk for the Nifty 50, FTSE 100 and S&P 500: a signal board for each, a plan with long, short and wait triggers on the daily close, and a record of every call.',
+    stack: 'Claude · Twelve Data and Alpha Vantage prices',
+    markets: ['Nifty 50', 'FTSE 100', 'S&P 500'],
+    links: []
   }],
   principles: [{
     n: '01',

@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
+  // index.html, about.html and career.html share one React bundle; <body data-page> picks the page
+  var pages = { about: window.AboutPage, career: window.CareerPage };
+  var page = document.body.getAttribute('data-page');
   ReactDOM.createRoot(document.getElementById('root')).render(
-    React.createElement(VariantA, null)
+    React.createElement(pages[page] || window.VariantA, null)
   );
+  if (pages[page]) return;
 
   // Preload hover cover images only on devices that support hover (desktop),
   // and only after the page is idle, so it never competes with first render.

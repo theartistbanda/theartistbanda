@@ -122,47 +122,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,wght@1,300;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,wght@1,300;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')==='dark'?'dark':'light')}catch(e){document.documentElement.setAttribute('data-theme','light')}</script>
 <link rel="stylesheet" href="/theme.css">
-<style>
-  html, body { margin: 0; padding: 0; background: var(--paper); }
-  /* Keeps focused items clear of the sticky banner and nav (WCAG 2.4.11) */
-  html { scroll-padding-top: 104px; }
-  * { box-sizing: border-box; }
-  /* 0.5 gives placeholders 4.6:1 (WCAG 1.4.3) */
-  input::placeholder, textarea::placeholder { color: var(--placeholder); opacity: 1; }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  /* Contact form: ring the whole cell while its field has focus (WCAG 2.4.7) */
-  .a-field:focus-within { outline: 2px solid var(--accent); outline-offset: -2px; }
-  /* Button micro-interactions. Keyboard focus gets the same treatment as hover. */
-  .cta-outline { transition: background-color .2s ease, border-color .2s ease, transform .2s ease; }
-  .cta .cta-arrow { display: inline-block; transition: transform .2s ease; }
-  .cta-outline:hover .cta-arrow, .cta-outline:focus-visible .cta-arrow { transform: translateX(4px); }
-  .cta-outline:hover, .cta-outline:focus-visible { border-color: var(--accent) !important; background-color: rgba(var(--accent-rgb), 0.08) !important; }
-  .cta-outline:active { transform: scale(0.98); }
-  /* CV section: "Read more" / "Show less" link button under each role */
-  .cv-toggle { margin-top: 14px; padding: 6px 0; background: none; border: none; cursor: pointer; color: var(--accent); font: 500 12px/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: text-decoration-color .2s ease; }
-  .cv-toggle:hover, .cv-toggle:focus-visible { text-decoration-color: currentColor; }
-  .cv-toggle-icon { display: inline-block; transition: transform .2s ease; }
-  .cv-toggle:hover .cv-toggle-icon, .cv-toggle:focus-visible .cv-toggle-icon { transform: translateY(2px); }
-  .cv-toggle[aria-expanded="true"]:hover .cv-toggle-icon, .cv-toggle[aria-expanded="true"]:focus-visible .cv-toggle-icon { transform: translateY(-2px); }
-  @keyframes cvReveal { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-  .cv-more:not([hidden]) { animation: cvReveal .35s ease both; }
-  /* Direct lines: the email copies on click. Tooltip on hover and keyboard focus; stays put while
-     hovered (WCAG 1.4.13), Escape hides it, and it shows "Copied" on touch screens too. */
-  .copy-tip { position: absolute; left: 52px; bottom: calc(100% - 4px); z-index: 5; padding: 7px 10px; white-space: nowrap; background: var(--ink); color: var(--paper); font: 500 11px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity .15s ease, transform .15s ease; }
-  .copy-tip::after { content: ""; position: absolute; left: 14px; top: 100%; border: 5px solid transparent; border-top-color: var(--ink); }
-  .copy-email:hover .copy-tip, .copy-email:focus-visible .copy-tip, .copy-email.is-copied .copy-tip { opacity: 1; transform: none; pointer-events: auto; }
-  .copy-email.tip-hidden .copy-tip { opacity: 0; pointer-events: none; }
-  .copy-email.is-copied .copy-tip { background: var(--accent); color: var(--on-accent); }
-  .copy-email.is-copied .copy-tip::after { border-top-color: var(--accent); }
-  .skip-link { position: absolute; left: 16px; top: -100px; z-index: 10000; background: var(--accent); color: var(--on-accent); padding: 12px 18px; font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
-  .skip-link:focus { top: 12px; }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-  }
-</style>
+<link rel="stylesheet" href="/site.css">
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -173,16 +136,18 @@
   <main style="font-family:sans-serif;max-width:800px;margin:40px auto;padding:0 24px;color:var(--ink);background:var(--paper);">
     <h1>Dipesh Gurav | Lead Product Designer</h1>
     <p>Lead Product Designer with 9 years of experience. Founding designer on the Digital IT team at TaskUs, designing enterprise AI tools used by around 35,000 people a day across 14 countries.</p>
-    <h2>Selected Work</h2>
+    <p>Hi, I'm Dipesh. I make conversations with technology feel human.</p>
+    <p><a href="/about">About me</a> · <a href="/career">Career and CV</a></p>
+    <h2>Experience</h2>
     <ul>
+      <li><a href="/case-taskgpt">TaskGPT</a>: AI suite for agents on live calls, call-handling time and costs each down 20%. Its products: <a href="/case-taskgpt-assistai">AssistAI</a> · <a href="/case-taskgpt-authorai">AuthorAI</a> · <a href="/case-taskgpt-document-search">Document Search</a> · <a href="/case-taskgpt-home">Home Page</a> · <a href="/case-taskgpt-dashboard">Dashboard</a> · <a href="/case-taskgpt-observability">Observability</a> · <a href="/case-taskgpt-reports">Reports</a> · <a href="/case-taskgpt-chatbotify">Chatbotify</a> · <a href="/case-taskgpt-knowledgebase">KnowledgeBase Utility</a> · <a href="/case-taskgpt-agentic-ai">Agentic AI</a> · <a href="/case-taskgpt-bcp">BCP</a> · <a href="/case-taskgpt-translatebuddy">TranslateBuddy</a> · <a href="/case-taskgpt-shield">Shield</a> · <a href="/case-taskgpt-shield-copilot">Shield Co-Pilot</a> · <a href="/case-taskgpt-deepfake-detection">Deepfake Detection</a> · <a href="/case-taskgpt-productivity-tracker">Productivity Tracker</a> (<a href="/case-taskgpt-full">full case study</a>)</li>
       <li><a href="/case-levelup">LevelUp</a>: Enterprise gamification, the TaskUs company standard, showcased at AWS Summit London 2025</li>
-      <li><a href="/case-taskgpt">TaskGPT</a>: AI suite for agents on live calls, call-handling time and costs each down 20%</li>
       <li><a href="/case-evaluateus">EvaluateUs</a>: AI-scored assessment platform, accuracy up 17%</li>
+      <li><a href="/case-job-app-assistant">Job App Assistant</a>: AI web app designed, coded and deployed solo</li>
       <li><a href="/case-yourhour">YourHour</a>: Digital wellbeing app with over a million downloads across 22 languages</li>
       <li><a href="/case-aatmnirbhar">Aatmnirbhar Bharat</a>: Open MyGov competition entry, taken up by the PM SVANidhi scheme and used on Indian-made goods</li>
       <li><a href="/case-jego">JEGO</a>: RTL-first mentorship platform for the Gulf, usability satisfaction up 25%</li>
       <li><a href="/case-earlyfoods">EarlyFoods</a>: Trust-first e-commerce, sales up 33% within two months</li>
-      <li><a href="/case-job-app-assistant">Job App Assistant</a>: AI web app designed, coded and deployed solo</li>
       <li>AutoQA: automated call review, held to its goal of getting flagged agents into coaching</li>
       <li>Maestro: an AI assistant inside Google Chat that answers team leads' questions with a summary, charts and a next action</li>
     </ul>

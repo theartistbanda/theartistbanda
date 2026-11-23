@@ -49,7 +49,38 @@ function sp(bp) {
 }
 
 // ─── AVAILABILITY BANNER ─────────────────────────────────────────────────────
-function ABanner() {
+// The contact form lives at the bottom of /about; other pages link to it there
+function contactHref(page) {
+  return page === 'about' ? '#contact' : '/about#contact';
+}
+
+// React draws the page after load, so the browser cannot jump to a #section by itself.
+// Jump once the page has rendered, and again when web fonts have settled the layout.
+function useHashTarget() {
+  React.useEffect(() => {
+    const target = location.hash && document.getElementById(location.hash.slice(1));
+    if (!target) return;
+    const go = () => target.scrollIntoView();
+    requestAnimationFrame(() => requestAnimationFrame(go));
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
+  }, []);
+}
+
+// "Built with AI" (Job App Assistant, Pattern Desk) is hidden until it has proper context
+// (Dipesh, 23 Nov 2026). Its section, cards, data and nav link stay in the code: set to true to show.
+const SHOW_BUILT = false;
+
+// Old links to homepage sections that moved on 23 Nov 2026 go to their new pages
+const MOVED_SECTIONS = {
+  '#contact': '/about#contact',
+  '#origin': '/about#origin',
+  '#studio': '/about#studio',
+  '#principles': '/about#principles',
+  '#career': '/career'
+};
+function ABanner({
+  page = 'home'
+}) {
   const bp = useBreakpoint();
   const side = sp(bp);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, `@keyframes abPulse{0%,100%{opacity:1}50%{opacity:.35}}`), /*#__PURE__*/React.createElement("div", {
@@ -79,7 +110,7 @@ function ABanner() {
       fontSize: bp.isMobile ? 9 : 10
     }
   }, bp.isMobile ? 'Right to work in the UK · Available now' : 'Right to work in the UK · No sponsorship required · Available now · Remote, hybrid or on-site'), /*#__PURE__*/React.createElement("a", {
-    href: "#contact",
+    href: contactHref(page),
     "data-cursor": "hover",
     style: {
       ...aStyles.mono,
@@ -126,8 +157,24 @@ function useHomeScrollMemory() {
     return () => window.removeEventListener('pagehide', save);
   }, []);
 }
-function VariantA() {
-  useHomeScrollMemory();
+
+// Header, main and footer shared by the three React pages (home, /about, /career)
+function ASiteShell({
+  page,
+  children
+}) {
+  // The homepage hero fills the screen below the sticky header: share the header's height
+  const headerRef = React.useRef(null);
+  React.useLayoutEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const set = () => document.documentElement.style.setProperty('--header-h', `${el.offsetHeight}px`);
+    set();
+    if (!('ResizeObserver' in window)) return;
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
   return /*#__PURE__*/React.createElement("div", {
     style: aStyles.root
   }, /*#__PURE__*/React.createElement("a", {
@@ -136,18 +183,57 @@ function VariantA() {
   }, "Skip to content"), /*#__PURE__*/React.createElement(CustomCursor, {
     accent: A.accent
   }), /*#__PURE__*/React.createElement("header", {
+    ref: headerRef,
     style: {
       position: 'sticky',
       top: 0,
       zIndex: 82
     }
-  }, /*#__PURE__*/React.createElement(ABanner, null), /*#__PURE__*/React.createElement(ANav, null)), /*#__PURE__*/React.createElement("main", {
+  }, /*#__PURE__*/React.createElement(ABanner, {
+    page: page
+  }), /*#__PURE__*/React.createElement(ANav, {
+    page: page
+  })), /*#__PURE__*/React.createElement("main", {
     id: "main",
     tabIndex: -1,
     style: {
       outline: 'none'
     }
-  }, /*#__PURE__*/React.createElement(AHero, null), /*#__PURE__*/React.createElement(AMetrics, null), /*#__PURE__*/React.createElement(AWork, null), /*#__PURE__*/React.createElement(APrinciples, null), /*#__PURE__*/React.createElement(ACareer, null), /*#__PURE__*/React.createElement(AAbout, null), /*#__PURE__*/React.createElement(AOrigin, null), /*#__PURE__*/React.createElement(AContact, null)), /*#__PURE__*/React.createElement(AFooter, null));
+  }, children), /*#__PURE__*/React.createElement(AFooter, null));
+}
+
+// Homepage, kept short (Dipesh, 23 Nov 2026): the hello, the work (TaskGPT first, with its products
+// as cards) and what he has built with AI. The numbers, beliefs,
+// bio, origin story and contact live on /about, the CV on /career.
+function VariantA() {
+  const moved = MOVED_SECTIONS[location.hash];
+  React.useLayoutEffect(() => {
+    if (moved) location.replace(moved);
+  }, []);
+  useHomeScrollMemory();
+  return /*#__PURE__*/React.createElement(ASiteShell, {
+    page: "home"
+  }, /*#__PURE__*/React.createElement(AHero, null), /*#__PURE__*/React.createElement(AWork, null), SHOW_BUILT && /*#__PURE__*/React.createElement(ABuilt, null));
+}
+
+// /about: intro, the four numbers, the six beliefs, the full bio, then the origin story and contact
+function AboutPage() {
+  useHashTarget();
+  return /*#__PURE__*/React.createElement(ASiteShell, {
+    page: "about"
+  }, /*#__PURE__*/React.createElement(AAboutIntro, null), /*#__PURE__*/React.createElement(AMetrics, null), /*#__PURE__*/React.createElement(APrinciples, null), /*#__PURE__*/React.createElement(AAbout, null), /*#__PURE__*/React.createElement(AOrigin, null), /*#__PURE__*/React.createElement(AContact, null));
+}
+
+// /career: the CV
+function CareerPage() {
+  useHashTarget();
+  return /*#__PURE__*/React.createElement(ASiteShell, {
+    page: "career"
+  }, /*#__PURE__*/React.createElement(ACareer, {
+    first: true
+  }), /*#__PURE__*/React.createElement(ANextBand, {
+    links: [['About me', '/about'], ['Get in touch', '/about#contact']]
+  }));
 }
 
 // ─── NAV ─────────────────────────────────────────────────────────────────────
@@ -190,7 +276,38 @@ function AThemeToggle() {
     className: "sr-only label-to-light"
   }, "Switch to light theme"));
 }
-function ANav() {
+
+// About and Career are pages; Experience is a section of the homepage, Origin a section of /about
+const NAV_LINKS = [{
+  label: 'Experience',
+  anchor: '#work',
+  on: 'home'
+}, {
+  label: 'Built with AI',
+  anchor: '#built',
+  on: 'home',
+  hidden: !SHOW_BUILT
+}, {
+  label: 'About',
+  page: 'about',
+  href: '/about'
+}, {
+  label: 'Origin',
+  anchor: '#origin',
+  on: 'about'
+}, {
+  label: 'Career',
+  page: 'career',
+  href: '/career'
+}];
+const PAGE_PATH = {
+  home: '/',
+  about: '/about',
+  career: '/career'
+};
+function ANav({
+  page = 'home'
+}) {
   const bp = useBreakpoint();
   const [t, setT] = React.useState('');
   const [open, setOpen] = React.useState(false);
@@ -210,7 +327,12 @@ function ANav() {
     const i = setInterval(tick, 15000);
     return () => clearInterval(i);
   }, []);
-  const links = ['Work', 'Principles', 'Career', 'Studio', 'Origin'];
+  const links = NAV_LINKS.filter(l => !l.hidden).map(l => ({
+    ...l,
+    href: l.anchor ? page === l.on ? l.anchor : `${PAGE_PATH[l.on]}${l.anchor}` : l.href,
+    current: l.page === page
+  }));
+  const isHome = page === 'home';
   return /*#__PURE__*/React.createElement("nav", {
     style: {
       background: 'rgba(var(--paper-rgb), 0.92)',
@@ -231,8 +353,9 @@ function ANav() {
   }, /*#__PURE__*/React.createElement("a", {
     href: "/",
     "data-cursor": "hover",
-    "aria-label": "Dipesh Gurav, back to top",
+    "aria-label": isHome ? 'Dipesh Gurav, back to top' : 'Dipesh Gurav, home',
     onClick: e => {
+      if (!isHome) return;
       e.preventDefault();
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
       window.scrollTo({
@@ -272,18 +395,20 @@ function ANav() {
       margin: 0,
       ...aStyles.mono
     }
-  }, links.map((x, i) => /*#__PURE__*/React.createElement("li", {
-    key: x
+  }, links.map(x => /*#__PURE__*/React.createElement("li", {
+    key: x.label
   }, /*#__PURE__*/React.createElement("a", {
-    href: `#${x.toLowerCase()}`,
+    href: x.href,
     "data-cursor": "hover",
+    "aria-current": x.current ? 'page' : undefined,
+    className: x.current ? 'nav-current' : undefined,
     style: {
-      color: A.mute,
-      textDecoration: 'none',
+      color: x.current ? A.ink : A.mute,
+      textDecoration: x.current ? undefined : 'none',
       display: 'flex',
       gap: 6
     }
-  }, x)))), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
+  }, x.label)))), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
     style: aStyles.mono
   }, /*#__PURE__*/React.createElement("span", {
     style: {
@@ -296,7 +421,7 @@ function ANav() {
       alignItems: 'center'
     }
   }, /*#__PURE__*/React.createElement(AThemeToggle, null), /*#__PURE__*/React.createElement("a", {
-    href: "#contact",
+    href: contactHref(page),
     "data-cursor": "hover",
     className: "cta cta-primary wipe",
     style: {
@@ -341,9 +466,10 @@ function ANav() {
       padding: `8px ${sp(bp)} 16px`
     }
   }, links.map(x => /*#__PURE__*/React.createElement("a", {
-    key: x,
-    href: `#${x.toLowerCase()}`,
+    key: x.label,
+    href: x.href,
     onClick: () => setOpen(false),
+    "aria-current": x.current ? 'page' : undefined,
     style: {
       ...aStyles.mono,
       display: 'flex',
@@ -351,32 +477,143 @@ function ANav() {
       padding: '14px 0',
       color: A.ink,
       textDecoration: 'none',
+      fontWeight: x.current ? 600 : undefined,
       borderBottom: `1px solid ${A.line}`
     }
-  }, x, " ", /*#__PURE__*/React.createElement("span", null, "\u2192")))));
+  }, x.label, " ", /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\u2192")))));
 }
 
 // ─── HERO ────────────────────────────────────────────────────────────────────
-const SHOW_HERO_ACCENT_BOX = false; // toggle to bring back the solid block in the headline
-
+// Dipesh, 23 Nov 2026: only the hello, filling the screen below the header on every size.
+// Left aligned and large enough to span the width, in a hand-drawn face (Caveat) for warmth,
+// with a hand-drawn line under the last word. No title row, no buttons. The two lines fade in
+// once and the line draws itself once (.hello, .scribble in /site.css); with reduced motion
+// everything is simply there.
 function AHero() {
   const bp = useBreakpoint();
-  const [scroll, setScroll] = React.useState(0);
+  const side = sp(bp);
+  const [hi, line] = PORTFOLIO.hello;
+  const words = line.split(' ');
+  const last = words.pop();
+  // As large as the screen allows. In Caveat "conversations" is about 4.6 times the font size wide,
+  // so on phones the size follows the width and that word always fits on its line.
+  // On short screens (a phone on its side, a small laptop) the height caps the size too, so the
+  // whole hello always fits in the first screen.
+  const room = 'calc(100vh - var(--header-h, 90px))';
+  const bigW = bp.isMobile ? 'clamp(44px, calc((100vw - 32px) * 0.19), 88px)' : bp.isTablet ? 'clamp(76px, calc((100vw - 48px) * 0.135), 124px)' : 'clamp(100px, 9.6vw, 172px)';
+  const smallW = bp.isMobile ? 'clamp(30px, 10vw, 46px)' : bp.isTablet ? 'clamp(44px, 6.4vw, 64px)' : 'clamp(52px, 4.4vw, 76px)';
+  const big = `min(${bigW}, ${room} * 0.2)`;
+  const small = `min(${smallW}, ${room} * 0.1)`;
+  return /*#__PURE__*/React.createElement("section", {
+    className: "hero-full",
+    style: {
+      padding: `${bp.isMobile ? 40 : 64}px ${side}`,
+      borderBottom: `1px solid ${A.line}`,
+      display: 'flex',
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1360,
+      margin: '0 auto',
+      width: '100%'
+    }
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "hello hand",
+    style: {
+      fontSize: small,
+      fontWeight: 500,
+      lineHeight: 1,
+      letterSpacing: 0,
+      color: A.ink2,
+      margin: 0
+    }
+  }, hi), /*#__PURE__*/React.createElement("p", {
+    className: "hello hello-2 hand",
+    style: {
+      fontSize: big,
+      fontWeight: 600,
+      lineHeight: 0.98,
+      letterSpacing: '-0.005em',
+      color: A.ink,
+      margin: `${bp.isMobile ? 16 : 20}px 0 0`,
+      textWrap: 'pretty'
+    }
+  }, words.join(' '), ' ', /*#__PURE__*/React.createElement("span", {
+    className: "scribble-wrap"
+  }, last, /*#__PURE__*/React.createElement("svg", {
+    className: "scribble",
+    viewBox: "0 0 300 24",
+    preserveAspectRatio: "none",
+    "aria-hidden": "true",
+    focusable: "false"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M4 15 C 52 6, 98 20, 150 12 S 246 5, 296 13",
+    pathLength: "1",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: bp.isMobile ? 3 : 5,
+    strokeLinecap: "round",
+    vectorEffect: "non-scaling-stroke"
+  }))))));
+}
 
-  // Only needed for the optional solid block in the headline; skip the scroll work when it's off
-  React.useEffect(() => {
-    if (!SHOW_HERO_ACCENT_BOX) return;
-    const on = () => setScroll(window.scrollY);
-    window.addEventListener('scroll', on, {
-      passive: true
-    });
-    return () => window.removeEventListener('scroll', on);
-  }, []);
-  const reduceMotion = React.useMemo(() => matchMedia('(prefers-reduced-motion: reduce)').matches, []);
-  const parallax = reduceMotion ? 0 : Math.min(scroll * 0.25, 80);
-  // Tight top padding so the stat tiles below are on screen without scrolling on a laptop
-  const padTop = bp.isMobile ? '28px' : bp.isTablet ? '36px' : '32px';
-  const padBottom = bp.isMobile ? '40px' : '48px';
+// ─── ABOUT INTRO (/about) ────────────────────────────────────────────────────
+// The tagline and summary that used to open the homepage, followed on the page by the numbers
+function AAboutIntro() {
+  const bp = useBreakpoint();
+  const side = sp(bp);
+  return /*#__PURE__*/React.createElement("section", {
+    style: {
+      padding: `${bp.isMobile ? '48px' : '88px'} ${side} ${bp.isMobile ? '40px' : '64px'}`
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1360,
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...aStyles.mono,
+      color: A.accent,
+      marginBottom: 20
+    }
+  }, "About"), /*#__PURE__*/React.createElement("h1", {
+    style: {
+      fontFamily: '"Inter Tight", "Inter", sans-serif',
+      fontWeight: 500,
+      fontSize: bp.isMobile ? 'clamp(36px, 10vw, 52px)' : 'clamp(48px, 5vw, 80px)',
+      lineHeight: 1.04,
+      letterSpacing: '-0.035em',
+      textWrap: 'balance',
+      margin: 0,
+      maxWidth: 1000,
+      color: A.ink
+    }
+  }, "Designing for the humans behind the ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontStyle: 'italic',
+      fontWeight: 400
+    }
+  }, "pixels")), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: bp.isMobile ? 16 : 18,
+      lineHeight: 1.55,
+      letterSpacing: '-0.01em',
+      color: A.ink2,
+      maxWidth: 760,
+      margin: `${bp.isMobile ? 20 : 28}px 0 0`
+    }
+  }, PORTFOLIO.lead)));
+}
+
+// ─── NEXT (end of /about and /career) ────────────────────────────────────────
+function ANextBand({
+  links
+}) {
+  const bp = useBreakpoint();
   const side = sp(bp);
   const btn = {
     ...aStyles.cta,
@@ -387,103 +624,36 @@ function AHero() {
     justifyContent: 'space-between',
     alignItems: 'center',
     gap: 24,
-    minWidth: bp.isMobile ? 0 : 220
+    minWidth: bp.isMobile ? 0 : 220,
+    color: A.ink,
+    fontWeight: 500
   };
   return /*#__PURE__*/React.createElement("section", {
+    "aria-label": "Where next",
     style: {
-      padding: `${padTop} ${side} ${padBottom}`,
-      borderBottom: `1px solid ${A.line}`
+      padding: `${bp.isMobile ? '48px' : '72px'} ${side}`,
+      background: A.surf
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       maxWidth: 1360,
-      margin: '0 auto'
-    }
-  }, !bp.isMobile && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: bp.isTablet ? '1fr 1fr' : 'repeat(3, 1fr)',
-      gap: 24,
-      marginBottom: bp.isTablet ? 32 : 44,
-      ...aStyles.mono
-    }
-  }, /*#__PURE__*/React.createElement("div", null, PORTFOLIO.role), /*#__PURE__*/React.createElement("div", null, PORTFOLIO.location, " \xB7 Open UK-wide"), bp.isDesktop && /*#__PURE__*/React.createElement("div", null, "Portfolio / vol. MMXXVI")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      textAlign: bp.isMobile ? 'left' : 'center',
-      maxWidth: 1040,
-      margin: '0 auto'
-    }
-  }, /*#__PURE__*/React.createElement("h1", {
-    style: {
-      fontFamily: '"Inter Tight", "Inter", sans-serif',
-      fontWeight: 500,
-      fontSize: bp.isMobile ? 'clamp(40px, 11vw, 56px)' : 'clamp(52px, 5.2vw, 84px)',
-      lineHeight: 1.04,
-      letterSpacing: '-0.035em',
-      textWrap: 'balance',
-      margin: 0,
-      color: A.ink
-    }
-  }, "Designing for the humans behind the", ' ', SHOW_HERO_ACCENT_BOX && /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'inline-block',
-      width: 'clamp(32px, 5vw, 64px)',
-      height: 'clamp(24px, 3.6vw, 46px)',
-      background: A.accent,
-      verticalAlign: 'middle',
-      marginRight: 8,
-      transform: `translateY(${parallax * 0.3}px)`,
-      transition: 'transform 0.1s linear'
-    },
-    "aria-hidden": true
-  }), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontStyle: 'italic',
-      fontWeight: 400,
-      color: A.accent
-    }
-  }, "pixels")), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: bp.isMobile ? 16 : 18,
-      lineHeight: 1.55,
-      letterSpacing: '-0.01em',
-      color: A.ink2,
-      maxWidth: 760,
-      margin: `${bp.isMobile ? 20 : 28}px auto 0`
-    }
-  }, PORTFOLIO.lead), /*#__PURE__*/React.createElement("div", {
-    style: {
+      margin: '0 auto',
       display: 'flex',
       flexDirection: bp.isMobile ? 'column' : 'row',
-      justifyContent: 'center',
-      gap: 12,
-      marginTop: bp.isMobile ? 24 : 32
+      gap: 12
     }
-  }, /*#__PURE__*/React.createElement("a", {
-    href: "#work",
+  }, links.map(([label, href]) => /*#__PURE__*/React.createElement("a", {
+    key: href,
+    href: href,
     "data-cursor": "hover",
     className: "cta cta-outline",
-    style: {
-      ...btn,
-      color: A.accent
-    }
-  }, "View the index ", /*#__PURE__*/React.createElement("span", {
-    className: "cta-arrow"
-  }, "\u2192")), /*#__PURE__*/React.createElement("a", {
-    href: "#contact",
-    "data-cursor": "hover",
-    className: "cta cta-outline",
-    style: {
-      ...btn,
-      fontWeight: 500,
-      color: A.ink
-    }
-  }, "Start a project ", /*#__PURE__*/React.createElement("span", {
+    style: btn
+  }, label, " ", /*#__PURE__*/React.createElement("span", {
     className: "cta-arrow",
     style: {
       color: A.accent
     }
-  }, "\u2192"))))));
+  }, "\u2192")))));
 }
 
 // ─── METRICS ─────────────────────────────────────────────────────────────────
@@ -593,7 +763,7 @@ function AWork() {
       color: A.accent,
       marginBottom: 16
     }
-  }, "Selected Work \xB7 2018\u20132026"), /*#__PURE__*/React.createElement("h2", {
+  }, "Experience \xB7 2018\u20132026"), /*#__PURE__*/React.createElement("h2", {
     style: {
       fontSize: bp.isMobile ? 28 : 44,
       fontWeight: 500,
@@ -612,13 +782,365 @@ function AWork() {
     style: {
       borderTop: `1px solid ${A.line}`
     }
-  }, PORTFOLIO.projects.filter(p => p.selected !== false).map(p => /*#__PURE__*/React.createElement(AProjectRow, {
+  }, PORTFOLIO.projects.filter(p => p.selected !== false).map(p => p.groups ? /*#__PURE__*/React.createElement(React.Fragment, {
+    key: p.id
+  }, /*#__PURE__*/React.createElement(AProjectRow, {
+    p: p,
+    joined: true
+  }), /*#__PURE__*/React.createElement(AProductRail, {
+    p: p
+  })) : /*#__PURE__*/React.createElement(AProjectRow, {
     key: p.id,
     p: p
   })))));
 }
-function AProjectRow({
+
+// TaskGPT's own case studies as cards under its row (Dipesh, 23 Nov 2026), in the hub's groups.
+// One sideways-scrolling rail; thin vertical lines divide the groups. Swipe, scroll, Tab
+// through the cards, or use the arrow buttons. Fades at an edge show there is more.
+function AProductRail({
   p
+}) {
+  const bp = useBreakpoint();
+  const [ref, inView] = useReveal();
+  const rail = React.useRef(null);
+  const [edge, setEdge] = React.useState({
+    start: true,
+    end: false
+  });
+  const update = React.useCallback(() => {
+    const el = rail.current;
+    if (!el) return;
+    setEdge({
+      start: el.scrollLeft <= 2,
+      end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 2
+    });
+  }, []);
+  React.useEffect(() => {
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, [update]);
+  const go = dir => {
+    const el = rail.current;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollBy({
+      left: dir * Math.round(el.clientWidth * 0.8),
+      behavior: reduce ? 'auto' : 'smooth'
+    });
+  };
+  const count = p.groups.reduce((n, g) => n + g.items.length, 0);
+  const cardW = bp.isMobile ? 228 : 264;
+  const fade = 40;
+  const mask = `linear-gradient(to right, ${edge.start ? '#000' : 'transparent'} 0, #000 ${fade}px, #000 calc(100% - ${fade}px), ${edge.end ? '#000' : 'transparent'} 100%)`;
+  const arrow = (dir, label, disabled) => /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "rail-btn",
+    "data-cursor": "hover",
+    "aria-label": label,
+    disabled: disabled,
+    onClick: () => go(dir)
+  }, /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true"
+  }, dir < 0 ? '←' : '→'));
+  return /*#__PURE__*/React.createElement("div", {
+    ref: ref,
+    style: {
+      borderBottom: `1px solid ${A.line}`,
+      padding: bp.isMobile ? '4px 0 32px' : '4px 8px 40px',
+      opacity: inView ? 1 : 0,
+      transform: inView ? 'none' : 'translateY(16px)',
+      transition: 'opacity .6s, transform .6s'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: 16,
+      marginBottom: 20,
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'baseline',
+      gap: 16,
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: aStyles.mono
+  }, "Inside ", p.title, " \xB7 ", count, " case studies"), /*#__PURE__*/React.createElement("a", {
+    href: p.full,
+    "data-cursor": "hover",
+    className: "sub-link",
+    style: {
+      ...aStyles.mono,
+      color: A.ink,
+      fontWeight: 500
+    }
+  }, "The full case study ", /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\u2192"))), !bp.isMobile && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 8
+    }
+  }, arrow(-1, `Scroll ${p.title} products back`, edge.start), arrow(1, `Scroll ${p.title} products forward`, edge.end))), /*#__PURE__*/React.createElement("div", {
+    ref: rail,
+    className: "rail",
+    onScroll: update,
+    role: "region",
+    "aria-label": `${p.title} products`,
+    style: {
+      maskImage: mask,
+      WebkitMaskImage: mask
+    }
+  }, p.groups.map((g, gi) => {
+    const id = `${p.id}-group-${g.label.toLowerCase().replace(/[^a-z]+/g, '-')}`;
+    return /*#__PURE__*/React.createElement("div", {
+      key: g.label,
+      style: {
+        flex: '0 0 auto',
+        paddingLeft: gi ? 24 : 0,
+        marginLeft: gi ? 24 : 0,
+        borderLeft: gi ? `1px solid ${A.line}` : 'none'
+      }
+    }, /*#__PURE__*/React.createElement("p", {
+      id: id,
+      style: {
+        ...aStyles.mono,
+        margin: '0 0 12px'
+      }
+    }, g.label, " \xB7 ", g.items.length), /*#__PURE__*/React.createElement("ul", {
+      "aria-labelledby": id,
+      style: {
+        listStyle: 'none',
+        padding: 0,
+        margin: 0,
+        display: 'flex',
+        gap: 16
+      }
+    }, g.items.map(([name, href, img, line]) => /*#__PURE__*/React.createElement("li", {
+      key: href,
+      style: {
+        flex: `0 0 ${cardW}px`,
+        display: 'flex'
+      }
+    }, /*#__PURE__*/React.createElement("a", {
+      href: href,
+      "data-cursor": "hover",
+      className: "rail-card"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "rail-thumb"
+    }, /*#__PURE__*/React.createElement("img", {
+      src: `/assets/${img}.webp`,
+      alt: "",
+      loading: "lazy",
+      decoding: "async"
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "rail-name"
+    }, name), /*#__PURE__*/React.createElement("span", {
+      className: "rail-line"
+    }, line))))));
+  })));
+}
+
+// ─── BUILT WITH AI ───────────────────────────────────────────────────────────
+// Working tools Dipesh designed and built with AI (Dipesh, 23 Nov 2026). Data: PORTFOLIO.builds.
+function ABuilt() {
+  const bp = useBreakpoint();
+  const side = sp(bp);
+  const vPad = bp.isMobile ? '56px' : '96px';
+  return /*#__PURE__*/React.createElement("section", {
+    id: "built",
+    style: {
+      padding: `${vPad} ${side}`,
+      borderBottom: `1px solid ${A.line}`
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1360,
+      margin: '0 auto'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: bp.isMobile ? 32 : 48,
+      maxWidth: 760
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      ...aStyles.mono,
+      color: A.accent,
+      marginBottom: 16
+    }
+  }, "Built with AI \xB7 2026"), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: bp.isMobile ? 28 : 44,
+      fontWeight: 500,
+      letterSpacing: '-0.02em',
+      lineHeight: 1.05,
+      margin: 0
+    }
+  }, "I design it, then I build it"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: bp.isMobile ? 15 : 17,
+      lineHeight: 1.6,
+      color: A.ink2,
+      margin: '20px 0 0'
+    }
+  }, "The same product thinking, taken all the way to working software with Claude.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gap: 24,
+      gridTemplateColumns: bp.isDesktop ? 'repeat(2, minmax(0, 1fr))' : '1fr'
+    }
+  }, PORTFOLIO.builds.map(b => /*#__PURE__*/React.createElement(ABuildCard, {
+    key: b.id,
+    b: b
+  })))));
+}
+function ABuildCard({
+  b
+}) {
+  const bp = useBreakpoint();
+  const [ref, inView] = useReveal();
+  const titleId = `build-${b.id}`;
+  return /*#__PURE__*/React.createElement("article", {
+    ref: ref,
+    "aria-labelledby": titleId,
+    style: {
+      border: `1px solid ${A.line}`,
+      display: 'flex',
+      flexDirection: 'column',
+      opacity: inView ? 1 : 0,
+      transform: inView ? 'none' : 'translateY(16px)',
+      transition: 'opacity .6s, transform .6s'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      aspectRatio: '16 / 9',
+      background: A.surf,
+      borderBottom: `1px solid ${A.line}`,
+      overflow: 'hidden'
+    }
+  }, b.image ? /*#__PURE__*/React.createElement("img", {
+    src: b.image,
+    alt: "",
+    loading: "lazy",
+    decoding: "async",
+    style: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      objectPosition: 'center',
+      display: 'block'
+    }
+  }) :
+  /*#__PURE__*/
+  // No screenshot of a private build: its markets, set as type
+  React.createElement("div", {
+    "aria-hidden": "true",
+    style: {
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      gap: bp.isMobile ? 6 : 10,
+      padding: bp.isMobile ? 24 : 40
+    }
+  }, (b.markets || []).map(m => /*#__PURE__*/React.createElement("div", {
+    key: m,
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'baseline',
+      borderBottom: `1px solid ${A.line}`,
+      paddingBottom: bp.isMobile ? 6 : 10
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: bp.isMobile ? 22 : 34,
+      fontWeight: 500,
+      letterSpacing: '-0.02em',
+      color: A.ink
+    }
+  }, m), /*#__PURE__*/React.createElement("span", {
+    style: aStyles.mono
+  }, "Signal board"))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: bp.isMobile ? 20 : 28,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 14,
+      flex: 1
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'baseline',
+      gap: 12,
+      flexWrap: 'wrap'
+    }
+  }, /*#__PURE__*/React.createElement("h3", {
+    id: titleId,
+    style: {
+      fontSize: bp.isMobile ? 22 : 28,
+      fontWeight: 500,
+      letterSpacing: '-0.02em',
+      lineHeight: 1.1,
+      margin: 0
+    }
+  }, b.title), /*#__PURE__*/React.createElement("span", {
+    style: aStyles.mono
+  }, b.status, " \xB7 ", b.year)), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 15,
+      lineHeight: 1.6,
+      color: A.ink2,
+      margin: 0
+    }
+  }, b.line), /*#__PURE__*/React.createElement("p", {
+    style: {
+      ...aStyles.mono,
+      margin: 0
+    }
+  }, b.stack), b.links.length > 0 && /*#__PURE__*/React.createElement("ul", {
+    style: {
+      listStyle: 'none',
+      padding: 0,
+      margin: 'auto 0 0',
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '8px 20px'
+    }
+  }, b.links.map(([label, href]) => /*#__PURE__*/React.createElement("li", {
+    key: href
+  }, /*#__PURE__*/React.createElement("a", {
+    href: href,
+    "data-cursor": "hover",
+    className: "sub-link",
+    style: {
+      ...aStyles.mono,
+      color: A.ink,
+      fontWeight: 500,
+      display: 'inline-block',
+      padding: '6px 0'
+    }
+  }, label, " ", /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\u2192"))))), b.note && /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 12.5,
+      color: A.mute,
+      margin: 0
+    }
+  }, b.note)));
+}
+function AProjectRow({
+  p,
+  joined
 }) {
   const bp = useBreakpoint();
   const [ref, inView] = useReveal();
@@ -638,7 +1160,8 @@ function AProjectRow({
     opacity: inView ? 1 : 0,
     transform: inView ? 'none' : 'translateY(16px)',
     transition: 'opacity .6s, transform .6s, background .18s',
-    borderBottom: `1px solid ${A.line}`
+    // A row with its product list below it: the list carries the dividing line
+    borderBottom: joined ? 'none' : `1px solid ${A.line}`
   };
 
   // Mobile: simple two-column card
@@ -850,7 +1373,7 @@ function AOrigin() {
       maxWidth: bp.isDesktop ? 480 : '100%',
       marginTop: 40
     }
-  }, "I entered an open MyGov competition to design a mark for the Aatmnirbhar Bharat campaign: the Indian tricolour and Ashok Chakra fused with a golden bird, a reference to the country once being called sone ki chidiya. The competition was never formally decided. The mark was taken up by the PM SVANidhi scheme and used by manufacturers marking Indian-made goods, without credit."), /*#__PURE__*/React.createElement("p", {
+  }, PORTFOLIO.origin), /*#__PURE__*/React.createElement("p", {
     style: {
       fontFamily: '"Fraunces", Georgia, serif',
       fontWeight: 300,
@@ -1247,14 +1770,20 @@ function ACareerItem({
     }
   }, t))));
 }
-function ACareer() {
+
+// `first`: the section opens its own page (/career), so its heading is the page's h1
+function ACareer({
+  first = false
+}) {
   const bp = useBreakpoint();
   const side = sp(bp);
   const vPad = bp.isMobile ? '72px' : '120px';
+  const topPad = first ? bp.isMobile ? '48px' : '88px' : vPad;
+  const Heading = first ? 'h1' : 'h2';
   return /*#__PURE__*/React.createElement("section", {
     id: "career",
     style: {
-      padding: `${vPad} ${side}`,
+      padding: `${topPad} ${side} ${vPad}`,
       borderBottom: `1px solid ${A.line}`
     }
   }, /*#__PURE__*/React.createElement("div", {
@@ -1281,7 +1810,7 @@ function ACareer() {
       color: A.accent,
       marginBottom: 16
     }
-  }, "Curriculum vitae"), /*#__PURE__*/React.createElement("h2", {
+  }, "Curriculum vitae"), /*#__PURE__*/React.createElement(Heading, {
     style: {
       fontSize: bp.isMobile ? 28 : 44,
       fontWeight: 500,
@@ -1390,31 +1919,14 @@ function AAbout() {
       borderTop: `1px solid ${A.line}`,
       paddingTop: 32
     }
-  }, /*#__PURE__*/React.createElement("p", {
+  }, PORTFOLIO.bio.map((para, i) => /*#__PURE__*/React.createElement("p", {
+    key: i,
     style: {
-      margin: 0
+      margin: i ? '16px 0 0' : 0
     }
-  }, "I have spent nine years in product design, and I love what I do: solving problems in human-computer interaction. I grew up watching technology promise to make life easier, then complicate it. Forms that run too long, menus that hide the one thing you need, apps that help and frustrate in equal measure. Closing that gap is the work I thrive on."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "For most of my career I have been an individual contributor on projects with no clear brief. There was always an idea, a problem or a gap, and how and where to start was mine to decide. I preferred it that way."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "Screens are just a medium. How a product feels comes from the person's experience, and the screen comes later. Understanding people and their behaviour comes first, whether I am designing an AI tool for operators on live calls, a wellbeing app, or a logo that ended up on Indian-made goods across the country."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "The work has taken me to a billion-person market in India, to Gulf users who read right to left, and to enterprise teams in 14 countries. YourHour, a wellbeing app I designed, ships in 22 languages and has passed a million downloads. Every one of those audiences taught me that \"intuitive\" carries a quiet question, ", /*#__PURE__*/React.createElement("em", null, "intuitive for whom"), ". Knowing beats assuming, so the answer comes from sitting alongside users, not from a report."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "The simplest things are the hardest to create. Ask a room full of people what a product should have and they will list dozens of features. Ask them to prune the list and the room goes quiet. Minimalism inspires me, and my layouts leave no room for unnecessary friction: clean on the surface, built cleanly behind the scenes."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "Away from work I read, and I lose hours to brain games. Both keep me practised at the thing design needs most: finding the pattern under the noise."))), /*#__PURE__*/React.createElement("div", {
+  }, para.split(/\*(.+?)\*/).map((part, j) => j % 2 ? /*#__PURE__*/React.createElement("em", {
+    key: j
+  }, part) : part))))), /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: bp.isDesktop ? 'span 5' : undefined,
       marginTop: bp.isMobile || bp.isTablet ? 48 : 0,
@@ -2515,6 +3027,9 @@ function AFooter() {
 }
 Object.assign(window, {
   VariantA,
+  AboutPage,
+  CareerPage,
+  ABuilt,
   ABanner,
   ANav,
   AHero,
