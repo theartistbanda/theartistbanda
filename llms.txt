@@ -18,9 +18,27 @@ Dipesh Gurav is a Lead Product Designer with 9 years of experience, based in Not
 
 ## Notable Projects
 
-**TaskGPT** (TaskUs): AI suite for agents on live customer calls, much of it a Chrome extension inside the tool agents already used
-- Call-handling time and operational costs each down 20%
+**TaskGPT** (TaskUs): enterprise AI suite for agents on live customer calls, and for the people who set up, measure and improve the AI behind them. Only designer, 2022 to 2025. All 11 products and 7 Chrome extensions went live
+- Call-handling time and operating costs each down 20%
 - Measurement designed in: usage, AI answer quality, token cost and agent feedback
+- TaskGPT hub: https://dipeshgurav.com/case-taskgpt
+- Full case study: https://dipeshgurav.com/case-taskgpt-full
+- AssistAI: https://dipeshgurav.com/case-taskgpt-assistai, the first TaskGPT chatbot.
+- AuthorAI: https://dipeshgurav.com/case-taskgpt-authorai, one-click writing help, planned from a survey of how people used TaskGPT: summaries, tone, emails and action items.
+- Document Search: https://dipeshgurav.com/case-taskgpt-document-search, one question across more than 50 long client documents.
+- Home Page: https://dipeshgurav.com/case-taskgpt-home, one front door to every product and every client instance, with admin settings that feel like a product, not a control panel.
+- TaskGPT Dashboard: https://dipeshgurav.com/case-taskgpt-dashboard, is the AI used, is it right, and what does it cost?
+- Observability: https://dipeshgurav.com/case-taskgpt-observability, every query, through 16 steps from masking to the model and back.
+- Reports: https://dipeshgurav.com/case-taskgpt-reports, one form for the rows behind the numbers: conversation history, audit logs, adoption and feedback, and daily active users.
+- Chatbotify: https://dipeshgurav.com/case-taskgpt-chatbotify, a client's chatbot without code: knowledge base, model, masking and small talk.
+- KnowledgeBase Utility: https://dipeshgurav.com/case-taskgpt-knowledgebase, client content managers write and version the answers the chatbots use, in a branch model like GitHub.
+- Agentic AI: https://dipeshgurav.com/case-taskgpt-agentic-ai, anyone can build an agent: start from a ready-made instance, add tools and connectors, and watch its chain of thought in a live preview.
+- BCP (Business Continuity Plan): https://dipeshgurav.com/case-taskgpt-bcp, when the main AI provider goes down, one action moves every chatbot to a backup engine the client chose, and every screen says so.
+- TranslateBuddy: https://dipeshgurav.com/case-taskgpt-translatebuddy, from a standalone translator to a Zendesk panel that detects the language and prepares the reply, so agents only review, edit and send.
+- Shield: https://dipeshgurav.com/case-taskgpt-shield, a wellbeing extension for content moderators.
+- Shield Co-Pilot: https://dipeshgurav.com/case-taskgpt-shield-copilot, an AI co-pilot inside the moderation tool.
+- Deepfake Detection: https://dipeshgurav.com/case-taskgpt-deepfake-detection, a side panel that checks images in fake claim calls and fake articles, with a score and a breakdown by method.
+- Productivity Tracker: https://dipeshgurav.com/case-taskgpt-productivity-tracker, sessions, breaks and time on each task.
 
 **EvaluateUs** (TaskUs): AI-scored assessments for hiring, coaching and training, with one dashboard for candidates, assessors and managers
 - Accuracy up 17%

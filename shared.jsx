@@ -92,7 +92,7 @@ const PORTFOLIO = {
     {
       id: 'taskgpt',
       index: '02',
-      year: 2024,
+      year: '2022–2025',
       title: 'TaskGPT',
       kicker: 'AI productivity · Enterprise · 14 countries',
       tagline: 'AI that works inside the live call',

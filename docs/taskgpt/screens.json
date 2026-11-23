@@ -1,0 +1,307 @@
+{
+ "dashboard": [
+  {
+   "file": "taskgpt-dashboard-1",
+   "caption": "Dashboard overview",
+   "alt": "TaskGPT dashboard overview for AssistAI, with campaign, line of business and site filters, KPI cards for users, engagement, responses, guardrails and sessions, and tables of knowledge-gap, guardrail, valid and small-talk queries.",
+   "w": 1600,
+   "h": 1494
+  },
+  {
+   "file": "taskgpt-dashboard-2",
+   "caption": "Review dashboard (March 2025)",
+   "alt": "Review dashboard with feedback and review summaries, a thumbs-up and thumbs-down split, a donut chart of review dispositions and a table of queries by usage count.",
+   "w": 1600,
+   "h": 1138
+  }
+ ],
+ "document-search": [
+  {
+   "file": "taskgpt-document-search-1",
+   "caption": "Question with clients selected",
+   "alt": "Document Search page where a user selects a question, picks the clients to search and starts the search.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-document-search-2",
+   "caption": "Manage document search",
+   "alt": "Manage document search page where an admin connects a client's Google Drive folder, syncs it and checks the sync status of each file.",
+   "w": 1600,
+   "h": 1000
+  }
+ ],
+ "home": [
+  {
+   "file": "taskgpt-home-1",
+   "caption": "TaskGPT Home",
+   "alt": "TaskGPT home page with product cards, a table of recently used instances, and a settings panel with the BCP switch, management links, role and time zone.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-home-2",
+   "caption": "TaskGPT extension popup: products and session numbers",
+   "alt": "Four states of the TaskGPT Chrome extension popup: the product list, Knowledge Assist session numbers, and the valid and total query history tables.",
+   "w": 1600,
+   "h": 531
+  },
+  {
+   "file": "taskgpt-home-3",
+   "caption": "Product and instance picker",
+   "alt": "TaskGPT extension configuration panel where the user picks a product and an instance.",
+   "w": 1344,
+   "h": 1332
+  }
+ ],
+ "reports": [
+  {
+   "file": "taskgpt-reports-1",
+   "caption": "Report form",
+   "alt": "Reports form where the user selects a product, a client, a report type and a date range, then downloads or views the report.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-reports-2",
+   "caption": "Report view (after View Report)",
+   "alt": "Report view after View Report, with search, a date range, filter chips, pagination and a table of conversation history logs.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-reports-3",
+   "caption": "Product feedback",
+   "alt": "Product feedback report with average product, quality and NLU rating charts beside a list of user feedback entries.",
+   "w": 1600,
+   "h": 1000
+  }
+ ],
+ "authorai": [
+  {
+   "file": "taskgpt-authorai-1",
+   "caption": "Chat with shortcuts",
+   "alt": "AuthorAI chat with writing-tool replies and shortcut chips such as Write an Email, Rephrase and Paraphrase above the input.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-authorai-2",
+   "caption": "Floating widget on a web page, with side panel",
+   "alt": "AuthorAI floating toolbar on a web page with the AuthorAI side panel open, including a service-unavailable message.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-authorai-3",
+   "caption": "Inside Kustomer",
+   "alt": "TaskGPT and AuthorAI panels inside the Kustomer agent workspace, next to a customer's refund question.",
+   "w": 1600,
+   "h": 739
+  },
+  {
+   "file": "taskgpt-authorai-4",
+   "caption": "TaskScribe side panel on a selection",
+   "alt": "TaskScribe side panel summarising selected text on a web page, with the floating TaskScribe toolbar on the selection.",
+   "w": 1600,
+   "h": 900
+  },
+  {
+   "file": "taskgpt-authorai-5",
+   "caption": "TaskScribe revamp, all states",
+   "alt": "The full TaskScribe revamp board: browser states, side panels, the edit and generate menus, history and prompt templates.",
+   "w": 1600,
+   "h": 714
+  }
+ ],
+ "observability": [
+  {
+   "file": "taskgpt-observability-1",
+   "caption": "Campaign view",
+   "alt": "Observability campaign view with total active and provisioned users, a definition of each metric, and a campaign table with active-user trends.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-observability-2",
+   "caption": "Interaction logs with status flag",
+   "alt": "Interaction logs with the user, query, feedback and a status flag for each interaction, with one row expanded to show a failed LLM request step.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-observability-3",
+   "caption": "Interaction detail, metadata",
+   "alt": "Interaction detail page with the query, response tabs and metadata cards for masking, response time, Pinecone and OpenAI timings and token counts.",
+   "w": 1600,
+   "h": 1000
+  }
+ ],
+ "assistai": [
+  {
+   "file": "taskgpt-assistai-1",
+   "caption": "Full-screen chat",
+   "alt": "AssistAI full-screen chat for MoneyLion with the knowledge-base version, source tags, related questions and a Playground switch.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-assistai-2",
+   "caption": "Floating panel with drawer",
+   "alt": "AssistAI floating panel with its chat-history drawer open, showing file upload, search and saved chats.",
+   "w": 1440,
+   "h": 1600
+  },
+  {
+   "file": "taskgpt-assistai-3",
+   "caption": "Sensitive-information check",
+   "alt": "Sensitive-information check that asks the user to confirm before sharing, with Don't Share, Share Masked and Yes (Not Recommended) options.",
+   "w": 1600,
+   "h": 325
+  }
+ ],
+ "agentic-ai": [
+  {
+   "file": "taskgpt-agentic-ai-1",
+   "caption": "Agent builder with live preview",
+   "alt": "Agentic AI agent builder with the name, system instructions, model and tools on the left, and a live preview of the agent's reasoning and tool use on the right.",
+   "w": 1600,
+   "h": 944
+  },
+  {
+   "file": "taskgpt-agentic-ai-2",
+   "caption": "Flow canvas",
+   "alt": "Agentic AI flow canvas that routes a customer from a first message through feedback, bug report and billing branches to ticket creation.",
+   "w": 1600,
+   "h": 1059
+  }
+ ],
+ "chatbotify": [
+  {
+   "file": "taskgpt-chatbotify-1",
+   "caption": "Knowledge base step",
+   "alt": "Chatbotify knowledge-base step with the KB version, upload stats such as cost, tokens and chunks, and a table of knowledge-base versions and their status.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-chatbotify-2",
+   "caption": "Upload tracker and structure checks",
+   "alt": "Chatbotify upload tracker and file-structure checks, with progress steps, markdown and file-type warnings, and a heading count.",
+   "w": 1600,
+   "h": 812
+  },
+  {
+   "file": "taskgpt-chatbotify-3",
+   "caption": "PII masking rules",
+   "alt": "Chatbotify advanced settings for PII masking, where admins turn masking on for each phrase type and set the replacement text.",
+   "w": 1600,
+   "h": 1000
+  }
+ ],
+ "bcp": [
+  {
+   "file": "taskgpt-bcp-1",
+   "caption": "Primary running",
+   "alt": "BCP page that shows OpenAI as the running primary engine, Anthropic as the secondary, and an Activate button.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-bcp-2",
+   "caption": "Agent chat with BCP banner",
+   "alt": "Agent chat with a banner that tells the user the Business Continuity Plan is active and the secondary AI engine is running.",
+   "w": 1600,
+   "h": 1000
+  }
+ ],
+ "knowledgebase": [
+  {
+   "file": "taskgpt-knowledgebase-1",
+   "caption": "Versions list",
+   "alt": "KnowledgeBase Utility versions list with published, archived and draft tabs, date filters and the latest version tagged.",
+   "w": 1600,
+   "h": 1000
+  },
+  {
+   "file": "taskgpt-knowledgebase-2",
+   "caption": "Editing an article, side by side",
+   "alt": "KnowledgeBase Utility article editor, with the article list beside a form for the question, category, tags, response and internal response.",
+   "w": 1600,
+   "h": 1056
+  }
+ ],
+ "translatebuddy": [
+  {
+   "file": "taskgpt-translatebuddy-1",
+   "caption": "Browser translator",
+   "alt": "TranslateBuddy browser extension with source and target language pickers, two text areas and a Translate button.",
+   "w": 1221,
+   "h": 1600
+  },
+  {
+   "file": "taskgpt-translatebuddy-2",
+   "caption": "Zendesk email transcript",
+   "alt": "TranslateBuddy inside a Zendesk ticket, showing the customer and agent emails side by side in English and French.",
+   "w": 1600,
+   "h": 803
+  }
+ ],
+ "shield": [
+  {
+   "file": "taskgpt-shield-1",
+   "caption": "Before: the developer build",
+   "alt": "Six screens of the first Shield build by the developers, with dense rows of buttons and tooltip text below each screen.",
+   "w": 1558,
+   "h": 1714
+  },
+  {
+   "file": "taskgpt-shield-2",
+   "caption": "After: home",
+   "alt": "Redesigned Shield home with six cards: Blur, Wellness Breaks, Clean and Restore, Sound Studio, Spatial Games and Sensation Cleanse.",
+   "w": 1013,
+   "h": 1600
+  },
+  {
+   "file": "taskgpt-shield-3",
+   "caption": "After: blur settings",
+   "alt": "Redesigned Shield blur settings with an intensity slider, Partial Blur and Grayscale toggles, and a short explanation of the tool.",
+   "w": 896,
+   "h": 1200
+  }
+ ],
+ "shield-copilot": [
+  {
+   "file": "taskgpt-shield-copilot-1",
+   "caption": "Review with policy panel",
+   "alt": "Shield Co-Pilot review panel listing the detected policies and sub-policies next to highlighted text, which is blurred in this image.",
+   "w": 1600,
+   "h": 1001
+  }
+ ],
+ "deepfake-detection": [
+  {
+   "file": "taskgpt-deepfake-detection-1",
+   "caption": "Result and breakdown",
+   "alt": "Deepfake Detection side panel with an overall authenticity result and a breakdown by GAN, visual noise, diffusion and face-swap checks, with the sample photo replaced by a placeholder.",
+   "w": 800,
+   "h": 1680
+  }
+ ],
+ "productivity-tracker": [
+  {
+   "file": "taskgpt-productivity-tracker-1",
+   "caption": "Before: the basic version",
+   "alt": "Five screens of the basic Productivity Tracker build: login, start activity, select line of business, and a long ticket form.",
+   "w": 1360,
+   "h": 1087
+  },
+  {
+   "file": "taskgpt-productivity-tracker-2",
+   "caption": "After: session and task",
+   "alt": "Redesigned Productivity Tracker with the campaign and line of business, a task timer with break and end-session buttons, and a shorter ticket form.",
+   "w": 525,
+   "h": 1600
+  }
+ ]
+}
