@@ -66,9 +66,12 @@ const PORTFOLIO = {
     'Hi, I\'m Dipesh',
     'I make conversations with technology feel human',
   ],
+  // Opens the homepage CV. Dipesh's words, kept exactly (23 Nov 2026): the character comes from
+  // how ALead in variant-a.jsx sets it, not from rewriting it. ALead finds its four figures by
+  // their exact wording, so update LEAD_FIGURES there if this changes.
   lead:
     'Product designer behind an enterprise AI suite that cut call-handling time and costs by 20%, products used by around 35,000 people a day in 14 countries, a wellbeing app with over a million downloads in 22 languages, and a mark manufacturers across India use on Indian-made goods.',
-  // The origin story on /about (Aatmnirbhar Bharat; see CLAUDE.md rule 10 before changing it)
+  // "A proud moment" on /about (Aatmnirbhar Bharat; see CLAUDE.md rule 10 before changing it)
   origin:
     'I entered an open MyGov competition to design a mark for the Aatmnirbhar Bharat campaign: the Indian tricolour and Ashok Chakra fused with a golden bird, a reference to the country once being called sone ki chidiya. The competition was never formally decided. The mark was taken up by the PM SVANidhi scheme and used by manufacturers marking Indian-made goods, without credit.',
   // The full About text, at the bottom of /about. *Asterisks* mark italics.
@@ -358,7 +361,7 @@ const PORTFOLIO = {
       from: '2021',
       to: '2026',
       role: 'Lead Product Designer',
-      org: 'TaskUs · Global BPO · Remote',
+      org: 'TaskUs',
       body: [
         'I was the founding and only designer on TaskUs\'s Digital IT team. Every product we built was multi-tenant, sold to client companies on subscription, and used by around 35,000 people a day across 14 countries; around 20 of them went live. I designed for two very different audiences: agents using AI during live customer calls, and the administrators configuring the systems behind them. My first job was in a call centre, so for the agent tools, I used to be the user.',
         'TaskGPT, an AI suite for agents on live customer calls, working across OpenAI, PaLM 2 and LLaMA. Much of it ran as a Chrome extension inside the tool agents already used, so nobody had to switch windows mid-call. I also designed how we measured it: usage, answer quality, token cost and agent feedback. Call-handling time and operational costs each fell 20%, and moving it behind an encrypted layer solved the privacy problem.',
@@ -378,7 +381,7 @@ const PORTFOLIO = {
       from: '2017',
       to: '2021',
       role: 'Product Designer',
-      org: 'Mindefy Technologies · Indore, India',
+      org: 'Mindefy Technologies',
       body: [
         'I joined Mindefy as an intern and became its sole designer. At Mindefy, I designed products across digital wellbeing, finance, e-commerce, streaming and mentorship. This was where I developed my belief that good design is not just about simplifying screens; it is about understanding what people need emotionally, culturally and behaviourally.',
         'Designed YourHour, a digital wellbeing app that reached more than 1 million downloads, with 70,000+ reviews, a 4.6-star rating and support for 22 languages. Based on more than 300 research sessions, the experience encouraged healthier digital habits through compassionate, non-punitive interventions.',

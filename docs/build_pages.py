@@ -50,7 +50,6 @@ def noscript_about(P):
     bio = ''.join(f'<p>{plain(x)}</p>' for x in P['bio'])
     contact = ''.join(f'<li>{esc(x["label"])}: <a href="{esc(x["href"])}">{esc(x["value"])}</a></li>' for x in P['links'])
     return f'''<h1>{esc(P["tagline"])}</h1>
-    <p>{esc(P["lead"])}</p>
     <ul>{m}</ul>
     <h2>I became a designer because technology is supposed to make life easier</h2>
     {bio}

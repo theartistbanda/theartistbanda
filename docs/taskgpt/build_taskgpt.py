@@ -30,6 +30,15 @@ SRC = os.path.expanduser('~/Downloads/taskgpt-source/')
 SITE = 'https://dipeshgurav.com'
 TITLE_FROM = 'Lead Agile UI/UX Designer (product designer)'
 TITLE_TO = 'Lead Product Designer'
+# The hub's Outcome said "20%" three times in two lines; Dipesh gave this wording and the 12%
+# onboarding figure on 23 Nov 2026. Swapped here so
+# the fix survives a fresh export of his Claude Doc; drop it once the doc says the same.
+HUB_SWAPS = [(
+    'All 11 products and 7 extensions went live. Call-handling time fell 20%, operating costs fell 20%, '
+    'and after the commercial revamp, adoption rose by an average of 20%.',
+    'All 11 products and 7 extensions went live, with call-handling time and operational costs each '
+    'coming down 20%. The commercial revamp added 12% to our client onboarding that quarter.',
+)]
 
 
 def newest(pattern):
@@ -855,6 +864,8 @@ def main():
     hub_md = open(newest('taskgpt-hub-copy-*.md'), encoding='utf-8').read()
     if TITLE_FROM in case_md:
         case_md = case_md.replace(TITLE_FROM, TITLE_TO)
+    for old, new in HUB_SWAPS:
+        hub_md = hub_md.replace(old, new)
     screens = json.load(open(os.path.join(ROOT, 'docs/taskgpt/screens.json'), encoding='utf-8'))
 
     blocks = parse(case_md)

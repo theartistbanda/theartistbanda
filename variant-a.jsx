@@ -361,8 +361,8 @@ function aboutH2(bp) {
   return { fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.08, margin: 0, color: A.ink, textWrap: 'balance', maxWidth: 900 };
 }
 
-// The opening: the tagline in the homepage's hand-drawn face (his own voice), the summary, and the
-// four numbers that back it, as one quiet row rather than a band of boxes.
+// The opening: the tagline in the homepage's hand-drawn face (his own voice), and the four numbers
+// as one quiet row rather than a band of boxes. (The summary moved to the homepage, 23 Nov 2026.)
 function AAboutIntro() {
   const bp = useBreakpoint();
   const side = sp(bp);
@@ -379,12 +379,6 @@ function AAboutIntro() {
         }}>
           Designing for the humans behind the <AScribble stroke={bp.isMobile ? 3 : 4} delay=".4s">pixels</AScribble>
         </h1>
-        <p style={{
-          fontSize: bp.isMobile ? 16 : 19, lineHeight: 1.6, letterSpacing: '-0.01em',
-          color: A.ink2, maxWidth: 780, margin: `${bp.isMobile ? 24 : 32}px 0 0`
-        }}>
-          {PORTFOLIO.lead}
-        </p>
         <ul ref={ref} style={{
           listStyle: 'none', padding: `${bp.isMobile ? 24 : 32}px 0 0`, margin: `${bp.isMobile ? 40 : 64}px 0 0`,
           borderTop: `1px solid ${A.line}`, display: 'grid',
@@ -682,7 +676,7 @@ function ABuildCard({ b }) {
 function AOrigin() {
   const bp = useBreakpoint();
   return (
-    <ARail id="origin" label="The origin story">
+    <ARail id="origin" label="A proud moment">
       <div style={{
         display: 'grid', alignItems: 'start', gap: bp.isDesktop ? 48 : 40,
         gridTemplateColumns: bp.isDesktop ? 'minmax(0, 5fr) minmax(0, 4fr)' : 'minmax(0, 1fr)'
@@ -922,6 +916,80 @@ function ACareerItem({ c, i, bp }) {
   );
 }
 
+// ─── LEAD (homepage) ─────────────────────────────────────────────────────────
+// The summary that opens the CV, set as a statement (Dipesh, 23 Nov 2026: keep his words exactly,
+// give it character visually). The words fill from grey to ink as the paragraph scrolls up the
+// screen, and the four figures are set in Fraunces italic. The grey is --mute, which still passes
+// 4.5:1 in both themes, so text that has not filled in yet is readable. With reduced motion,
+// everything is ink from the start and nothing moves.
+const LEAD_FIGURES = ['20%', '35,000 people a day', 'a million downloads', 'Indian-made goods'];
+
+function leadTokens(text) {
+  const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const parts = text.split(new RegExp(`(${LEAD_FIGURES.map(esc).join('|')})`));
+  const out = [];
+  parts.forEach((part, i) => {
+    part.split(/(\s+)/).forEach((t) => {
+      if (!t) return;
+      out.push(/^\s+$/.test(t) ? { space: t } : { word: t, fig: i % 2 === 1 });
+    });
+  });
+  return out;
+}
+
+function ALead() {
+  const bp = useBreakpoint();
+  const ref = React.useRef(null);
+  const tokens = React.useMemo(() => leadTokens(PORTFOLIO.lead), []);
+  const total = tokens.filter((t) => t.word).length;
+  const [reduce] = React.useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const [lit, setLit] = React.useState(reduce ? total : 0);
+
+  React.useEffect(() => {
+    if (reduce) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      if (!ref.current) return;
+      const r = ref.current.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // Starts when the paragraph's top is 85% down the screen, done when its bottom reaches halfway
+      const start = vh * 0.85, end = vh * 0.5;
+      const p = (start - r.top) / (start - end + r.height);
+      setLit(Math.round(Math.max(0, Math.min(1, p)) * total));
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  let n = 0;
+  return (
+    <p ref={ref} className="lead-statement" style={{
+      fontSize: bp.isMobile ? 'clamp(24px, 7vw, 30px)' : 'clamp(30px, 2.9vw, 42px)',
+      lineHeight: 1.24, letterSpacing: '-0.022em', fontWeight: 400,
+      color: A.ink, maxWidth: 1180, margin: `0 0 ${bp.isMobile ? 64 : 112}px`, textWrap: 'pretty'
+    }}>
+      {tokens.map((t, i) => {
+        if (t.space) return t.space;
+        const on = n++ < lit;
+        return (
+          <span key={i} className={t.fig ? 'lead-fig' : undefined} style={{
+            color: on ? A.ink : A.mute, whiteSpace: 'nowrap', // keeps "call-handling" and "Indian-made" whole
+            transition: reduce ? 'none' : 'color .35s ease'
+          }}>{t.word}</span>
+        );
+      })}
+    </p>
+  );
+}
+
 // The CV, on the homepage under the hello (it was /career until 23 Nov 2026)
 function ACareer() {
   const bp = useBreakpoint();
@@ -933,6 +1001,8 @@ function ACareer() {
   return (
     <section id="career" style={{ padding: `${topPad} ${side} ${vPad}`, borderBottom: `1px solid ${A.line}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
+        {/* The summary, before "Curriculum vitae" (moved here from /about, Dipesh, 23 Nov 2026) */}
+        <ALead />
         <div style={{
           display: 'flex',
           flexDirection: bp.isMobile ? 'column' : 'row',
