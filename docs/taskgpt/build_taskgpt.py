@@ -372,7 +372,7 @@ SHIELD_CAPTION = ("The developers' build put every tool behind rows of tab butto
                   "I turned it into six cards, with a screen for each tool.")
 # Card thumbnails on the hub: the redesign, not the 'before' build
 THUMB = {'shield': 1, 'productivity-tracker': 1}
-# The dashboard overview without its placeholder tables (also the hub cover)
+# The top of the dashboard overview: the page cover, hub cover, hub card and link preview
 DASH_CROP = {'file': 'taskgpt-hub-cover', 'w': 1600, 'h': 684, 'caption': 'Dashboard overview',
              'alt': 'TaskGPT dashboard overview for AssistAI, with campaign, line of business and site filters, '
                     'and KPI cards for users, engagement, responses, guardrails and sessions.'}
