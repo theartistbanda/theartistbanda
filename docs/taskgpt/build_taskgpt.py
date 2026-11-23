@@ -280,7 +280,16 @@ def picture(f, alt, w, h, eager=False):
             f'<img src="/assets/{f}.jpg" alt="{attr(alt)}" width="{w}" height="{h}" {load} decoding="async"></picture>')
 
 
+def placeholder(s, caption=True):
+    """A held-back screen (see "hold" in screens.json): a labelled box, never a broken image."""
+    shape = 'tall' if s['h'] / s['w'] > 0.9 else 'wide'
+    cap = f'<figcaption>{esc(s["caption"])}</figcaption>' if caption else ''
+    return (f'<figure class="shot ph ph-{shape}"><div class="frame"><p class="ph-text">Screen coming soon</p></div>{cap}</figure>')
+
+
 def shot(s, eager=False, caption=True):
+    if s.get('hold'):
+        return placeholder(s, caption)
     tall = s['h'] / s['w'] > 0.9
     cap = f'<figcaption>{esc(s["caption"])}</figcaption>' if caption else ''
     return (f'<figure class="shot{" tall" if tall else ""}"><div class="frame">'
@@ -363,6 +372,18 @@ SHIELD_CAPTION = ("The developers' build put every tool behind rows of tab butto
                   "I turned it into six cards, with a screen for each tool.")
 # Card thumbnails on the hub: the redesign, not the 'before' build
 THUMB = {'shield': 1, 'productivity-tracker': 1}
+# The dashboard overview without its placeholder tables (also the hub cover)
+DASH_CROP = {'file': 'taskgpt-hub-cover', 'w': 1600, 'h': 684, 'caption': 'Dashboard overview',
+             'alt': 'TaskGPT dashboard overview for AssistAI, with campaign, line of business and site filters, '
+                    'and KPI cards for users, engagement, responses, guardrails and sessions.'}
+
+
+def card_thumb(sl, screens):
+    if sl == 'dashboard':
+        return DASH_CROP
+    shots = screens[sl]
+    order = [THUMB.get(sl, 0)] + [i for i in range(len(shots)) if i != THUMB.get(sl, 0)]
+    return next((shots[i] for i in order if not shots[i].get('hold')), None)
 CHIPS = [TITLE_TO, 'Only designer', 'TaskUs', '2022 to 2025', 'Live']
 
 
@@ -605,9 +626,13 @@ def build_hub(secs, screens):
             cm = CARD_RE.match(b['text']) if b['t'] == 'p' else None
             if cm:
                 sl = clean_href(cm.group(3)).replace('/case-taskgpt-', '')
-                thumb = screens[sl][THUMB.get(sl, 0)]
-                cards.append(f'<li class="card"><div class="thumb"><img src="/assets/{thumb["file"]}.webp" alt="" '
-                             f'width="{thumb["w"]}" height="{thumb["h"]}" loading="lazy" decoding="async"></div>'
+                thumb = card_thumb(sl, screens)
+                if thumb:
+                    th = (f'<div class="thumb"><img src="/assets/{thumb["file"]}.webp" alt="" '
+                          f'width="{thumb["w"]}" height="{thumb["h"]}" loading="lazy" decoding="async"></div>')
+                else:
+                    th = '<div class="thumb thumb-ph"><span>Screens coming soon</span></div>'
+                cards.append(f'<li class="card">{th}'
                              f'<{card_level}>{esc(cm.group(1))}</{card_level}><p>{inline(cm.group(2))}</p>'
                              f'<a class="more" href="/case-taskgpt-{sl}">Read the case study'
                              f'<span class="sr-only">: {esc(cm.group(1))}</span> <span aria-hidden="true">→</span></a></li>')
@@ -745,9 +770,13 @@ def build_standalone(idx, sections, ext_table, ext_decisions, instrumented, popu
     elif sl == 'productivity-tracker':
         cover = f'<div class="pair">{shot(shots[0], True)}{shot(shots[1], True)}</div>'
         rest = []
+    elif sl == 'dashboard':
+        cover = shot(DASH_CROP, True)
+        rest = shots
     else:
-        cover = shot(shots[0], True)
-        rest = shots[1:]
+        lead_i = next((i for i, x in enumerate(shots) if not x.get('hold')), 0)
+        cover = shot(shots[lead_i], True)
+        rest = [x for i, x in enumerate(shots) if i != lead_i]
 
     chips = ''.join(f'<li>{esc(c)}</li>' for c in CHIPS)
     sections_html = []
@@ -807,9 +836,16 @@ def build_standalone(idx, sections, ext_table, ext_decisions, instrumented, popu
     <p class="mf-back"><a class="btn btn-outline" href="/case-taskgpt"><span aria-hidden="true">←</span> Back to TaskGPT</a></p>
   </div>
 </section>'''
-    og = shots[0]['file'] if sl != 'shield' else shots[1]['file']
+    usable = [x for x in shots if not x.get('hold')]
+    if sl == 'dashboard':
+        og = DASH_CROP['file']
+    elif sl == 'shield':
+        og = shots[1]['file']
+    else:
+        og = usable[0]['file'] if usable else 'taskgpt-hub-og'
+    og_path = '/assets/taskgpt-hub-og.jpg' if og == 'taskgpt-hub-og' else f'/assets/{og}.jpg'
     return page(f'/case-taskgpt-{sl}', f'{name} · TaskGPT Case Study | Dipesh Gurav',
-                meta_desc(name, card['desc']), f'/assets/{og}.jpg', f'TaskGPT · {name}', body, part_of=True)
+                meta_desc(name, card['desc']), og_path, f'TaskGPT · {name}', body, part_of=True)
 
 
 # ─── Main ────────────────────────────────────────────────────────────────────

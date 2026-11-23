@@ -5,14 +5,16 @@
    "caption": "Dashboard overview",
    "alt": "TaskGPT dashboard overview for AssistAI, with campaign, line of business and site filters, KPI cards for users, engagement, responses, guardrails and sessions, and tables of knowledge-gap, guardrail, valid and small-talk queries.",
    "w": 1600,
-   "h": 1494
+   "h": 1494,
+   "hold": "lorem ipsum in the tables; colleague name"
   },
   {
    "file": "taskgpt-dashboard-2",
    "caption": "Review dashboard (March 2025)",
    "alt": "Review dashboard with feedback and review summaries, a thumbs-up and thumbs-down split, a donut chart of review dispositions and a table of queries by usage count.",
    "w": 1600,
-   "h": 1138
+   "h": 1138,
+   "hold": "lorem ipsum in the tables"
   }
  ],
  "document-search": [
@@ -37,7 +39,8 @@
    "caption": "TaskGPT Home",
    "alt": "TaskGPT home page with product cards, a table of recently used instances, and a settings panel with the BCP switch, management links, role and time zone.",
    "w": 1600,
-   "h": 1000
+   "h": 1000,
+   "hold": "lorem ipsum on the AssistAI card; \"Oberevability\" typo; 2014 sample date"
   },
   {
    "file": "taskgpt-home-2",
@@ -67,14 +70,16 @@
    "caption": "Report view (after View Report)",
    "alt": "Report view after View Report, with search, a date range, filter chips, pagination and a table of conversation history logs.",
    "w": 1600,
-   "h": 1000
+   "h": 1000,
+   "hold": "lorem ipsum and \"TH\" headers in the table"
   },
   {
    "file": "taskgpt-reports-3",
    "caption": "Product feedback",
    "alt": "Product feedback report with average product, quality and NLU rating charts beside a list of user feedback entries.",
    "w": 1600,
-   "h": 1000
+   "h": 1000,
+   "hold": "lorem ipsum in the feedback; 2020 sample dates"
   }
  ],
  "authorai": [
@@ -90,7 +95,7 @@
    "caption": "Floating widget on a web page, with side panel",
    "alt": "AuthorAI floating toolbar on a web page with the AuthorAI side panel open, including a service-unavailable message.",
    "w": 1600,
-   "h": 1000
+   "h": 930
   },
   {
    "file": "taskgpt-authorai-3",
@@ -104,14 +109,15 @@
    "caption": "TaskScribe side panel on a selection",
    "alt": "TaskScribe side panel summarising selected text on a web page, with the floating TaskScribe toolbar on the selection.",
    "w": 1600,
-   "h": 900
+   "h": 830
   },
   {
    "file": "taskgpt-authorai-5",
    "caption": "TaskScribe revamp, all states",
    "alt": "The full TaskScribe revamp board: browser states, side panels, the edit and generate menus, history and prompt templates.",
    "w": 1600,
-   "h": 714
+   "h": 714,
+   "hold": "lorem ipsum on the template cards"
   }
  ],
  "observability": [
@@ -127,14 +133,16 @@
    "caption": "Interaction logs with status flag",
    "alt": "Interaction logs with the user, query, feedback and a status flag for each interaction, with one row expanded to show a failed LLM request step.",
    "w": 1600,
-   "h": 1000
+   "h": 1000,
+   "hold": "2020 sample dates"
   },
   {
    "file": "taskgpt-observability-3",
    "caption": "Interaction detail, metadata",
    "alt": "Interaction detail page with the query, response tabs and metadata cards for masking, response time, Pinecone and OpenAI timings and token counts.",
    "w": 1600,
-   "h": 1000
+   "h": 1000,
+   "hold": "lorem ipsum in the query; 2020 sample dates"
   }
  ],
  "assistai": [
@@ -143,7 +151,8 @@
    "caption": "Full-screen chat",
    "alt": "AssistAI full-screen chat for MoneyLion with the knowledge-base version, source tags, related questions and a Playground switch.",
    "w": 1600,
-   "h": 1000
+   "h": 1000,
+   "hold": "lorem ipsum in the related questions"
   },
   {
    "file": "taskgpt-assistai-2",
@@ -182,7 +191,8 @@
    "caption": "Knowledge base step",
    "alt": "Chatbotify knowledge-base step with the KB version, upload stats such as cost, tokens and chunks, and a table of knowledge-base versions and their status.",
    "w": 1600,
-   "h": 1000
+   "h": 1000,
+   "hold": "2013 sample dates"
   },
   {
    "file": "taskgpt-chatbotify-2",
@@ -221,7 +231,8 @@
    "caption": "Versions list",
    "alt": "KnowledgeBase Utility versions list with published, archived and draft tabs, date filters and the latest version tagged.",
    "w": 1600,
-   "h": 1000
+   "h": 1000,
+   "hold": "2013 sample dates; colleague names"
   },
   {
    "file": "taskgpt-knowledgebase-2",
@@ -267,7 +278,8 @@
    "caption": "After: blur settings",
    "alt": "Redesigned Shield blur settings with an intensity slider, Partial Blur and Grayscale toggles, and a short explanation of the tool.",
    "w": 896,
-   "h": 1200
+   "h": 1200,
+   "hold": "typo: \"This San minimize\""
   }
  ],
  "shield-copilot": [
@@ -285,7 +297,8 @@
    "caption": "Result and breakdown",
    "alt": "Deepfake Detection side panel with an overall authenticity result and a breakdown by GAN, visual noise, diffusion and face-swap checks, with the sample photo replaced by a placeholder.",
    "w": 800,
-   "h": 1680
+   "h": 1680,
+   "hold": "typo: \"Visual Noice Analysis\""
   }
  ],
  "productivity-tracker": [

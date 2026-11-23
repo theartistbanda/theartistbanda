@@ -141,6 +141,12 @@ td strong, tbody th strong { color: var(--ink); }
 .pair .shot.tall .frame { padding: 16px; }
 .pair .shot.tall img { max-height: 70vh; }
 .shots { display: grid; gap: 48px; }
+/* Held-back screens (fixes pending in Figma): a labelled box in the screen's place */
+.shot.ph .frame { align-items: center; justify-content: center; background: var(--surf); border: 1px dashed var(--rule); background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(var(--ink-rgb), 0.035) 11px 12px); }
+.shot.ph .frame { height: 240px; }
+.ph-text { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); padding: 8px 14px; background: var(--paper); border: 1px solid var(--line); }
+.card .thumb-ph { display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(var(--ink-rgb), 0.035) 11px 12px); }
+.card .thumb-ph span { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); padding: 6px 10px; background: var(--paper); border: 1px solid var(--line); }
 
 .context { padding: 48px 0; }
 .context-box { max-width: 860px; padding: 24px 28px; border: 1px solid var(--line); background: var(--surf); font-size: 16px; line-height: 1.7; color: var(--ink2); }
@@ -313,6 +319,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   .block .facts:has(> div:nth-child(4)) { grid-template-columns: 1fr; }
   .pair { grid-template-columns: 1fr; }
   .shot.tall .frame { padding: 12px; }
+  .shot.ph .frame { height: 180px; }
   .shot.tall img { max-height: 70vh; }
   .context { padding: 36px 0; }
   .context-box { padding: 20px; }
