@@ -8,6 +8,11 @@
       "statusCode": 301
     },
     {
+      "source": "/career",
+      "destination": "/#career",
+      "statusCode": 302
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.dipeshgurav.com" }],
       "destination": "https://dipeshgurav.com/$1",

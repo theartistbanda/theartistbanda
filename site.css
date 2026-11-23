@@ -48,7 +48,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .scribble path { stroke-dasharray: 1; stroke-dashoffset: 0; animation: scribbleIn .9s cubic-bezier(.6, 0, .3, 1) var(--scribble-delay, 1.5s) both; }
 @keyframes scribbleIn { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 /* TaskGPT products under its row: one sideways rail of cards. The padding keeps focus rings unclipped. */
-.rail { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: 6px 64px; padding: 6px 6px 18px; margin: 0 -6px; scrollbar-width: thin; scrollbar-color: rgba(var(--ink-rgb), 0.25) transparent; }
+.rail { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-padding-inline: 6px 64px; padding: 6px 6px 18px; margin: 0 -6px; scrollbar-width: thin; scrollbar-color: rgba(var(--ink-rgb), 0.25) transparent; }
 .rail-card { display: flex; flex-direction: column; gap: 8px; width: 100%; color: var(--ink); text-decoration: none; scroll-snap-align: start; }
 .rail-thumb { display: block; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--line); background: var(--surf); margin-bottom: 6px; }
 .rail-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; transition: transform .3s ease; }
@@ -56,6 +56,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .rail-name { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color .15s ease; }
 .rail-card:hover .rail-name, .rail-card:focus-visible .rail-name { text-decoration-color: currentColor; }
 .rail-line { font-size: 13px; line-height: 1.5; color: var(--ink2); }
+/* Snap to cards only for swiping on touch screens: with a mouse or keyboard, snapping could pull a
+   focused card back under the edge fade */
+@media (pointer: coarse) { .rail { scroll-snap-type: x proximity; } }
+/* The same cards under each role in the CV: project covers, so centred rather than top left */
+.cv-card .rail-thumb img { object-position: center; }
 /* Arrow buttons beside the rail, drawn like the theme switch */
 .rail-btn { width: 40px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: transparent; color: var(--ink); border: 1px solid rgba(var(--ink-rgb), 0.2); cursor: pointer; font: 500 16px/1 "JetBrains Mono", ui-monospace, monospace; transition: border-color .2s ease, background-color .2s ease; }
 .rail-btn:hover:not(:disabled), .rail-btn:focus-visible { border-color: var(--accent); background-color: rgba(var(--accent-rgb), 0.08); }

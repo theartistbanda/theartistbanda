@@ -206,6 +206,8 @@ const PORTFOLIO = {
       ],
       tags: ['Generative AI Tools', 'AI Interfaces', 'Solo build'],
       image: '/assets/jaa-cover.webp',
+      // Card thumbnail on /career: jaa-cover's sample cover letter says "10+ years"
+      thumb: '/assets/jaa-mobile-views.webp',
       href: '/case-job-app-assistant',
     },
     {
@@ -365,6 +367,8 @@ const PORTFOLIO = {
         'AI in the workflow. Claude connected to Figma, Claude Code, Cursor, Figma Make, v0 and Lovable let me build several UX directions in parallel and prototype in code, which surfaced edge cases and let me test a mental model before a stakeholder review instead of after one.',
       ],
       tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Founding designer'],
+      // Case studies shown under this role on /career (Dipesh, 23 Nov 2026)
+      products: ['taskgpt', 'levelup', 'evaluateus'],
       current: false,
     },
     {
@@ -383,6 +387,7 @@ const PORTFOLIO = {
         'Hired and mentored junior and mid-level designers, for client products and for Mindefy\'s own.',
       ],
       tags: ['Fintech', 'E-commerce', 'Mobile', 'Wellbeing UX'],
+      products: ['yourhour', 'jego', 'earlyfoods'],
     },
     {
       // Undated work outside the two roles, as on the CV
@@ -397,6 +402,8 @@ const PORTFOLIO = {
         'Job App Assistant, a live AI web app that I designed, coded and deployed alone in one session, with Node.js and the Claude API.',
       ],
       tags: ['Fintech', 'Developer tools', 'Generative AI'],
+      // Aatmnirbhar was his own open-competition entry, not Mindefy work, so it sits here
+      products: ['job-app-assistant', 'aatmnirbhar'],
     },
   ],
   skills: [

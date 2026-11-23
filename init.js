@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // index.html, about.html and career.html share one React bundle; <body data-page> picks the page
-  var pages = { about: window.AboutPage, career: window.CareerPage };
+  // index.html and about.html share one React bundle; <body data-page> picks the page
+  var pages = { about: window.AboutPage };
   var page = document.body.getAttribute('data-page');
   ReactDOM.createRoot(document.getElementById('root')).render(
     React.createElement(pages[page] || window.VariantA, null)

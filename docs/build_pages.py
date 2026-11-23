@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Writes about.html and career.html (23 Nov 2026).
+"""Writes about.html (23 Nov 2026; career.html too until the CV moved onto the homepage).
 
 Both pages run the homepage's React bundle; <body data-page> tells init.js which page to render.
 This script writes their <head> (title, description, link previews) and the <noscript> text that
@@ -23,13 +23,6 @@ PAGES = {
                  'every design call, the person behind the work, and how to reach him.'),
         'schema': 'AboutPage',
         'name': 'About Dipesh Gurav',
-    },
-    'career': {
-        'title': 'Career and CV | Dipesh Gurav, Product Designer',
-        'desc': ('The CV of Dipesh Gurav: Lead Product Designer at TaskUs, 2021 to 2026, and Product Designer '
-                 'at Mindefy Technologies, 2017 to 2021. Download the PDF.'),
-        'schema': 'ProfilePage',
-        'name': 'Career and CV of Dipesh Gurav',
     },
 }
 
@@ -59,15 +52,15 @@ def noscript_about(P):
     return f'''<h1>{esc(P["tagline"])}</h1>
     <p>{esc(P["lead"])}</p>
     <ul>{m}</ul>
-    <h2>Six beliefs that decide every design call</h2>
-    <ol>{pr}</ol>
     <h2>I became a designer because technology is supposed to make life easier</h2>
     {bio}
+    <h2>Six beliefs that decide every design call</h2>
+    <ol>{pr}</ol>
     <h2 id="origin">An open competition, a golden bird, a mark India picked up</h2>
     <p>{esc(P["origin"])}</p>
     <h2 id="contact">Let's build something meaningful</h2>
     <ul>{contact}</ul>
-    <p><a href="/career">Career and CV</a> · <a href="/">Experience</a></p>'''
+    <p><a href="/#career">Career and case studies</a></p>'''
 
 
 def noscript_career(P):
@@ -77,6 +70,9 @@ def noscript_career(P):
         dates = f' ({c["from"]} to {c["to"]})' if c.get('from') else ''
         out.append(f'<h2>{esc(c["role"])}, {esc(c["org"])}{esc(dates)}</h2>')
         out += [f'<p>{esc(x)}</p>' for x in c['body']]
+        cases = [next(p for p in P['projects'] if p['id'] == i) for i in c.get('products', [])]
+        if cases:
+            out.append('<p>Case studies: ' + ' · '.join(f'<a href="{esc(p["href"])}">{esc(p["title"])}</a>' for p in cases) + '</p>')
     out.append('<p><a href="/about">About me</a> · <a href="/about#contact">Contact</a> · <a href="/">Experience</a></p>')
     return '\n    '.join(out)
 
@@ -87,7 +83,7 @@ def page(slug, P):
     url = f'{SITE}/{slug}'
     ld = json.dumps({'@context': 'https://schema.org', '@type': c['schema'], 'name': c['name'], 'url': url,
                      'mainEntity': {'@type': 'Person', 'name': P['name'], 'url': SITE}}, indent=2)
-    body = noscript_about(P) if slug == 'about' else noscript_career(P)
+    body = noscript_about(P)
     out = f'''<!DOCTYPE html>
 <html lang="en">
 <head>

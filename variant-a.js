@@ -67,16 +67,17 @@ function useHashTarget() {
 }
 
 // "Built with AI" (Job App Assistant, Pattern Desk) is hidden until it has proper context
-// (Dipesh, 23 Nov 2026). Its section, cards, data and nav link stay in the code: set to true to show.
+// (Dipesh, 23 Nov 2026). Its section, cards and data stay in the code: set to true to show.
 const SHOW_BUILT = false;
 
 // Old links to homepage sections that moved on 23 Nov 2026 go to their new pages
+// (#work was the Experience list, which became the CV on the homepage the same day.)
 const MOVED_SECTIONS = {
   '#contact': '/about#contact',
   '#origin': '/about#origin',
   '#studio': '/about#studio',
   '#principles': '/about#principles',
-  '#career': '/career'
+  '#work': '/#career'
 };
 function ABanner({
   page = 'home'
@@ -202,9 +203,10 @@ function ASiteShell({
   }, children), /*#__PURE__*/React.createElement(AFooter, null));
 }
 
-// Homepage, kept short (Dipesh, 23 Nov 2026): the hello, the work (TaskGPT first, with its products
-// as cards) and what he has built with AI. The numbers, beliefs,
-// bio, origin story and contact live on /about, the CV on /career.
+// Homepage (Dipesh, 23 Nov 2026): the hello, then the CV company by company, each role with its
+// case studies as cards; under TaskUs, TaskGPT stays expanded into its products. The Career page
+// and the Experience list merged into this. The numbers, beliefs, bio, origin story and contact
+// live on /about.
 function VariantA() {
   const moved = MOVED_SECTIONS[location.hash];
   React.useLayoutEffect(() => {
@@ -213,27 +215,17 @@ function VariantA() {
   useHomeScrollMemory();
   return /*#__PURE__*/React.createElement(ASiteShell, {
     page: "home"
-  }, /*#__PURE__*/React.createElement(AHero, null), /*#__PURE__*/React.createElement(AWork, null), SHOW_BUILT && /*#__PURE__*/React.createElement(ABuilt, null));
+  }, /*#__PURE__*/React.createElement(AHero, null), /*#__PURE__*/React.createElement(ACareer, null), SHOW_BUILT && /*#__PURE__*/React.createElement(ABuilt, null));
 }
 
-// /about: intro, the four numbers, the six beliefs, the full bio, then the origin story and contact
+// /about, redesigned as one page (Dipesh, 23 Nov 2026) rather than a stack of former homepage
+// sections: the intro with the numbers, the person behind the work, the six beliefs, the origin
+// story, then contact.
 function AboutPage() {
   useHashTarget();
   return /*#__PURE__*/React.createElement(ASiteShell, {
     page: "about"
-  }, /*#__PURE__*/React.createElement(AAboutIntro, null), /*#__PURE__*/React.createElement(AMetrics, null), /*#__PURE__*/React.createElement(APrinciples, null), /*#__PURE__*/React.createElement(AAbout, null), /*#__PURE__*/React.createElement(AOrigin, null), /*#__PURE__*/React.createElement(AContact, null));
-}
-
-// /career: the CV
-function CareerPage() {
-  useHashTarget();
-  return /*#__PURE__*/React.createElement(ASiteShell, {
-    page: "career"
-  }, /*#__PURE__*/React.createElement(ACareer, {
-    first: true
-  }), /*#__PURE__*/React.createElement(ANextBand, {
-    links: [['About me', '/about'], ['Get in touch', '/about#contact']]
-  }));
+  }, /*#__PURE__*/React.createElement(AAboutIntro, null), /*#__PURE__*/React.createElement(APerson, null), /*#__PURE__*/React.createElement(ABeliefs, null), /*#__PURE__*/React.createElement(AOrigin, null), /*#__PURE__*/React.createElement(AContact, null));
 }
 
 // ─── NAV ─────────────────────────────────────────────────────────────────────
@@ -277,60 +269,26 @@ function AThemeToggle() {
   }, "Switch to light theme"));
 }
 
-// About and Career are pages; Experience is a section of the homepage. Origin (on /about) left
-// the menu on 23 Nov 2026 (Dipesh).
-const NAV_LINKS = [{
-  label: 'Experience',
-  anchor: '#work',
-  on: 'home'
-}, {
-  label: 'Built with AI',
-  anchor: '#built',
-  on: 'home',
-  hidden: !SHOW_BUILT
-}, {
-  label: 'About',
-  page: 'about',
-  href: '/about'
-}, {
-  label: 'Career',
-  page: 'career',
-  href: '/career'
-}];
-const PAGE_PATH = {
-  home: '/',
-  about: '/about',
-  career: '/career'
-};
+// The menu since 23 Nov 2026 (Dipesh): one "About me" button, in the outline style of the
+// "Download PDF résumé" button. "Get in touch" lives only in the banner above. No link list, no
+// clock, no hamburger.
 function ANav({
   page = 'home'
 }) {
   const bp = useBreakpoint();
-  const [t, setT] = React.useState('');
-  const [open, setOpen] = React.useState(false);
-  React.useEffect(() => {
-    const tick = () => {
-      // UK local time, so BST and GMT switch over on their own
-      // Hours and minutes only, so it changes once a minute instead of ticking (WCAG 2.2.2)
-      const uk = new Date().toLocaleTimeString('en-GB', {
-        timeZone: 'Europe/London',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      });
-      setT(`${uk} UK`);
-    };
-    tick();
-    const i = setInterval(tick, 15000);
-    return () => clearInterval(i);
-  }, []);
-  const links = NAV_LINKS.filter(l => !l.hidden).map(l => ({
-    ...l,
-    href: l.anchor ? page === l.on ? l.anchor : `${PAGE_PATH[l.on]}${l.anchor}` : l.href,
-    current: l.page === page
-  }));
   const isHome = page === 'home';
+  const pad = bp.isMobile ? '10px 12px' : '10px 16px';
+  const btn = {
+    ...aStyles.cta,
+    padding: pad,
+    textDecoration: 'none',
+    display: 'inline-flex',
+    gap: 8,
+    alignItems: 'center',
+    flexShrink: 0
+  };
   return /*#__PURE__*/React.createElement("nav", {
+    "aria-label": "Main",
     style: {
       background: 'rgba(var(--paper-rgb), 0.92)',
       backdropFilter: 'blur(12px)',
@@ -345,7 +303,7 @@ function ANav({
       alignItems: 'center',
       justifyContent: 'space-between',
       height: 56,
-      gap: bp.isMobile ? 10 : 16
+      gap: bp.isMobile ? 8 : 16
     }
   }, /*#__PURE__*/React.createElement("a", {
     href: "/",
@@ -383,102 +341,28 @@ function ANav({
       fontWeight: 600,
       letterSpacing: '-0.01em'
     }
-  }, "Dipesh Gurav")), bp.isDesktop && /*#__PURE__*/React.createElement("ul", {
-    style: {
-      display: 'flex',
-      gap: 28,
-      listStyle: 'none',
-      padding: 0,
-      margin: 0,
-      ...aStyles.mono
-    }
-  }, links.map(x => /*#__PURE__*/React.createElement("li", {
-    key: x.label
-  }, /*#__PURE__*/React.createElement("a", {
-    href: x.href,
-    "data-cursor": "hover",
-    "aria-current": x.current ? 'page' : undefined,
-    className: x.current ? 'nav-current' : undefined,
-    style: {
-      color: x.current ? A.ink : A.mute,
-      textDecoration: x.current ? undefined : 'none',
-      display: 'flex',
-      gap: 6
-    }
-  }, x.label)))), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
-    style: aStyles.mono
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: A.ink
-    }
-  }, "\u25CF "), t), /*#__PURE__*/React.createElement("div", {
+  }, "Dipesh Gurav")), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: bp.isMobile ? 8 : 12,
       alignItems: 'center'
     }
   }, /*#__PURE__*/React.createElement(AThemeToggle, null), /*#__PURE__*/React.createElement("a", {
-    href: contactHref(page),
+    href: "/about",
     "data-cursor": "hover",
-    className: "cta cta-primary wipe",
+    className: "cta cta-outline",
+    "aria-current": page === 'about' ? 'page' : undefined,
     style: {
-      ...aStyles.cta,
-      color: A.paper,
-      backgroundColor: A.accent,
-      padding: bp.isMobile ? '10px 12px' : '10px 16px',
-      textDecoration: 'none',
-      display: 'inline-flex',
-      gap: 8,
-      alignItems: 'center',
-      flexShrink: 0
-    }
-  }, bp.isMobile ? 'Contact' : 'Get in touch', " ", /*#__PURE__*/React.createElement("span", {
-    className: "cta-arrow"
-  }, "\u2192")), !bp.isDesktop && /*#__PURE__*/React.createElement("button", {
-    onClick: () => setOpen(o => !o),
-    "aria-label": "Menu",
-    "aria-expanded": open,
-    style: {
-      background: 'none',
-      border: `1px solid ${A.line}`,
-      padding: '8px 10px',
-      cursor: 'pointer',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 4,
-      flexShrink: 0
-    }
-  }, [0, 1, 2].map(i => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    style: {
-      display: 'block',
-      width: 18,
-      height: 1,
-      background: A.ink
-    }
-  }))))), !bp.isDesktop && open && /*#__PURE__*/React.createElement("div", {
-    style: {
-      background: A.paper,
-      borderTop: `1px solid ${A.line}`,
-      padding: `8px ${sp(bp)} 16px`
-    }
-  }, links.map(x => /*#__PURE__*/React.createElement("a", {
-    key: x.label,
-    href: x.href,
-    onClick: () => setOpen(false),
-    "aria-current": x.current ? 'page' : undefined,
-    style: {
-      ...aStyles.mono,
-      display: 'flex',
-      justifyContent: 'space-between',
-      padding: '14px 0',
+      ...btn,
+      fontWeight: 500,
       color: A.ink,
-      textDecoration: 'none',
-      fontWeight: x.current ? 600 : undefined,
-      borderBottom: `1px solid ${A.line}`
+      border: `1px solid ${page === 'about' ? A.ink : 'rgba(var(--ink-rgb), 0.2)'}`
     }
-  }, x.label, " ", /*#__PURE__*/React.createElement("span", {
-    "aria-hidden": "true"
+  }, "About me ", /*#__PURE__*/React.createElement("span", {
+    className: "cta-arrow",
+    style: {
+      color: A.accent
+    }
   }, "\u2192")))));
 }
 
@@ -572,16 +456,78 @@ function AHero() {
   }, last))));
 }
 
-// ─── ABOUT INTRO (/about) ────────────────────────────────────────────────────
-// The tagline and summary that used to open the homepage, followed on the page by the numbers.
-// The heading is in the homepage's hand-drawn face, his own voice (Dipesh, 23 Nov 2026), at heading
-// size rather than full screen so the numbers stay in view.
-function AAboutIntro() {
+// ─── ABOUT PAGE (/about) ─────────────────────────────────────────────────────
+// After the intro, each section keeps its label in a left rail on desktop (sticky while you read)
+// and its content in the nine columns beside it, so the page reads as one piece.
+function ARail({
+  id,
+  label,
+  tone,
+  children
+}) {
   const bp = useBreakpoint();
   const side = sp(bp);
   return /*#__PURE__*/React.createElement("section", {
+    id: id,
     style: {
-      padding: `${bp.isMobile ? '48px' : '88px'} ${side} ${bp.isMobile ? '40px' : '64px'}`
+      padding: `${bp.isMobile ? 64 : 112}px ${side}`,
+      background: tone === 'surf' ? A.surf : A.paper,
+      borderTop: `1px solid ${A.line}`
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: 1360,
+      margin: '0 auto',
+      display: 'grid',
+      gridTemplateColumns: bp.isDesktop ? 'repeat(12, minmax(0, 1fr))' : 'minmax(0, 1fr)',
+      columnGap: 24,
+      rowGap: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: bp.isDesktop ? {
+      gridColumn: 'span 3'
+    } : undefined
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      ...aStyles.mono,
+      color: A.accent,
+      margin: 0,
+      ...(bp.isDesktop ? {
+        position: 'sticky',
+        top: 'calc(var(--header-h, 90px) + 32px)'
+      } : {})
+    }
+  }, label)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      gridColumn: bp.isDesktop ? 'span 9' : undefined,
+      minWidth: 0
+    }
+  }, children)));
+}
+function aboutH2(bp) {
+  return {
+    fontSize: bp.isMobile ? 28 : 44,
+    fontWeight: 500,
+    letterSpacing: '-0.02em',
+    lineHeight: 1.08,
+    margin: 0,
+    color: A.ink,
+    textWrap: 'balance',
+    maxWidth: 900
+  };
+}
+
+// The opening: the tagline in the homepage's hand-drawn face (his own voice), the summary, and the
+// four numbers that back it, as one quiet row rather than a band of boxes.
+function AAboutIntro() {
+  const bp = useBreakpoint();
+  const side = sp(bp);
+  const [ref, inView] = useReveal({
+    threshold: 0.2
+  });
+  return /*#__PURE__*/React.createElement("section", {
+    style: {
+      padding: `${bp.isMobile ? '48px' : '88px'} ${side} ${bp.isMobile ? '56px' : '96px'}`
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -611,202 +557,242 @@ function AAboutIntro() {
     delay: ".4s"
   }, "pixels")), /*#__PURE__*/React.createElement("p", {
     style: {
-      fontSize: bp.isMobile ? 16 : 18,
-      lineHeight: 1.55,
+      fontSize: bp.isMobile ? 16 : 19,
+      lineHeight: 1.6,
       letterSpacing: '-0.01em',
       color: A.ink2,
-      maxWidth: 760,
-      margin: `${bp.isMobile ? 20 : 28}px 0 0`
+      maxWidth: 780,
+      margin: `${bp.isMobile ? 24 : 32}px 0 0`
     }
-  }, PORTFOLIO.lead)));
+  }, PORTFOLIO.lead), /*#__PURE__*/React.createElement("ul", {
+    ref: ref,
+    style: {
+      listStyle: 'none',
+      padding: `${bp.isMobile ? 24 : 32}px 0 0`,
+      margin: `${bp.isMobile ? 40 : 64}px 0 0`,
+      borderTop: `1px solid ${A.line}`,
+      display: 'grid',
+      gridTemplateColumns: bp.isDesktop ? 'repeat(4, minmax(0, 1fr))' : 'repeat(2, minmax(0, 1fr))',
+      columnGap: 24,
+      rowGap: 32
+    }
+  }, PORTFOLIO.metrics.map((m, i) => /*#__PURE__*/React.createElement(AAboutNumber, {
+    key: i,
+    m: m,
+    i: i,
+    inView: inView,
+    bp: bp
+  })))));
 }
 
-// ─── NEXT (end of /about and /career) ────────────────────────────────────────
-function ANextBand({
-  links
-}) {
-  const bp = useBreakpoint();
-  const side = sp(bp);
-  const btn = {
-    ...aStyles.cta,
-    padding: '13px 18px',
-    border: `1px solid rgba(var(--ink-rgb), 0.2)`,
-    textDecoration: 'none',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: 24,
-    minWidth: bp.isMobile ? 0 : 220,
-    color: A.ink,
-    fontWeight: 500
-  };
-  return /*#__PURE__*/React.createElement("section", {
-    "aria-label": "Where next",
-    style: {
-      padding: `${bp.isMobile ? '48px' : '72px'} ${side}`,
-      background: A.surf
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: 1360,
-      margin: '0 auto',
-      display: 'flex',
-      flexDirection: bp.isMobile ? 'column' : 'row',
-      gap: 12
-    }
-  }, links.map(([label, href]) => /*#__PURE__*/React.createElement("a", {
-    key: href,
-    href: href,
-    "data-cursor": "hover",
-    className: "cta cta-outline",
-    style: btn
-  }, label, " ", /*#__PURE__*/React.createElement("span", {
-    className: "cta-arrow",
-    style: {
-      color: A.accent
-    }
-  }, "\u2192")))));
-}
-
-// ─── METRICS ─────────────────────────────────────────────────────────────────
-// Extracted to avoid calling useCounter inside .map() (hooks-in-loop violation)
-function AMetricItem({
+// Counts up once when it comes into view (instantly with reduced motion)
+function AAboutNumber({
   m,
   i,
   inView,
   bp
 }) {
   const v = useCounter(m.value || 0, inView, 1400 + i * 120);
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement("li", {
     style: {
-      padding: bp.isMobile ? '20px 16px' : '24px 28px',
-      borderRight: `1px solid ${A.line}`,
       display: 'flex',
       flexDirection: 'column',
       gap: 6
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: aStyles.mono
-  }, "0", i + 1, " / 04"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: bp.isMobile ? 40 : 56,
       fontWeight: 500,
       letterSpacing: '-0.03em',
       lineHeight: 1,
-      color: A.ink,
-      marginTop: 8
+      color: A.ink
     }
-  }, m.text ? m.text : /*#__PURE__*/React.createElement(React.Fragment, null, fmt(v, {
+  }, fmt(v, {
     decimals: 0
-  }), /*#__PURE__*/React.createElement("span", {
+  }), m.suffix), /*#__PURE__*/React.createElement("span", {
     style: {
-      color: A.accent
-    }
-  }, m.suffix))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 13,
+      fontSize: 14,
       color: A.ink,
       marginTop: 8
     }
-  }, m.label), /*#__PURE__*/React.createElement("div", {
+  }, m.label), /*#__PURE__*/React.createElement("span", {
     style: aStyles.mono
   }, m.sub));
 }
-function AMetrics() {
+
+// The person behind the work: the bio as a reading column (the first paragraph as its opening),
+// then the facts that used to sit in a sidebar, laid out under it.
+function APerson() {
   const bp = useBreakpoint();
-  const [ref, inView] = useReveal({
-    threshold: 0.2
-  });
-  const cols = bp.isDesktop ? 'repeat(4, 1fr)' : 'repeat(2, 1fr)';
-  const side = sp(bp);
-  return /*#__PURE__*/React.createElement("section", {
-    ref: ref,
+  const [first, ...rest] = PORTFOLIO.bio;
+  const em = para => para.split(/\*(.+?)\*/).map((part, j) => j % 2 ? /*#__PURE__*/React.createElement("em", {
+    key: j
+  }, part) : part);
+  const factTitle = {
+    ...aStyles.mono,
+    margin: '0 0 12px',
+    fontWeight: 400
+  };
+  const line = {
+    fontSize: 14,
+    lineHeight: 1.6,
+    color: A.ink2,
+    margin: 0
+  };
+  return /*#__PURE__*/React.createElement(ARail, {
+    id: "studio",
+    label: "The person behind the work"
+  }, /*#__PURE__*/React.createElement("h2", {
+    style: aboutH2(bp)
+  }, "I became a designer because technology is supposed to make life ", /*#__PURE__*/React.createElement("span", {
     style: {
-      borderBottom: `1px solid ${A.line}`,
-      padding: `32px ${side}`
+      fontStyle: 'italic'
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, "easier")), /*#__PURE__*/React.createElement("div", {
     style: {
-      maxWidth: 1360,
-      margin: '0 auto',
-      display: 'grid',
-      gridTemplateColumns: cols,
-      borderLeft: `1px solid ${A.line}`
+      maxWidth: 720,
+      marginTop: bp.isMobile ? 28 : 40
     }
-  }, PORTFOLIO.metrics.map((m, i) => /*#__PURE__*/React.createElement(AMetricItem, {
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: bp.isMobile ? 18 : 21,
+      lineHeight: 1.55,
+      letterSpacing: '-0.01em',
+      color: A.ink,
+      margin: 0
+    }
+  }, em(first)), rest.map((para, i) => /*#__PURE__*/React.createElement("p", {
     key: i,
-    m: m,
-    i: i,
-    inView: inView,
-    bp: bp
-  }))));
+    style: {
+      fontSize: 16,
+      lineHeight: 1.75,
+      color: A.ink2,
+      margin: '20px 0 0'
+    }
+  }, em(para)))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: bp.isMobile ? 48 : 72,
+      paddingTop: 28,
+      borderTop: `1px solid ${A.line}`,
+      display: 'grid',
+      columnGap: 24,
+      rowGap: 36,
+      gridTemplateColumns: bp.isDesktop ? 'repeat(3, minmax(0, 1fr))' : bp.isTablet ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)'
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    style: factTitle
+  }, "Availability"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      ...line,
+      color: A.ink
+    }
+  }, "Open to work \xB7 Immediate joiner"), /*#__PURE__*/React.createElement("p", {
+    style: line
+  }, "Remote \xB7 Hybrid \xB7 On-site \xB7 UK-wide"), /*#__PURE__*/React.createElement("p", {
+    style: line
+  }, "No sponsorship required")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    style: factTitle
+  }, "Experience"), ['9 years', '14 countries', '1M+ downloads shipped'].map(x => /*#__PURE__*/React.createElement("p", {
+    key: x,
+    style: {
+      ...line,
+      color: A.ink
+    }
+  }, x))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    style: factTitle
+  }, "Notable"), /*#__PURE__*/React.createElement("ul", {
+    style: {
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 6
+    }
+  }, PORTFOLIO.notable.map(n => /*#__PURE__*/React.createElement("li", {
+    key: n,
+    style: line
+  }, n)))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      gridColumn: '1 / -1'
+    }
+  }, /*#__PURE__*/React.createElement("h3", {
+    style: factTitle
+  }, "Skills \xB7 Tools"), /*#__PURE__*/React.createElement("ul", {
+    style: {
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 6
+    }
+  }, PORTFOLIO.skills.map(s => /*#__PURE__*/React.createElement("li", {
+    key: s,
+    style: {
+      fontSize: 12,
+      padding: '5px 10px',
+      color: A.ink2,
+      border: `1px solid ${A.line}`
+    }
+  }, s))))));
 }
 
-// ─── WORK ────────────────────────────────────────────────────────────────────
-function AWork() {
+// The six beliefs, after the person (Dipesh, 23 Nov 2026): a numbered list in two columns
+// instead of a grid of cards.
+function ABeliefs() {
   const bp = useBreakpoint();
-  const side = sp(bp);
-  const vPad = bp.isMobile ? '56px' : '96px';
-  return /*#__PURE__*/React.createElement("section", {
-    id: "work",
+  return /*#__PURE__*/React.createElement(ARail, {
+    id: "principles",
+    label: "Operating principles",
+    tone: "surf"
+  }, /*#__PURE__*/React.createElement("h2", {
+    style: aboutH2(bp)
+  }, "Six beliefs that decide every design call"), /*#__PURE__*/React.createElement("ol", {
     style: {
-      padding: `${vPad} ${side}`,
-      borderBottom: `1px solid ${A.line}`
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: 1360,
-      margin: '0 auto'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
+      listStyle: 'none',
+      padding: 0,
+      margin: `${bp.isMobile ? 32 : 48}px 0 0`,
       display: 'grid',
-      gridTemplateColumns: bp.isMobile ? '1fr' : bp.isTablet ? '1fr 1fr' : 'repeat(12, 1fr)',
-      gap: 24,
-      marginBottom: bp.isMobile ? 32 : 64
+      gridTemplateColumns: bp.isMobile ? 'minmax(0, 1fr)' : 'repeat(2, minmax(0, 1fr))',
+      columnGap: 48
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: bp.isDesktop ? {
-      gridColumn: 'span 7'
-    } : {}
-  }, /*#__PURE__*/React.createElement("div", {
+  }, PORTFOLIO.principles.map(p => /*#__PURE__*/React.createElement("li", {
+    key: p.n,
+    style: {
+      borderTop: `1px solid ${A.line}`,
+      padding: '24px 0 28px',
+      display: 'grid',
+      gridTemplateColumns: '44px minmax(0, 1fr)',
+      columnGap: 12
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
     style: {
       ...aStyles.mono,
       color: A.accent,
-      marginBottom: 16
+      paddingTop: 6
     }
-  }, "Experience \xB7 2018\u20132026"), /*#__PURE__*/React.createElement("h2", {
+  }, p.n), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
     style: {
-      fontSize: bp.isMobile ? 28 : 44,
+      fontSize: bp.isMobile ? 18 : 21,
       fontWeight: 500,
-      letterSpacing: '-0.02em',
-      lineHeight: 1.05,
-      margin: 0
+      letterSpacing: '-0.01em',
+      lineHeight: 1.25,
+      margin: 0,
+      color: A.ink
     }
-  }, "Eight products, four markets,", /*#__PURE__*/React.createElement("br", null), "measurable behaviour change")), bp.isDesktop && /*#__PURE__*/React.createElement("div", {
+  }, p.title), /*#__PURE__*/React.createElement("p", {
     style: {
-      gridColumn: 'span 4',
-      alignSelf: 'end',
-      textAlign: 'right',
-      ...aStyles.mono
+      fontSize: 15,
+      lineHeight: 1.65,
+      color: A.ink2,
+      margin: '10px 0 0'
     }
-  }, "Click any row to", /*#__PURE__*/React.createElement("br", null), "open the case study.")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      borderTop: `1px solid ${A.line}`
-    }
-  }, PORTFOLIO.projects.filter(p => p.selected !== false).map(p => p.groups ? /*#__PURE__*/React.createElement(React.Fragment, {
-    key: p.id
-  }, /*#__PURE__*/React.createElement(AProjectRow, {
-    p: p,
-    joined: true
-  }), /*#__PURE__*/React.createElement(AProductRail, {
-    p: p
-  })) : /*#__PURE__*/React.createElement(AProjectRow, {
-    key: p.id,
-    p: p
-  })))));
+  }, p.body))))));
 }
 
+// ─── TASKGPT ROW AND ITS PRODUCT RAIL (under TaskUs in the CV) ───────────────
 // TaskGPT's own case studies as cards under its row (Dipesh, 23 Nov 2026), in the hub's groups.
 // One sideways-scrolling rail; thin vertical lines divide the groups. Swipe, scroll, Tab
 // through the cards, or use the arrow buttons. Fades at an edge show there is more.
@@ -816,6 +802,7 @@ function AProductRail({
   const bp = useBreakpoint();
   const [ref, inView] = useReveal();
   const rail = React.useRef(null);
+  const fade = 40;
   const [edge, setEdge] = React.useState({
     start: true,
     end: false
@@ -841,9 +828,19 @@ function AProductRail({
       behavior: reduce ? 'auto' : 'smooth'
     });
   };
+  // Tabbing onto a card the rail only half shows: browsers leave it cut off at the edge, so bring
+  // the whole card into view, clear of the edge fade (WCAG 2.4.11)
+  const reveal = e => {
+    const el = rail.current;
+    const card = e.target.closest && e.target.closest('.rail-card');
+    if (!el || !card) return;
+    const c = card.getBoundingClientRect(),
+      r = el.getBoundingClientRect();
+    const room = fade + 8;
+    if (c.left < r.left + room) el.scrollLeft -= r.left + room - c.left;else if (c.right > r.right - room) el.scrollLeft += c.right - (r.right - room);
+  };
   const count = p.groups.reduce((n, g) => n + g.items.length, 0);
   const cardW = bp.isMobile ? 228 : 264;
-  const fade = 40;
   const mask = `linear-gradient(to right, ${edge.start ? '#000' : 'transparent'} 0, #000 ${fade}px, #000 calc(100% - ${fade}px), ${edge.end ? '#000' : 'transparent'} 100%)`;
   const arrow = (dir, label, disabled) => /*#__PURE__*/React.createElement("button", {
     type: "button",
@@ -902,6 +899,7 @@ function AProductRail({
     ref: rail,
     className: "rail",
     onScroll: update,
+    onFocus: reveal,
     role: "region",
     "aria-label": `${p.title} products`,
     style: {
@@ -1326,89 +1324,71 @@ function AProjectRow({
   })));
 }
 
-// ─── ORIGIN ──────────────────────────────────────────────────────────────────
+// ─── ORIGIN (/about) ─────────────────────────────────────────────────────────
+// The Aatmnirbhar story in the About rail: the words beside the mark, at the page's heading size.
+// Wording rules: CLAUDE.md rule 10.
 function AOrigin() {
   const bp = useBreakpoint();
-  const side = sp(bp);
-  const vPad = bp.isMobile ? '72px' : '120px';
-  return /*#__PURE__*/React.createElement("section", {
+  return /*#__PURE__*/React.createElement(ARail, {
     id: "origin",
-    style: {
-      background: A.surf,
-      color: A.ink,
-      padding: `${vPad} ${side}`,
-      borderBottom: `1px solid ${A.line}`
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: 1360,
-      margin: '0 auto'
-    }
+    label: "The origin story"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
-      gridTemplateColumns: bp.isDesktop ? 'repeat(12, 1fr)' : '1fr',
-      gap: 24
+      alignItems: 'start',
+      gap: bp.isDesktop ? 48 : 40,
+      gridTemplateColumns: bp.isDesktop ? 'minmax(0, 5fr) minmax(0, 4fr)' : 'minmax(0, 1fr)'
     }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: bp.isDesktop ? {
-      gridColumn: 'span 7'
-    } : {}
-  }, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 12
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...aStyles.mono,
-      color: A.accent,
-      marginBottom: 20
-    }
-  }, "The origin story"), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 'clamp(36px, 7vw, 88px)',
-      fontWeight: 500,
-      lineHeight: 1,
-      letterSpacing: '-0.03em',
-      margin: 0
-    }
-  }, "An open competition,", /*#__PURE__*/React.createElement("br", null), "a golden bird,", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    style: aboutH2(bp)
+  }, "An open competition, a golden bird,", ' ', /*#__PURE__*/React.createElement("span", {
     style: {
       fontStyle: 'italic',
-      color: A.accent
+      display: 'block'
     }
   }, "a mark India picked up")), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 16,
-      lineHeight: 1.6,
-      color: 'rgba(var(--ink-rgb), 0.82)',
-      maxWidth: bp.isDesktop ? 480 : '100%',
-      marginTop: 40
+      lineHeight: 1.75,
+      color: A.ink2,
+      margin: '28px 0 0',
+      maxWidth: 560
     }
   }, PORTFOLIO.origin), /*#__PURE__*/React.createElement("p", {
     style: {
       fontFamily: '"Fraunces", Georgia, serif',
       fontWeight: 300,
       fontStyle: 'italic',
-      fontSize: bp.isMobile ? 18 : 22,
-      lineHeight: 1.4,
+      fontSize: bp.isMobile ? 18 : 21,
+      lineHeight: 1.45,
       color: A.ink,
-      marginTop: 32,
-      maxWidth: bp.isDesktop ? 520 : '100%'
+      margin: '28px 0 0',
+      maxWidth: 520
     }
-  }, "\"Good design does not ask permission; it simply works for people.\"")), /*#__PURE__*/React.createElement("div", {
+  }, "\"Good design does not ask permission; it simply works for people.\""), /*#__PURE__*/React.createElement("p", {
     style: {
-      gridColumn: bp.isDesktop ? 'span 5' : undefined,
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      // Logo row takes any spare height so the quote row never gapes below its line
-      gridTemplateRows: '1fr auto',
-      border: `1px solid rgba(var(--ink-rgb), 0.12)`,
-      marginTop: bp.isMobile ? 48 : bp.isTablet ? 48 : 0
+      margin: '28px 0 0'
+    }
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "/case-aatmnirbhar",
+    "data-cursor": "hover",
+    className: "sub-link",
+    style: {
+      ...aStyles.mono,
+      color: A.ink,
+      fontWeight: 500,
+      display: 'inline-block',
+      padding: '6px 0'
+    }
+  }, "Read the case study ", /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\u2192")))), /*#__PURE__*/React.createElement("figure", {
+    style: {
+      margin: 0,
+      border: `1px solid rgba(var(--ink-rgb), 0.12)`
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      gridColumn: 'span 2',
       background: 'var(--panel)',
       padding: bp.isMobile ? '32px 24px' : '48px 40px',
       display: 'flex',
@@ -1424,118 +1404,19 @@ function AOrigin() {
       height: 'auto',
       display: 'block'
     }
-  })), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("figcaption", {
     style: {
-      gridColumn: 'span 2',
-      padding: bp.isMobile ? '20px 16px' : 28,
+      padding: bp.isMobile ? '20px 16px' : 24,
       background: 'var(--accent-tint)',
-      borderTop: `1px solid rgba(var(--ink-rgb), 0.08)`
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
+      borderTop: `1px solid rgba(var(--ink-rgb), 0.08)`,
       fontFamily: '"Fraunces", Georgia, serif',
       fontWeight: 300,
       fontStyle: 'italic',
-      fontSize: bp.isMobile ? 18 : 22,
+      fontSize: bp.isMobile ? 18 : 20,
       color: 'var(--accent-strong)',
       letterSpacing: '-0.01em'
     }
-  }, "Design captures culture, not just pixels."))))));
-}
-
-// ─── PRINCIPLES ──────────────────────────────────────────────────────────────
-function APrinciples() {
-  const bp = useBreakpoint();
-  const side = sp(bp);
-  const vPad = bp.isMobile ? '72px' : '120px';
-  const cols = bp.isMobile ? '1fr' : bp.isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)';
-  return /*#__PURE__*/React.createElement("section", {
-    id: "principles",
-    style: {
-      padding: `${vPad} ${side}`,
-      borderBottom: `1px solid ${A.line}`
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: 1360,
-      margin: '0 auto'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: bp.isMobile ? 32 : 48
-    }
-  }, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 8
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...aStyles.mono,
-      color: A.accent,
-      marginBottom: 16
-    }
-  }, "Operating principles"), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: bp.isMobile ? 28 : 44,
-      fontWeight: 500,
-      letterSpacing: '-0.02em',
-      lineHeight: 1.05,
-      margin: 0
-    }
-  }, "Six beliefs that decide", /*#__PURE__*/React.createElement("br", null), "every design call")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: cols,
-      borderTop: `1px solid ${A.line}`,
-      borderLeft: `1px solid ${A.line}`
-    }
-  }, PORTFOLIO.principles.map((p, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      padding: bp.isMobile ? '24px 20px' : 32,
-      borderRight: `1px solid ${A.line}`,
-      borderBottom: `1px solid ${A.line}`,
-      minHeight: bp.isMobile ? 'auto' : 240,
-      display: 'flex',
-      flexDirection: 'column'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: 24
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...aStyles.mono,
-      color: A.accent
-    }
-  }, "Principle ", p.n), /*#__PURE__*/React.createElement("span", {
-    style: {
-      width: 6,
-      height: 6,
-      borderRadius: 99,
-      background: A.line
-    }
-  })), /*#__PURE__*/React.createElement("h3", {
-    style: {
-      fontSize: bp.isMobile ? 17 : 20,
-      fontWeight: 500,
-      letterSpacing: '-0.01em',
-      lineHeight: 1.2,
-      margin: 0,
-      marginBottom: 16,
-      color: A.ink
-    }
-  }, p.title), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 13.5,
-      color: A.mute,
-      lineHeight: 1.6,
-      margin: 0
-    }
-  }, p.body))))));
+  }, "Design captures culture, not just pixels."))));
 }
 
 // ─── CAREER ──────────────────────────────────────────────────────────────────
@@ -1598,14 +1479,151 @@ function ACareerBody({
     "aria-hidden": "true"
   }, open ? '↑' : '↓'))));
 }
+
+// The case studies from each role (Dipesh, 23 Nov 2026): `products` on each career entry, by
+// project id. All of them use the same card as TaskGPT's product rail.
+function caseStudiesOf(c) {
+  return (c.products || []).map(id => PORTFOLIO.projects.find(p => p.id === id)).filter(Boolean);
+}
+function orgSlug(c) {
+  return c.org.split(' · ')[0].toLowerCase().replace(/[^a-z]+/g, '-');
+}
+function ACaseCard({
+  p
+}) {
+  return /*#__PURE__*/React.createElement("a", {
+    href: p.href,
+    "data-cursor": "hover",
+    className: "rail-card cv-card"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "rail-thumb"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: p.thumb || p.image,
+    alt: "",
+    loading: "lazy",
+    decoding: "async"
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "rail-name"
+  }, p.title), /*#__PURE__*/React.createElement("span", {
+    className: "rail-line"
+  }, p.tagline));
+}
+
+// A role's case studies under its Read more, in the body column
+function ACareerProducts({
+  c,
+  bp
+}) {
+  const items = caseStudiesOf(c);
+  if (!items.length) return null;
+  const labelId = `cv-cases-${orgSlug(c)}`;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 24
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    id: labelId,
+    style: {
+      ...aStyles.mono,
+      margin: '0 0 12px'
+    }
+  }, "Case studies", /*#__PURE__*/React.createElement("span", {
+    className: "sr-only"
+  }, " from ", c.about || c.org.split(' · ')[0])), /*#__PURE__*/React.createElement("ul", {
+    "aria-labelledby": labelId,
+    style: {
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+      display: 'grid',
+      gap: 16,
+      // Two across on phones and tablets, three on desktop
+      gridTemplateColumns: `repeat(auto-fill, minmax(${bp.isMobile ? 116 : bp.isTablet ? 140 : 176}px, 1fr))`
+    }
+  }, items.map(p => /*#__PURE__*/React.createElement("li", {
+    key: p.id,
+    style: {
+      display: 'flex'
+    }
+  }, /*#__PURE__*/React.createElement(ACaseCard, {
+    p: p
+  })))));
+}
+
+// TaskUs: TaskGPT stays expanded as it was on the homepage (its row and the rail of its product
+// cards), and the role's other case studies follow in the same card. Wider than the body column,
+// so it sits under the whole role, lined up with the role's title.
+function ACareerFeatured({
+  c,
+  featured,
+  others,
+  bp
+}) {
+  const orgName = c.org.split(' · ')[0];
+  const labelId = `cv-cases-${orgSlug(c)}`;
+  const moreId = `${labelId}-more`;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: bp.isMobile ? '0 0 40px' : '0 0 48px 96px'
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    id: labelId,
+    style: {
+      ...aStyles.mono,
+      margin: '0 0 12px'
+    }
+  }, "Case studies", /*#__PURE__*/React.createElement("span", {
+    className: "sr-only"
+  }, " from ", orgName)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      borderTop: `1px solid ${A.line}`
+    }
+  }, /*#__PURE__*/React.createElement(AProjectRow, {
+    p: featured,
+    joined: true
+  }), /*#__PURE__*/React.createElement(AProductRail, {
+    p: featured
+  })), others.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 28
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    id: moreId,
+    style: {
+      ...aStyles.mono,
+      margin: '0 0 12px'
+    }
+  }, "Also at ", orgName), /*#__PURE__*/React.createElement("ul", {
+    "aria-labelledby": moreId,
+    style: {
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 16
+    }
+  }, others.map(p => /*#__PURE__*/React.createElement("li", {
+    key: p.id,
+    style: {
+      flex: bp.isMobile ? '0 0 calc(50% - 8px)' : '0 0 264px',
+      display: 'flex'
+    }
+  }, /*#__PURE__*/React.createElement(ACaseCard, {
+    p: p
+  }))))));
+}
 function ACareerItem({
   c,
   i,
   bp
 }) {
   const [ref, inView] = useReveal();
+  const items = caseStudiesOf(c);
+  const featured = items.find(p => p.groups);
+  const others = items.filter(p => p !== featured);
   const gridCols = bp.isMobile ? '72px 1fr' : bp.isTablet ? '72px 1fr 1fr' : '64px 260px 3fr 1fr';
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     ref: ref,
     style: {
       display: 'grid',
@@ -1678,6 +1696,9 @@ function ACareerItem({
     c: c,
     i: i,
     gap: 10
+  }), !featured && /*#__PURE__*/React.createElement(ACareerProducts, {
+    c: c,
+    bp: bp
   })), c.nda && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 10,
@@ -1739,6 +1760,9 @@ function ACareerItem({
     c: c,
     i: i,
     gap: 12
+  }), !featured && /*#__PURE__*/React.createElement(ACareerProducts, {
+    c: c,
+    bp: bp
   }), c.nda && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 12,
@@ -1780,18 +1804,21 @@ function ACareerItem({
       color: A.ink2,
       textTransform: 'uppercase'
     }
-  }, t))));
+  }, t)))), featured && /*#__PURE__*/React.createElement(ACareerFeatured, {
+    c: c,
+    featured: featured,
+    others: others,
+    bp: bp
+  }));
 }
 
-// `first`: the section opens its own page (/career), so its heading is the page's h1
-function ACareer({
-  first = false
-}) {
+// The CV, on the homepage under the hello (it was /career until 23 Nov 2026)
+function ACareer() {
   const bp = useBreakpoint();
   const side = sp(bp);
   const vPad = bp.isMobile ? '72px' : '120px';
-  const topPad = first ? bp.isMobile ? '48px' : '88px' : vPad;
-  const Heading = first ? 'h1' : 'h2';
+  const topPad = vPad;
+  const Heading = 'h2';
   return /*#__PURE__*/React.createElement("section", {
     id: "career",
     style: {
@@ -1858,164 +1885,6 @@ function ACareer({
     i: i,
     bp: bp
   })))));
-}
-
-// ─── ABOUT ───────────────────────────────────────────────────────────────────
-function AAbout() {
-  const bp = useBreakpoint();
-  const side = sp(bp);
-  const vPad = bp.isMobile ? '72px' : '120px';
-  const sidebarRow = (label, children, last = false) => /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '20px 24px',
-      borderBottom: last ? 'none' : `1px solid ${A.line}`
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...aStyles.mono,
-      color: A.mute,
-      marginBottom: 12
-    }
-  }, label), children);
-  return /*#__PURE__*/React.createElement("section", {
-    id: "studio",
-    style: {
-      padding: `${vPad} ${side}`,
-      background: A.paper,
-      borderBottom: `1px solid ${A.line}`
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: 1360,
-      margin: '0 auto'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: bp.isDesktop ? 'repeat(12, 1fr)' : '1fr',
-      gap: 24,
-      alignItems: 'start'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: bp.isDesktop ? {
-      gridColumn: 'span 7'
-    } : {}
-  }, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 8
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...aStyles.mono,
-      color: A.accent,
-      marginBottom: 16
-    }
-  }, "The person behind the work"), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: bp.isMobile ? 26 : 44,
-      fontWeight: 500,
-      letterSpacing: '-0.02em',
-      lineHeight: 1.05,
-      margin: 0,
-      marginBottom: 40
-    }
-  }, "I became a designer because", /*#__PURE__*/React.createElement("br", null), "technology is supposed to make", /*#__PURE__*/React.createElement("br", null), "life ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontStyle: 'italic'
-    }
-  }, "easier")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 15,
-      lineHeight: 1.75,
-      color: A.ink2,
-      borderTop: `1px solid ${A.line}`,
-      paddingTop: 32
-    }
-  }, PORTFOLIO.bio.map((para, i) => /*#__PURE__*/React.createElement("p", {
-    key: i,
-    style: {
-      margin: i ? '16px 0 0' : 0
-    }
-  }, para.split(/\*(.+?)\*/).map((part, j) => j % 2 ? /*#__PURE__*/React.createElement("em", {
-    key: j
-  }, part) : part))))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      gridColumn: bp.isDesktop ? 'span 5' : undefined,
-      marginTop: bp.isMobile || bp.isTablet ? 48 : 0,
-      background: A.paper2,
-      border: `1px solid ${A.line}`
-    }
-  }, sidebarRow('Availability', /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 14,
-      color: A.ink,
-      lineHeight: 1.6
-    }
-  }, "Open to work \xB7 Immediate joiner"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 14,
-      color: A.ink2,
-      lineHeight: 1.6
-    }
-  }, "Remote \xB7 Hybrid \xB7 On-site \xB7 UK-wide"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 14,
-      color: A.ink2,
-      lineHeight: 1.6
-    }
-  }, "No sponsorship required"))), sidebarRow('Experience', /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 4
-    }
-  }, ['9 years', '14 countries', '1M+ downloads shipped'].map(v => /*#__PURE__*/React.createElement("div", {
-    key: v,
-    style: {
-      fontSize: 14,
-      color: A.ink,
-      lineHeight: 1.5
-    }
-  }, v)))), sidebarRow('Skills · Tools', /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: 6
-    }
-  }, PORTFOLIO.skills.map(s => /*#__PURE__*/React.createElement("span", {
-    key: s,
-    style: {
-      fontSize: 11,
-      padding: '5px 9px',
-      background: A.paper,
-      color: A.ink2,
-      border: `1px solid ${A.line}`
-    }
-  }, s)))), sidebarRow('Notable', /*#__PURE__*/React.createElement("ul", {
-    style: {
-      listStyle: 'none',
-      padding: 0,
-      margin: 0,
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 10
-    }
-  }, PORTFOLIO.notable.map(n => /*#__PURE__*/React.createElement("li", {
-    key: n,
-    style: {
-      fontSize: 12.5,
-      display: 'flex',
-      gap: 10,
-      alignItems: 'flex-start',
-      color: A.ink2
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: A.accent,
-      flexShrink: 0,
-      lineHeight: 1.6
-    }
-  }, "\xB7"), n))), true)))));
 }
 
 // ─── CONTACT ─────────────────────────────────────────────────────────────────
@@ -2547,297 +2416,233 @@ function AContact() {
       setSending(false);
     }
   };
-  return /*#__PURE__*/React.createElement("section", {
-    id: "contact",
-    style: {
-      background: A.surf,
-      color: A.ink,
-      padding: `${vPad} ${side}`
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: 1360,
-      margin: '0 auto'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: bp.isDesktop ? '7fr 5fr' : '1fr',
-      gap: bp.isMobile ? 48 : 64,
-      alignItems: bp.isDesktop ? 'stretch' : 'start'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column'
-    }
-  }, /*#__PURE__*/React.createElement("div", null, bp.isDesktop && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 12
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...aStyles.mono,
-      color: A.accent,
-      marginBottom: 16
-    }
-  }, "Let's work together"), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 'clamp(36px, 7vw, 88px)',
-      fontWeight: 500,
-      lineHeight: 1,
-      letterSpacing: '-0.03em',
-      margin: 0
-    }
-  }, "Let's build", /*#__PURE__*/React.createElement("br", null), "something ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontStyle: 'italic',
-      color: A.accent
-    }
-  }, "meaningful")), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 15,
-      lineHeight: 1.7,
-      color: 'rgba(var(--ink-rgb), 0.80)',
-      maxWidth: bp.isDesktop ? 460 : '100%',
-      marginTop: 32
-    }
-  }, "Open to senior product design roles, consulting, and conversations with people who care about the humans behind the pixels."))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'flex-start',
-      // Matches the 12px spacer above "Let's work together" so both columns start level
-      paddingTop: bp.isDesktop ? 12 : 0
-    }
-  }, sent ? /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 24
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 8
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...aStyles.mono,
-      color: A.accent,
-      marginBottom: 12
-    }
-  }, "/ Message received"), /*#__PURE__*/React.createElement("h3", {
-    style: {
-      fontSize: bp.isMobile ? 22 : 28,
-      fontWeight: 500,
-      letterSpacing: '-0.02em',
-      lineHeight: 1.2,
-      margin: 0,
-      color: A.ink
-    }
-  }, "Thanks, ", senderName, /*#__PURE__*/React.createElement("br", null), "I'll be in touch")), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 15,
-      lineHeight: 1.7,
-      color: 'rgba(var(--ink-rgb), 0.80)',
-      margin: 0
-    }
-  }, "Your message landed safely. I read every enquiry personally and typically reply within 48 hours."), /*#__PURE__*/React.createElement("button", {
-    onClick: () => {
-      setSent(false);
-      setSendError(false);
-    },
-    "data-cursor": "hover",
-    className: "cta cta-outline",
-    style: {
-      ...aStyles.cta,
-      fontWeight: 500,
-      padding: '14px 20px',
-      background: 'transparent',
-      color: A.ink,
-      border: `1px solid rgba(var(--ink-rgb), 0.2)`,
-      cursor: 'pointer',
-      textAlign: 'left',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center'
-    }
-  }, "Send another message ", /*#__PURE__*/React.createElement("span", {
-    className: "cta-arrow",
-    style: {
-      color: A.accent
-    }
-  }, "\u2192"))) : /*#__PURE__*/React.createElement("form", {
-    onSubmit: submit,
-    noValidate: true,
-    style: {
-      display: 'flex',
-      flexDirection: 'column'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: 32
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...aStyles.mono,
-      color: 'rgba(var(--ink-rgb), 0.65)',
-      marginBottom: 12
-    }
-  }, "Write to me"), /*#__PURE__*/React.createElement("h3", {
-    style: {
-      fontSize: bp.isMobile ? 22 : 28,
-      fontWeight: 500,
-      letterSpacing: '-0.02em',
-      lineHeight: 1.1,
-      margin: 0,
-      color: A.ink
-    }
-  }, "Or drop me a line directly")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'relative'
-    }
-  }, /*#__PURE__*/React.createElement(ACropMarks, {
-    reach: bp.isMobile ? 10 : 20
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      border: `1px solid ${A_RULE}`
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: bp.isMobile ? '1fr' : '1fr 1fr'
-    }
-  }, /*#__PURE__*/React.createElement(AField, {
-    id: "field-name",
-    label: "Full Name",
-    placeholder: "Your full name",
-    autoComplete: "name",
-    value: form.name,
-    onChange: v => update('name', v),
-    onBlur: () => check('name'),
-    error: errors.name,
-    cellStyle: bp.isMobile ? {} : {
-      borderRight: `1px solid ${A_RULE}`
-    }
-  }), /*#__PURE__*/React.createElement(AField, {
-    id: "field-email",
-    label: "Email",
-    type: "email",
-    placeholder: "you@company.com",
-    autoComplete: "email",
-    value: form.email,
-    onChange: v => update('email', v),
-    onBlur: () => check('email'),
-    error: errors.email,
-    hint: errors.email === '' && emailHint && /*#__PURE__*/React.createElement("span", null, "Did you mean", ' ', /*#__PURE__*/React.createElement("button", {
-      type: "button",
-      "data-cursor": "hover",
-      onClick: () => update('email', emailHint),
+  return (
+    /*#__PURE__*/
+    // In the /about rail like the sections above it (Dipesh, 23 Nov 2026): one heading, "Drop a Hi!",
+    // then straight into the form, then the direct lines
+    React.createElement(ARail, {
+      id: "contact",
+      label: "Let's work together",
+      tone: "surf"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+      id: "contact-heading",
+      style: aboutH2(bp)
+    }, "Drop a Hi!")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
       style: {
-        background: 'none',
-        border: 'none',
-        padding: 0,
-        font: 'inherit',
-        color: A.accent,
-        textDecoration: 'underline',
-        cursor: 'pointer',
-        overflowWrap: 'anywhere',
-        textAlign: 'left'
+        marginTop: bp.isMobile ? 28 : 40,
+        maxWidth: 760
       }
-    }, emailHint), "?"),
-    cellStyle: bp.isMobile ? {
-      borderTop: `1px solid ${A_RULE}`
-    } : {}
-  })), /*#__PURE__*/React.createElement(AField, {
-    id: "field-msg",
-    label: "Message",
-    multiline: true,
-    placeholder: "What are we building?",
-    value: form.msg,
-    onChange: v => update('msg', v),
-    onBlur: () => check('msg'),
-    error: errors.msg,
-    hint: form.msg.length > MSG_MAX * 0.8 && `${form.msg.length.toLocaleString('en-GB')} / ${MSG_MAX.toLocaleString('en-GB')}`,
-    cellStyle: {
-      borderTop: `1px solid ${A_RULE}`
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    "aria-hidden": "true",
-    style: {
-      position: 'absolute',
-      left: -10000,
-      width: 1,
-      height: 1,
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "field-website"
-  }, "Website"), /*#__PURE__*/React.createElement("input", {
-    id: "field-website",
-    name: "website",
-    type: "text",
-    tabIndex: -1,
-    autoComplete: "off",
-    value: form.website,
-    onChange: e => setForm(f => ({
-      ...f,
-      website: e.target.value
-    }))
-  })), sendError && /*#__PURE__*/React.createElement("p", {
-    style: {
-      ...aStyles.mono,
-      color: A.accent,
-      margin: 0,
-      padding: '14px 20px',
-      borderTop: `1px solid ${A_RULE}`
-    }
-  }, "Something went wrong. Try emailing me directly."), /*#__PURE__*/React.createElement("button", {
-    type: "submit",
-    "data-cursor": "hover",
-    disabled: sending,
-    className: "cta cta-primary wipe",
-    style: {
-      ...aStyles.cta,
-      padding: '18px 20px',
-      width: '100%',
-      backgroundColor: sending ? 'rgba(var(--ink-rgb), 0.1)' : A.accent,
-      color: sending ? A.ink : A.paper,
-      border: 'none',
-      cursor: sending ? 'default' : 'pointer',
-      textAlign: 'left',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center'
-    }
-  }, sending ? 'Sending…' : 'Send', " ", /*#__PURE__*/React.createElement("span", {
-    className: "cta-arrow"
-  }, "\u2192"))))))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: bp.isMobile ? 48 : 64
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      ...aStyles.mono,
-      color: 'rgba(var(--ink-rgb), 0.65)',
-      marginBottom: 12
-    }
-  }, "Direct lines"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: bp.isDesktop ? 'repeat(3, minmax(0, 1fr))' : bp.isTablet ? 'repeat(2, minmax(0, 1fr))' : '1fr',
-      columnGap: 40,
-      rowGap: 4
-    }
-  }, PORTFOLIO.links.map(l => l.label === 'Email' ? /*#__PURE__*/React.createElement(ACopyEmail, {
-    key: l.label,
-    l: l,
-    bp: bp
-  }) : /*#__PURE__*/React.createElement(ADirectLink, {
-    key: l.label,
-    l: l,
-    bp: bp
-  }))))));
+    }, sent ? /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 24
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginBottom: 8
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        ...aStyles.mono,
+        color: A.accent,
+        marginBottom: 12
+      }
+    }, "/ Message received"), /*#__PURE__*/React.createElement("h3", {
+      style: {
+        fontSize: bp.isMobile ? 22 : 28,
+        fontWeight: 500,
+        letterSpacing: '-0.02em',
+        lineHeight: 1.2,
+        margin: 0,
+        color: A.ink
+      }
+    }, "Thanks, ", senderName, /*#__PURE__*/React.createElement("br", null), "I'll be in touch")), /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontSize: 15,
+        lineHeight: 1.7,
+        color: 'rgba(var(--ink-rgb), 0.80)',
+        margin: 0
+      }
+    }, "Your message landed safely. I read every enquiry personally and typically reply within 48 hours."), /*#__PURE__*/React.createElement("button", {
+      onClick: () => {
+        setSent(false);
+        setSendError(false);
+      },
+      "data-cursor": "hover",
+      className: "cta cta-outline",
+      style: {
+        ...aStyles.cta,
+        fontWeight: 500,
+        padding: '14px 20px',
+        background: 'transparent',
+        color: A.ink,
+        border: `1px solid rgba(var(--ink-rgb), 0.2)`,
+        cursor: 'pointer',
+        textAlign: 'left',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }
+    }, "Send another message ", /*#__PURE__*/React.createElement("span", {
+      className: "cta-arrow",
+      style: {
+        color: A.accent
+      }
+    }, "\u2192"))) : /*#__PURE__*/React.createElement("form", {
+      onSubmit: submit,
+      noValidate: true,
+      "aria-labelledby": "contact-heading",
+      style: {
+        display: 'flex',
+        flexDirection: 'column'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'relative'
+      }
+    }, /*#__PURE__*/React.createElement(ACropMarks, {
+      reach: bp.isMobile ? 10 : 20
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        border: `1px solid ${A_RULE}`
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'grid',
+        gridTemplateColumns: bp.isMobile ? '1fr' : '1fr 1fr'
+      }
+    }, /*#__PURE__*/React.createElement(AField, {
+      id: "field-name",
+      label: "Full Name",
+      placeholder: "Your full name",
+      autoComplete: "name",
+      value: form.name,
+      onChange: v => update('name', v),
+      onBlur: () => check('name'),
+      error: errors.name,
+      cellStyle: bp.isMobile ? {} : {
+        borderRight: `1px solid ${A_RULE}`
+      }
+    }), /*#__PURE__*/React.createElement(AField, {
+      id: "field-email",
+      label: "Email",
+      type: "email",
+      placeholder: "you@company.com",
+      autoComplete: "email",
+      value: form.email,
+      onChange: v => update('email', v),
+      onBlur: () => check('email'),
+      error: errors.email,
+      hint: errors.email === '' && emailHint && /*#__PURE__*/React.createElement("span", null, "Did you mean", ' ', /*#__PURE__*/React.createElement("button", {
+        type: "button",
+        "data-cursor": "hover",
+        onClick: () => update('email', emailHint),
+        style: {
+          background: 'none',
+          border: 'none',
+          padding: 0,
+          font: 'inherit',
+          color: A.accent,
+          textDecoration: 'underline',
+          cursor: 'pointer',
+          overflowWrap: 'anywhere',
+          textAlign: 'left'
+        }
+      }, emailHint), "?"),
+      cellStyle: bp.isMobile ? {
+        borderTop: `1px solid ${A_RULE}`
+      } : {}
+    })), /*#__PURE__*/React.createElement(AField, {
+      id: "field-msg",
+      label: "Message",
+      multiline: true,
+      placeholder: "What are we building?",
+      value: form.msg,
+      onChange: v => update('msg', v),
+      onBlur: () => check('msg'),
+      error: errors.msg,
+      hint: form.msg.length > MSG_MAX * 0.8 && `${form.msg.length.toLocaleString('en-GB')} / ${MSG_MAX.toLocaleString('en-GB')}`,
+      cellStyle: {
+        borderTop: `1px solid ${A_RULE}`
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      "aria-hidden": "true",
+      style: {
+        position: 'absolute',
+        left: -10000,
+        width: 1,
+        height: 1,
+        overflow: 'hidden'
+      }
+    }, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "field-website"
+    }, "Website"), /*#__PURE__*/React.createElement("input", {
+      id: "field-website",
+      name: "website",
+      type: "text",
+      tabIndex: -1,
+      autoComplete: "off",
+      value: form.website,
+      onChange: e => setForm(f => ({
+        ...f,
+        website: e.target.value
+      }))
+    })), sendError && /*#__PURE__*/React.createElement("p", {
+      style: {
+        ...aStyles.mono,
+        color: A.accent,
+        margin: 0,
+        padding: '14px 20px',
+        borderTop: `1px solid ${A_RULE}`
+      }
+    }, "Something went wrong. Try emailing me directly."), /*#__PURE__*/React.createElement("button", {
+      type: "submit",
+      "data-cursor": "hover",
+      disabled: sending,
+      className: "cta cta-primary wipe",
+      style: {
+        ...aStyles.cta,
+        padding: '18px 20px',
+        width: '100%',
+        backgroundColor: sending ? 'rgba(var(--ink-rgb), 0.1)' : A.accent,
+        color: sending ? A.ink : A.paper,
+        border: 'none',
+        cursor: sending ? 'default' : 'pointer',
+        textAlign: 'left',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }
+    }, sending ? 'Sending…' : 'Send', " ", /*#__PURE__*/React.createElement("span", {
+      className: "cta-arrow"
+    }, "\u2192"))))))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: bp.isMobile ? 48 : 64
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        ...aStyles.mono,
+        color: 'rgba(var(--ink-rgb), 0.65)',
+        marginBottom: 12
+      }
+    }, "Direct lines"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'grid',
+        gridTemplateColumns: bp.isDesktop ? 'repeat(3, minmax(0, 1fr))' : bp.isTablet ? 'repeat(2, minmax(0, 1fr))' : '1fr',
+        columnGap: 40,
+        rowGap: 4
+      }
+    }, PORTFOLIO.links.map(l => l.label === 'Email' ? /*#__PURE__*/React.createElement(ACopyEmail, {
+      key: l.label,
+      l: l,
+      bp: bp
+    }) : /*#__PURE__*/React.createElement(ADirectLink, {
+      key: l.label,
+      l: l,
+      bp: bp
+    })))))
+  );
 }
 
 // Field outlines at 3:1 or more against the sheet in both themes (WCAG 1.4.11)
@@ -3040,17 +2845,15 @@ function AFooter() {
 Object.assign(window, {
   VariantA,
   AboutPage,
-  CareerPage,
   ABuilt,
   ABanner,
   ANav,
   AHero,
-  AMetrics,
-  AWork,
-  AOrigin,
-  APrinciples,
   ACareer,
-  AAbout,
+  AAboutIntro,
+  APerson,
+  ABeliefs,
+  AOrigin,
   AContact,
   AFooter
 });

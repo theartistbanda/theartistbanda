@@ -68,13 +68,14 @@ function useHashTarget() {
 }
 
 // "Built with AI" (Job App Assistant, Pattern Desk) is hidden until it has proper context
-// (Dipesh, 23 Nov 2026). Its section, cards, data and nav link stay in the code: set to true to show.
+// (Dipesh, 23 Nov 2026). Its section, cards and data stay in the code: set to true to show.
 const SHOW_BUILT = false;
 
 // Old links to homepage sections that moved on 23 Nov 2026 go to their new pages
+// (#work was the Experience list, which became the CV on the homepage the same day.)
 const MOVED_SECTIONS = {
   '#contact': '/about#contact', '#origin': '/about#origin', '#studio': '/about#studio',
-  '#principles': '/about#principles', '#career': '/career',
+  '#principles': '/about#principles', '#work': '/#career',
 };
 
 function ABanner({ page = 'home' }) {
@@ -169,9 +170,10 @@ function ASiteShell({ page, children }) {
   );
 }
 
-// Homepage, kept short (Dipesh, 23 Nov 2026): the hello, the work (TaskGPT first, with its products
-// as cards) and what he has built with AI. The numbers, beliefs,
-// bio, origin story and contact live on /about, the CV on /career.
+// Homepage (Dipesh, 23 Nov 2026): the hello, then the CV company by company, each role with its
+// case studies as cards; under TaskUs, TaskGPT stays expanded into its products. The Career page
+// and the Experience list merged into this. The numbers, beliefs, bio, origin story and contact
+// live on /about.
 function VariantA() {
   const moved = MOVED_SECTIONS[location.hash];
   React.useLayoutEffect(() => { if (moved) location.replace(moved); }, []);
@@ -179,34 +181,24 @@ function VariantA() {
   return (
     <ASiteShell page="home">
       <AHero />
-      <AWork />
+      <ACareer />
       {SHOW_BUILT && <ABuilt />}
     </ASiteShell>
   );
 }
 
-// /about: intro, the four numbers, the six beliefs, the full bio, then the origin story and contact
+// /about, redesigned as one page (Dipesh, 23 Nov 2026) rather than a stack of former homepage
+// sections: the intro with the numbers, the person behind the work, the six beliefs, the origin
+// story, then contact.
 function AboutPage() {
   useHashTarget();
   return (
     <ASiteShell page="about">
       <AAboutIntro />
-      <AMetrics />
-      <APrinciples />
-      <AAbout />
+      <APerson />
+      <ABeliefs />
       <AOrigin />
       <AContact />
-    </ASiteShell>
-  );
-}
-
-// /career: the CV
-function CareerPage() {
-  useHashTarget();
-  return (
-    <ASiteShell page="career">
-      <ACareer first />
-      <ANextBand links={[['About me', '/about'], ['Get in touch', '/about#contact']]} />
     </ASiteShell>
   );
 }
@@ -225,42 +217,20 @@ function AThemeToggle() {
   );
 }
 
-// About and Career are pages; Experience is a section of the homepage. Origin (on /about) left
-// the menu on 23 Nov 2026 (Dipesh).
-const NAV_LINKS = [
-  { label: 'Experience', anchor: '#work', on: 'home' },
-  { label: 'Built with AI', anchor: '#built', on: 'home', hidden: !SHOW_BUILT },
-  { label: 'About', page: 'about', href: '/about' },
-  { label: 'Career', page: 'career', href: '/career' },
-];
-const PAGE_PATH = { home: '/', about: '/about', career: '/career' };
-
+// The menu since 23 Nov 2026 (Dipesh): one "About me" button, in the outline style of the
+// "Download PDF résumé" button. "Get in touch" lives only in the banner above. No link list, no
+// clock, no hamburger.
 function ANav({ page = 'home' }) {
   const bp = useBreakpoint();
-  const [t, setT] = React.useState('');
-  const [open, setOpen] = React.useState(false);
-
-  React.useEffect(() => {
-    const tick = () => {
-      // UK local time, so BST and GMT switch over on their own
-      // Hours and minutes only, so it changes once a minute instead of ticking (WCAG 2.2.2)
-      const uk = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', hour12: false });
-      setT(`${uk} UK`);
-    };
-    tick();
-    const i = setInterval(tick, 15000);
-    return () => clearInterval(i);
-  }, []);
-
-  const links = NAV_LINKS.filter((l) => !l.hidden).map((l) => ({
-    ...l,
-    href: l.anchor ? (page === l.on ? l.anchor : `${PAGE_PATH[l.on]}${l.anchor}`) : l.href,
-    current: l.page === page,
-  }));
   const isHome = page === 'home';
+  const pad = bp.isMobile ? '10px 12px' : '10px 16px';
+  const btn = {
+    ...aStyles.cta, padding: pad, textDecoration: 'none',
+    display: 'inline-flex', gap: 8, alignItems: 'center', flexShrink: 0
+  };
 
   return (
-    <nav style={{
+    <nav aria-label="Main" style={{
       background: 'rgba(var(--paper-rgb), 0.92)', backdropFilter: 'blur(12px)',
       borderBottom: `1px solid ${A.line}`
     }}>
@@ -268,7 +238,7 @@ function ANav({ page = 'home' }) {
         maxWidth: 1360, margin: '0 auto',
         padding: `0 ${sp(bp)}`,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        height: 56, gap: bp.isMobile ? 10 : 16
+        height: 56, gap: bp.isMobile ? 8 : 16
       }}>
         {/* Logo: back to the top of the homepage, or to the homepage from another page */}
         <a href="/" data-cursor="hover" aria-label={isHome ? 'Dipesh Gurav, back to top' : 'Dipesh Gurav, home'}
@@ -284,74 +254,14 @@ function ANav({ page = 'home' }) {
           <span style={{ fontWeight: 600, letterSpacing: '-0.01em' }}>Dipesh Gurav</span>
         </a>
 
-        {/* Desktop nav links */}
-        {bp.isDesktop && (
-          <ul style={{ display: 'flex', gap: 28, listStyle: 'none', padding: 0, margin: 0, ...aStyles.mono }}>
-            {links.map((x) => (
-              <li key={x.label}>
-                <a href={x.href} data-cursor="hover" aria-current={x.current ? 'page' : undefined}
-                  className={x.current ? 'nav-current' : undefined}
-                  style={{ color: x.current ? A.ink : A.mute, textDecoration: x.current ? undefined : 'none', display: 'flex', gap: 6 }}>
-                  {x.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {/* Clock: desktop only */}
-        {bp.isDesktop && (
-          <div style={aStyles.mono}>
-            <span style={{ color: A.ink }}>● </span>{t}
-          </div>
-        )}
-
         <div style={{ display: 'flex', gap: bp.isMobile ? 8 : 12, alignItems: 'center' }}>
           <AThemeToggle />
-          <a href={contactHref(page)} data-cursor="hover" className="cta cta-primary wipe" style={{
-            ...aStyles.cta, color: A.paper, backgroundColor: A.accent,
-            padding: bp.isMobile ? '10px 12px' : '10px 16px', textDecoration: 'none',
-            display: 'inline-flex', gap: 8, alignItems: 'center', flexShrink: 0
-          }}>
-            {bp.isMobile ? 'Contact' : 'Get in touch'} <span className="cta-arrow">→</span>
+          <a href="/about" data-cursor="hover" className="cta cta-outline" aria-current={page === 'about' ? 'page' : undefined}
+            style={{ ...btn, fontWeight: 500, color: A.ink, border: `1px solid ${page === 'about' ? A.ink : 'rgba(var(--ink-rgb), 0.2)'}` }}>
+            About me <span className="cta-arrow" style={{ color: A.accent }}>→</span>
           </a>
-
-          {/* Hamburger: tablet + mobile */}
-          {!bp.isDesktop && (
-            <button
-              onClick={() => setOpen(o => !o)}
-              aria-label="Menu"
-              aria-expanded={open}
-              style={{
-                background: 'none', border: `1px solid ${A.line}`,
-                padding: '8px 10px', cursor: 'pointer',
-                display: 'flex', flexDirection: 'column', gap: 4, flexShrink: 0
-              }}>
-              {[0, 1, 2].map(i => (
-                <span key={i} style={{ display: 'block', width: 18, height: 1, background: A.ink }} />
-              ))}
-            </button>
-          )}
         </div>
       </div>
-
-      {/* Mobile / tablet dropdown */}
-      {!bp.isDesktop && open && (
-        <div style={{ background: A.paper, borderTop: `1px solid ${A.line}`, padding: `8px ${sp(bp)} 16px` }}>
-          {links.map((x) => (
-            <a key={x.label} href={x.href} onClick={() => setOpen(false)}
-              aria-current={x.current ? 'page' : undefined}
-              style={{
-                ...aStyles.mono, display: 'flex', justifyContent: 'space-between',
-                padding: '14px 0', color: A.ink, textDecoration: 'none',
-                fontWeight: x.current ? 600 : undefined,
-                borderBottom: `1px solid ${A.line}`
-              }}>
-              {x.label} <span aria-hidden="true">→</span>
-            </a>
-          ))}
-        </div>
-      )}
     </nav>
   );
 }
@@ -419,15 +329,46 @@ function AHero() {
   );
 }
 
-// ─── ABOUT INTRO (/about) ────────────────────────────────────────────────────
-// The tagline and summary that used to open the homepage, followed on the page by the numbers.
-// The heading is in the homepage's hand-drawn face, his own voice (Dipesh, 23 Nov 2026), at heading
-// size rather than full screen so the numbers stay in view.
-function AAboutIntro() {
+// ─── ABOUT PAGE (/about) ─────────────────────────────────────────────────────
+// After the intro, each section keeps its label in a left rail on desktop (sticky while you read)
+// and its content in the nine columns beside it, so the page reads as one piece.
+function ARail({ id, label, tone, children }) {
   const bp = useBreakpoint();
   const side = sp(bp);
   return (
-    <section style={{ padding: `${bp.isMobile ? '48px' : '88px'} ${side} ${bp.isMobile ? '40px' : '64px'}` }}>
+    <section id={id} style={{
+      padding: `${bp.isMobile ? 64 : 112}px ${side}`,
+      background: tone === 'surf' ? A.surf : A.paper, borderTop: `1px solid ${A.line}`
+    }}>
+      <div style={{
+        maxWidth: 1360, margin: '0 auto', display: 'grid',
+        gridTemplateColumns: bp.isDesktop ? 'repeat(12, minmax(0, 1fr))' : 'minmax(0, 1fr)',
+        columnGap: 24, rowGap: 20
+      }}>
+        <div style={bp.isDesktop ? { gridColumn: 'span 3' } : undefined}>
+          <p style={{
+            ...aStyles.mono, color: A.accent, margin: 0,
+            ...(bp.isDesktop ? { position: 'sticky', top: 'calc(var(--header-h, 90px) + 32px)' } : {})
+          }}>{label}</p>
+        </div>
+        <div style={{ gridColumn: bp.isDesktop ? 'span 9' : undefined, minWidth: 0 }}>{children}</div>
+      </div>
+    </section>
+  );
+}
+
+function aboutH2(bp) {
+  return { fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.08, margin: 0, color: A.ink, textWrap: 'balance', maxWidth: 900 };
+}
+
+// The opening: the tagline in the homepage's hand-drawn face (his own voice), the summary, and the
+// four numbers that back it, as one quiet row rather than a band of boxes.
+function AAboutIntro() {
+  const bp = useBreakpoint();
+  const side = sp(bp);
+  const [ref, inView] = useReveal({ threshold: 0.2 });
+  return (
+    <section style={{ padding: `${bp.isMobile ? '48px' : '88px'} ${side} ${bp.isMobile ? '56px' : '96px'}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
         <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 20 }}>About</div>
         <h1 className="hand" style={{
@@ -439,118 +380,120 @@ function AAboutIntro() {
           Designing for the humans behind the <AScribble stroke={bp.isMobile ? 3 : 4} delay=".4s">pixels</AScribble>
         </h1>
         <p style={{
-          fontSize: bp.isMobile ? 16 : 18, lineHeight: 1.55, letterSpacing: '-0.01em',
-          color: A.ink2, maxWidth: 760, margin: `${bp.isMobile ? 20 : 28}px 0 0`
+          fontSize: bp.isMobile ? 16 : 19, lineHeight: 1.6, letterSpacing: '-0.01em',
+          color: A.ink2, maxWidth: 780, margin: `${bp.isMobile ? 24 : 32}px 0 0`
         }}>
           {PORTFOLIO.lead}
         </p>
+        <ul ref={ref} style={{
+          listStyle: 'none', padding: `${bp.isMobile ? 24 : 32}px 0 0`, margin: `${bp.isMobile ? 40 : 64}px 0 0`,
+          borderTop: `1px solid ${A.line}`, display: 'grid',
+          gridTemplateColumns: bp.isDesktop ? 'repeat(4, minmax(0, 1fr))' : 'repeat(2, minmax(0, 1fr))',
+          columnGap: 24, rowGap: 32
+        }}>
+          {PORTFOLIO.metrics.map((m, i) => <AAboutNumber key={i} m={m} i={i} inView={inView} bp={bp} />)}
+        </ul>
       </div>
     </section>
   );
 }
 
-// ─── NEXT (end of /about and /career) ────────────────────────────────────────
-function ANextBand({ links }) {
-  const bp = useBreakpoint();
-  const side = sp(bp);
-  const btn = {
-    ...aStyles.cta, padding: '13px 18px', border: `1px solid rgba(var(--ink-rgb), 0.2)`,
-    textDecoration: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-    gap: 24, minWidth: bp.isMobile ? 0 : 220, color: A.ink, fontWeight: 500
-  };
-  return (
-    <section aria-label="Where next" style={{ padding: `${bp.isMobile ? '48px' : '72px'} ${side}`, background: A.surf }}>
-      <div style={{
-        maxWidth: 1360, margin: '0 auto', display: 'flex',
-        flexDirection: bp.isMobile ? 'column' : 'row', gap: 12
-      }}>
-        {links.map(([label, href]) => (
-          <a key={href} href={href} data-cursor="hover" className="cta cta-outline" style={btn}>
-            {label} <span className="cta-arrow" style={{ color: A.accent }}>→</span>
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// ─── METRICS ─────────────────────────────────────────────────────────────────
-// Extracted to avoid calling useCounter inside .map() (hooks-in-loop violation)
-function AMetricItem({ m, i, inView, bp }) {
+// Counts up once when it comes into view (instantly with reduced motion)
+function AAboutNumber({ m, i, inView, bp }) {
   const v = useCounter(m.value || 0, inView, 1400 + i * 120);
   return (
-    <div style={{
-      padding: bp.isMobile ? '20px 16px' : '24px 28px',
-      borderRight: `1px solid ${A.line}`,
-      display: 'flex', flexDirection: 'column', gap: 6
-    }}>
-      <div style={aStyles.mono}>0{i + 1} / 04</div>
-      <div style={{ fontSize: bp.isMobile ? 40 : 56, fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1, color: A.ink, marginTop: 8 }}>
-        {m.text ? m.text : <>{fmt(v, { decimals: 0 })}<span style={{ color: A.accent }}>{m.suffix}</span></>}
-      </div>
-      <div style={{ fontSize: 13, color: A.ink, marginTop: 8 }}>{m.label}</div>
-      <div style={aStyles.mono}>{m.sub}</div>
-    </div>
+    <li style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <span style={{ fontSize: bp.isMobile ? 40 : 56, fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1, color: A.ink }}>
+        {fmt(v, { decimals: 0 })}{m.suffix}
+      </span>
+      <span style={{ fontSize: 14, color: A.ink, marginTop: 8 }}>{m.label}</span>
+      <span style={aStyles.mono}>{m.sub}</span>
+    </li>
   );
 }
 
-function AMetrics() {
+// The person behind the work: the bio as a reading column (the first paragraph as its opening),
+// then the facts that used to sit in a sidebar, laid out under it.
+function APerson() {
   const bp = useBreakpoint();
-  const [ref, inView] = useReveal({ threshold: 0.2 });
-  const cols = bp.isDesktop ? 'repeat(4, 1fr)' : 'repeat(2, 1fr)';
-  const side = sp(bp);
+  const [first, ...rest] = PORTFOLIO.bio;
+  const em = (para) => para.split(/\*(.+?)\*/).map((part, j) => (j % 2 ? <em key={j}>{part}</em> : part));
+  const factTitle = { ...aStyles.mono, margin: '0 0 12px', fontWeight: 400 };
+  const line = { fontSize: 14, lineHeight: 1.6, color: A.ink2, margin: 0 };
   return (
-    <section ref={ref} style={{ borderBottom: `1px solid ${A.line}`, padding: `32px ${side}` }}>
-      <div style={{ maxWidth: 1360, margin: '0 auto', display: 'grid', gridTemplateColumns: cols, borderLeft: `1px solid ${A.line}` }}>
-        {PORTFOLIO.metrics.map((m, i) => (
-          <AMetricItem key={i} m={m} i={i} inView={inView} bp={bp} />
+    <ARail id="studio" label="The person behind the work">
+      <h2 style={aboutH2(bp)}>
+        I became a designer because technology is supposed to make life <span style={{ fontStyle: 'italic' }}>easier</span>
+      </h2>
+      <div style={{ maxWidth: 720, marginTop: bp.isMobile ? 28 : 40 }}>
+        <p style={{ fontSize: bp.isMobile ? 18 : 21, lineHeight: 1.55, letterSpacing: '-0.01em', color: A.ink, margin: 0 }}>{em(first)}</p>
+        {rest.map((para, i) => (
+          <p key={i} style={{ fontSize: 16, lineHeight: 1.75, color: A.ink2, margin: '20px 0 0' }}>{em(para)}</p>
         ))}
       </div>
-    </section>
-  );
-}
-
-// ─── WORK ────────────────────────────────────────────────────────────────────
-function AWork() {
-  const bp = useBreakpoint();
-  const side = sp(bp);
-  const vPad = bp.isMobile ? '56px' : '96px';
-  return (
-    <section id="work" style={{ padding: `${vPad} ${side}`, borderBottom: `1px solid ${A.line}` }}>
-      <div style={{ maxWidth: 1360, margin: '0 auto' }}>
-
-        {/* Header */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: bp.isMobile ? '1fr' : bp.isTablet ? '1fr 1fr' : 'repeat(12, 1fr)',
-          gap: 24, marginBottom: bp.isMobile ? 32 : 64
-        }}>
-          <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
-            <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Experience · 2018–2026</div>
-            <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-              Eight products, four markets,<br />
-              measurable behaviour change
-            </h2>
-          </div>
-          {bp.isDesktop && (
-            <div style={{ gridColumn: 'span 4', alignSelf: 'end', textAlign: 'right', ...aStyles.mono }}>
-              Click any row to<br />open the case study.
-            </div>
-          )}
+      <div style={{
+        marginTop: bp.isMobile ? 48 : 72, paddingTop: 28, borderTop: `1px solid ${A.line}`,
+        display: 'grid', columnGap: 24, rowGap: 36,
+        gridTemplateColumns: bp.isDesktop ? 'repeat(3, minmax(0, 1fr))' : bp.isTablet ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)'
+      }}>
+        <div>
+          <h3 style={factTitle}>Availability</h3>
+          <p style={{ ...line, color: A.ink }}>Open to work · Immediate joiner</p>
+          <p style={line}>Remote · Hybrid · On-site · UK-wide</p>
+          <p style={line}>No sponsorship required</p>
         </div>
-
-        <div style={{ borderTop: `1px solid ${A.line}` }}>
-          {PORTFOLIO.projects.filter(p => p.selected !== false).map((p) => (
-            p.groups
-              ? <React.Fragment key={p.id}><AProjectRow p={p} joined /><AProductRail p={p} /></React.Fragment>
-              : <AProjectRow key={p.id} p={p} />
-          ))}
+        <div>
+          <h3 style={factTitle}>Experience</h3>
+          {['9 years', '14 countries', '1M+ downloads shipped'].map((x) => <p key={x} style={{ ...line, color: A.ink }}>{x}</p>)}
+        </div>
+        <div>
+          <h3 style={factTitle}>Notable</h3>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {PORTFOLIO.notable.map((n) => <li key={n} style={line}>{n}</li>)}
+          </ul>
+        </div>
+        <div style={{ gridColumn: '1 / -1' }}>
+          <h3 style={factTitle}>Skills · Tools</h3>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            {PORTFOLIO.skills.map((s) => (
+              <li key={s} style={{ fontSize: 12, padding: '5px 10px', color: A.ink2, border: `1px solid ${A.line}` }}>{s}</li>
+            ))}
+          </ul>
         </div>
       </div>
-    </section>
+    </ARail>
   );
 }
 
+// The six beliefs, after the person (Dipesh, 23 Nov 2026): a numbered list in two columns
+// instead of a grid of cards.
+function ABeliefs() {
+  const bp = useBreakpoint();
+  return (
+    <ARail id="principles" label="Operating principles" tone="surf">
+      <h2 style={aboutH2(bp)}>Six beliefs that decide every design call</h2>
+      <ol style={{
+        listStyle: 'none', padding: 0, margin: `${bp.isMobile ? 32 : 48}px 0 0`, display: 'grid',
+        gridTemplateColumns: bp.isMobile ? 'minmax(0, 1fr)' : 'repeat(2, minmax(0, 1fr))', columnGap: 48
+      }}>
+        {PORTFOLIO.principles.map((p) => (
+          <li key={p.n} style={{
+            borderTop: `1px solid ${A.line}`, padding: '24px 0 28px',
+            display: 'grid', gridTemplateColumns: '44px minmax(0, 1fr)', columnGap: 12
+          }}>
+            <span aria-hidden="true" style={{ ...aStyles.mono, color: A.accent, paddingTop: 6 }}>{p.n}</span>
+            <div>
+              <h3 style={{ fontSize: bp.isMobile ? 18 : 21, fontWeight: 500, letterSpacing: '-0.01em', lineHeight: 1.25, margin: 0, color: A.ink }}>{p.title}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.65, color: A.ink2, margin: '10px 0 0' }}>{p.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </ARail>
+  );
+}
+
+// ─── TASKGPT ROW AND ITS PRODUCT RAIL (under TaskUs in the CV) ───────────────
 // TaskGPT's own case studies as cards under its row (Dipesh, 23 Nov 2026), in the hub's groups.
 // One sideways-scrolling rail; thin vertical lines divide the groups. Swipe, scroll, Tab
 // through the cards, or use the arrow buttons. Fades at an edge show there is more.
@@ -558,6 +501,7 @@ function AProductRail({ p }) {
   const bp = useBreakpoint();
   const [ref, inView] = useReveal();
   const rail = React.useRef(null);
+  const fade = 40;
   const [edge, setEdge] = React.useState({ start: true, end: false });
   const update = React.useCallback(() => {
     const el = rail.current;
@@ -574,10 +518,20 @@ function AProductRail({ p }) {
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     el.scrollBy({ left: dir * Math.round(el.clientWidth * 0.8), behavior: reduce ? 'auto' : 'smooth' });
   };
+  // Tabbing onto a card the rail only half shows: browsers leave it cut off at the edge, so bring
+  // the whole card into view, clear of the edge fade (WCAG 2.4.11)
+  const reveal = (e) => {
+    const el = rail.current;
+    const card = e.target.closest && e.target.closest('.rail-card');
+    if (!el || !card) return;
+    const c = card.getBoundingClientRect(), r = el.getBoundingClientRect();
+    const room = fade + 8;
+    if (c.left < r.left + room) el.scrollLeft -= (r.left + room - c.left);
+    else if (c.right > r.right - room) el.scrollLeft += (c.right - (r.right - room));
+  };
 
   const count = p.groups.reduce((n, g) => n + g.items.length, 0);
   const cardW = bp.isMobile ? 228 : 264;
-  const fade = 40;
   const mask = `linear-gradient(to right, ${edge.start ? '#000' : 'transparent'} 0, #000 ${fade}px, #000 calc(100% - ${fade}px), ${edge.end ? '#000' : 'transparent'} 100%)`;
   const arrow = (dir, label, disabled) => (
     <button type="button" className="rail-btn" data-cursor="hover" aria-label={label} disabled={disabled}
@@ -608,7 +562,7 @@ function AProductRail({ p }) {
         )}
       </div>
 
-      <div ref={rail} className="rail" onScroll={update} role="region" aria-label={`${p.title} products`}
+      <div ref={rail} className="rail" onScroll={update} onFocus={reveal} role="region" aria-label={`${p.title} products`}
         style={{ maskImage: mask, WebkitMaskImage: mask }}>
         {p.groups.map((g, gi) => {
           const id = `${p.id}-group-${g.label.toLowerCase().replace(/[^a-z]+/g, '-')}`;
@@ -818,112 +772,58 @@ function AProjectRow({ p, joined }) {
   );
 }
 
-// ─── ORIGIN ──────────────────────────────────────────────────────────────────
+// ─── ORIGIN (/about) ─────────────────────────────────────────────────────────
+// The Aatmnirbhar story in the About rail: the words beside the mark, at the page's heading size.
+// Wording rules: CLAUDE.md rule 10.
 function AOrigin() {
   const bp = useBreakpoint();
-  const side = sp(bp);
-  const vPad = bp.isMobile ? '72px' : '120px';
-
   return (
-    <section id="origin" style={{ background: A.surf, color: A.ink, padding: `${vPad} ${side}`, borderBottom: `1px solid ${A.line}` }}>
-      <div style={{ maxWidth: 1360, margin: '0 auto' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: bp.isDesktop ? 'repeat(12, 1fr)' : '1fr',
-          gap: 24
-        }}>
-
-          {/* Left */}
-          <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
-            {bp.isDesktop && <div style={{ marginBottom: 12 }} />}
-            <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 20 }}>The origin story</div>
-            <h2 style={{
-              fontSize: 'clamp(36px, 7vw, 88px)',
-              fontWeight: 500, lineHeight: 1, letterSpacing: '-0.03em', margin: 0
-            }}>
-              An open competition,<br />
-              a golden bird,<br />
-              <span style={{ fontStyle: 'italic', color: A.accent }}>a mark India picked up</span>
-            </h2>
-            <p style={{ fontSize: 16, lineHeight: 1.6, color: 'rgba(var(--ink-rgb), 0.82)', maxWidth: bp.isDesktop ? 480 : '100%', marginTop: 40 }}>
-              {PORTFOLIO.origin}
-            </p>
-            <p style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 300, fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, lineHeight: 1.4, color: A.ink, marginTop: 32, maxWidth: bp.isDesktop ? 520 : '100%' }}>
-              "Good design does not ask permission; it simply works for people."
-            </p>
-          </div>
-
-          {/* Right: stats */}
-          <div style={{
-            gridColumn: bp.isDesktop ? 'span 5' : undefined,
-            display: 'grid', gridTemplateColumns: '1fr 1fr',
-            // Logo row takes any spare height so the quote row never gapes below its line
-            gridTemplateRows: '1fr auto',
-            border: `1px solid rgba(var(--ink-rgb), 0.12)`,
-            marginTop: bp.isMobile ? 48 : bp.isTablet ? 48 : 0
-          }}>
-            <div style={{
-              gridColumn: 'span 2',
-              background: 'var(--panel)',
-              padding: bp.isMobile ? '32px 24px' : '48px 40px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center'
-            }}>
-              <img
-                src="/assets/aatmnirbhar-logo.webp"
-                alt="The Aatmnirbhar Bharat mark: a bird with saffron, white and green wings rising around the Ashok Chakra, with Aatmnirbhar Bharat written in Devanagari below"
-                style={{ width: bp.isMobile ? '60%' : '55%', maxWidth: 260, height: 'auto', display: 'block' }}
-              />
-            </div>
-            <div style={{ gridColumn: 'span 2', padding: bp.isMobile ? '20px 16px' : 28, background: 'var(--accent-tint)', borderTop: `1px solid rgba(var(--ink-rgb), 0.08)` }}>
-              <div style={{ fontFamily: '"Fraunces", Georgia, serif', fontWeight: 300, fontStyle: 'italic', fontSize: bp.isMobile ? 18 : 22, color: 'var(--accent-strong)', letterSpacing: '-0.01em' }}>
-                Design captures culture, not just pixels.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── PRINCIPLES ──────────────────────────────────────────────────────────────
-function APrinciples() {
-  const bp = useBreakpoint();
-  const side = sp(bp);
-  const vPad = bp.isMobile ? '72px' : '120px';
-  const cols = bp.isMobile ? '1fr' : bp.isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)';
-
-  return (
-    <section id="principles" style={{ padding: `${vPad} ${side}`, borderBottom: `1px solid ${A.line}` }}>
-      <div style={{ maxWidth: 1360, margin: '0 auto' }}>
-        <div style={{ marginBottom: bp.isMobile ? 32 : 48 }}>
-          {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
-          <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Operating principles</div>
-          <h2 style={{ fontSize: bp.isMobile ? 28 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0 }}>
-            Six beliefs that decide<br />every design call
+    <ARail id="origin" label="The origin story">
+      <div style={{
+        display: 'grid', alignItems: 'start', gap: bp.isDesktop ? 48 : 40,
+        gridTemplateColumns: bp.isDesktop ? 'minmax(0, 5fr) minmax(0, 4fr)' : 'minmax(0, 1fr)'
+      }}>
+        <div>
+          <h2 style={aboutH2(bp)}>
+            An open competition, a golden bird,{' '}
+            <span style={{ fontStyle: 'italic', display: 'block' }}>a mark India picked up</span>
           </h2>
+          <p style={{ fontSize: 16, lineHeight: 1.75, color: A.ink2, margin: '28px 0 0', maxWidth: 560 }}>{PORTFOLIO.origin}</p>
+          <p style={{
+            fontFamily: '"Fraunces", Georgia, serif', fontWeight: 300, fontStyle: 'italic',
+            fontSize: bp.isMobile ? 18 : 21, lineHeight: 1.45, color: A.ink, margin: '28px 0 0', maxWidth: 520
+          }}>
+            "Good design does not ask permission; it simply works for people."
+          </p>
+          <p style={{ margin: '28px 0 0' }}>
+            <a href="/case-aatmnirbhar" data-cursor="hover" className="sub-link"
+              style={{ ...aStyles.mono, color: A.ink, fontWeight: 500, display: 'inline-block', padding: '6px 0' }}>
+              Read the case study <span aria-hidden="true">→</span>
+            </a>
+          </p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: cols, borderTop: `1px solid ${A.line}`, borderLeft: `1px solid ${A.line}` }}>
-          {PORTFOLIO.principles.map((p, i) => (
-            <div key={i} style={{
-              padding: bp.isMobile ? '24px 20px' : 32,
-              borderRight: `1px solid ${A.line}`, borderBottom: `1px solid ${A.line}`,
-              minHeight: bp.isMobile ? 'auto' : 240,
-              display: 'flex', flexDirection: 'column'
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-                <span style={{ ...aStyles.mono, color: A.accent }}>Principle {p.n}</span>
-                <span style={{ width: 6, height: 6, borderRadius: 99, background: A.line }} />
-              </div>
-              <h3 style={{ fontSize: bp.isMobile ? 17 : 20, fontWeight: 500, letterSpacing: '-0.01em', lineHeight: 1.2, margin: 0, marginBottom: 16, color: A.ink }}>
-                {p.title}
-              </h3>
-              <p style={{ fontSize: 13.5, color: A.mute, lineHeight: 1.6, margin: 0 }}>{p.body}</p>
-            </div>
-          ))}
-        </div>
+        <figure style={{ margin: 0, border: `1px solid rgba(var(--ink-rgb), 0.12)` }}>
+          <div style={{
+            background: 'var(--panel)', padding: bp.isMobile ? '32px 24px' : '48px 40px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center'
+          }}>
+            <img
+              src="/assets/aatmnirbhar-logo.webp"
+              alt="The Aatmnirbhar Bharat mark: a bird with saffron, white and green wings rising around the Ashok Chakra, with Aatmnirbhar Bharat written in Devanagari below"
+              style={{ width: bp.isMobile ? '60%' : '55%', maxWidth: 260, height: 'auto', display: 'block' }}
+            />
+          </div>
+          <figcaption style={{
+            padding: bp.isMobile ? '20px 16px' : 24, background: 'var(--accent-tint)',
+            borderTop: `1px solid rgba(var(--ink-rgb), 0.08)`,
+            fontFamily: '"Fraunces", Georgia, serif', fontWeight: 300, fontStyle: 'italic',
+            fontSize: bp.isMobile ? 18 : 20, color: 'var(--accent-strong)', letterSpacing: '-0.01em'
+          }}>
+            Design captures culture, not just pixels.
+          </figcaption>
+        </figure>
       </div>
-    </section>
+    </ARail>
   );
 }
 
@@ -970,8 +870,83 @@ function ACareerBody({ c, i, gap }) {
   );
 }
 
+// The case studies from each role (Dipesh, 23 Nov 2026): `products` on each career entry, by
+// project id. All of them use the same card as TaskGPT's product rail.
+function caseStudiesOf(c) {
+  return (c.products || []).map((id) => PORTFOLIO.projects.find((p) => p.id === id)).filter(Boolean);
+}
+function orgSlug(c) {
+  return c.org.split(' · ')[0].toLowerCase().replace(/[^a-z]+/g, '-');
+}
+
+function ACaseCard({ p }) {
+  return (
+    <a href={p.href} data-cursor="hover" className="rail-card cv-card">
+      <span className="rail-thumb"><img src={p.thumb || p.image} alt="" loading="lazy" decoding="async" /></span>
+      <span className="rail-name">{p.title}</span>
+      <span className="rail-line">{p.tagline}</span>
+    </a>
+  );
+}
+
+// A role's case studies under its Read more, in the body column
+function ACareerProducts({ c, bp }) {
+  const items = caseStudiesOf(c);
+  if (!items.length) return null;
+  const labelId = `cv-cases-${orgSlug(c)}`;
+  return (
+    <div style={{ marginTop: 24 }}>
+      <p id={labelId} style={{ ...aStyles.mono, margin: '0 0 12px' }}>
+        Case studies<span className="sr-only"> from {c.about || c.org.split(' · ')[0]}</span>
+      </p>
+      <ul aria-labelledby={labelId} style={{
+        listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 16,
+        // Two across on phones and tablets, three on desktop
+        gridTemplateColumns: `repeat(auto-fill, minmax(${bp.isMobile ? 116 : bp.isTablet ? 140 : 176}px, 1fr))`
+      }}>
+        {items.map((p) => <li key={p.id} style={{ display: 'flex' }}><ACaseCard p={p} /></li>)}
+      </ul>
+    </div>
+  );
+}
+
+// TaskUs: TaskGPT stays expanded as it was on the homepage (its row and the rail of its product
+// cards), and the role's other case studies follow in the same card. Wider than the body column,
+// so it sits under the whole role, lined up with the role's title.
+function ACareerFeatured({ c, featured, others, bp }) {
+  const orgName = c.org.split(' · ')[0];
+  const labelId = `cv-cases-${orgSlug(c)}`;
+  const moreId = `${labelId}-more`;
+  return (
+    <div style={{ padding: bp.isMobile ? '0 0 40px' : '0 0 48px 96px' }}>
+      <p id={labelId} style={{ ...aStyles.mono, margin: '0 0 12px' }}>
+        Case studies<span className="sr-only"> from {orgName}</span>
+      </p>
+      <div style={{ borderTop: `1px solid ${A.line}` }}>
+        <AProjectRow p={featured} joined />
+        <AProductRail p={featured} />
+      </div>
+      {others.length > 0 && (
+        <div style={{ marginTop: 28 }}>
+          <p id={moreId} style={{ ...aStyles.mono, margin: '0 0 12px' }}>Also at {orgName}</p>
+          <ul aria-labelledby={moreId} style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+            {others.map((p) => (
+              <li key={p.id} style={{ flex: bp.isMobile ? '0 0 calc(50% - 8px)' : '0 0 264px', display: 'flex' }}>
+                <ACaseCard p={p} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ACareerItem({ c, i, bp }) {
   const [ref, inView] = useReveal();
+  const items = caseStudiesOf(c);
+  const featured = items.find((p) => p.groups);
+  const others = items.filter((p) => p !== featured);
 
   const gridCols = bp.isMobile
     ? '72px 1fr'
@@ -980,6 +955,7 @@ function ACareerItem({ c, i, bp }) {
     : '64px 260px 3fr 1fr';
 
   return (
+    <React.Fragment>
     <div ref={ref} style={{
       display: 'grid',
       gridTemplateColumns: gridCols,
@@ -1017,6 +993,7 @@ function ACareerItem({ c, i, bp }) {
             <div style={{ fontSize: 14, color: A.accent, marginTop: 4 }}>{c.org}</div>
             <div style={{ marginTop: 12 }}>
               <ACareerBody c={c} i={i} gap={10} />
+              {!featured && <ACareerProducts c={c} bp={bp} />}
             </div>
             {c.nda && (
               <div style={{ marginTop: 10, display: 'flex', alignItems: 'flex-start', gap: 7 }}>
@@ -1048,6 +1025,7 @@ function ACareerItem({ c, i, bp }) {
       {bp.isDesktop && (
         <div>
           <ACareerBody c={c} i={i} gap={12} />
+          {!featured && <ACareerProducts c={c} bp={bp} />}
           {c.nda && (
             <div style={{ marginTop: 12, display: 'flex', alignItems: 'flex-start', gap: 7 }}>
               <span style={{ width: 5, height: 5, borderRadius: 99, background: A.accent, display: 'inline-block', flexShrink: 0, marginTop: 3 }} />
@@ -1064,16 +1042,18 @@ function ACareerItem({ c, i, bp }) {
         </span>
       )}
     </div>
+    {featured && <ACareerFeatured c={c} featured={featured} others={others} bp={bp} />}
+    </React.Fragment>
   );
 }
 
-// `first`: the section opens its own page (/career), so its heading is the page's h1
-function ACareer({ first = false }) {
+// The CV, on the homepage under the hello (it was /career until 23 Nov 2026)
+function ACareer() {
   const bp = useBreakpoint();
   const side = sp(bp);
   const vPad = bp.isMobile ? '72px' : '120px';
-  const topPad = first ? (bp.isMobile ? '48px' : '88px') : vPad;
-  const Heading = first ? 'h1' : 'h2';
+  const topPad = vPad;
+  const Heading = 'h2';
 
   return (
     <section id="career" style={{ padding: `${topPad} ${side} ${vPad}`, borderBottom: `1px solid ${A.line}` }}>
@@ -1104,88 +1084,6 @@ function ACareer({ first = false }) {
           {PORTFOLIO.career.map((c, i) => (
             <ACareerItem key={i} c={c} i={i} bp={bp} />
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── ABOUT ───────────────────────────────────────────────────────────────────
-function AAbout() {
-  const bp = useBreakpoint();
-  const side = sp(bp);
-  const vPad = bp.isMobile ? '72px' : '120px';
-
-  const sidebarRow = (label, children, last = false) => (
-    <div style={{ padding: '20px 24px', borderBottom: last ? 'none' : `1px solid ${A.line}` }}>
-      <div style={{ ...aStyles.mono, color: A.mute, marginBottom: 12 }}>{label}</div>
-      {children}
-    </div>
-  );
-
-  return (
-    <section id="studio" style={{ padding: `${vPad} ${side}`, background: A.paper, borderBottom: `1px solid ${A.line}` }}>
-      <div style={{ maxWidth: 1360, margin: '0 auto' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: bp.isDesktop ? 'repeat(12, 1fr)' : '1fr',
-          gap: 24,
-          alignItems: 'start'
-        }}>
-          {/* Main bio */}
-          <div style={bp.isDesktop ? { gridColumn: 'span 7' } : {}}>
-            {bp.isDesktop && <div style={{ marginBottom: 8 }} />}
-            <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>The person behind the work</div>
-            <h2 style={{ fontSize: bp.isMobile ? 26 : 44, fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.05, margin: 0, marginBottom: 40 }}>
-              I became a designer because<br />technology is supposed to make<br />life <span style={{ fontStyle: 'italic' }}>easier</span>
-            </h2>
-            <div style={{ fontSize: 15, lineHeight: 1.75, color: A.ink2, borderTop: `1px solid ${A.line}`, paddingTop: 32 }}>
-              {PORTFOLIO.bio.map((para, i) => (
-                <p key={i} style={{ margin: i ? '16px 0 0' : 0 }}>
-                  {para.split(/\*(.+?)\*/).map((part, j) => (j % 2 ? <em key={j}>{part}</em> : part))}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          {/* Sidebar: unified panel */}
-          <div style={{
-            gridColumn: bp.isDesktop ? 'span 5' : undefined,
-            marginTop: bp.isMobile || bp.isTablet ? 48 : 0,
-            background: A.paper2,
-            border: `1px solid ${A.line}`,
-          }}>
-            {sidebarRow('Availability', (
-              <>
-                <div style={{ fontSize: 14, color: A.ink, lineHeight: 1.6 }}>Open to work · Immediate joiner</div>
-                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>Remote · Hybrid · On-site · UK-wide</div>
-                <div style={{ fontSize: 14, color: A.ink2, lineHeight: 1.6 }}>No sponsorship required</div>
-              </>
-            ))}
-            {sidebarRow('Experience', (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                {['9 years', '14 countries', '1M+ downloads shipped'].map((v) => (
-                  <div key={v} style={{ fontSize: 14, color: A.ink, lineHeight: 1.5 }}>{v}</div>
-                ))}
-              </div>
-            ))}
-            {sidebarRow('Skills · Tools', (
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                {PORTFOLIO.skills.map((s) => (
-                  <span key={s} style={{ fontSize: 11, padding: '5px 9px', background: A.paper, color: A.ink2, border: `1px solid ${A.line}` }}>{s}</span>
-                ))}
-              </div>
-            ))}
-            {sidebarRow('Notable', (
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {PORTFOLIO.notable.map((n) => (
-                  <li key={n} style={{ fontSize: 12.5, display: 'flex', gap: 10, alignItems: 'flex-start', color: A.ink2 }}>
-                    <span style={{ color: A.accent, flexShrink: 0, lineHeight: 1.6 }}>·</span>{n}
-                  </li>
-                ))}
-              </ul>
-            ), true)}
-          </div>
         </div>
       </div>
     </section>
@@ -1475,39 +1373,14 @@ function AContact() {
   };
 
   return (
-    <section id="contact" style={{ background: A.surf, color: A.ink, padding: `${vPad} ${side}` }}>
-      <div style={{ maxWidth: 1360, margin: '0 auto' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: bp.isDesktop ? '7fr 5fr' : '1fr',
-          gap: bp.isMobile ? 48 : 64,
-          alignItems: bp.isDesktop ? 'stretch' : 'start'
-        }}>
-          {/* Left: intro top, links pushed to bottom */}
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div>
-              {bp.isDesktop && <div style={{ marginBottom: 12 }} />}
-              <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 16 }}>Let's work together</div>
-              <h2 style={{
-                fontSize: 'clamp(36px, 7vw, 88px)',
-                fontWeight: 500, lineHeight: 1, letterSpacing: '-0.03em', margin: 0
-              }}>
-                Let's build<br />
-                something <span style={{ fontStyle: 'italic', color: A.accent }}>meaningful</span>
-              </h2>
-              <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(var(--ink-rgb), 0.80)', maxWidth: bp.isDesktop ? 460 : '100%', marginTop: 32 }}>
-                Open to senior product design roles, consulting, and conversations with people who care about the humans behind the pixels.
-              </p>
-            </div>
-          </div>
-
-          {/* Right: form, starting level with the intro */}
-          <div style={{
-            display: 'flex', flexDirection: 'column',
-            justifyContent: 'flex-start',
-            // Matches the 12px spacer above "Let's work together" so both columns start level
-            paddingTop: bp.isDesktop ? 12 : 0
-          }}>
+    // In the /about rail like the sections above it (Dipesh, 23 Nov 2026): one heading, "Drop a Hi!",
+    // then straight into the form, then the direct lines
+    <ARail id="contact" label="Let's work together" tone="surf">
+        <div>
+          <h2 id="contact-heading" style={aboutH2(bp)}>Drop a Hi!</h2>
+        </div>
+        <div>
+          <div style={{ marginTop: bp.isMobile ? 28 : 40, maxWidth: 760 }}>
             {sent ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
                 <div style={{ marginBottom: 8 }}>
@@ -1535,17 +1408,7 @@ function AContact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={submit} noValidate style={{ display: 'flex', flexDirection: 'column' }}>
-                <div style={{ marginBottom: 32 }}>
-                  <div style={{ ...aStyles.mono, color: 'rgba(var(--ink-rgb), 0.65)', marginBottom: 12 }}>Write to me</div>
-                  <h3 style={{
-                    fontSize: bp.isMobile ? 22 : 28,
-                    fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.1,
-                    margin: 0, color: A.ink
-                  }}>
-                    Or drop me a line directly
-                  </h3>
-                </div>
+              <form onSubmit={submit} noValidate aria-labelledby="contact-heading" style={{ display: 'flex', flexDirection: 'column' }}>
                 {/* Ruled sheet: hairline cells with crop marks at the corners, like a paper form */}
                 <div style={{ position: 'relative' }}>
                   <ACropMarks reach={bp.isMobile ? 10 : 20} />
@@ -1612,8 +1475,7 @@ function AContact() {
               : <ADirectLink key={l.label} l={l} bp={bp} />))}
           </div>
         </div>
-      </div>
-    </section>
+    </ARail>
   );
 }
 
@@ -1712,4 +1574,4 @@ function AFooter() {
   );
 }
 
-Object.assign(window, { VariantA, AboutPage, CareerPage, ABuilt, ABanner, ANav, AHero, AMetrics, AWork, AOrigin, APrinciples, ACareer, AAbout, AContact, AFooter });
+Object.assign(window, { VariantA, AboutPage, ABuilt, ABanner, ANav, AHero, ACareer, AAboutIntro, APerson, ABeliefs, AOrigin, AContact, AFooter });
