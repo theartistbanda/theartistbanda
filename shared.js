@@ -299,11 +299,6 @@ const PORTFOLIO = {
     href: 'tel:+447352673152',
     flag: 'gb'
   }, {
-    label: 'Phone · India',
-    value: '+91 90094 80090',
-    href: 'tel:+919009480090',
-    flag: 'in'
-  }, {
     label: 'LinkedIn',
     value: 'in/dipeshgurav-design',
     href: 'https://www.linkedin.com/in/dipeshgurav-design/'

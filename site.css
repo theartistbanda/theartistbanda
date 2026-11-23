@@ -42,10 +42,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 /* Homepage hero: fills the screen below the sticky header (--header-h, set by the page) */
 .hero-full { min-height: calc(100vh - var(--header-h, 90px)); min-height: calc(100svh - var(--header-h, 90px)); }
 .hand { font-family: "Caveat", "Bradley Hand", "Segoe Print", cursive; }
-/* A hand-drawn line under the hero's last word. It draws itself once, after the words arrive. */
+/* A hand-drawn line under a word (the homepage hero, the /about heading). It draws itself once. */
 .scribble-wrap { position: relative; display: inline-block; white-space: nowrap; }
 .scribble { position: absolute; left: -3%; bottom: -0.06em; width: 110%; height: 0.2em; overflow: visible; color: var(--ink2); }
-.scribble path { stroke-dasharray: 1; stroke-dashoffset: 0; animation: scribbleIn .9s cubic-bezier(.6, 0, .3, 1) 1.5s both; }
+.scribble path { stroke-dasharray: 1; stroke-dashoffset: 0; animation: scribbleIn .9s cubic-bezier(.6, 0, .3, 1) var(--scribble-delay, 1.5s) both; }
 @keyframes scribbleIn { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 /* TaskGPT products under its row: one sideways rail of cards. The padding keeps focus rings unclipped. */
 .rail { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: 6px 64px; padding: 6px 6px 18px; margin: 0 -6px; scrollbar-width: thin; scrollbar-color: rgba(var(--ink-rgb), 0.25) transparent; }

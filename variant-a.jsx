@@ -225,12 +225,12 @@ function AThemeToggle() {
   );
 }
 
-// About and Career are pages; Experience is a section of the homepage, Origin a section of /about
+// About and Career are pages; Experience is a section of the homepage. Origin (on /about) left
+// the menu on 23 Nov 2026 (Dipesh).
 const NAV_LINKS = [
   { label: 'Experience', anchor: '#work', on: 'home' },
   { label: 'Built with AI', anchor: '#built', on: 'home', hidden: !SHOW_BUILT },
   { label: 'About', page: 'about', href: '/about' },
-  { label: 'Origin', anchor: '#origin', on: 'about' },
   { label: 'Career', page: 'career', href: '/career' },
 ];
 const PAGE_PATH = { home: '/', about: '/about', career: '/career' };
@@ -356,6 +356,21 @@ function ANav({ page = 'home' }) {
   );
 }
 
+// A word with a hand-drawn line under it, which draws itself once (.scribble in /site.css).
+// `delay` is how long it waits: after the homepage hello has faded in, or sooner on /about.
+function AScribble({ children, stroke = 5, delay }) {
+  return (
+    <span className="scribble-wrap">
+      {children}
+      <svg className="scribble" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"
+        style={delay ? { '--scribble-delay': delay } : undefined}>
+        <path d="M4 15 C 52 6, 98 20, 150 12 S 246 5, 296 13" pathLength="1" fill="none"
+          stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+      </svg>
+    </span>
+  );
+}
+
 // ─── HERO ────────────────────────────────────────────────────────────────────
 // Dipesh, 23 Nov 2026: only the hello, filling the screen below the header on every size.
 // Left aligned and large enough to span the width, in a hand-drawn face (Caveat) for warmth,
@@ -397,13 +412,7 @@ function AHero() {
           color: A.ink, margin: `${bp.isMobile ? 16 : 20}px 0 0`, textWrap: 'pretty'
         }}>
           {words.join(' ')}{' '}
-          <span className="scribble-wrap">
-            {last}
-            <svg className="scribble" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <path d="M4 15 C 52 6, 98 20, 150 12 S 246 5, 296 13" pathLength="1" fill="none"
-                stroke="currentColor" strokeWidth={bp.isMobile ? 3 : 5} strokeLinecap="round" vectorEffect="non-scaling-stroke" />
-            </svg>
-          </span>
+          <AScribble stroke={bp.isMobile ? 3 : 5}>{last}</AScribble>
         </p>
       </div>
     </section>
@@ -411,7 +420,9 @@ function AHero() {
 }
 
 // ─── ABOUT INTRO (/about) ────────────────────────────────────────────────────
-// The tagline and summary that used to open the homepage, followed on the page by the numbers
+// The tagline and summary that used to open the homepage, followed on the page by the numbers.
+// The heading is in the homepage's hand-drawn face, his own voice (Dipesh, 23 Nov 2026), at heading
+// size rather than full screen so the numbers stay in view.
 function AAboutIntro() {
   const bp = useBreakpoint();
   const side = sp(bp);
@@ -419,14 +430,13 @@ function AAboutIntro() {
     <section style={{ padding: `${bp.isMobile ? '48px' : '88px'} ${side} ${bp.isMobile ? '40px' : '64px'}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
         <div style={{ ...aStyles.mono, color: A.accent, marginBottom: 20 }}>About</div>
-        <h1 style={{
-          fontFamily: '"Inter Tight", "Inter", sans-serif',
-          fontWeight: 500,
-          fontSize: bp.isMobile ? 'clamp(36px, 10vw, 52px)' : 'clamp(48px, 5vw, 80px)',
-          lineHeight: 1.04, letterSpacing: '-0.035em', textWrap: 'balance',
-          margin: 0, maxWidth: 1000, color: A.ink
+        <h1 className="hand" style={{
+          fontWeight: 600,
+          fontSize: bp.isMobile ? 'clamp(44px, 13vw, 64px)' : bp.isTablet ? 'clamp(60px, 9vw, 88px)' : 'clamp(72px, 6.6vw, 112px)',
+          lineHeight: 1, letterSpacing: '-0.005em', textWrap: 'balance',
+          margin: 0, maxWidth: 1100, color: A.ink
         }}>
-          Designing for the humans behind the <span style={{ fontStyle: 'italic', fontWeight: 400 }}>pixels</span>
+          Designing for the humans behind the <AScribble stroke={bp.isMobile ? 3 : 4} delay=".4s">pixels</AScribble>
         </h1>
         <p style={{
           fontSize: bp.isMobile ? 16 : 18, lineHeight: 1.55, letterSpacing: '-0.01em',
@@ -1588,8 +1598,8 @@ function AContact() {
           </div>
         </div>
 
-        {/* Direct lines: full width under the intro and form. Three across on desktop
-            (email and phones, then profiles), two on tablet, one on phones. */}
+        {/* Direct lines: full width under the intro and form. Three across on desktop, two on
+            tablet, one on phones. The India phone tile left on 23 Nov 2026 (Dipesh). */}
         <div style={{ marginTop: bp.isMobile ? 48 : 64 }}>
           <div style={{ ...aStyles.mono, color: 'rgba(var(--ink-rgb), 0.65)', marginBottom: 12 }}>Direct lines</div>
           <div style={{

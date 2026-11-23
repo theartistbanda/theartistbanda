@@ -277,7 +277,8 @@ function AThemeToggle() {
   }, "Switch to light theme"));
 }
 
-// About and Career are pages; Experience is a section of the homepage, Origin a section of /about
+// About and Career are pages; Experience is a section of the homepage. Origin (on /about) left
+// the menu on 23 Nov 2026 (Dipesh).
 const NAV_LINKS = [{
   label: 'Experience',
   anchor: '#work',
@@ -291,10 +292,6 @@ const NAV_LINKS = [{
   label: 'About',
   page: 'about',
   href: '/about'
-}, {
-  label: 'Origin',
-  anchor: '#origin',
-  on: 'about'
 }, {
   label: 'Career',
   page: 'career',
@@ -485,6 +482,35 @@ function ANav({
   }, "\u2192")))));
 }
 
+// A word with a hand-drawn line under it, which draws itself once (.scribble in /site.css).
+// `delay` is how long it waits: after the homepage hello has faded in, or sooner on /about.
+function AScribble({
+  children,
+  stroke = 5,
+  delay
+}) {
+  return /*#__PURE__*/React.createElement("span", {
+    className: "scribble-wrap"
+  }, children, /*#__PURE__*/React.createElement("svg", {
+    className: "scribble",
+    viewBox: "0 0 300 24",
+    preserveAspectRatio: "none",
+    "aria-hidden": "true",
+    focusable: "false",
+    style: delay ? {
+      '--scribble-delay': delay
+    } : undefined
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M4 15 C 52 6, 98 20, 150 12 S 246 5, 296 13",
+    pathLength: "1",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: stroke,
+    strokeLinecap: "round",
+    vectorEffect: "non-scaling-stroke"
+  })));
+}
+
 // ─── HERO ────────────────────────────────────────────────────────────────────
 // Dipesh, 23 Nov 2026: only the hello, filling the screen below the header on every size.
 // Left aligned and large enough to span the width, in a hand-drawn face (Caveat) for warmth,
@@ -541,27 +567,15 @@ function AHero() {
       margin: `${bp.isMobile ? 16 : 20}px 0 0`,
       textWrap: 'pretty'
     }
-  }, words.join(' '), ' ', /*#__PURE__*/React.createElement("span", {
-    className: "scribble-wrap"
-  }, last, /*#__PURE__*/React.createElement("svg", {
-    className: "scribble",
-    viewBox: "0 0 300 24",
-    preserveAspectRatio: "none",
-    "aria-hidden": "true",
-    focusable: "false"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M4 15 C 52 6, 98 20, 150 12 S 246 5, 296 13",
-    pathLength: "1",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: bp.isMobile ? 3 : 5,
-    strokeLinecap: "round",
-    vectorEffect: "non-scaling-stroke"
-  }))))));
+  }, words.join(' '), ' ', /*#__PURE__*/React.createElement(AScribble, {
+    stroke: bp.isMobile ? 3 : 5
+  }, last))));
 }
 
 // ─── ABOUT INTRO (/about) ────────────────────────────────────────────────────
-// The tagline and summary that used to open the homepage, followed on the page by the numbers
+// The tagline and summary that used to open the homepage, followed on the page by the numbers.
+// The heading is in the homepage's hand-drawn face, his own voice (Dipesh, 23 Nov 2026), at heading
+// size rather than full screen so the numbers stay in view.
 function AAboutIntro() {
   const bp = useBreakpoint();
   const side = sp(bp);
@@ -581,22 +595,20 @@ function AAboutIntro() {
       marginBottom: 20
     }
   }, "About"), /*#__PURE__*/React.createElement("h1", {
+    className: "hand",
     style: {
-      fontFamily: '"Inter Tight", "Inter", sans-serif',
-      fontWeight: 500,
-      fontSize: bp.isMobile ? 'clamp(36px, 10vw, 52px)' : 'clamp(48px, 5vw, 80px)',
-      lineHeight: 1.04,
-      letterSpacing: '-0.035em',
+      fontWeight: 600,
+      fontSize: bp.isMobile ? 'clamp(44px, 13vw, 64px)' : bp.isTablet ? 'clamp(60px, 9vw, 88px)' : 'clamp(72px, 6.6vw, 112px)',
+      lineHeight: 1,
+      letterSpacing: '-0.005em',
       textWrap: 'balance',
       margin: 0,
-      maxWidth: 1000,
+      maxWidth: 1100,
       color: A.ink
     }
-  }, "Designing for the humans behind the ", /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontStyle: 'italic',
-      fontWeight: 400
-    }
+  }, "Designing for the humans behind the ", /*#__PURE__*/React.createElement(AScribble, {
+    stroke: bp.isMobile ? 3 : 4,
+    delay: ".4s"
   }, "pixels")), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: bp.isMobile ? 16 : 18,
