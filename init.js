@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
   );
   if (pages[page]) return;
 
-  // Preload hover cover images only on devices that support hover (desktop),
-  // and only after the page is idle, so it never competes with first render.
+  // Warm the case study card images on desktop, once the page is idle, so they never compete
+  // with the first render.
   function preloadCovers() {
     if (!window.matchMedia('(hover: hover)').matches) return;
     ['/assets/taskgpt-dashboard.webp', '/assets/evaluateus-cover.webp', '/assets/yourhour-cover.webp', '/assets/levelup-cover.webp', '/assets/aatmnirbhar-cover.webp', '/assets/jego-cover.webp', '/assets/earlyfoods-cover.webp'].forEach(function (src) {

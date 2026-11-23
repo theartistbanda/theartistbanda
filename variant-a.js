@@ -792,9 +792,10 @@ function ABeliefs() {
   }, p.body))))));
 }
 
-// ─── TASKGPT ROW AND ITS PRODUCT RAIL (under TaskUs in the CV) ───────────────
-// TaskGPT's own case studies as cards under its row (Dipesh, 23 Nov 2026), in the hub's groups.
-// One sideways-scrolling rail; thin vertical lines divide the groups. Swipe, scroll, Tab
+// ─── TASKGPT PRODUCT RAIL (under TaskUs in the CV) ───────────────────────────
+// TaskGPT's own case studies as cards (Dipesh, 23 Nov 2026), in the hub's groups, led by the full
+// case study. It sits under TaskUs's case study cards, in the role's text column like every other
+// role's cards. One sideways-scrolling rail; thin vertical lines divide the groups. Swipe, scroll, Tab
 // through the cards, or use the arrow buttons. Fades at an edge show there is more.
 function AProductRail({
   p
@@ -840,7 +841,12 @@ function AProductRail({
     if (c.left < r.left + room) el.scrollLeft -= r.left + room - c.left;else if (c.right > r.right - room) el.scrollLeft += c.right - (r.right - room);
   };
   const count = p.groups.reduce((n, g) => n + g.items.length, 0);
-  const cardW = bp.isMobile ? 228 : 264;
+  const cardW = bp.isMobile ? 208 : 232;
+  // The full case study leads, as a card in its own group
+  const groups = p.fullCard ? [{
+    label: 'Overview',
+    items: [p.fullCard]
+  }, ...p.groups] : p.groups;
   const mask = `linear-gradient(to right, ${edge.start ? '#000' : 'transparent'} 0, #000 ${fade}px, #000 calc(100% - ${fade}px), ${edge.end ? '#000' : 'transparent'} 100%)`;
   const arrow = (dir, label, disabled) => /*#__PURE__*/React.createElement("button", {
     type: "button",
@@ -855,8 +861,6 @@ function AProductRail({
   return /*#__PURE__*/React.createElement("div", {
     ref: ref,
     style: {
-      borderBottom: `1px solid ${A.line}`,
-      padding: bp.isMobile ? '4px 0 32px' : '4px 8px 40px',
       opacity: inView ? 1 : 0,
       transform: inView ? 'none' : 'translateY(16px)',
       transition: 'opacity .6s, transform .6s'
@@ -867,30 +871,12 @@ function AProductRail({
       alignItems: 'center',
       justifyContent: 'space-between',
       gap: 16,
-      marginBottom: 20,
-      flexWrap: 'wrap'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'baseline',
-      gap: 16,
+      marginBottom: 16,
       flexWrap: 'wrap'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: aStyles.mono
-  }, "Inside ", p.title, " \xB7 ", count, " case studies"), /*#__PURE__*/React.createElement("a", {
-    href: p.full,
-    "data-cursor": "hover",
-    className: "sub-link",
-    style: {
-      ...aStyles.mono,
-      color: A.ink,
-      fontWeight: 500
-    }
-  }, "The full case study ", /*#__PURE__*/React.createElement("span", {
-    "aria-hidden": "true"
-  }, "\u2192"))), !bp.isMobile && /*#__PURE__*/React.createElement("div", {
+  }, "Inside ", p.title, " \xB7 ", count, " case studies"), !bp.isMobile && /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 8
@@ -906,7 +892,7 @@ function AProductRail({
       maskImage: mask,
       WebkitMaskImage: mask
     }
-  }, p.groups.map((g, gi) => {
+  }, groups.map((g, gi) => {
     const id = `${p.id}-group-${g.label.toLowerCase().replace(/[^a-z]+/g, '-')}`;
     return /*#__PURE__*/React.createElement("div", {
       key: g.label,
@@ -1148,181 +1134,6 @@ function ABuildCard({
     }
   }, b.note)));
 }
-function AProjectRow({
-  p,
-  joined
-}) {
-  const bp = useBreakpoint();
-  const [ref, inView] = useReveal();
-  const [hover, setHover] = React.useState(false);
-  // The preview covers the rows below, so Escape must hide it (WCAG 1.4.13)
-  React.useEffect(() => {
-    if (!hover) return;
-    const onKey = e => {
-      if (e.key === 'Escape') setHover(false);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [hover]);
-  const baseStyle = {
-    textDecoration: 'none',
-    color: A.ink,
-    opacity: inView ? 1 : 0,
-    transform: inView ? 'none' : 'translateY(16px)',
-    transition: 'opacity .6s, transform .6s, background .18s',
-    // A row with its product list below it: the list carries the dividing line
-    borderBottom: joined ? 'none' : `1px solid ${A.line}`
-  };
-
-  // Mobile: simple two-column card
-  if (bp.isMobile) {
-    return /*#__PURE__*/React.createElement("a", {
-      ref: ref,
-      href: p.href,
-      style: {
-        ...baseStyle,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '20px 0'
-      }
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 20,
-        fontWeight: 500,
-        letterSpacing: '-0.015em',
-        marginBottom: 6
-      }
-    }, p.title), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 12,
-        color: A.ink2
-      }
-    }, p.tagline), /*#__PURE__*/React.createElement("div", {
-      style: {
-        ...aStyles.mono,
-        marginTop: 6
-      }
-    }, p.kicker)), /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: A.accent,
-        fontSize: 20,
-        flexShrink: 0,
-        marginLeft: 16
-      }
-    }, "\u2192"));
-  }
-
-  // Tablet: 4-column
-  if (bp.isTablet) {
-    return /*#__PURE__*/React.createElement("a", {
-      ref: ref,
-      href: p.href,
-      onMouseEnter: () => setHover(true),
-      onMouseLeave: () => setHover(false),
-      style: {
-        ...baseStyle,
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr 32px',
-        gap: 16,
-        alignItems: 'center',
-        padding: '24px 8px',
-        background: hover ? A.paper2 : 'transparent'
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 22,
-        fontWeight: 500,
-        letterSpacing: '-0.015em'
-      }
-    }, p.title), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 13,
-        color: A.ink2
-      }
-    }, p.tagline), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 18,
-        color: hover ? A.accent : A.mute,
-        transition: 'color .18s',
-        textAlign: 'right'
-      }
-    }, hover ? '→' : '·'));
-  }
-
-  // Desktop: full 6-column with hover preview
-  return /*#__PURE__*/React.createElement("a", {
-    ref: ref,
-    href: p.href,
-    "data-cursor": "hover",
-    onMouseEnter: () => setHover(true),
-    onMouseLeave: () => setHover(false),
-    style: {
-      ...baseStyle,
-      display: 'grid',
-      gridTemplateColumns: '2fr 3fr 2fr 1.2fr 40px',
-      gap: 24,
-      alignItems: 'center',
-      padding: '28px 8px',
-      position: 'relative',
-      background: hover ? A.paper2 : 'transparent'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 28,
-      fontWeight: 500,
-      letterSpacing: '-0.02em'
-    }
-  }, p.title), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 14,
-      color: A.ink2,
-      letterSpacing: '-0.005em'
-    }
-  }, p.tagline), /*#__PURE__*/React.createElement("span", {
-    style: aStyles.mono
-  }, p.kicker), /*#__PURE__*/React.createElement("span", {
-    style: {
-      ...aStyles.mono,
-      textAlign: 'right'
-    }
-  }, p.year), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 18,
-      color: hover ? A.accent : A.mute,
-      transition: 'color .18s',
-      textAlign: 'right'
-    }
-  }, hover ? '→' : '·'), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      left: '20%',
-      top: '100%',
-      width: 280,
-      pointerEvents: 'none',
-      zIndex: 20,
-      opacity: hover ? 1 : 0,
-      transform: hover ? 'translateY(4px)' : 'translateY(-4px)',
-      transition: 'opacity .22s, transform .22s'
-    }
-  }, p.image ? /*#__PURE__*/React.createElement("img", {
-    src: p.image,
-    alt: "",
-    loading: "lazy",
-    decoding: "async",
-    style: {
-      width: '100%',
-      display: 'block',
-      boxShadow: '0 20px 60px rgba(20,17,15,0.22)'
-    },
-    onError: e => {
-      e.currentTarget.style.display = 'none';
-    }
-  }) : /*#__PURE__*/React.createElement(Placeholder, {
-    label: `${p.id}.png`,
-    tone: "ink"
-  })));
-}
 
 // ─── ORIGIN (/about) ─────────────────────────────────────────────────────────
 // The Aatmnirbhar story in the About rail: the words beside the mark, at the page's heading size.
@@ -1549,81 +1360,28 @@ function ACareerProducts({
     p: p
   })))));
 }
-
-// TaskUs: TaskGPT stays expanded as it was on the homepage (its row and the rail of its product
-// cards), and the role's other case studies follow in the same card. Wider than the body column,
-// so it sits under the whole role, lined up with the role's title.
-function ACareerFeatured({
-  c,
-  featured,
-  others,
-  bp
-}) {
-  const orgName = c.org.split(' · ')[0];
-  const labelId = `cv-cases-${orgSlug(c)}`;
-  const moreId = `${labelId}-more`;
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: bp.isMobile ? '0 0 40px' : '0 0 48px 96px'
-    }
-  }, /*#__PURE__*/React.createElement("p", {
-    id: labelId,
-    style: {
-      ...aStyles.mono,
-      margin: '0 0 12px'
-    }
-  }, "Case studies", /*#__PURE__*/React.createElement("span", {
-    className: "sr-only"
-  }, " from ", orgName)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      borderTop: `1px solid ${A.line}`
-    }
-  }, /*#__PURE__*/React.createElement(AProjectRow, {
-    p: featured,
-    joined: true
-  }), /*#__PURE__*/React.createElement(AProductRail, {
-    p: featured
-  })), others.length > 0 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 28
-    }
-  }, /*#__PURE__*/React.createElement("p", {
-    id: moreId,
-    style: {
-      ...aStyles.mono,
-      margin: '0 0 12px'
-    }
-  }, "Also at ", orgName), /*#__PURE__*/React.createElement("ul", {
-    "aria-labelledby": moreId,
-    style: {
-      listStyle: 'none',
-      padding: 0,
-      margin: 0,
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: 16
-    }
-  }, others.map(p => /*#__PURE__*/React.createElement("li", {
-    key: p.id,
-    style: {
-      flex: bp.isMobile ? '0 0 calc(50% - 8px)' : '0 0 264px',
-      display: 'flex'
-    }
-  }, /*#__PURE__*/React.createElement(ACaseCard, {
-    p: p
-  }))))));
-}
 function ACareerItem({
   c,
   i,
   bp
 }) {
   const [ref, inView] = useReveal();
-  const items = caseStudiesOf(c);
-  const featured = items.find(p => p.groups);
-  const others = items.filter(p => p !== featured);
-  const gridCols = bp.isMobile ? '72px 1fr' : bp.isTablet ? '72px 1fr 1fr' : '64px 260px 3fr 1fr';
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  // A case study with its own products (TaskGPT) opens into its rail under the role's cards
+  const expanded = caseStudiesOf(c).find(p => p.groups);
+  const cases = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ACareerProducts, {
+    c: c,
+    bp: bp
+  }), expanded && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 32
+    }
+  }, /*#__PURE__*/React.createElement(AProductRail, {
+    p: expanded
+  })));
+
+  // minmax(0, …): a column may not grow to fit TaskGPT's rail; the rail scrolls inside it instead
+  const gridCols = bp.isMobile ? '72px minmax(0, 1fr)' : bp.isTablet ? '72px minmax(0, 1fr) minmax(0, 1fr)' : '64px 260px minmax(0, 3fr) minmax(0, 1fr)';
+  return /*#__PURE__*/React.createElement("div", {
     ref: ref,
     style: {
       display: 'grid',
@@ -1696,10 +1454,7 @@ function ACareerItem({
     c: c,
     i: i,
     gap: 10
-  }), !featured && /*#__PURE__*/React.createElement(ACareerProducts, {
-    c: c,
-    bp: bp
-  })), c.nda && /*#__PURE__*/React.createElement("div", {
+  }), cases), c.nda && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 10,
       display: 'flex',
@@ -1760,10 +1515,7 @@ function ACareerItem({
     c: c,
     i: i,
     gap: 12
-  }), !featured && /*#__PURE__*/React.createElement(ACareerProducts, {
-    c: c,
-    bp: bp
-  }), c.nda && /*#__PURE__*/React.createElement("div", {
+  }), cases, c.nda && /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 12,
       display: 'flex',
@@ -1804,12 +1556,7 @@ function ACareerItem({
       color: A.ink2,
       textTransform: 'uppercase'
     }
-  }, t)))), featured && /*#__PURE__*/React.createElement(ACareerFeatured, {
-    c: c,
-    featured: featured,
-    others: others,
-    bp: bp
-  }));
+  }, t))));
 }
 
 // The CV, on the homepage under the hello (it was /career until 23 Nov 2026)
