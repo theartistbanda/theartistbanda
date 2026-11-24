@@ -30,21 +30,22 @@ SRC = os.path.expanduser('~/Downloads/taskgpt-source/')
 SITE = 'https://dipeshgurav.com'
 TITLE_FROM = 'Lead Agile UI/UX Designer (product designer)'
 TITLE_TO = 'Lead Product Designer'
-# Dipesh's wording changes of 23 Nov 2026, swapped here so they survive a fresh export of his
-# Claude Doc; drop each one once the doc says the same. The hub's Outcome said "20%" three times,
-# and "adoption rose by an average of 20%" became the 12% client onboarding figure he gave,
-# on every page. Order matters: the hub's whole sentence goes first.
+# Dipesh's corrections, swapped here so they survive a fresh export of his Claude Doc; drop each
+# one once the doc says the same. 23 Nov 2026: the hub's Outcome said "20%" three times. 24 Nov 2026:
+# adoption after the commercial revamp rose 12%, not 20% (call-handling time and operational costs
+# each fell 20%). For a day the site said "client onboarding" instead of adoption; that was wrong.
+# His own wording is kept and only the number changes. Order matters: the hub's whole sentence first.
 COPY_SWAPS = [
     ('All 11 products and 7 extensions went live. Call-handling time fell 20%, operating costs fell 20%, '
      'and after the commercial revamp, adoption rose by an average of 20%.',
      'All 11 products and 7 extensions went live, with call-handling time and operational costs each '
-     'coming down 20%. The commercial revamp added 12% to our client onboarding that quarter.'),
-    ('and after the commercial revamp, adoption rose by an average of 20%.',
-     'and the commercial revamp added 12% to our client onboarding that quarter.'),
+     'coming down 20%. After the commercial revamp, adoption rose by an average of 12%.'),
+    ('after the commercial revamp, adoption rose by an average of 20%.',
+     'after the commercial revamp, adoption rose by an average of 12%.'),
     ('After that revamp, adoption rose by an average of 20%.',
-     'That revamp added 12% to our client onboarding that quarter.'),
+     'After that revamp, adoption rose by an average of 12%.'),
     ('After that revamp, adoption across the renamed products rose by an average of 20%.',
-     'That revamp added 12% to our client onboarding that quarter.'),
+     'After that revamp, adoption across the renamed products rose by an average of 12%.'),
 ]
 
 # What each product is, in the general words a reader might look for, since nobody outside
@@ -1023,7 +1024,8 @@ def main():
     for old, new in COPY_SWAPS:
         hub_md = hub_md.replace(old, new)
         case_md = case_md.replace(old, new)
-    assert 'adoption rose' not in hub_md + case_md, 'a new adoption sentence needs a COPY_SWAPS entry'
+    # Adoption after the revamp is 12%; a new sentence giving it as 20% needs a COPY_SWAPS entry
+    assert not re.search(r'adoption[^.]*20%', hub_md + case_md), 'adoption must say 12%, not 20%'
     screens = json.load(open(os.path.join(ROOT, 'docs/taskgpt/screens.json'), encoding='utf-8'))
 
     blocks = parse(case_md)
