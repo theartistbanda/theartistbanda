@@ -415,7 +415,6 @@ function aboutH2(bp) {
 function AAboutIntro() {
   const bp = useBreakpoint();
   const side = sp(bp);
-  const [ref, inView] = useReveal({ threshold: 0.2 });
   return (
     <section style={{ padding: `${bp.isMobile ? '48px' : '88px'} ${side} ${bp.isMobile ? '56px' : '96px'}` }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
@@ -428,16 +427,25 @@ function AAboutIntro() {
         }}>
           Designing for the humans behind the <AScribble stroke={bp.isMobile ? 3 : 4} delay=".4s">pixels</AScribble>
         </h1>
-        <ul ref={ref} style={{
-          listStyle: 'none', padding: `${bp.isMobile ? 24 : 32}px 0 0`, margin: `${bp.isMobile ? 40 : 64}px 0 0`,
-          borderTop: `1px solid ${A.line}`, display: 'grid',
-          gridTemplateColumns: bp.isDesktop ? 'repeat(4, minmax(0, 1fr))' : 'repeat(2, minmax(0, 1fr))',
-          columnGap: 24, rowGap: 32
-        }}>
-          {PORTFOLIO.metrics.map((m, i) => <AAboutNumber key={i} m={m} i={i} inView={inView} bp={bp} />)}
-        </ul>
       </div>
     </section>
+  );
+}
+
+// The four numbers, above the contact form (Dipesh, 24 Nov 2026; they sat under the heading at
+// the top of /about): the proof just before the ask.
+function AAboutNumbers() {
+  const bp = useBreakpoint();
+  const [ref, inView] = useReveal({ threshold: 0.2 });
+  return (
+    <ul ref={ref} style={{
+      listStyle: 'none', padding: `0 0 ${bp.isMobile ? 32 : 40}px`, margin: `0 0 ${bp.isMobile ? 40 : 56}px`,
+      borderBottom: `1px solid ${A.line}`, display: 'grid',
+      gridTemplateColumns: bp.isDesktop ? 'repeat(4, minmax(0, 1fr))' : 'repeat(2, minmax(0, 1fr))',
+      columnGap: 24, rowGap: 32
+    }}>
+      {PORTFOLIO.metrics.map((m, i) => <AAboutNumber key={i} m={m} i={i} inView={inView} bp={bp} />)}
+    </ul>
   );
 }
 
@@ -1380,6 +1388,7 @@ function AContact() {
     // In the /about rail like the sections above it (Dipesh, 23 Nov 2026): one heading, "Drop a Hi!",
     // then straight into the form, then the direct lines
     <ARail id="contact" label="Let's work together" tone="surf">
+        <AAboutNumbers />
         <div>
           <h2 id="contact-heading" style={aboutH2(bp)}>Drop a <ASecLine>Hi</ASecLine>!</h2>
         </div>

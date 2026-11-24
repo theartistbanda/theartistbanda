@@ -601,9 +601,6 @@ function aboutH2(bp) {
 function AAboutIntro() {
   const bp = useBreakpoint();
   const side = sp(bp);
-  const [ref, inView] = useReveal({
-    threshold: 0.2
-  });
   return /*#__PURE__*/React.createElement("section", {
     style: {
       padding: `${bp.isMobile ? '48px' : '88px'} ${side} ${bp.isMobile ? '56px' : '96px'}`
@@ -634,13 +631,23 @@ function AAboutIntro() {
   }, "Designing for the humans behind the ", /*#__PURE__*/React.createElement(AScribble, {
     stroke: bp.isMobile ? 3 : 4,
     delay: ".4s"
-  }, "pixels")), /*#__PURE__*/React.createElement("ul", {
+  }, "pixels"))));
+}
+
+// The four numbers, above the contact form (Dipesh, 24 Nov 2026; they sat under the heading at
+// the top of /about): the proof just before the ask.
+function AAboutNumbers() {
+  const bp = useBreakpoint();
+  const [ref, inView] = useReveal({
+    threshold: 0.2
+  });
+  return /*#__PURE__*/React.createElement("ul", {
     ref: ref,
     style: {
       listStyle: 'none',
-      padding: `${bp.isMobile ? 24 : 32}px 0 0`,
-      margin: `${bp.isMobile ? 40 : 64}px 0 0`,
-      borderTop: `1px solid ${A.line}`,
+      padding: `0 0 ${bp.isMobile ? 32 : 40}px`,
+      margin: `0 0 ${bp.isMobile ? 40 : 56}px`,
+      borderBottom: `1px solid ${A.line}`,
       display: 'grid',
       gridTemplateColumns: bp.isDesktop ? 'repeat(4, minmax(0, 1fr))' : 'repeat(2, minmax(0, 1fr))',
       columnGap: 24,
@@ -652,7 +659,7 @@ function AAboutIntro() {
     i: i,
     inView: inView,
     bp: bp
-  })))));
+  })));
 }
 
 // Counts up once when it comes into view (instantly with reduced motion)
@@ -2345,7 +2352,7 @@ function AContact() {
       id: "contact",
       label: "Let's work together",
       tone: "surf"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    }, /*#__PURE__*/React.createElement(AAboutNumbers, null), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
       id: "contact-heading",
       style: aboutH2(bp)
     }, "Drop a ", /*#__PURE__*/React.createElement(ASecLine, null, "Hi"), "!")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
