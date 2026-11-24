@@ -206,7 +206,8 @@ footer { background: var(--surf); color: rgba(var(--ink-rgb), 0.65); padding: 32
 .doc h4 { margin: 40px 0 10px; font-size: 21px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
 .doc p, .doc ul, .doc ol { margin-bottom: 18px; }
 .doc strong { color: var(--ink); font-weight: 600; }
-.doc a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+/* Not links styled as buttons, or the end button's text would take its own background colour */
+.doc a:not(.btn) { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .doc .label { margin: 32px 0 8px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
 .own-page { margin: 4px 0 0 !important; }
 .doc-end { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }

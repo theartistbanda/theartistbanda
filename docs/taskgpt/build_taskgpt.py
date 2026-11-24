@@ -649,7 +649,8 @@ def full_page(title, out, toc):
     <p class="readtime">About 35 minutes to read</p>
     <div class="doc-cover">{shot(DASH_CROP, True)}</div>
     {"".join(out)}
-    <div class="doc-end"><a class="btn btn-outline" href="/case-taskgpt"><span aria-hidden="true">←</span> Back to TaskGPT</a></div>
+    <!-- The end of the read goes to the contact form (Dipesh, 24 Nov 2026; it went back to the hub) -->
+    <div class="doc-end"><a class="btn btn-primary wipe" href="/about#contact">Get in touch <span aria-hidden="true">→</span></a></div>
   </article>
 </div>
 </div>
