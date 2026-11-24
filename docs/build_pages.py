@@ -120,6 +120,9 @@ def page(slug, P):
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/site.css">
 <script defer src="/_vercel/insights/script.js"></script>
+<!-- Vercel Speed Insights -->
+<script>window.si = window.si || function () {{ (window.siq = window.siq || []).push(arguments); }};</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body data-page="{slug}">
 <div id="root"></div>
