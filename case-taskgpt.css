@@ -338,3 +338,51 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   .next .arrow { font-size: 20px; }
   footer { padding: 24px 16px; }
 }
+
+/* ─── One reader for every TaskGPT page (Dipesh, 23 Nov 2026) ────────────────
+   The 16 product pages use the full case study's layout: the tree on the left lists every
+   product in its hub group with what it is in plain words (.toc-desc), and the screens sit
+   inside the story. Text keeps a 720px measure; screens get the full column. */
+@media (min-width: 1024px) {
+  .reader { grid-template-columns: 260px minmax(0, 840px); gap: 56px; }
+}
+.doc > p, .doc > ul, .doc > ol, .doc > h2, .doc > h3, .doc > h4, .doc > .label { max-width: 720px; }
+.doc > .lede.statement { max-width: 840px; font-size: clamp(21px, 1.9vw, 27px); margin: 8px 0 28px; }
+.doc .shot, .doc .pair, .doc .pair-fig { margin: 36px 0 40px; }
+.doc-cover { margin: 28px 0 8px; }
+.doc-cover .shot { margin: 0; }
+
+/* Tree: page links, group labels, product name with its plain-words line */
+.toc-name { display: block; }
+.toc-desc { display: block; margin-top: 1px; font-size: 12px; font-weight: 400; line-height: 1.35; color: var(--mute); }
+.toc-page { margin-bottom: 2px; }
+.toc-grouped { margin-top: 14px; }
+.toc-group { display: block; padding: 4px 8px; font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); }
+.toc-grouped > ol { margin-top: 2px; }
+.toc-l2 > .toc-row > a { padding-top: 5px; padding-bottom: 5px; }
+.toc a[aria-current="page"] { color: var(--ink); font-weight: 600; background: var(--paper2); box-shadow: inset 2px 0 0 var(--ink); }
+.toc a[aria-current="page"] .toc-desc, .toc a[aria-current="location"] .toc-desc { font-weight: 400; color: var(--ink2); }
+.toc-l2.is-here > ol { margin: 4px 0 6px 10px; }
+
+/* Product page head, inside the reader */
+.product .crumb { margin: 4px 0 0; }
+.product h1 { margin-top: 18px; }
+.kind { margin-top: 12px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); }
+.product .lede.statement { margin-top: 22px; max-width: 840px; }
+.product .chips { margin-top: 24px; }
+.product .cover-fig { margin-top: 32px; }
+.product .context-box { margin-top: 40px; max-width: 720px; }
+.product .story-body { max-width: none; margin-top: 48px; }
+.product .story-body .block { max-width: 720px; }
+.product .story-body > * + * { margin-top: 48px; }
+.product .story-body > .shot, .product .story-body > .pair, .product .story-body > .pair-fig { margin-bottom: 0; }
+.product .more-from { padding: 72px 0 24px; }
+.product .more-from h2 { margin-bottom: 16px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); font-weight: 500; }
+
+/* Hub cards: the plain-words line under each name */
+.card .kind { flex: none; margin: 0; padding: 6px 20px 0; font-size: 10px; color: var(--ink2); }
+/* The reader's running-text rules (.doc ul, .doc li, .doc a) are not meant for these */
+.product .chips, .product .crumb { padding-left: 0; margin-bottom: 0; }
+.product .chips li, .product .crumb li { margin: 0; }
+.product .btn, .product .mf-grid a { text-decoration: none; }
+.product .crumb a { color: var(--ink2); }

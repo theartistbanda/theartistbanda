@@ -1,0 +1,69 @@
+/* Character for the case study pages (Dipesh, 23 to 24 Nov 2026): the design carries it and the
+   words never change. case-lead.js does the wrapping. Four pieces:
+   1. The opening paragraph (.lede.statement): large, its key phrases in Fraunces italic
+      (<span class="fig">), one phrase with the hand-drawn line from the homepage hero
+      (<span class="fig mark">), the words filling from grey to ink once as the page opens.
+   2. Figures in every paragraph in the serif italic (.fig).
+   3. Every section heading: the hand-drawn line under one word (.sec-mark), drawn once in view.
+   4. Every section's first paragraph (.opener): larger, filling from grey to ink once in view.
+   The grey is --mute, which passes 4.5:1 in both themes, so words that have not filled in yet are
+   still readable. With reduced motion nothing moves and everything is ink. */
+
+.lede.statement {
+  font-size: clamp(22px, 2.3vw, 32px);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.statement .fig {
+  font-family: "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+/* Words stay whole, so "right-to-left" or "Indian-made" never split at the hyphen */
+.statement .w { white-space: nowrap; }
+
+/* The hand-drawn line */
+.statement .mark { position: relative; display: inline-block; white-space: nowrap; }
+.statement .mark svg {
+  position: absolute; left: -3%; bottom: -0.1em; width: 106%; height: 0.24em;
+  overflow: visible; color: var(--ink2); pointer-events: none;
+}
+.statement .mark path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Grey before the script runs, so the fill never flashes ink first */
+  .js .lede.statement { color: var(--mute); }
+  .js .lede.statement.is-filling { color: var(--ink); }
+  .statement.is-filling .w { animation: leadFill .55s ease both; }
+  .js .lede.statement .mark path { stroke-dashoffset: 1; opacity: 0; }
+  .statement.is-filling .mark path { animation: leadLine .9s cubic-bezier(.6, 0, .3, 1) var(--line-delay, 1.2s) both; }
+}
+@keyframes leadFill { from { color: var(--mute); } to { color: var(--ink); } }
+/* Opacity too, or the round cap of the empty line shows as a dot before it draws */
+@keyframes leadLine { from { stroke-dashoffset: 1; opacity: 0; } 1% { opacity: 1; } to { stroke-dashoffset: 0; opacity: 1; } }
+
+/* 2. Figures in running text */
+main .fig { font-family: "Fraunces", Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.06em; letter-spacing: -0.005em; line-height: 1; }
+main .statement .fig { font-weight: 300; font-size: 1em; letter-spacing: -0.01em; line-height: inherit; }
+
+/* 3. Section headings */
+.sec-mark { position: relative; display: inline-block; white-space: nowrap; }
+.sec-mark svg { position: absolute; left: -4%; bottom: -0.04em; width: 108%; height: 0.22em; overflow: visible; color: var(--ink2); pointer-events: none; }
+.sec-mark path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+
+/* 4. Section openers */
+.opener { font-size: 20px; line-height: 1.6; letter-spacing: -0.012em; color: var(--ink); max-width: 880px; }
+.doc .opener, .story-body .opener { font-size: 20px; max-width: 720px; }
+.opener .w { white-space: nowrap; }
+@media (max-width: 639px) { .opener, .doc .opener, .story-body .opener { font-size: 18px; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .sec-mark.is-waiting path { stroke-dashoffset: 1; opacity: 0; }
+  .sec-mark.is-in path { animation: leadLine .85s cubic-bezier(.6, 0, .3, 1) .2s both; }
+  .opener.is-waiting .w { color: var(--mute); }
+  .opener.is-in .w { animation: leadFill .5s ease both; }
+}

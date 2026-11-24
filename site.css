@@ -81,3 +81,21 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   font-weight: 300;
   letter-spacing: -0.01em;
 }
+
+/* Character on /about (Dipesh, 24 Nov 2026), the same pieces as the case studies (case-lead.css):
+   the hand-drawn line under one word of each section heading (.sec-mark, drawn once in view),
+   each section's first paragraph filling from grey to ink once in view (.opener), and figures in
+   the serif italic (.fig). The grey is --mute (4.5:1 or more); reduced motion shows it all at once. */
+.sec-mark { position: relative; display: inline-block; white-space: nowrap; }
+.sec-mark svg { position: absolute; left: -4%; bottom: -0.04em; width: 108%; height: 0.22em; overflow: visible; color: var(--ink2); pointer-events: none; }
+.sec-mark path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.opener .w { white-space: nowrap; }
+.fig { font-family: "Fraunces", Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.06em; letter-spacing: -0.005em; line-height: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .sec-mark.is-waiting path { stroke-dashoffset: 1; opacity: 0; }
+  .sec-mark.is-in path { animation: secLine .85s cubic-bezier(.6, 0, .3, 1) .2s both; }
+  .opener.is-waiting .w { color: var(--mute); }
+  .opener.is-in .w { animation: openerFill .5s ease both; }
+}
+@keyframes secLine { from { stroke-dashoffset: 1; opacity: 0; } 1% { opacity: 1; } to { stroke-dashoffset: 0; opacity: 1; } }
+@keyframes openerFill { from { color: var(--mute); } to { color: var(--ink); } }

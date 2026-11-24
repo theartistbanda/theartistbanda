@@ -281,6 +281,54 @@ function AScribble({ children, stroke = 5, delay }) {
   );
 }
 
+// ─── CHARACTER ON /about (Dipesh, 24 Nov 2026) ───────────────────────────────
+// The same pieces as the case studies (case-lead.css): the hand-drawn line under one word of each
+// section heading, drawn once in view; each section's first paragraph larger and filling from grey
+// to ink once in view; figures in the serif italic. Words never change. Styles in /site.css.
+const FIG_RE = /(\b\d{1,3}(?:,\d{3})+\+?|\b\d+(?:\.\d+)?%|\b\d+\+(?=[\s.,;:)]|$)|\b\d+(?:\.\d+)?[MK]\+?|\b(?:a|one) million\b)/g;
+
+function ASecLine({ children, stroke = 2.6 }) {
+  const [ref, inView] = useReveal({ threshold: 0.6 });
+  return (
+    <span ref={ref} className={`sec-mark ${inView ? 'is-in' : 'is-waiting'}`}>
+      {children}
+      <svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M4 15 C 52 6, 98 20, 150 12 S 246 5, 296 13" pathLength="1" fill="none"
+          stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+      </svg>
+    </span>
+  );
+}
+
+// Text with *italics* and figures, optionally with every word in a span for the fill
+function richText(text, fill) {
+  const total = text.replace(/\*/g, '').split(/\s+/).filter(Boolean).length;
+  const step = Math.min(30, 1100 / Math.max(1, total));
+  let n = 0;
+  const words = (s, key) => s.split(/(\s+)/).filter(Boolean).map((w, x) => (
+    /^\s+$/.test(w) || !fill ? w
+      : <span key={`${key}-${x}`} className="w" style={{ animationDelay: `${Math.round(80 + (n++) * step)}ms` }}>{w}</span>
+  ));
+  return text.split(/\*(.+?)\*/).map((part, j) => {
+    const nodes = [];
+    let last = 0, m;
+    FIG_RE.lastIndex = 0;
+    while ((m = FIG_RE.exec(part))) {
+      if (m.index > last) nodes.push(...words(part.slice(last, m.index), `${j}a${m.index}`));
+      nodes.push(<span key={`${j}f${m.index}`} className="fig">{words(m[0], `${j}f${m.index}`)}</span>);
+      last = m.index + m[0].length;
+    }
+    if (last < part.length) nodes.push(...words(part.slice(last), `${j}z`));
+    return j % 2 ? <em key={j}>{nodes}</em> : <React.Fragment key={j}>{nodes}</React.Fragment>;
+  });
+}
+
+// A section's first paragraph: fills from grey to ink once in view (all ink with reduced motion)
+function AFill({ text, style }) {
+  const [ref, inView] = useReveal({ threshold: 0.25 });
+  return <p ref={ref} className={`opener ${inView ? 'is-in' : 'is-waiting'}`} style={style}>{richText(text, true)}</p>;
+}
+
 // ─── HERO ────────────────────────────────────────────────────────────────────
 // Dipesh, 23 Nov 2026: only the hello, filling the screen below the header on every size.
 // Left aligned and large enough to span the width, in a hand-drawn face (Caveat) for warmth,
@@ -411,18 +459,17 @@ function AAboutNumber({ m, i, inView, bp }) {
 function APerson() {
   const bp = useBreakpoint();
   const [first, ...rest] = PORTFOLIO.bio;
-  const em = (para) => para.split(/\*(.+?)\*/).map((part, j) => (j % 2 ? <em key={j}>{part}</em> : part));
   const factTitle = { ...aStyles.mono, margin: '0 0 12px', fontWeight: 400 };
   const line = { fontSize: 14, lineHeight: 1.6, color: A.ink2, margin: 0 };
   return (
     <ARail id="studio" label="The person behind the work">
       <h2 style={aboutH2(bp)}>
-        I became a designer because technology is supposed to make life <span style={{ fontStyle: 'italic' }}>easier</span>
+        I became a designer because technology is supposed to make life <span style={{ fontStyle: 'italic' }}><ASecLine>easier</ASecLine></span>
       </h2>
       <div style={{ maxWidth: 720, marginTop: bp.isMobile ? 28 : 40 }}>
-        <p style={{ fontSize: bp.isMobile ? 18 : 21, lineHeight: 1.55, letterSpacing: '-0.01em', color: A.ink, margin: 0 }}>{em(first)}</p>
+        <AFill text={first} style={{ fontSize: bp.isMobile ? 18 : 21, lineHeight: 1.55, letterSpacing: '-0.01em', color: A.ink, margin: 0 }} />
         {rest.map((para, i) => (
-          <p key={i} style={{ fontSize: 16, lineHeight: 1.75, color: A.ink2, margin: '20px 0 0' }}>{em(para)}</p>
+          <p key={i} style={{ fontSize: 16, lineHeight: 1.75, color: A.ink2, margin: '20px 0 0' }}>{richText(para)}</p>
         ))}
       </div>
       <div style={{
@@ -465,7 +512,7 @@ function ABeliefs() {
   const bp = useBreakpoint();
   return (
     <ARail id="principles" label="Operating principles" tone="surf">
-      <h2 style={aboutH2(bp)}>Six beliefs that decide every design call</h2>
+      <h2 style={aboutH2(bp)}>Six beliefs that decide every design <ASecLine>call</ASecLine></h2>
       <ol style={{
         listStyle: 'none', padding: 0, margin: `${bp.isMobile ? 32 : 48}px 0 0`, display: 'grid',
         gridTemplateColumns: bp.isMobile ? 'minmax(0, 1fr)' : 'repeat(2, minmax(0, 1fr))', columnGap: 48
@@ -475,10 +522,13 @@ function ABeliefs() {
             borderTop: `1px solid ${A.line}`, padding: '24px 0 28px',
             display: 'grid', gridTemplateColumns: '44px minmax(0, 1fr)', columnGap: 12
           }}>
-            <span aria-hidden="true" style={{ ...aStyles.mono, color: A.accent, paddingTop: 6 }}>{p.n}</span>
+            <span aria-hidden="true" style={{
+              fontFamily: '"Fraunces", Georgia, serif', fontStyle: 'italic', fontWeight: 300,
+              fontSize: bp.isMobile ? 24 : 28, lineHeight: 1, color: A.ink2, paddingTop: 1
+            }}>{p.n}</span>
             <div>
               <h3 style={{ fontSize: bp.isMobile ? 18 : 21, fontWeight: 500, letterSpacing: '-0.01em', lineHeight: 1.25, margin: 0, color: A.ink }}>{p.title}</h3>
-              <p style={{ fontSize: 15, lineHeight: 1.65, color: A.ink2, margin: '10px 0 0' }}>{p.body}</p>
+              <p style={{ fontSize: 15, lineHeight: 1.65, color: A.ink2, margin: '10px 0 0' }}>{richText(p.body)}</p>
             </div>
           </li>
         ))}
@@ -684,9 +734,9 @@ function AOrigin() {
         <div>
           <h2 style={aboutH2(bp)}>
             An open competition, a golden bird,{' '}
-            <span style={{ fontStyle: 'italic', display: 'block' }}>a mark India picked up</span>
+            <span style={{ fontStyle: 'italic', display: 'block' }}>a mark India <ASecLine>picked up</ASecLine></span>
           </h2>
-          <p style={{ fontSize: 16, lineHeight: 1.75, color: A.ink2, margin: '28px 0 0', maxWidth: 560 }}>{PORTFOLIO.origin}</p>
+          <AFill text={PORTFOLIO.origin} style={{ fontSize: bp.isMobile ? 18 : 20, lineHeight: 1.6, letterSpacing: '-0.012em', color: A.ink, margin: '28px 0 0', maxWidth: 600 }} />
           <p style={{
             fontFamily: '"Fraunces", Georgia, serif', fontWeight: 300, fontStyle: 'italic',
             fontSize: bp.isMobile ? 18 : 21, lineHeight: 1.45, color: A.ink, margin: '28px 0 0', maxWidth: 520
@@ -1322,7 +1372,7 @@ function AContact() {
     // then straight into the form, then the direct lines
     <ARail id="contact" label="Let's work together" tone="surf">
         <div>
-          <h2 id="contact-heading" style={aboutH2(bp)}>Drop a Hi!</h2>
+          <h2 id="contact-heading" style={aboutH2(bp)}>Drop a <ASecLine>Hi</ASecLine>!</h2>
         </div>
         <div>
           <div style={{ marginTop: bp.isMobile ? 28 : 40, maxWidth: 760 }}>

@@ -30,15 +30,89 @@ SRC = os.path.expanduser('~/Downloads/taskgpt-source/')
 SITE = 'https://dipeshgurav.com'
 TITLE_FROM = 'Lead Agile UI/UX Designer (product designer)'
 TITLE_TO = 'Lead Product Designer'
-# The hub's Outcome said "20%" three times in two lines; Dipesh gave this wording and the 12%
-# onboarding figure on 23 Nov 2026. Swapped here so
-# the fix survives a fresh export of his Claude Doc; drop it once the doc says the same.
-HUB_SWAPS = [(
-    'All 11 products and 7 extensions went live. Call-handling time fell 20%, operating costs fell 20%, '
-    'and after the commercial revamp, adoption rose by an average of 20%.',
-    'All 11 products and 7 extensions went live, with call-handling time and operational costs each '
-    'coming down 20%. The commercial revamp added 12% to our client onboarding that quarter.',
-)]
+# Dipesh's wording changes of 23 Nov 2026, swapped here so they survive a fresh export of his
+# Claude Doc; drop each one once the doc says the same. The hub's Outcome said "20%" three times,
+# and "adoption rose by an average of 20%" became the 12% client onboarding figure he gave,
+# on every page. Order matters: the hub's whole sentence goes first.
+COPY_SWAPS = [
+    ('All 11 products and 7 extensions went live. Call-handling time fell 20%, operating costs fell 20%, '
+     'and after the commercial revamp, adoption rose by an average of 20%.',
+     'All 11 products and 7 extensions went live, with call-handling time and operational costs each '
+     'coming down 20%. The commercial revamp added 12% to our client onboarding that quarter.'),
+    ('and after the commercial revamp, adoption rose by an average of 20%.',
+     'and the commercial revamp added 12% to our client onboarding that quarter.'),
+    ('After that revamp, adoption rose by an average of 20%.',
+     'That revamp added 12% to our client onboarding that quarter.'),
+    ('After that revamp, adoption across the renamed products rose by an average of 20%.',
+     'That revamp added 12% to our client onboarding that quarter.'),
+]
+
+# What each product is, in the general words a reader might look for, since nobody outside
+# TaskUs knows our names for them (Dipesh, 23 Nov 2026). Each is drawn from that product's own
+# hub line, adds no claim, and shows in the product tree, on the hub cards and under each title.
+# Short labels, so no full stops (rule 21).
+DESCRIPTORS = {
+    'assistai': 'Knowledge chatbot for agents',
+    'authorai': 'AI writing assistant',
+    'document-search': 'Questions across long documents',
+    'home': 'One door to every product',
+    'dashboard': 'AI usage, quality and cost',
+    'observability': 'Trace every AI answer',
+    'reports': 'View and download the data',
+    'chatbotify': 'Build a chatbot without code',
+    'knowledgebase': 'Edit the answers chatbots use',
+    'agentic-ai': 'Build your own AI agent',
+    'bcp': 'Switch to a backup AI engine',
+    'translatebuddy': 'Translate replies in Zendesk',
+    'shield': 'Wellbeing for content moderators',
+    'shield-copilot': 'AI help for policy reviews',
+    'deepfake-detection': 'Spot fake images',
+    'productivity-tracker': 'Track sessions, breaks and tasks',
+}
+
+# The opening paragraph of each page is set as a statement (case-lead.css, Dipesh, 23 Nov 2026:
+# character from the design, never new words). For each page: the phrases set in Fraunces italic,
+# then the one phrase that gets the hand-drawn line. Every phrase is copied from that paragraph;
+# if the source changes and a phrase is gone, the build says so and leaves it plain.
+LEDE_MARKS = {
+    'hub': (['live customer calls', 'All 11 products and 7 Chrome extensions'], 'the only designer'),
+    'full': (['All 11 products and 7 Chrome extensions', 'around 35,000 people a day'], 'the only designer'),
+    'assistai': (['the way they ask ChatGPT'], 'own knowledge base'),
+    'authorai': (['almost any website'], 'One-click'),
+    'document-search': (['more than 50 long client documents', 'reasoning and citation'], 'One question'),
+    'home': (['One front door', 'not a control panel'], 'I pitched it'),
+    'dashboard': (['Eight groups of KPIs', 'sold TaskGPT most'], 'client trust'),
+    'observability': (['the evidence behind each answer'], '16 steps'),
+    'reports': (['the rows behind the numbers'], 'One form'),
+    'chatbotify': (['without code', 'about a day'], 'minutes'),
+    'knowledgebase': (['write and version'], 'like GitHub'),
+    'agentic-ai': (['chain of thought', 'live preview'], 'Anyone'),
+    'bcp': (['a backup engine', 'every screen says so'], 'one action'),
+    'translatebuddy': (['detects the language and prepares the reply'], 'review, edit and send'),
+    'shield': (['content moderators'], 'six clear tools'),
+    'shield-copilot': (['explains why'], 'every review'),
+    'deepfake-detection': (['fake claim calls and fake articles'], 'a score'),
+    'productivity-tracker': (['Sessions, breaks and time on each task'], 'the first campaign'),
+}
+# The hand-drawn line, the same one as under "human" on the homepage (AScribble in variant-a.jsx)
+SCRIBBLE = ('<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">'
+            '<path d="M4 15 C 52 6, 98 20, 150 12 S 246 5, 296 13" pathLength="1" fill="none" '
+            'stroke="currentColor" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>')
+
+
+def statement(h, key):
+    """Wrap the page's chosen phrases in an already-rendered opening paragraph. Words unchanged."""
+    figs, mark = LEDE_MARKS.get(key, ([], None))
+    for f in figs + ([mark] if mark else []):
+        e = esc(f)
+        if h.count(e) != 1:
+            print(f'  note: "{f}" is not in the {key} opening exactly once, so it stays plain')
+            continue
+        if f == mark:
+            h = h.replace(e, f'<span class="fig mark">{e}{SCRIBBLE}</span>', 1)
+        else:
+            h = h.replace(e, f'<span class="fig">{e}</span>', 1)
+    return h
 
 
 def newest(pattern):
@@ -239,6 +313,7 @@ def page(path, title, desc, og_img, label, body, *, part_of=False, progress=Fals
 <script>document.documentElement.classList.add('js');try{{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')==='dark'?'dark':'light')}}catch(e){{document.documentElement.setAttribute('data-theme','light')}}</script>
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/case-taskgpt.css">
+<link rel="stylesheet" href="/case-lead.css">
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -251,7 +326,7 @@ def page(path, title, desc, og_img, label, body, *, part_of=False, progress=Fals
     <span class="mono nav-label"><span class="dot" aria-hidden="true">●</span> {esc(label)}</span>
     <div class="nav-right">
       {THEME_TOGGLE}
-      <a href="mailto:contact@dipeshgurav.com" class="back">Contact →</a>
+      <a href="/about#contact" class="back">Contact →</a>
     </div>
   </div>
   {bar}
@@ -267,6 +342,7 @@ def page(path, title, desc, og_img, label, body, *, part_of=False, progress=Fals
 <script src="/theme.js" defer></script>
 <script src="/case-nav.js" defer></script>
 <script src="/case-reader.js" defer></script>
+<script src="/case-lead.js" defer></script>
 </body>
 </html>
 '''
@@ -412,7 +488,7 @@ def crossrefs(h, full=False):
 
 # ─── Full case study ─────────────────────────────────────────────────────────
 
-def build_full(blocks):
+def build_full(blocks, screens):
     title = next(b['text'] for b in blocks if b['t'] == 'h' and b['level'] == 1)
     body_blocks = [b for b in blocks if not (b['t'] == 'h' and b['level'] == 1)
                    and not (b['t'] == 'p' and b['text'].startswith('Source text for'))]
@@ -424,9 +500,23 @@ def build_full(blocks):
     collect = None          # id whose blocks we are collecting for the standalone pages
     in_ext = False          # inside section 12
     table_no = {}
+    first_p = True          # the opening paragraph is set as a statement
+    shots_q = []            # this product's screens still to place (Dipesh, 23 Nov 2026: in the story)
+    shot_placed = False
+    used = set()
+
+    def start_shots(sl):
+        nonlocal shots_q, shot_placed
+        shots_q, shot_placed = [], False
+        if sl not in used:
+            used.add(sl)
+            shots_q = list(screens.get(sl, []))
 
     def flush():
-        nonlocal pending
+        nonlocal pending, shots_q
+        # The rest of this product's screens close its section, before the link to its own page
+        out.extend(shot(x) for x in shots_q)
+        shots_q = []
         if pending:
             out.append(own_link(*pending))
             pending = None
@@ -462,6 +552,7 @@ def build_full(blocks):
                 in_ext = (i == 'chrome-extensions')
                 if i in OWN_PAGE:
                     pending = OWN_PAGE[i]
+                    start_shots(pending[0])
             continue
 
         # Section 12: a bold lead-in such as **TranslateBuddy.** becomes an h4
@@ -476,6 +567,8 @@ def build_full(blocks):
                 collect = i
                 sections[i] = [{'t': 'p', 'text': lead[1]}]
                 pending = OWN_PAGE.get(i)
+                if pending:
+                    start_shots(pending[0])
                 out.append(f'<p>{crossrefs(inline(lead[1]), True)}</p>')
                 continue
             if cur['h4'] and is_label(b):
@@ -487,8 +580,16 @@ def build_full(blocks):
         if collect:
             sections[collect].append(b)
 
+        # A product's first screen goes in before its first labelled part (usually What I designed)
+        if is_label(b) and shots_q and not shot_placed:
+            out.append(shot(shots_q.pop(0)))
+            shot_placed = True
+
         if is_loop(b):
             out.append(loop_html())
+        elif b['t'] == 'p' and first_p and not is_label(b):
+            first_p = False
+            out.append(f'<p class="lede statement">{statement(crossrefs(inline(b["text"]), True), "full")}</p>')
         elif b['t'] == 'p':
             cls = ' class="label"' if is_label(b) else ''
             text = label_text(b) if is_label(b) else b['text']
@@ -514,7 +615,10 @@ def toc_html(nodes, depth=1):
     items = []
     for n in nodes:
         num = f'<span class="toc-num">{esc(n["num"])}</span> ' if n['num'] else ''
-        link = f'<a href="#{n["id"]}" data-label="{attr(plain(n["label"]))}">{num}{esc(plain(n["text"]))}</a>'
+        kind = DESCRIPTORS.get(OWN_PAGE[n['id']][0]) if n['id'] in OWN_PAGE else None
+        kind = f'<span class="toc-desc">{esc(kind)}</span>' if kind else ''
+        link = (f'<a href="#{n["id"]}" data-label="{attr(plain(n["label"]))}">'
+                f'<span class="toc-name">{num}{esc(plain(n["text"]))}</span>{kind}</a>')
         if n['kids']:
             gid = f'toc-g-{n["id"]}'
             twist = (f'<button type="button" class="toc-twist" aria-expanded="true" aria-controls="{gid}" hidden>'
@@ -543,6 +647,7 @@ def full_page(title, out, toc):
     <p class="doc-back"><a href="/case-taskgpt">← Back to TaskGPT</a></p>
     <h1>{h1}</h1>
     <p class="readtime">About 35 minutes to read</p>
+    <div class="doc-cover">{shot(DASH_CROP, True)}</div>
     {"".join(out)}
     <div class="doc-end"><a class="btn btn-outline" href="/case-taskgpt"><span aria-hidden="true">←</span> Back to TaskGPT</a></div>
   </article>
@@ -583,6 +688,48 @@ def hub_cards(secs):
     return cards
 
 
+def hub_groups(secs):
+    """The hub's product groups in order: Use, Measure, Set up, Protect, then Chrome extensions."""
+    groups = []
+    for s in secs:
+        title = re.sub(r'\s*\(id="[^"]+"\)$', '', s['title'])
+        cur = None
+        for b in s['blocks']:
+            if b['t'] == 'h' and b['level'] == 3:
+                cur = (b['text'], [])
+                groups.append(cur)
+                continue
+            m = CARD_RE.match(b['text']) if b['t'] == 'p' else None
+            if m:
+                if cur is None:
+                    cur = (title, [])
+                    groups.append(cur)
+                cur[1].append(clean_href(m.group(3)).replace('/case-taskgpt-', ''))
+    return groups
+
+
+def product_tree(groups, current, page_toc):
+    """The tree on a product page: the overview, the full case study, then every product in its
+    group with what it is in plain words. The current one is marked and lists its own parts."""
+    names = {p[0]: p[1] for p in PAGES}
+    items = ['<li class="toc-l1 toc-page"><div class="toc-row"><a href="/case-taskgpt">TaskGPT overview</a></div></li>',
+             '<li class="toc-l1 toc-page"><div class="toc-row"><a href="/case-taskgpt-full">The full case study</a></div></li>']
+    for title, slugs in groups:
+        kids = []
+        for sl in slugs:
+            here = sl == current
+            link = (f'<a href="/case-taskgpt-{sl}"{" aria-current=" + chr(34) + "page" + chr(34) if here else ""}>'
+                    f'<span class="toc-name">{esc(names[sl])}</span><span class="toc-desc">{esc(DESCRIPTORS[sl])}</span></a>')
+            sub = ''
+            if here and page_toc:
+                sub = '<ol>' + ''.join(f'<li class="toc-l3"><div class="toc-row"><a href="#{i}" data-label="{attr(t)}">{esc(t)}</a></div></li>'
+                                       for i, t in page_toc) + '</ol>'
+            kids.append(f'<li class="toc-l2{" is-here" if here else ""}"><div class="toc-row">{link}</div>{sub}</li>')
+        items.append(f'<li class="toc-l1 toc-grouped"><div class="toc-row"><span class="toc-group">{esc(title)}</span></div>'
+                     f'<ol>{"".join(kids)}</ol></li>')
+    return ''.join(items)
+
+
 def build_hub(secs, screens):
     hero = secs[0]['blocks']
     title = re.fullmatch(r'\*\*(.+)\*\*', hero[0]['text']).group(1)
@@ -604,7 +751,7 @@ def build_hub(secs, screens):
       <div>Context / <span>Enterprise AI · 14 Countries</span></div>
     </div>
     <h1>{h1}</h1>
-    <p class="lede">{inline(sub)}</p>
+    <p class="lede statement">{statement(inline(sub), 'hub')}</p>
     <div class="hero-cta">
       <a class="btn btn-primary wipe" href="/case-taskgpt-full">Read the full case study <span aria-hidden="true">→</span></a>
       <a class="btn btn-outline" href="#products">See the products <span aria-hidden="true">↓</span></a>
@@ -642,7 +789,7 @@ def build_hub(secs, screens):
                 else:
                     th = '<div class="thumb thumb-ph"><span>Screens coming soon</span></div>'
                 cards.append(f'<li class="card">{th}'
-                             f'<{card_level}>{esc(cm.group(1))}</{card_level}><p>{inline(cm.group(2))}</p>'
+                             f'<{card_level}>{esc(cm.group(1))}</{card_level}><p class="kind">{esc(DESCRIPTORS[sl])}</p><p>{inline(cm.group(2))}</p>'
                              f'<a class="more" href="/case-taskgpt-{sl}">Read the case study'
                              f'<span class="sr-only">: {esc(cm.group(1))}</span> <span aria-hidden="true">→</span></a></li>')
                 continue
@@ -735,7 +882,7 @@ def facts_html(cells):
             + '</dl>')
 
 
-def build_standalone(idx, sections, ext_table, ext_decisions, instrumented, popup, cards, screens):
+def build_standalone(idx, sections, ext_table, ext_decisions, instrumented, popup, cards, screens, tree_groups):
     sl, name, kind, sec = PAGES[idx]
     card = cards[sl]
     shots = screens[sl]
@@ -788,20 +935,24 @@ def build_standalone(idx, sections, ext_table, ext_decisions, instrumented, popu
         rest = [x for i, x in enumerate(shots) if i != lead_i]
 
     chips = ''.join(f'<li>{esc(c)}</li>' for c in CHIPS)
-    sections_html = []
+    # The story, with this product's screens placed between its parts (Dipesh, 23 Nov 2026:
+    # the screens read best inside the story, not in a gallery at the end)
+    queue = list(rest)
+
+    def take():
+        return shot(queue.pop(0)) if queue else ''
+
+    story, page_toc = [], []
     if lead or intro:
         lead_html = f'<p class="lead">{inline(lead["text"])}</p>' if lead else ''
-        sections_html.append(f'<div class="block">{lead_html}{render_blocks(intro)}</div>')
+        story.append(f'<div class="block">{lead_html}{render_blocks(intro)}</div>')
+        story.append(take())
     for g in groups:
-        sections_html.append(f'<div class="block"><h2>{esc(g["title"])}</h2>{render_blocks(g["blocks"])}</div>')
-    screens_html = ''
-    if rest:
-        screens_html = f'''<section class="body screens">
-  <div class="wrap">
-    <div class="section-head"><h2>Screens</h2></div>
-    <div class="shots">{"".join(shot(s) for s in rest)}</div>
-  </div>
-</section>'''
+        gid = slug(g['title'])
+        page_toc.append((gid, g['title']))
+        story.append(f'<div class="block"><h2 id="{gid}">{esc(g["title"])}</h2>{render_blocks(g["blocks"])}</div>')
+        story.append(take())
+    story += [shot(x) for x in queue]
 
     prev_p = PAGES[idx - 1] if idx > 0 else None
     next_p = PAGES[idx + 1] if idx < len(PAGES) - 1 else None
@@ -815,36 +966,39 @@ def build_standalone(idx, sections, ext_table, ext_decisions, instrumented, popu
         nav.append(f'<a class="mf-next" href="/case-taskgpt-{next_p[0]}"><span class="mono">Next</span>'
                    f'<span class="mf-name">{esc(next_p[1])}<span aria-hidden="true"> →</span></span></a>')
 
-    body = f'''<section class="hero">
-  <div class="wrap">
+    # The same reader as the full case study (Dipesh, 23 Nov 2026): every product stays in view
+    # in the tree on the left, each with what it is in plain words, so nobody has to go back to
+    # the hub to find the next one. Below 1024px the tree is a drawer.
+    body = f'''<div class="wrap">
+<div class="reader product-reader">
+  <div class="toc-backdrop" hidden></div>
+  <nav class="toc" id="toc" aria-label="TaskGPT case studies">
+    <div class="toc-top"><span class="mono">TaskGPT</span><button type="button" class="toc-close">Close<span class="sr-only"> the list of products</span></button></div>
+    <ol class="toc-list">{product_tree(tree_groups, sl, page_toc)}</ol>
+  </nav>
+  <article class="doc product" id="content" tabindex="-1">
     <nav aria-label="Breadcrumb"><ol class="crumb"><li><a href="/case-taskgpt">TaskGPT</a></li><li aria-current="page">{esc(name)}</li></ol></nav>
     <h1>{esc(name)}</h1>
-    <p class="lede">{inline(card["desc"])}</p>
+    <p class="kind">{esc(DESCRIPTORS[sl])}</p>
+    <p class="lede statement">{statement(inline(card["desc"]), sl)}</p>
     <ul class="chips" aria-label="Role and status">{chips}</ul>
     <div class="cover-fig">{cover}</div>
-  </div>
-</section>
-<section class="body context">
-  <div class="wrap">
     <div class="context-box">
       <p>{context}</p>
       <p class="context-links"><a href="/case-taskgpt">See all of TaskGPT</a><a href="/case-taskgpt-full#{full_id}">Read the full case study</a></p>
     </div>
-  </div>
-</section>
-<section class="body story">
-  <div class="wrap">
-    <div class="story-body">{"".join(sections_html)}</div>
-  </div>
-</section>
-{screens_html}
-<section class="more-from">
-  <div class="wrap">
-    <h2 class="mono">More from TaskGPT</h2>
-    <div class="mf-grid">{"".join(nav)}</div>
-    <p class="mf-back"><a class="btn btn-outline" href="/case-taskgpt"><span aria-hidden="true">←</span> Back to TaskGPT</a></p>
-  </div>
-</section>'''
+    <div class="story-body">{"".join(story)}</div>
+    <section class="more-from" aria-labelledby="more-from">
+      <h2 class="mono" id="more-from">More from TaskGPT</h2>
+      <div class="mf-grid">{"".join(nav)}</div>
+      <p class="mf-back"><a class="btn btn-outline" href="/case-taskgpt"><span aria-hidden="true">←</span> Back to TaskGPT</a></p>
+    </section>
+  </article>
+</div>
+</div>'''
+    bar = ('<div class="reader-bar"><button type="button" class="toc-open" aria-expanded="false" aria-controls="toc">'
+           '<span class="toc-open-icon" aria-hidden="true"></span>All products</button>'
+           '<span class="reader-current" id="reader-current"></span></div>')
     usable = [x for x in shots if not x.get('hold')]
     if sl == 'dashboard':
         og = DASH_CROP['file']
@@ -854,7 +1008,8 @@ def build_standalone(idx, sections, ext_table, ext_decisions, instrumented, popu
         og = usable[0]['file'] if usable else 'taskgpt-hub-og'
     og_path = '/assets/taskgpt-hub-og.jpg' if og == 'taskgpt-hub-og' else f'/assets/{og}.jpg'
     return page(f'/case-taskgpt-{sl}', f'{name} · TaskGPT Case Study | Dipesh Gurav',
-                meta_desc(name, card['desc']), og_path, f'TaskGPT · {name}', body, part_of=True)
+                meta_desc(name, card['desc']), og_path, f'TaskGPT · {name}', body, part_of=True,
+                skip='#content', extra_before_main=bar)
 
 
 # ─── Main ────────────────────────────────────────────────────────────────────
@@ -864,12 +1019,14 @@ def main():
     hub_md = open(newest('taskgpt-hub-copy-*.md'), encoding='utf-8').read()
     if TITLE_FROM in case_md:
         case_md = case_md.replace(TITLE_FROM, TITLE_TO)
-    for old, new in HUB_SWAPS:
+    for old, new in COPY_SWAPS:
         hub_md = hub_md.replace(old, new)
+        case_md = case_md.replace(old, new)
+    assert 'adoption rose' not in hub_md + case_md, 'a new adoption sentence needs a COPY_SWAPS entry'
     screens = json.load(open(os.path.join(ROOT, 'docs/taskgpt/screens.json'), encoding='utf-8'))
 
     blocks = parse(case_md)
-    title, out, toc, sections = build_full(blocks)
+    title, out, toc, sections = build_full(blocks, screens)
 
     # Pieces the standalone pages borrow from other sections
     ext = sections['chrome-extensions']
@@ -897,13 +1054,15 @@ def main():
     secs = hub_sections(hub_blocks)
     cards = hub_cards(secs)
     assert set(cards) == {p[0] for p in PAGES}, set(cards) ^ {p[0] for p in PAGES}
+    tree_groups = hub_groups(secs)
+    assert sorted(x for _, g in tree_groups for x in g) == sorted(p[0] for p in PAGES), tree_groups
 
     written = {}
     written['case-taskgpt-full.html'] = full_page(title, out, toc)
     written['case-taskgpt.html'] = build_hub(secs, screens)
     for i, p in enumerate(PAGES):
         written[f'case-taskgpt-{p[0]}.html'] = build_standalone(
-            i, sections, ext_table, ext_decisions, instrumented, popup, cards, screens)
+            i, sections, ext_table, ext_decisions, instrumented, popup, cards, screens, tree_groups)
 
     for name, text in written.items():
         assert '\u2014' not in text, f'em dash in {name}'

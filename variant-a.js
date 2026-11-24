@@ -395,6 +395,86 @@ function AScribble({
   })));
 }
 
+// ─── CHARACTER ON /about (Dipesh, 24 Nov 2026) ───────────────────────────────
+// The same pieces as the case studies (case-lead.css): the hand-drawn line under one word of each
+// section heading, drawn once in view; each section's first paragraph larger and filling from grey
+// to ink once in view; figures in the serif italic. Words never change. Styles in /site.css.
+const FIG_RE = /(\b\d{1,3}(?:,\d{3})+\+?|\b\d+(?:\.\d+)?%|\b\d+\+(?=[\s.,;:)]|$)|\b\d+(?:\.\d+)?[MK]\+?|\b(?:a|one) million\b)/g;
+function ASecLine({
+  children,
+  stroke = 2.6
+}) {
+  const [ref, inView] = useReveal({
+    threshold: 0.6
+  });
+  return /*#__PURE__*/React.createElement("span", {
+    ref: ref,
+    className: `sec-mark ${inView ? 'is-in' : 'is-waiting'}`
+  }, children, /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 300 24",
+    preserveAspectRatio: "none",
+    "aria-hidden": "true",
+    focusable: "false"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M4 15 C 52 6, 98 20, 150 12 S 246 5, 296 13",
+    pathLength: "1",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: stroke,
+    strokeLinecap: "round",
+    vectorEffect: "non-scaling-stroke"
+  })));
+}
+
+// Text with *italics* and figures, optionally with every word in a span for the fill
+function richText(text, fill) {
+  const total = text.replace(/\*/g, '').split(/\s+/).filter(Boolean).length;
+  const step = Math.min(30, 1100 / Math.max(1, total));
+  let n = 0;
+  const words = (s, key) => s.split(/(\s+)/).filter(Boolean).map((w, x) => /^\s+$/.test(w) || !fill ? w : /*#__PURE__*/React.createElement("span", {
+    key: `${key}-${x}`,
+    className: "w",
+    style: {
+      animationDelay: `${Math.round(80 + n++ * step)}ms`
+    }
+  }, w));
+  return text.split(/\*(.+?)\*/).map((part, j) => {
+    const nodes = [];
+    let last = 0,
+      m;
+    FIG_RE.lastIndex = 0;
+    while (m = FIG_RE.exec(part)) {
+      if (m.index > last) nodes.push(...words(part.slice(last, m.index), `${j}a${m.index}`));
+      nodes.push(/*#__PURE__*/React.createElement("span", {
+        key: `${j}f${m.index}`,
+        className: "fig"
+      }, words(m[0], `${j}f${m.index}`)));
+      last = m.index + m[0].length;
+    }
+    if (last < part.length) nodes.push(...words(part.slice(last), `${j}z`));
+    return j % 2 ? /*#__PURE__*/React.createElement("em", {
+      key: j
+    }, nodes) : /*#__PURE__*/React.createElement(React.Fragment, {
+      key: j
+    }, nodes);
+  });
+}
+
+// A section's first paragraph: fills from grey to ink once in view (all ink with reduced motion)
+function AFill({
+  text,
+  style
+}) {
+  const [ref, inView] = useReveal({
+    threshold: 0.25
+  });
+  return /*#__PURE__*/React.createElement("p", {
+    ref: ref,
+    className: `opener ${inView ? 'is-in' : 'is-waiting'}`,
+    style: style
+  }, richText(text, true));
+}
+
 // ─── HERO ────────────────────────────────────────────────────────────────────
 // Dipesh, 23 Nov 2026: only the hello, filling the screen below the header on every size.
 // Left aligned and large enough to span the width, in a hand-drawn face (Caveat) for warmth,
@@ -616,9 +696,6 @@ function AAboutNumber({
 function APerson() {
   const bp = useBreakpoint();
   const [first, ...rest] = PORTFOLIO.bio;
-  const em = para => para.split(/\*(.+?)\*/).map((part, j) => j % 2 ? /*#__PURE__*/React.createElement("em", {
-    key: j
-  }, part) : part);
   const factTitle = {
     ...aStyles.mono,
     margin: '0 0 12px',
@@ -639,12 +716,13 @@ function APerson() {
     style: {
       fontStyle: 'italic'
     }
-  }, "easier")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(ASecLine, null, "easier"))), /*#__PURE__*/React.createElement("div", {
     style: {
       maxWidth: 720,
       marginTop: bp.isMobile ? 28 : 40
     }
-  }, /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement(AFill, {
+    text: first,
     style: {
       fontSize: bp.isMobile ? 18 : 21,
       lineHeight: 1.55,
@@ -652,7 +730,7 @@ function APerson() {
       color: A.ink,
       margin: 0
     }
-  }, em(first)), rest.map((para, i) => /*#__PURE__*/React.createElement("p", {
+  }), rest.map((para, i) => /*#__PURE__*/React.createElement("p", {
     key: i,
     style: {
       fontSize: 16,
@@ -660,7 +738,7 @@ function APerson() {
       color: A.ink2,
       margin: '20px 0 0'
     }
-  }, em(para)))), /*#__PURE__*/React.createElement("div", {
+  }, richText(para)))), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: bp.isMobile ? 48 : 72,
       paddingTop: 28,
@@ -739,7 +817,7 @@ function ABeliefs() {
     tone: "surf"
   }, /*#__PURE__*/React.createElement("h2", {
     style: aboutH2(bp)
-  }, "Six beliefs that decide every design call"), /*#__PURE__*/React.createElement("ol", {
+  }, "Six beliefs that decide every design ", /*#__PURE__*/React.createElement(ASecLine, null, "call")), /*#__PURE__*/React.createElement("ol", {
     style: {
       listStyle: 'none',
       padding: 0,
@@ -760,9 +838,13 @@ function ABeliefs() {
   }, /*#__PURE__*/React.createElement("span", {
     "aria-hidden": "true",
     style: {
-      ...aStyles.mono,
-      color: A.accent,
-      paddingTop: 6
+      fontFamily: '"Fraunces", Georgia, serif',
+      fontStyle: 'italic',
+      fontWeight: 300,
+      fontSize: bp.isMobile ? 24 : 28,
+      lineHeight: 1,
+      color: A.ink2,
+      paddingTop: 1
     }
   }, p.n), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
     style: {
@@ -780,7 +862,7 @@ function ABeliefs() {
       color: A.ink2,
       margin: '10px 0 0'
     }
-  }, p.body))))));
+  }, richText(p.body)))))));
 }
 
 // ─── TASKGPT PRODUCT RAIL (under TaskUs in the CV) ───────────────────────────
@@ -1148,15 +1230,17 @@ function AOrigin() {
       fontStyle: 'italic',
       display: 'block'
     }
-  }, "a mark India picked up")), /*#__PURE__*/React.createElement("p", {
+  }, "a mark India ", /*#__PURE__*/React.createElement(ASecLine, null, "picked up"))), /*#__PURE__*/React.createElement(AFill, {
+    text: PORTFOLIO.origin,
     style: {
-      fontSize: 16,
-      lineHeight: 1.75,
-      color: A.ink2,
+      fontSize: bp.isMobile ? 18 : 20,
+      lineHeight: 1.6,
+      letterSpacing: '-0.012em',
+      color: A.ink,
       margin: '28px 0 0',
-      maxWidth: 560
+      maxWidth: 600
     }
-  }, PORTFOLIO.origin), /*#__PURE__*/React.createElement("p", {
+  }), /*#__PURE__*/React.createElement("p", {
     style: {
       fontFamily: '"Fraunces", Georgia, serif',
       fontWeight: 300,
@@ -2254,7 +2338,7 @@ function AContact() {
     }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
       id: "contact-heading",
       style: aboutH2(bp)
-    }, "Drop a Hi!")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    }, "Drop a ", /*#__PURE__*/React.createElement(ASecLine, null, "Hi"), "!")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
       style: {
         marginTop: bp.isMobile ? 28 : 40,
         maxWidth: 760
