@@ -131,7 +131,8 @@ const PORTFOLIO = {
       items: [['TranslateBuddy', '/case-taskgpt-translatebuddy', 'taskgpt-translatebuddy-1', 'From a standalone translator to a Zendesk panel that detects the language and prepares the reply, so agents only review, edit and send.'], ['Shield', '/case-taskgpt-shield', 'taskgpt-shield-2', 'A wellbeing extension for content moderators.'], ['Shield Co-Pilot', '/case-taskgpt-shield-copilot', 'taskgpt-shield-copilot-1', 'An AI co-pilot inside the moderation tool.'], ['Deepfake Detection', '/case-taskgpt-deepfake-detection', 'taskgpt-deepfake-detection-1', 'A side panel that checks images in fake claim calls and fake articles, with a score and a breakdown by method.'], ['Productivity Tracker', '/case-taskgpt-productivity-tracker', 'taskgpt-productivity-tracker-2', 'Sessions, breaks and time on each task.']]
     }],
     full: '/case-taskgpt-full',
-    // The first card in the rail, in its own group (Dipesh, 23 Nov 2026). Line from that page's description.
+    // Shown in TaskGPT's place among TaskUs's case study cards (Dipesh, 24 Nov 2026; it led the rail
+    // until then). Line from that page's description.
     fullCard: ['The full case study', '/case-taskgpt-full', 'taskgpt-hub-cover', 'An enterprise AI suite for agents on live customer calls, from research to developer handover.']
   }, {
     id: 'levelup',

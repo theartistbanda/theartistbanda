@@ -269,7 +269,7 @@ function AThemeToggle() {
   }, "Switch to light theme"));
 }
 
-// The menu since 23 Nov 2026 (Dipesh): one "About me" button, in the outline style of the
+// The menu since 23 Nov 2026 (Dipesh): one "About me" button ("Career" on /about), in the outline style of the
 // "Download PDF résumé" button. "Get in touch" lives only in the banner above. No link list, no
 // clock, no hamburger.
 function ANav({
@@ -348,17 +348,16 @@ function ANav({
       alignItems: 'center'
     }
   }, /*#__PURE__*/React.createElement(AThemeToggle, null), /*#__PURE__*/React.createElement("a", {
-    href: "/about",
+    href: page === 'about' ? '/#career' : '/about',
     "data-cursor": "hover",
     className: "cta cta-outline",
-    "aria-current": page === 'about' ? 'page' : undefined,
     style: {
       ...btn,
       fontWeight: 500,
       color: A.ink,
-      border: `1px solid ${page === 'about' ? A.ink : 'rgba(var(--ink-rgb), 0.2)'}`
+      border: '1px solid rgba(var(--ink-rgb), 0.2)'
     }
-  }, "About me ", /*#__PURE__*/React.createElement("span", {
+  }, page === 'about' ? 'Career' : 'About me', " ", /*#__PURE__*/React.createElement("span", {
     className: "cta-arrow",
     style: {
       color: A.accent
@@ -915,11 +914,9 @@ function AProductRail({
   };
   const count = p.groups.reduce((n, g) => n + g.items.length, 0);
   const cardW = bp.isMobile ? 208 : 232;
-  // The full case study leads, as a card in its own group
-  const groups = p.fullCard ? [{
-    label: 'Overview',
-    items: [p.fullCard]
-  }, ...p.groups] : p.groups;
+  // Starts with the first product (Dipesh, 24 Nov 2026): the full case study card moved up into
+  // the role's case study cards, in TaskGPT's place
+  const groups = p.groups;
   const mask = `linear-gradient(to right, ${edge.start ? '#000' : 'transparent'} 0, #000 ${fade}px, #000 calc(100% - ${fade}px), ${edge.end ? '#000' : 'transparent'} 100%)`;
   const arrow = (dir, label, disabled) => /*#__PURE__*/React.createElement("button", {
     type: "button",
@@ -1371,6 +1368,19 @@ function ACareerBody({
 function caseStudiesOf(c) {
   return (c.products || []).map(id => PORTFOLIO.projects.find(p => p.id === id)).filter(Boolean);
 }
+// The card a case study shows under its role. TaskGPT shows its full case study card instead of
+// its own (Dipesh, 24 Nov 2026), and its products follow in the rail below.
+function roleCard(p) {
+  if (!p.fullCard) return p;
+  const [title, href, img, tagline] = p.fullCard;
+  return {
+    id: p.id,
+    title,
+    href,
+    thumb: `/assets/${img}.webp`,
+    tagline
+  };
+}
 function orgSlug(c) {
   return c.org.split(' · ')[0].toLowerCase().replace(/[^a-z]+/g, '-');
 }
@@ -1432,7 +1442,7 @@ function ACareerProducts({
       display: 'flex'
     }
   }, /*#__PURE__*/React.createElement(ACaseCard, {
-    p: p
+    p: roleCard(p)
   })))));
 }
 function ACareerItem({

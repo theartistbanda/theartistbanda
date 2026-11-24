@@ -155,7 +155,8 @@ const PORTFOLIO = {
         ] },
       ],
       full: '/case-taskgpt-full',
-      // The first card in the rail, in its own group (Dipesh, 23 Nov 2026). Line from that page's description.
+      // Shown in TaskGPT's place among TaskUs's case study cards (Dipesh, 24 Nov 2026; it led the rail
+      // until then). Line from that page's description.
       fullCard: ['The full case study', '/case-taskgpt-full', 'taskgpt-hub-cover',
         'An enterprise AI suite for agents on live customer calls, from research to developer handover.'],
     },
