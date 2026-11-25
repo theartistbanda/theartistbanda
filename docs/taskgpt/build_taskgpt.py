@@ -353,8 +353,8 @@ def page(path, title, desc, og_img, label, body, *, part_of=False, progress=Fals
 NEXT_CASE = '''<section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
-    <a href="/case-levelup">
-      <span class="nt">LevelUp: <i>a game that runs on business logic</i></span>
+    <a href="/case-yourhour">
+      <span class="nt">YourHour: <i>breaking digital addiction, compassionately</i></span>
       <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>

@@ -55,8 +55,8 @@ DESC = ("How Dipesh Gurav designed LevelUp, TaskUs's gamification platform with 
 NEXT = '''<section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
-    <a href="/case-evaluateus">
-      <span class="nt">EvaluateUs: <i>from typed questions to a live AI customer</i></span>
+    <a href="/case-taskgpt-full">
+      <span class="nt">TaskGPT: <i>the AI that works inside the call</i></span>
       <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>

@@ -197,7 +197,6 @@ const PORTFOLIO = {
       href: '/case-evaluateus',
     },
     {
-      // After EvaluateUs (Dipesh, 25 Nov 2026)
       id: 'maestro',
       index: '04',
       year: '2025–2026',
@@ -386,7 +385,7 @@ const PORTFOLIO = {
       ],
       tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Founding designer'],
       // Case studies shown under this role on /career (Dipesh, 23 Nov 2026)
-      products: ['taskgpt', 'levelup', 'evaluateus', 'maestro'],
+      products: ['maestro', 'evaluateus', 'levelup', 'taskgpt'], // Dipesh's order, 25 Nov 2026
       current: false,
     },
     {

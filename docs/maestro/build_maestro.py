@@ -61,8 +61,8 @@ DESC = ('How Dipesh Gurav designed Maestro, a TaskUs AI assistant in Google Chat
 NEXT = '''<section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
-    <a href="/case-yourhour">
-      <span class="nt">YourHour: <i>breaking digital addiction, compassionately</i></span>
+    <a href="/case-evaluateus">
+      <span class="nt">EvaluateUs: <i>from typed questions to a live AI customer</i></span>
       <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>
