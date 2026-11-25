@@ -133,7 +133,7 @@ const PORTFOLIO = {
     full: '/case-taskgpt-full',
     // Shown in TaskGPT's place among TaskUs's case study cards (Dipesh, 24 Nov 2026; it led the rail
     // until then). Line from that page's description.
-    fullCard: ['The full case study', '/case-taskgpt-full', 'taskgpt-hub-cover', 'An enterprise AI suite for agents on live customer calls, from research to developer handover.']
+    fullCard: ['TaskGPT', '/case-taskgpt-full', 'taskgpt-hub-cover', 'An enterprise AI suite for agents on live customer calls, from research to developer handover.']
   }, {
     id: 'levelup',
     index: '02',
