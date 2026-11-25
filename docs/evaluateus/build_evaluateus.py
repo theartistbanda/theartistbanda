@@ -43,12 +43,14 @@ tg.LEDE_MARKS['evaluateus'] = (['hire, coach and train agents', 'what happens ne
 # Headings whose text or id differs from the source (brief, section 3.1)
 H3_TEXT = {'Admins set the rules. Managers work inside them': 'Admins set the rules, managers work inside them'}
 IDS = {'Admins set the rules, managers work inside them': 'admins-set-the-rules'}
-# Dipesh's wording after the source export (25 Nov 2026): the dates
+# Dipesh's wording after the source export (25 Nov 2026): the dates, and the level in decision 7
 COPY_SWAPS = [
     ('First version launched at the end of 2024. AI scenario version: September 2025 to March 2026',
      'First version went live in December 2025. AI scenario version: September 2025 to March 2026'),
     ('When the AI version came in, the first version was already in testing.',
      'The first version went live in December 2025, and the AI scenario version went into testing in February 2026.'),
+    # To match the updated results screen
+    ('for example "85%, A2"', 'for example "85%, B2"'),
 ]
 BEFORE_AFTER = 'The flow would grow, with settings inside settings. The full page gives every setting room.'
 
