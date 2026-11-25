@@ -311,7 +311,7 @@ def page(path, title, desc, og_img, label, body, *, part_of=False, progress=Fals
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="{FONTS}" rel="stylesheet">
-<script>document.documentElement.classList.add('js');try{{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')==='dark'?'dark':'light')}}catch(e){{document.documentElement.setAttribute('data-theme','light')}}</script>
+<script>document.documentElement.classList.add('js');(function(d,t){{try{{t=localStorage.getItem('theme')}}catch(e){{}}if(t!=='dark'&&t!=='light')t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';d.setAttribute('data-theme',t)}})(document.documentElement)</script>
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/case-taskgpt.css">
 <link rel="stylesheet" href="/case-lead.css">
