@@ -9,7 +9,7 @@ Captions, alt text and sizes: docs/maestro/screens.json. The images are in asset
 After Dipesh exports a fresh copy, put it in that folder and run, from the repo root:
   python3 docs/maestro/build_maestro.py
 
-The words come from the source as they are. The page parts come from the TaskGPT build script and the
+The words come from the source as they are, apart from COPY_SWAPS. The page parts come from the TaskGPT build script and the
 styles from the LevelUp page. Maestro is its own product: nothing on this page may name TaskGPT.
 """
 import glob
@@ -44,6 +44,9 @@ IDS = {'Start the shift with a brief, not a dashboard': 'start-the-shift-with-a-
        'Training for the person, not the team': 'training-for-the-person',
        'Ask for trust first, then earn it': 'ask-for-trust-first',
        'Want me to keep an eye on this?': 'keep-an-eye-on-this'}
+# Dipesh's change after the source export (25 Nov 2026): a Figma page name that readers cannot know
+COPY_SWAPS = [('The "UI including AI" page shows the next version of Maestro. This version was built too.',
+               'This version was built too.')]
 # Only these sections turn their bold numbered lead-ins into headings
 NUMBERED = ['Key design decisions', 'The later version: from an answer to a watch']
 BEFORE_AFTER = 'The same AHT number, split into talk time, hold time and after-call work.'
@@ -97,7 +100,11 @@ def main():
     files = sorted(glob.glob(os.path.join(SRC, 'maestro-case-study-source-*.md')), key=os.path.getmtime)
     if not files:
         sys.exit(f'No source file in {SRC}')
-    blocks = parse(open(files[-1], encoding='utf-8').read())
+    source = open(files[-1], encoding='utf-8').read()
+    for a, b in COPY_SWAPS:
+        source = source.replace(a, b)
+    assert 'UI including AI' not in source.split('## The brief', 1)[1]
+    blocks = parse(source)
 
     # Sections by ## heading
     secs, cur = [], None
