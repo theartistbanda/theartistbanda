@@ -28,6 +28,10 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.expanduser('~/Downloads/taskgpt-source/')
 SITE = 'https://dipeshgurav.com'
+# Hero videos, by page: file, size, label, caption, and where to start (brief, 25 Nov 2026). One with
+# a "hold" reason is left out, and its page keeps its first image at the top.
+VIDEOS = {k: v for k, v in json.load(open(os.path.join(ROOT, 'docs/videos.json'), encoding='utf-8')).items()
+          if not v.get('hold')}
 TITLE_FROM = 'Lead Agile UI/UX Designer (product designer)'
 TITLE_TO = 'Lead Product Designer'
 # Dipesh's corrections, swapped here so they survive a fresh export of his Claude Doc; drop each
@@ -272,6 +276,7 @@ THEME_TOGGLE = '''<button type="button" class="theme-toggle" data-theme-toggle>
 
 
 def page(path, title, desc, og_img, label, body, *, part_of=False, progress=False, skip='#main', extra_before_main=''):
+    video_js = '\n<script src="/case-video.js" defer></script>' if 'class="shot case-video' in body else ''
     assert len(desc) <= 160, f'{path}: description is {len(desc)} characters'
     for s in (title, desc):
         assert '\u2014' not in s and ' -- ' not in s
@@ -343,7 +348,7 @@ def page(path, title, desc, og_img, label, body, *, part_of=False, progress=Fals
 <script src="/theme.js" defer></script>
 <script src="/case-nav.js" defer></script>
 <script src="/case-reader.js" defer></script>
-<script src="/case-lead.js" defer></script>
+<script src="/case-lead.js" defer></script>{video_js}
 </body>
 </html>
 '''
@@ -365,6 +370,20 @@ def picture(f, alt, w, h, eager=False):
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
     return (f'<picture><source type="image/webp" srcset="/assets/{f}.webp">'
             f'<img src="/assets/{f}.jpg" alt="{attr(alt)}" width="{w}" height="{h}" {load} decoding="async"></picture>')
+
+
+def case_video(key):
+    """A hero video (brief, 25 Nov 2026): a silent loop in the place of the page's first image. No
+    autoplay attribute: case-video.js starts it when motion is allowed and it is on screen."""
+    v = VIDEOS[key]
+    start = f' data-start="{v["start"]}"' if v.get('start') else ''
+    left = ' is-left' if v.get('corner') == 'left' else ''   # the Pause button goes in the clip's empty corner
+    return (f'<figure class="shot case-video{left}" data-label="{attr(v["label"])}"{start}><div class="frame case-video-frame">'
+            f'<video muted loop playsinline preload="metadata" width="{v["w"]}" height="{v["h"]}" '
+            f'poster="/assets/{v["file"]}-poster.webp" aria-label="{attr(v["label"])}">'
+            f'<source src="/assets/{v["file"]}.mp4" type="video/mp4"></video>'
+            f'<button type="button" class="case-video-toggle">Play</button></div>'
+            f'<figcaption>{esc(v["caption"])}</figcaption></figure>')
 
 
 def placeholder(s, caption=True):
@@ -920,21 +939,28 @@ def build_standalone(idx, sections, ext_table, ext_decisions, instrumented, popu
                'who set up, measure and improve the AI behind them. I was the only designer, from 2022 to 2025. '
                + ctx_tail)
 
-    # Cover and screens
+    # Cover and screens. With a hero video, the first image moves down under the context box
+    # (Dipesh, 25 Nov 2026) and no longer loads first.
+    first = sl not in VIDEOS
     if sl == 'shield':
-        cover = (f'<figure class="pair-fig"><div class="pair">{shot(shots[0], True, False)}{shot(shots[1], True, False)}</div>'
+        cover = (f'<figure class="pair-fig"><div class="pair">{shot(shots[0], first, False)}{shot(shots[1], first, False)}</div>'
                  f'<figcaption>{esc(SHIELD_CAPTION)}</figcaption></figure>')
         rest = shots[2:]
     elif sl == 'productivity-tracker':
-        cover = f'<div class="pair">{shot(shots[0], True)}{shot(shots[1], True)}</div>'
+        cover = f'<div class="pair">{shot(shots[0], first)}{shot(shots[1], first)}</div>'
         rest = []
     elif sl == 'dashboard':
-        cover = shot(DASH_CROP, True)
+        cover = shot(DASH_CROP, first)
         rest = shots
     else:
         lead_i = next((i for i, x in enumerate(shots) if not x.get('hold')), 0)
-        cover = shot(shots[lead_i], True)
+        cover = shot(shots[lead_i], first)
         rest = [x for i, x in enumerate(shots) if i != lead_i]
+
+    # "first_image": "off" leaves the first image out: on the Dashboard page it is a crop of the screen
+    # that follows it (Dipesh, 25 Nov 2026)
+    moved = (f'\n    <div class="cover-fig">{cover}</div>'
+             if sl in VIDEOS and VIDEOS[sl].get('first_image') != 'off' else '')
 
     chips = ''.join(f'<li>{esc(c)}</li>' for c in CHIPS)
     # The story, with this product's screens placed between its parts (Dipesh, 23 Nov 2026:
@@ -984,11 +1010,11 @@ def build_standalone(idx, sections, ext_table, ext_decisions, instrumented, popu
     <p class="kind">{esc(DESCRIPTORS[sl])}</p>
     <p class="lede statement">{statement(inline(card["desc"]), sl)}</p>
     <ul class="chips" aria-label="Role and status">{chips}</ul>
-    <div class="cover-fig">{cover}</div>
+    <div class="cover-fig">{case_video(sl) if sl in VIDEOS else cover}</div>
     <div class="context-box">
       <p>{context}</p>
       <p class="context-links"><a href="/case-taskgpt-full">See all of TaskGPT</a><a href="/case-taskgpt-full#{full_id}">Read the full case study</a></p>
-    </div>
+    </div>{moved}
     <div class="story-body">{"".join(story)}</div>
     <section class="more-from" aria-labelledby="more-from">
       <h2 class="mono" id="more-from">More from TaskGPT</h2>

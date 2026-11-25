@@ -131,11 +131,13 @@ def main():
     h1 = h1.replace('a live AI customer', '<i>a live AI customer</i>')
     opening = (f'<h1>{h1}</h1>\n    <p class="readtime">{READ_TIME}</p>\n'
                f'    <p class="lede statement">{tg.statement(inline(intro), "evaluateus")}</p>\n'
-               f'    {figure(HERO_IMAGE, eager=True)}\n'
+               f'    {tg.case_video("evaluateus") if "evaluateus" in tg.VIDEOS else figure(HERO_IMAGE, eager=True)}\n'
                f'    {table_html(["Fact", "Detail"], [r for r in facts["rows"] if r[0] in KEEP_FACTS], "EvaluateUs facts")}')
 
-    # Body
+    # Body. With a hero video, the first image sits after the first paragraph, because the video has
+    # taken its place at the top (Dipesh, 25 Nov 2026).
     out, toc, ids = [], [], set()
+    first_image = figure(HERO_IMAGE) if "evaluateus" in tg.VIDEOS else ''
 
     def new_id(text):
         i = IDS.get(text) or slug(re.sub(r"['’]", '', text))
@@ -161,7 +163,8 @@ def main():
                 node['kids'].append({'id': hid, 'num': f'{m.group(1)}.', 'text': text, 'label': text, 'kids': []})
                 out.append(f'<p>{inline(m.group(3))}</p>')
             elif b['t'] == 'p':
-                out.append(f'<p>{inline(b["text"])}</p>')
+                out.append(f'<p>{inline(b["text"])}</p>{first_image}')
+                first_image = ''
             elif b['t'] in ('ul', 'ol'):
                 out.append(list_html(b))
             elif b['t'] == 'table':
