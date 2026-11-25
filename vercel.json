@@ -13,6 +13,11 @@
       "statusCode": 302
     },
     {
+      "source": "/case-taskgpt",
+      "destination": "/case-taskgpt-full",
+      "statusCode": 302
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.dipeshgurav.com" }],
       "destination": "https://dipeshgurav.com/$1",
