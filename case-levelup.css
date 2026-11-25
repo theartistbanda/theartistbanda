@@ -1,37 +1,11 @@
 /* LevelUp case study (24 Nov 2026). Loaded after case-taskgpt.css and case-lead.css: the header,
-   hero, reader, tables, figures and loop boxes are the TaskGPT ones, and only what differs is here. */
-
-/* ─── Hero ─────────────────────────────────────────────────────────────────── */
-.lu-hero { padding-top: 48px; padding-bottom: 72px; }
-.lu-hero .lede + .lede { margin-top: 20px; }
-@media (min-width: 1024px) { .lu-hero .lede { max-width: 900px; } .lu-hero .lede.statement { max-width: 1080px; } }
-.lu-hero .stats { margin-top: 48px; }
-/* Words as stats ("January 2024", "AWS Summit") stay on one line */
-.stats-words .stat { padding: 24px 20px; }
-.stats-words .stat .n { font-size: clamp(21px, 2.05vw, 27px); line-height: 1.1; white-space: nowrap; }
-.stats-words .stat .mono { line-height: 1.6; }
-
-/* Facts: three across, like the TaskGPT fact rows, in two rows */
-.facts-6 { margin: 32px 0 0; }
-.facts-6 > div { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.facts-6 > div:nth-child(3n) { border-right: none; }
-.facts-6 > div:nth-last-child(-n+3) { border-bottom: none; }
-@media (min-width: 640px) and (max-width: 1023px) {
-  .facts-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .facts-6 > div:nth-child(3n) { border-right: 1px solid var(--line); }
-  .facts-6 > div:nth-child(2n) { border-right: none; }
-  .facts-6 > div:nth-last-child(-n+3) { border-bottom: 1px solid var(--line); }
-  .facts-6 > div:nth-last-child(-n+2) { border-bottom: none; }
-}
-@media (max-width: 639px) {
-  .facts-6 > div, .facts-6 > div:nth-child(3n) { border-right: none; border-bottom: 1px solid var(--line); }
-  .facts-6 > div:last-child { border-bottom: none; }
-}
+   reader, tables, figures and loop boxes are the TaskGPT ones, and only what differs is here. */
 
 /* ─── Reader ───────────────────────────────────────────────────────────────── */
-.lu-reader { padding-top: 56px; }
+/* The opening (no hero since 25 Nov 2026): title, what LevelUp is, the dashboard, the facts */
+.lu-doc > .readtime { margin-bottom: 28px !important; }
+.lu-doc > .readtime + .lede.statement { margin-top: 0; }
 .lu-doc > h2 { margin: 88px 0 18px; font-size: clamp(28px, 2.7vw, 36px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; color: var(--ink); text-wrap: balance; }
-.lu-doc > h2:first-of-type { margin-top: 0; }
 .lu-doc h3 { margin: 56px 0 14px; font-size: 23px; }
 .lu-doc h3 .num { color: var(--ink2); }
 /* Fifteen sections at the top level: bold only where the reader is */

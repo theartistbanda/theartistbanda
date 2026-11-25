@@ -29,7 +29,13 @@ SRC = os.path.expanduser('~/Downloads/levelup-source/')
 PAGE = os.path.join(ROOT, 'case-levelup.html')
 SCREENS = json.load(open(os.path.join(ROOT, 'docs/levelup/screens.json'), encoding='utf-8'))
 
-CHIPS = ['Only designer', 'TaskUs', 'Launched January 2024', 'Live']
+# No hero (Dipesh, 25 Nov 2026): the page opens like the full TaskGPT case study, and the source's
+# hero goes into it. Kept: the title, what LevelUp is (the opening paragraph), the dashboard picture,
+# and these facts. Left out, because the Outcome section already says it: the second paragraph, the
+# five numbers (the launch date is in Timeline) and the other facts.
+KEEP_FACTS = ['Role', 'Team', 'Timeline', 'Platform']
+SAID_IN_OUTCOME = ['Clients', 'Recognition']
+READ_TIME = 'About 9 minutes to read'   # same pace as the full TaskGPT case study
 # The opening paragraph: phrases in Fraunces italic, then the one with the hand-drawn line
 # (see "Opening paragraphs" in CLAUDE.md). Every phrase is copied from that paragraph.
 tg.LEDE_MARKS['levelup'] = (['a timed challenge', 'their own animated 3D characters'], 'wins something')
@@ -131,33 +137,24 @@ def main():
     hero, body_secs = secs[0], secs[1:]
     assert hero['title'] == 'Hero', hero['title']
 
-    # Hero
+    # The opening, from the source's hero (see KEEP_FACTS)
     paras = [b['text'] for b in hero['blocks'] if b['t'] == 'p']
     title = re.fullmatch(r'\*\*(.+)\*\*', paras[0]).group(1)
-    intro = paras[1:3]
-    stats, facts = [b for b in hero['blocks'] if b['t'] == 'table']
+    intro = paras[1]
+    assert intro.startswith('LevelUp is '), intro[:40]
+    facts = [b for b in hero['blocks'] if b['t'] == 'table'][1]
+    assert [r[0] for r in facts['rows']] == KEEP_FACTS + SAID_IN_OUTCOME, facts['rows']
     hero_media = next(p for p in paras if p.startswith('[IMAGE'))
+    poster = SLOTS['hero']
+    assert poster in hero_media
     name, _, rest = title.partition(':')
     h1 = f'{esc(name)}: {esc(rest.strip())}'
     assert 'business logic' in h1
     h1 = h1.replace('business logic', '<i>business logic</i>')
-    stat_cells = ''.join(f'<div class="stat"><div class="n">{esc(v)}</div><div class="mono">{esc(l)}</div></div>'
-                         for v, l in zip(stats['head'], stats['rows'][0]))
-    fact_rows = ''.join(f'<div><dt>{esc(k)}</dt><dd>{inline(v)}</dd></div>' for k, v in facts['rows'])
-    chips = ''.join(f'<li>{esc(c)}</li>' for c in CHIPS)
-    poster = SLOTS['hero']
-    assert poster in hero_media
-    hero_html = f'''<section class="hero lu-hero">
-  <div class="wrap">
-    <h1>{h1}</h1>
-    <p class="lede statement">{tg.statement(inline(intro[0]), 'levelup')}</p>
-    <p class="lede">{inline(intro[1])}</p>
-    <ul class="chips" aria-label="Role and status">{chips}</ul>
-    <div class="stats stats-5 stats-words">{stat_cells}</div>
-    <dl class="facts facts-6">{fact_rows}</dl>
-    <div class="cover-fig lu">{figure(poster, 'hero', eager=True)}</div>
-  </div>
-</section>'''
+    opening = (f'<h1>{h1}</h1>\n    <p class="readtime">{READ_TIME}</p>\n'
+               f'    <p class="lede statement">{tg.statement(inline(intro), "levelup")}</p>\n'
+               f'    {figure(poster, "hero", eager=True)}\n'
+               f'    {table_html(["Fact", "Detail"], [r for r in facts["rows"] if r[0] in KEEP_FACTS], "LevelUp facts")}')
 
     # Body
     out, toc, ids = [], [], set()
@@ -198,8 +195,7 @@ def main():
     bar = ('<div class="reader-bar"><button type="button" class="toc-open" aria-expanded="false" aria-controls="toc">'
            '<span class="toc-open-icon" aria-hidden="true"></span>Contents</button>'
            '<span class="reader-current" id="reader-current"></span></div>')
-    body = f'''{hero_html}
-<div class="wrap">
+    body = f'''<div class="wrap">
 <div class="reader lu-reader">
   <div class="toc-backdrop" hidden></div>
   <nav class="toc" id="toc" aria-label="Case study contents">
@@ -207,6 +203,7 @@ def main():
     <ol class="toc-list">{toc_html(toc)}</ol>
   </nav>
   <article class="doc lu-doc lu" id="content" tabindex="-1">
+    {opening}
     {"".join(out)}
     <div class="doc-end"><a class="btn btn-outline" href="/#career"><span aria-hidden="true">←</span> Back to portfolio</a></div>
   </article>
@@ -214,7 +211,7 @@ def main():
 </div>
 {NEXT}'''
     html = tg.page('/case-levelup', TITLE, DESC, '/assets/levelup-dashboard-1.jpg', 'LevelUp', body, progress=True,
-                   extra_before_main=bar)
+                   skip='#content', extra_before_main=bar)
     swaps = [
         ("<!-- Built by docs/taskgpt/build_taskgpt.py from Dipesh's source files. Edit the source and rebuild rather than editing this file. -->",
          "<!-- Built by docs/levelup/build_levelup.py from Dipesh's source file. Edit the source and rebuild rather than editing this file.\n"
