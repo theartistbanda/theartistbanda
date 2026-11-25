@@ -646,7 +646,7 @@ def full_page(title, out, toc):
     <ol class="toc-list">{toc_html(toc)}</ol>
   </nav>
   <article class="doc" id="content" tabindex="-1">
-    <p class="doc-back"><a href="/case-taskgpt">← Back to TaskGPT</a></p>
+    <!-- No link back to the overview page above the title (Dipesh, 25 Nov 2026) -->
     <h1>{h1}</h1>
     <p class="readtime">About 35 minutes to read</p>
     <div class="doc-cover">{shot(DASH_CROP, True)}</div>

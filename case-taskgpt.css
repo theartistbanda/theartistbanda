@@ -196,7 +196,6 @@ footer { background: var(--surf); color: rgba(var(--ink-rgb), 0.65); padding: 32
 .reader { padding: 32px 0 80px; }
 .doc { min-width: 0; font-size: 17px; line-height: 1.75; color: var(--ink2); }
 .doc h1 { font-size: clamp(36px, 4.6vw, 60px); line-height: 1.05; margin-top: 20px; color: var(--ink); }
-.doc-back a { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink2); text-decoration: underline; text-underline-offset: 3px; }
 .readtime { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); margin: 16px 0 48px !important; }
 .doc h2.part { margin: 96px 0 8px; padding-top: 28px; border-top: 1px solid var(--rule); font-size: clamp(30px, 3.4vw, 42px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.1; color: var(--ink); }
 .doc h2.part:first-of-type { margin-top: 0; }
