@@ -349,11 +349,12 @@ def page(path, title, desc, og_img, label, body, *, part_of=False, progress=Fals
 '''
 
 
+# The bottom links follow the homepage's order (Dipesh, 25 Nov 2026), see CLAUDE.md
 NEXT_CASE = '''<section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
-    <a href="/case-evaluateus">
-      <span class="nt">EvaluateUs: <i>heavy data, held fairly</i></span>
+    <a href="/case-levelup">
+      <span class="nt">LevelUp: <i>a game that runs on business logic</i></span>
       <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>

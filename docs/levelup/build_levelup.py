@@ -51,12 +51,12 @@ LOOP = [('Set up', 'Manager, wizard'), ('Compete', 'Live leaderboard'), ('Celebr
 TITLE = 'LevelUp case study: a game that runs on business logic | Dipesh Gurav'
 DESC = ("How Dipesh Gurav designed LevelUp, TaskUs's gamification platform with animated 3D characters, "
         'presented at AWS Summit London 2025.')
+# The bottom links follow the homepage's order (Dipesh, 25 Nov 2026), see CLAUDE.md
 NEXT = '''<section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
-    <!-- The full case study, not the TaskGPT overview (Dipesh, 24 Nov 2026) -->
-    <a href="/case-taskgpt-full">
-      <span class="nt">TaskGPT: <i>the AI that works inside the call</i></span>
+    <a href="/case-evaluateus">
+      <span class="nt">EvaluateUs: <i>heavy data, held fairly</i></span>
       <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>
