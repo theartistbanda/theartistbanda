@@ -44,9 +44,8 @@ Dipesh Gurav is a Lead Product Designer with 9 years of experience, based in Not
 - Accuracy up 17%
 - Built to WCAG 2.2 AA
 
-**LevelUp** (TaskUs): Enterprise gamification with 3D characters built in Three.js, live leaderboards and rewards
+**LevelUp**: gamification platform for TaskUs operations floors. Managers turn KPIs into timed challenges; agents compete as animated 3D characters on live leaderboards. Launched January 2024, presented at AWS Summit London 2025.
 - Became the TaskUs company standard for gamification
-- Showcased at AWS Summit London 2025
 
 **AutoQA** (TaskUs): Automated review of agent calls, held to its goal of getting flagged agents into training and one-to-ones
 

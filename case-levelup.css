@@ -1,0 +1,77 @@
+/* LevelUp case study (24 Nov 2026). Loaded after case-taskgpt.css and case-lead.css: the header,
+   hero, reader, tables, figures and loop boxes are the TaskGPT ones, and only what differs is here. */
+
+/* ─── Hero ─────────────────────────────────────────────────────────────────── */
+.lu-hero { padding-top: 48px; padding-bottom: 72px; }
+.lu-hero .lede + .lede { margin-top: 20px; }
+@media (min-width: 1024px) { .lu-hero .lede { max-width: 900px; } .lu-hero .lede.statement { max-width: 1080px; } }
+.lu-hero .stats { margin-top: 48px; }
+/* Words as stats ("January 2024", "AWS Summit") stay on one line */
+.stats-words .stat { padding: 24px 20px; }
+.stats-words .stat .n { font-size: clamp(21px, 2.05vw, 27px); line-height: 1.1; white-space: nowrap; }
+.stats-words .stat .mono { line-height: 1.6; }
+
+/* Facts: three across, like the TaskGPT fact rows, in two rows */
+.facts-6 { margin: 32px 0 0; }
+.facts-6 > div { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.facts-6 > div:nth-child(3n) { border-right: none; }
+.facts-6 > div:nth-last-child(-n+3) { border-bottom: none; }
+@media (min-width: 640px) and (max-width: 1023px) {
+  .facts-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts-6 > div:nth-child(3n) { border-right: 1px solid var(--line); }
+  .facts-6 > div:nth-child(2n) { border-right: none; }
+  .facts-6 > div:nth-last-child(-n+3) { border-bottom: 1px solid var(--line); }
+  .facts-6 > div:nth-last-child(-n+2) { border-bottom: none; }
+}
+@media (max-width: 639px) {
+  .facts-6 > div, .facts-6 > div:nth-child(3n) { border-right: none; border-bottom: 1px solid var(--line); }
+  .facts-6 > div:last-child { border-bottom: none; }
+}
+
+/* ─── Reader ───────────────────────────────────────────────────────────────── */
+.lu-reader { padding-top: 56px; }
+.lu-doc > h2 { margin: 88px 0 18px; font-size: clamp(28px, 2.7vw, 36px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; color: var(--ink); text-wrap: balance; }
+.lu-doc > h2:first-of-type { margin-top: 0; }
+.lu-doc h3 { margin: 56px 0 14px; font-size: 23px; }
+.lu-doc h3 .num { color: var(--ink2); }
+/* Fifteen sections at the top level: bold only where the reader is */
+.lu-reader .toc-l1 { margin-bottom: 2px; }
+.lu-reader .toc-l1 > .toc-row > a { font-weight: 400; color: var(--ink2); }
+.lu-reader .toc-l1 > .toc-row > a[aria-current="location"] { font-weight: 600; color: var(--ink); }
+
+/* The screens have rounded corners drawn on white; clipping them keeps the white out of both
+   themes. In per cent, so the curve follows the image at every size. */
+.lu .shot .frame { border-radius: 2.1% / 3.7%; }
+.lu .shot picture { width: 100%; }
+.lu .shot img { width: 100%; }
+.lu-doc .pair .shot, .lu-doc .pair-fig .pair { margin: 0; }
+.lu-doc .pair-fig > figcaption { margin-top: 18px; }
+@media (max-width: 1023px) { .lu-doc .pair { grid-template-columns: 1fr; gap: 28px; } }
+
+/* ─── Loop ─────────────────────────────────────────────────────────────────── */
+.lu-loop .loop-title { margin-bottom: 18px; }
+.lu-row { display: grid; grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr); align-items: stretch; }
+.lu-loop .loop-box { padding: 16px 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+.lu-loop .loop-name { font-size: 16px; margin: 0; }
+.lu-loop .loop-who { margin: 6px 0 0; line-height: 1.5; color: var(--ink2); }
+.lu-arrow { display: flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1; color: var(--ink); }
+.lu-arrow .g-narrow, .lu-back { display: none; }
+/* The way back: from under the last box to under the first, with an arrowhead */
+.lu-return { position: relative; height: 46px; margin: 0 !important; }
+.lu-return-line { position: absolute; left: 9%; right: 9%; top: 8px; height: 22px; border: 1px solid var(--ink2); border-top: none; }
+.lu-return-line::before { content: ""; position: absolute; left: -5.5px; top: -3px; width: 0; height: 0; border: 5px solid transparent; border-top: none; border-bottom: 7px solid var(--ink2); }
+.lu-return-label { position: absolute; left: 50%; top: 30px; transform: translate(-50%, -50%); padding: 0 12px; background: var(--paper); font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.4; color: var(--ink2); white-space: nowrap; }
+@media (max-width: 719px) {
+  .lu-row { grid-template-columns: 1fr; }
+  .lu-arrow { padding: 8px 0; }
+  .lu-arrow .g-wide, .lu-return { display: none; }
+  .lu-arrow .g-narrow { display: inline; }
+  .lu-back { display: block; margin: 10px 0 0 !important; text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink2); }
+}
+
+/* ─── Motion slots (motion-slots.js) ───────────────────────────────────────── */
+.motion-slot .frame { position: relative; }
+.motion-slot video { display: block; width: 100%; height: auto; }
+.motion-btn { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px; border: 1px solid var(--paper); outline: 1px solid var(--ink); background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
+.motion-btn:hover { background: var(--accent-hover); }
+.motion-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }

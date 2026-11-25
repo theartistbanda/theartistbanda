@@ -121,7 +121,7 @@
 
   // 3. Section headings
   var STOP = /^(a|an|the|of|on|in|to|up|it|is|at|by|for|and|or|from|with|as|be|we|its|off|out)$/i;
-  var HEADS = 'section.body .section-head h2, .story-body .block > h2, .doc h2.part .part-title, .doc h3';
+  var HEADS = 'section.body .section-head h2, .story-body .block > h2, .doc h2.part .part-title, .lu-doc > h2, .doc h3';
   Array.prototype.slice.call(main.querySelectorAll(HEADS)).forEach(function (h) {
     var italics = h.querySelectorAll('i, em');
     var scope = italics.length ? italics[italics.length - 1] : h;
@@ -153,7 +153,7 @@
 
   // 4. Each section's first paragraph
   var OPENERS = 'section.body .prose > p:first-child, section.body .hub-body > p:first-child, ' +
-                '.story-body .block > p.lead, .story-body .block > .facts + p, .story-body .block > h2 + p, .doc h3 + p';
+                '.story-body .block > p.lead, .story-body .block > .facts + p, .story-body .block > h2 + p, .lu-doc > h2 + p, .doc h3 + p';
   Array.prototype.slice.call(main.querySelectorAll(OPENERS)).forEach(function (p) {
     if (p.classList.contains('statement') || p.className.replace(/\b(lead)\b/, '').trim()) return;
     if (p.querySelector('.btn') || p.textContent.trim().length < 60) return;
