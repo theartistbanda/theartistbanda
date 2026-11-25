@@ -1,4 +1,4 @@
-/* LevelUp case study (24 Nov 2026). Loaded after case-taskgpt.css and case-lead.css: the header,
+/* LevelUp and EvaluateUs case studies (24 and 25 Nov 2026). Loaded after case-taskgpt.css and case-lead.css: the header,
    reader, tables, figures and loop boxes are the TaskGPT ones, and only what differs is here. */
 
 /* ─── Reader ───────────────────────────────────────────────────────────────── */
@@ -16,8 +16,12 @@
 /* The screens have rounded corners drawn on white; clipping them keeps the white out of both
    themes. In per cent, so the curve follows the image at every size. */
 .lu .shot .frame { border-radius: 2.1% / 3.7%; }
-.lu .shot picture { width: 100%; }
-.lu .shot img { width: 100%; }
+/* EvaluateUs screens are square-cornered and come in three heights, so one radius in pixels */
+.eu .shot .frame { border-radius: 17px; }
+@media (max-width: 1023px) { .eu .shot .frame { border-radius: 8px; } }
+@media (min-width: 1024px) { .eu .pair .shot .frame { border-radius: 10px; } }
+.lu .shot picture, .eu .shot picture { width: 100%; }
+.lu .shot img, .eu .shot img { width: 100%; }
 .lu-doc .pair .shot, .lu-doc .pair-fig .pair { margin: 0; }
 .lu-doc .pair-fig > figcaption { margin-top: 18px; }
 @media (max-width: 1023px) { .lu-doc .pair { grid-template-columns: 1fr; gap: 28px; } }

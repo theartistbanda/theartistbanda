@@ -3,209 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EvaluateUs · Case Study | Dipesh Gurav</title>
-<meta name="description" content="EvaluateUs: enterprise assessment platform case study by Dipesh Gurav. Designed for TaskUs. Available for discussion in a confidential interview setting.">
+<title>EvaluateUs case study: from typed questions to a live AI customer | Dipesh Gurav</title>
+<meta name="description" content="How Dipesh Gurav designed EvaluateUs, a TaskUs AI assessment platform that grew from typed questions to AI customers on mock calls.">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dipeshgurav.com/case-evaluateus">
-<meta property="og:title" content="EvaluateUs · Case Study | Dipesh Gurav">
-<meta property="og:description" content="UX strategy and full redesign of TaskUs's assessment and training platform. Accuracy rose 17%.">
-<meta property="og:image" content="https://dipeshgurav.com/assets/evaluateus-cover.jpg">
+<meta property="og:title" content="EvaluateUs case study: from typed questions to a live AI customer | Dipesh Gurav">
+<meta property="og:description" content="How Dipesh Gurav designed EvaluateUs, a TaskUs AI assessment platform that grew from typed questions to AI customers on mock calls.">
+<meta property="og:image" content="https://dipeshgurav.com/assets/evaluateus-dashboard-1.jpg">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EvaluateUs · Case Study | Dipesh Gurav">
-<meta name="twitter:description" content="UX strategy and full redesign of TaskUs's assessment and training platform. Accuracy rose 17%.">
-<meta name="twitter:image" content="https://dipeshgurav.com/assets/evaluateus-cover.jpg">
+<meta name="twitter:title" content="EvaluateUs case study: from typed questions to a live AI customer | Dipesh Gurav">
+<meta name="twitter:description" content="How Dipesh Gurav designed EvaluateUs, a TaskUs AI assessment platform that grew from typed questions to AI customers on mock calls.">
+<meta name="twitter:image" content="https://dipeshgurav.com/assets/evaluateus-dashboard-1.jpg">
 <link rel="canonical" href="https://dipeshgurav.com/case-evaluateus">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "EvaluateUs case study: from typed questions to a live AI customer",
+  "description": "How Dipesh Gurav designed EvaluateUs, a TaskUs AI assessment platform that grew from typed questions to AI customers on mock calls.",
+  "url": "https://dipeshgurav.com/case-evaluateus",
+  "image": "https://dipeshgurav.com/assets/evaluateus-dashboard-1.jpg",
+  "author": {
+    "@type": "Person",
+    "name": "Dipesh Gurav",
+    "url": "https://dipeshgurav.com",
+    "jobTitle": "Lead Product Designer"
+  },
+  "creator": {
+    "@type": "Person",
+    "name": "Dipesh Gurav"
+  }
+}
+</script>
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')==='dark'?'dark':'light')}catch(e){document.documentElement.setAttribute('data-theme','light')}</script>
+<script>document.documentElement.classList.add('js');try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')==='dark'?'dark':'light')}catch(e){document.documentElement.setAttribute('data-theme','light')}</script>
 <link rel="stylesheet" href="/theme.css">
-<style>
-  :root {
-    /* Colours live in /theme.css (light default, dark toggle) */
-    --sans: 'Inter Tight', 'Inter', system-ui, sans-serif;
-    --serif: 'Fraunces', Georgia, serif;
-    --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.7; letter-spacing: -0.005em; }
-  a { color: inherit; }
-  .mono { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
-
-  nav { position: sticky; top: 0; z-index: 10; background: rgba(var(--paper-rgb), 0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-  nav > div { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
-  .back { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink2); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; }
-  .back:hover { color: var(--accent); }
-  .nav-label { flex-shrink: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
-
-  .hero { padding: 96px 0 48px; border-bottom: 1px solid var(--line); }
-  .meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 64px; }
-  .meta > div { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
-  .meta > div span { color: var(--ink); }
-  h1 { font-family: var(--sans); font-weight: 500; font-size: clamp(48px, 9vw, 132px); line-height: 0.95; letter-spacing: -0.035em; max-width: 12ch; }
-  h1 i { font-style: italic; font-weight: 400; color: var(--accent); }
-  .lede { margin-top: 48px; font-size: 19px; line-height: 1.55; color: var(--ink2); letter-spacing: -0.008em; }
-
-  .cover { aspect-ratio: 16/9; margin: 64px 0 0; background: var(--ink); border: 1px solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; background-image: repeating-linear-gradient(135deg, transparent 0 11px, rgba(var(--paper-rgb), 0.04) 11px 12px); }
-  .cover-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(var(--paper-rgb), 0.4); }
-  .cover img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-  .wide { border: 1px solid var(--line); margin-top: 40px; }
-  .wide img { width: 100%; display: block; }
-  .cap { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-top: 10px; }
-  .photos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
-  .photos img { width: 100%; display: block; border: 1px solid var(--line); }
-  @media (max-width: 639px) { .photos { grid-template-columns: 1fr; } }
-
-  .stats { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .stat { padding: 28px 24px; border-right: 1px solid var(--line); }
-  .stat:last-child { border-right: none; }
-  .stat .n { font-family: var(--sans); font-size: 48px; font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
-  .stat .n i { color: var(--accent); font-style: italic; font-weight: 400; }
-
-  section.body { padding: 96px 0; border-bottom: 1px solid var(--line); }
-  .section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
-  .section-head h2 { font-family: var(--sans); font-size: 40px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
-  .section-head h2 i { font-style: italic; color: var(--accent); }
-  .prose { font-size: 16px; line-height: 1.75; color: var(--ink2); }
-  .prose p + p { margin-top: 16px; }
-  .prose strong { color: var(--ink); font-weight: 500; }
-
-  .process { display: grid; grid-template-columns: repeat(4, 1fr); border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
-  .process > div { padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-height: 200px; }
-  .process h3 { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; margin: 12px 0 8px; }
-  .process p { font-size: 13px; color: var(--mute); line-height: 1.65; }
-
-  .impact { display: grid; grid-template-columns: repeat(2, 1fr); border-left: 1px solid var(--line); border-top: 1px solid var(--line); margin-top: 48px; }
-  .impact > div { padding: 28px 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .impact .n { font-size: 44px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
-  .impact .n i { color: var(--accent); font-style: italic; font-weight: 400; }
-
-  blockquote { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(24px, 3.2vw, 44px); line-height: 1.25; letter-spacing: -0.02em; max-width: 22ch; margin: 40px 0; color: var(--ink); }
-  blockquote span { color: var(--accent); }
-  .quote-attr { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); margin-top: 12px; }
-
-  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
-  .tag { font-family: var(--mono); font-size: 9px; padding: 5px 10px; border: 1px solid var(--line); color: var(--ink2); letter-spacing: 0.08em; text-transform: uppercase; }
-
-  .next { padding: 80px 0 120px; }
-  .next-label { margin-bottom: 8px; }
-  .next a { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 32px 0; border-top: 1px solid var(--line); text-decoration: none; color: var(--ink); transition: padding-left 0.2s; }
-  .next a:hover { padding-left: 12px; }
-  .next .nt { font-family: var(--sans); font-size: clamp(32px, 6vw, 88px); letter-spacing: -0.03em; line-height: 1; font-weight: 500; flex: 1; min-width: 0; }
-  .next .nt i { color: var(--accent); font-style: italic; font-weight: 400; }
-  .next .arrow { font-size: 28px; flex-shrink: 0; }
-
-  footer { background: var(--surf); color: rgba(var(--ink-rgb), 0.65); padding: 32px; text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
-
-  /* ─── TABLET ─────────────────────────────────────────────────────────────── */
-  @media (min-width: 640px) and (max-width: 1023px) {
-    nav > div { padding: 0 24px; }
-    .wrap { padding: 0 24px; }
-    .hero { padding: 64px 0 40px; }
-    .meta { grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
-    .stats { grid-template-columns: 1fr 1fr; }
-    .section-head { gap: 10px; margin-bottom: 36px; }
-    .section-head h2 { font-size: 32px; }
-    .process { grid-template-columns: 1fr 1fr; }
-    .process > div:nth-child(2n) { border-right: none; }
-    .process > div { min-height: auto; }
-    .impact { grid-template-columns: 1fr 1fr; }
-    section.body { padding: 72px 0; }
-    .next { padding: 56px 0 96px; }
-    footer { padding: 24px; }
-  }
-
-  /* ─── MOBILE ─────────────────────────────────────────────────────────────── */
-  @media (max-width: 639px) {
-    nav > div { padding: 0 16px; }
-    .nav-label { display: none; }
-    .wrap { padding: 0 16px; }
-    .hero { padding: 48px 0 32px; }
-    .meta { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
-    .meta > div:nth-child(3), .meta > div:nth-child(4) { display: none; }
-    .lede { font-size: 16px; margin-top: 28px; }
-    .cover { margin: 32px 0 0; }
-    .stats { grid-template-columns: 1fr 1fr; }
-    .stat { padding: 20px 14px; }
-    .stat .n { font-size: 36px; }
-    section.body { padding: 56px 0; }
-    .section-head { gap: 8px; margin-bottom: 24px; }
-    .section-head h2 { font-size: 24px; }
-    .prose { font-size: 15px; }
-    .process { grid-template-columns: 1fr; }
-    .process > div { border-right: none; min-height: auto; }
-    .impact { grid-template-columns: 1fr 1fr; }
-    .impact > div:nth-child(2n) { border-right: none; }
-    .impact .n { font-size: 32px; }
-    blockquote { max-width: 100%; margin: 28px 0; }
-    .next { padding: 48px 0 72px; }
-    .next a { padding: 24px 0; gap: 16px; }
-    .arrow { font-size: 20px; }
-    footer { padding: 24px 16px; }
-  }
-
-  /* Skip link, and focused items kept clear of the sticky nav (WCAG 2.4.1, 2.4.11) */
-  html { scroll-padding-top: 72px; }
-  .skip-link { position: absolute; left: 16px; top: -100px; z-index: 100; background: var(--accent); color: var(--paper); padding: 12px 18px; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; }
-  .skip-link:focus { top: 12px; }
-  main:focus { outline: none; }
-  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-  /* Reduced motion: honour the user's OS-level preference */
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-  }
-
-  /* Type and spacing pass (Oct 2026): calmer headings, and the title, intro and top of the cover fit on a laptop screen without scrolling */
-  .hero { padding: 24px 0 40px; }
-  .meta { margin-bottom: 40px; }
-  h1 { font-size: clamp(40px, 5.2vw, 76px); line-height: 1.02; letter-spacing: -0.03em; max-width: none; text-wrap: balance; }
-  .lede { margin-top: 24px; font-size: 18px; max-width: 1080px; }
-  .cover { margin-top: 40px; }
-  section.body { padding: 80px 0; }
-  .section-head h2 { font-size: 32px; line-height: 1.2; letter-spacing: -0.015em; max-width: 28ch; }
-  .next .nt { font-size: clamp(28px, 4vw, 56px); line-height: 1.05; }
-  @media (min-width: 640px) and (max-width: 1023px) {
-    .hero { padding: 24px 0 32px; }
-    .meta { margin-bottom: 32px; }
-    section.body { padding: 64px 0; }
-    .section-head h2 { font-size: 28px; }
-  }
-  @media (max-width: 639px) {
-    .hero { padding: 20px 0 28px; }
-    .meta { margin-bottom: 24px; }
-    h1 { font-size: clamp(34px, 10vw, 44px); }
-    .lede { font-size: 16px; margin-top: 20px; }
-    .cover { margin-top: 28px; }
-    section.body { padding: 52px 0; }
-    .section-head h2 { font-size: 24px; }
-  }
-  /* Laptops and up: centre the title block so it sits balanced over the full-width cover */
-  @media (min-width: 1024px) {
-    .hero h1 { text-align: center; margin-left: auto; margin-right: auto; }
-    .hero .figma-cta { text-align: center; }
-    .hero .lede { text-align: center; margin-left: auto; margin-right: auto; }
-  }
-</style>
-<script defer src="/_vercel/insights/script.js"></script>
+<link rel="stylesheet" href="/case-taskgpt.css">
 <link rel="stylesheet" href="/case-lead.css">
-<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="/case-levelup.css">
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-<a href="#main" class="skip-link">Skip to content</a>
+<!-- Built by docs/evaluateus/build_evaluateus.py from Dipesh's source file. Edit the source and rebuild rather than editing this file. -->
+<a href="#content" class="skip-link">Skip to content</a>
 
-<nav>
+<nav class="site-nav">
   <div>
     <a href="/" class="back">← Portfolio</a>
-    <span class="mono nav-label"><span style="color:var(--ink)">●</span> EvaluateUs</span>
+    <span class="mono nav-label"><span class="dot" aria-hidden="true">●</span> EvaluateUs</span>
     <div class="nav-right">
       <button type="button" class="theme-toggle" data-theme-toggle>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
@@ -215,138 +65,37 @@
       <a href="/about#contact" class="back">Contact →</a>
     </div>
   </div>
+  <span class="progress" aria-hidden="true"><span></span></span>
 </nav>
-
+<div class="reader-bar"><button type="button" class="toc-open" aria-expanded="false" aria-controls="toc"><span class="toc-open-icon" aria-hidden="true"></span>Contents</button><span class="reader-current" id="reader-current"></span></div>
 <main id="main" tabindex="-1">
-<section class="hero">
-  <div class="wrap">
-    <div class="meta">
-      <div>Type / <span>Case Study</span></div>
-      <div>Year / <span>2022–2023</span></div>
-      <div>Role / <span>Lead Product Design</span></div>
-      <div>Context / <span>Assessment &amp; Training SaaS · TaskUs</span></div>
-    </div>
-    <h1>EvaluateUs, heavy data held <i>fairly</i></h1>
-    <p class="lede statement">UX strategy and a full redesign of TaskUs's enterprise assessment platform, where an AI scores hiring, coaching and training assessments and <span class="fig">people decide what to do next</span>. <span class="fig mark">Accuracy rose 17%<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 15 C 52 6, 98 20, 150 12 S 246 5, 296 13" pathLength="1" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span>, built to WCAG 2.2 AA throughout.</p>
-
-    <div class="cover">
-      <img src="/assets/evaluateus-cover.webp" alt="EvaluateUs dashboard on a laptop: assessment statistics, active users chart, assessment creation and skills breakdown" />
-    </div>
-
-    <div class="stats">
-      <div class="stat"><div class="mono" style="margin-bottom:8px">Accuracy</div><div class="n">+17<i>%</i></div></div>
-      <div class="stat"><div class="mono" style="margin-bottom:8px">Accessibility · WCAG 2.2</div><div class="n">AA</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="body">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="mono">Problem</span>
-      <h2>An evaluation is not a data point, it is <i>someone's month</i></h2>
-    </div>
-    <div class="prose">
-      <p>In high-volume operations, assessment is where the numbers meet people's livelihoods. Evaluators work through dense scoring workflows at speed; the people being evaluated live with the results. When the tool is cluttered or ambiguous, evaluators make errors, and an inaccurate evaluation is not a spreadsheet problem: it is an unfair one. Clients feel it too, because every disputed or re-run evaluation costs real money.</p>
-      <p>Before EvaluateUs, the picture lived in fragments: several Google Sheets, Boost for coaching, Workday for one-to-ones, and teammate lists sent around by email. Team leads filtered one sheet to decide whom to coach and tracked coaching history in another. Nobody could see how hiring and training were going in one place.</p>
-      <p>The brief was a full redesign, grounded in UX strategy rather than a visual refresh: make data-heavy evaluation workflows <strong>fast to work through, hard to get wrong, and fair to the people on both sides of the score</strong>.</p>
-    </div>
-
-    <blockquote>"Accuracy is <span>fairness.</span> A mis-scored evaluation is someone's bad month."</blockquote>
-    <div class="quote-attr">Design principle, EvaluateUs</div>
-
-    <div class="tag-row">
-      <span class="tag">Enterprise UX</span>
-      <span class="tag">Data-dense UI</span>
-      <span class="tag">Assessment Workflows</span>
-      <span class="tag">Three Roles</span>
-      <span class="tag">WCAG 2.2 AA</span>
-    </div>
-  </div>
-</section>
-
-<section class="body">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="mono">The product</span>
-      <h2>Skills built, assessments run, <i>results reported</i></h2>
-    </div>
-    <div class="prose">
-      <p>EvaluateUs is a learning and training SaaS as much as an assessment tool. Campaigns and scripts are configured per team, candidates take skill assessments, and managers read the outcomes in analytics dashboards and reports. The surfaces below are production design: configuration tables, the assessment builder, candidate views and the reporting layer.</p>
-    </div>
-
-    <div class="wide">
-      <img loading="lazy" src="/assets/evaluateus-overview.webp" alt="EvaluateUs: learning and training SaaS with skill development, training builder, analytics dashboard and reports" />
-    </div>
-    <div class="cap">The dashboard · active users, assessment creation and skills breakdown at a glance</div>
-
-    <div class="wide">
-      <img loading="lazy" src="/assets/evaluateus-screens.webp" alt="EvaluateUs screens: login, dashboards, assessment gallery, candidates, configuration tables and reports" />
-    </div>
-    <div class="cap">The full surface · campaigns, scripts, candidates, configuration and reports (client names softened)</div>
-  </div>
-</section>
-
-<section class="body">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="mono">Approach</span>
-      <h2>Design for the decision, <i>not the data</i></h2>
-    </div>
-    <div class="prose">
-      <p>One AI-scored result, three people reading it. The candidate asks: how did I do? The assessor asks: do I trust this score enough to stand behind it? The manager asks: is this helping my team? The first prototypes made it clear that reporting was the real value, and stakeholders confirmed it. So each view was designed around that person's next decision, not around the data available. An assessment system that only works for the assessor is just surveillance with a UI.</p>
-      <p>Accessibility was not a checklist at the end. WCAG 2.2 AA contrast, focus states and text scaling were applied throughout, because a tool people are required to use all day has no excuse to exclude anyone.</p>
-    </div>
-
-    <div class="impact">
-      <div><div class="n">+17<i>%</i></div><div class="mono">Accuracy</div></div>
-      <div><div class="n">AA</div><div class="mono">WCAG 2.2 throughout</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="body">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="mono">Craft</span>
-      <h2>A system under the <i>surface</i></h2>
-    </div>
-    <div class="prose">
-      <p>Like every product in the suite, EvaluateUs ships on a design system: an extensive component library, a deliberately minimal styleguide, and a pixel-perfect file with strict non-fractional sizing and advanced auto-layout, so teams can customise without breaking the system. It also got its own theme, so TaskUs could sell it to external clients.</p>
-    </div>
-
-    <div class="photos">
-      <img loading="lazy" src="/assets/evaluateus-components.webp" alt="EvaluateUs component library: menus, buttons, assessment cards and filters" />
-      <img loading="lazy" src="/assets/evaluateus-stylesheet.webp" alt="EvaluateUs minimal stylesheet: branding colours and text styles" />
-    </div>
-    <div class="wide">
-      <img loading="lazy" src="/assets/evaluateus-highlights.webp" alt="EvaluateUs file highlights: pixel perfect, organised layers, component library, minimal styleguide and auto-layout" />
-    </div>
-  </div>
-</section>
-
-<section class="body">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="mono">Note</span>
-      <h2>The full story is told <i>in person</i></h2>
-    </div>
-    <div class="prose">
-      <p>EvaluateUs is an internal enterprise product protected by NDA. Screens, flows and the detailed decision record are available for discussion in a confidential interview setting: <a href="mailto:contact@dipeshgurav.com" style="color:var(--accent)">contact@dipeshgurav.com</a>.</p>
-    </div>
-  </div>
-</section>
-
+<div class="wrap">
+<div class="reader lu-reader">
+  <div class="toc-backdrop" hidden></div>
+  <nav class="toc" id="toc" aria-label="Case study contents">
+    <div class="toc-top"><span class="mono">Contents</span><button type="button" class="toc-close">Close<span class="sr-only"> contents</span></button></div>
+    <ol class="toc-list"><li class="toc-l1"><div class="toc-row"><a href="#the-brief" data-label="The brief"><span class="toc-name">The brief</span></a></div></li><li class="toc-l1"><div class="toc-row"><a href="#planning" data-label="Planning: what the product had to do"><span class="toc-name">Planning: what the product had to do</span></a></div></li><li class="toc-l1"><div class="toc-row"><a href="#one-result-three-people" data-label="One result, three people"><span class="toc-name">One result, three people</span></a></div></li><li class="toc-l1"><div class="toc-row"><a href="#version-one" data-label="Version one: start simple, on purpose"><span class="toc-name">Version one: start simple, on purpose</span></a></div></li><li class="toc-l1 has-kids"><div class="toc-row"><a href="#key-design-decisions-in-version-one" data-label="Key design decisions in version one"><span class="toc-name">Key design decisions in version one</span></a><button type="button" class="toc-twist" aria-expanded="true" aria-controls="toc-g-key-design-decisions-in-version-one" hidden><span class="sr-only">Sections in Key design decisions in version one</span></button></div><ol id="toc-g-key-design-decisions-in-version-one"><li class="toc-l2"><div class="toc-row"><a href="#one-wizard-for-every-assessment" data-label="One wizard for every assessment"><span class="toc-name"><span class="toc-num">1.</span> One wizard for every assessment</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#three-ways-to-add-questions" data-label="Three ways to add questions"><span class="toc-name"><span class="toc-num">2.</span> Three ways to add questions</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#admins-set-the-rules" data-label="Admins set the rules, managers work inside them"><span class="toc-name"><span class="toc-num">3.</span> Admins set the rules, managers work inside them</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#send-by-team-structure-or-by-email" data-label="Send by team structure or by email"><span class="toc-name"><span class="toc-num">4.</span> Send by team structure or by email</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#tell-candidates-everything-before-they-start" data-label="Tell candidates everything before they start"><span class="toc-name"><span class="toc-num">5.</span> Tell candidates everything before they start</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#show-the-ais-working" data-label="Show the AI&#x27;s working"><span class="toc-name"><span class="toc-num">6.</span> Show the AI's working</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#results-that-every-role-can-read" data-label="Results that every role can read"><span class="toc-name"><span class="toc-num">7.</span> Results that every role can read</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#the-states-people-skip" data-label="The states people skip"><span class="toc-name"><span class="toc-num">8.</span> The states people skip</span></a></div></li></ol></li><li class="toc-l1"><div class="toc-row"><a href="#the-idea-i-kept-bringing-back" data-label="The idea I kept bringing back"><span class="toc-name">The idea I kept bringing back</span></a></div></li><li class="toc-l1"><div class="toc-row"><a href="#research" data-label="Research: what the Wellness team needed"><span class="toc-name">Research: what the Wellness team needed</span></a></div></li><li class="toc-l1 has-kids"><div class="toc-row"><a href="#version-two" data-label="Version two: write the scenario, not the questions"><span class="toc-name">Version two: write the scenario, not the questions</span></a><button type="button" class="toc-twist" aria-expanded="true" aria-controls="toc-g-version-two" hidden><span class="sr-only">Sections in Version two: write the scenario, not the questions</span></button></div><ol id="toc-g-version-two"><li class="toc-l2"><div class="toc-row"><a href="#describe-the-situation-in-plain-words" data-label="Describe the situation in plain words"><span class="toc-name"><span class="toc-num">1.</span> Describe the situation in plain words</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#test-the-call-before-any-candidate-does" data-label="Test the call before any candidate does"><span class="toc-name"><span class="toc-num">2.</span> Test the call before any candidate does</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#show-what-the-ai-is-doing" data-label="Show what the AI is doing"><span class="toc-name"><span class="toc-num">3.</span> Show what the AI is doing</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#make-the-mock-call-feel-like-a-call" data-label="Make the mock call feel like a call"><span class="toc-name"><span class="toc-num">4.</span> Make the mock call feel like a call</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#skills-that-match-the-test" data-label="Skills that match the test"><span class="toc-name"><span class="toc-num">5.</span> Skills that match the test</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#the-ai-writes-the-feedback-questions-too" data-label="The AI writes the feedback questions too"><span class="toc-name"><span class="toc-num">6.</span> The AI writes the feedback questions too</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#a-results-page-built-for-coaching" data-label="A results page built for coaching"><span class="toc-name"><span class="toc-num">7.</span> A results page built for coaching</span></a></div></li><li class="toc-l2"><div class="toc-row"><a href="#one-dashboard-for-two-kinds-of-test" data-label="One dashboard for two kinds of test"><span class="toc-name"><span class="toc-num">8.</span> One dashboard for two kinds of test</span></a></div></li></ol></li><li class="toc-l1"><div class="toc-row"><a href="#from-design-to-build" data-label="From design to build"><span class="toc-name">From design to build</span></a></div></li><li class="toc-l1"><div class="toc-row"><a href="#craft" data-label="Craft"><span class="toc-name">Craft</span></a></div></li><li class="toc-l1"><div class="toc-row"><a href="#outcome" data-label="Outcome"><span class="toc-name">Outcome</span></a></div></li><li class="toc-l1"><div class="toc-row"><a href="#what-i-learned" data-label="What I learned"><span class="toc-name">What I learned</span></a></div></li></ol>
+  </nav>
+  <article class="doc lu-doc eu" id="content" tabindex="-1">
+    <h1>EvaluateUs: from typed questions to <i>a live AI customer</i></h1>
+    <p class="readtime">About 11 minutes to read</p>
+    <p class="lede statement">EvaluateUs is an AI assessment platform I designed at TaskUs. Teams use it to <span class="fig">hire, coach and train agents</span>. An AI scores every answer, and <span class="fig mark">three people<svg viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 15 C 52 6, 98 20, 150 12 S 246 5, 296 13" pathLength="1" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span> read that result: the candidate, the assessor who checks the score, and the manager who decides <span class="fig">what happens next</span>.</p>
+    <figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-dashboard-1.webp"><img src="/assets/evaluateus-dashboard-1.jpg" alt="EvaluateUs admin dashboard with an active users chart, cards for active assessments, users, attempts and creation, a bar chart of assessments created each day, and a skills pie chart." width="1400" height="900" fetchpriority="high" decoding="async"></picture></div><figcaption>The admin dashboard: active users, assessments, attempts, and the skills the AI scored.</figcaption></figure>
+    <div class="table-wrap" role="region" aria-label="EvaluateUs facts"><table class="cols-2"><thead><tr><th scope="col">Fact</th><th scope="col">Detail</th></tr></thead><tbody><tr><th scope="row">Role</th><td>Lead Product Designer and the only designer: research, planning, design, prototypes, handover, and UI testing of the build</td></tr><tr><th scope="row">Team</th><td>A senior director of development, a senior development manager, developers, testers and me</td></tr><tr><th scope="row">Timeline</th><td>First version launched at the end of 2024. AI scenario version: September 2025 to March 2026</td></tr><tr><th scope="row">Platform</th><td>Web: an admin and manager console, and a candidate assessment page</td></tr></tbody></table></div>
+    <h2 id="the-brief">The brief</h2><p>TaskUs hires and trains agents for many client campaigns. Before an agent talks to a customer, the campaign needs to know one thing: can this person communicate well? A language check was one round of the interview. The same checks came back in coaching and training.</p><p>The data behind those checks lived in fragments: several Google Sheets, Boost for coaching, Workday for one-to-ones, and teammate lists sent around by email. Team leads filtered one sheet to decide whom to coach, and tracked coaching history in another. Nobody could see how hiring and training were going in one place.</p><p>The PRD set the business goals: spend less time and effort on manual evaluation, and make scores fairer and more accurate.</p><h2 id="planning">Planning: what the product had to do</h2><p>I started with a plain list of what the product had to do, and grew it into a PRD. The list covered:</p><ul><li>Language evaluations for an interview round, shared through a secret link or a passcode.</li><li>Settings for each evaluation: number of attempts, pass marks, anti-cheating rules, fixed or random question order, and scoring by the system or by a person.</li><li>A weight for each skill: grammar, sentence construction, tenses, punctuation and spelling.</li><li>Questions written in the product, or uploaded as a document.</li><li>Automatic scoring, with a person able to review every answer.</li><li>Dashboards for recruiters, managers and client campaigns, and a scorecard for candidates.</li><li>A setup for many clients, with onboarding for each one, and a super admin view of usage.</li></ul><p>I also planned a dashboard for each role. Admins track logins per day, how many assessments people create, the share graded by AI, and the cost per assessment. Managers track team scores, the spread of scores and skill gaps. Teammates see their own score over time and their recent feedback.</p><h2 id="one-result-three-people">One result, three people</h2><p>One AI-scored result, three people reading it. The candidate asks: how did I do? The assessor asks: do I trust this score enough to stand behind it? The manager asks: is this helping my team?</p><p>The first prototypes made it clear that reporting was the real value, and stakeholders confirmed it. So I designed each view around that person's next decision, not around the data available. Above all three sits the admin, who sets the rules for each campaign.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-early-dashboard-1.webp"><img src="/assets/evaluateus-early-dashboard-1.jpg" alt="An early dashboard that shows assessments, metrics, candidates and skills as plain numbers." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>An early dashboard, with numbers only. Later versions turned them into trends and skill breakdowns.</figcaption></figure><h2 id="version-one">Version one: start simple, on purpose</h2><p>My usual approach is to launch a first version with the priority features only, simple enough to use without help. More comes as the product grows with its users.</p><p>In version one, an admin writes up to 15 questions, sets a time limit for each one, and sends the test. The candidate answers in a chat. The AI scores the answers.</p><figure class="pair-fig"><div class="pair"><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-early-1.webp"><img src="/assets/evaluateus-early-1.jpg" alt="An early Create Assessment flow in a modal, with a dark side rail listing four steps and a form for title, type, welcome message and thumbnail." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>Before: the first create flow, in a modal</figcaption></figure><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-wizard-configure-1.webp"><img src="/assets/evaluateus-wizard-configure-1.jpg" alt="Create Assessment, Configure step: skills set by the admin shown in grey, settings for passcode, retakes and review, and anti-cheating options." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>After: the full-page wizard</figcaption></figure></div><figcaption>The flow would grow, with settings inside settings. The full page gives every setting room.</figcaption></figure><h2 id="key-design-decisions-in-version-one">Key design decisions in version one</h2><h3 id="one-wizard-for-every-assessment"><span class="num">1.</span> One wizard for every assessment</h3><p>Creating an assessment takes four steps: Basic Information, Script, Configure and Scoping. The page saves as you go. I worked through seven rounds of this flow. It started as a modal with a dark side rail. But I knew the flow would grow: more settings, and settings inside settings. In a modal, that would get crowded, especially on small screens. So I gave it its own page, with a stepper at the top. That choice paid off later: the AI version fitted into the same wizard by changing one step.</p><h3 id="three-ways-to-add-questions"><span class="num">2.</span> Three ways to add questions</h3><p>Select a saved script, create one in place, or upload a text or Excel file from a template. Each question has its own time limit, and the footer counts the questions as you add them.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-wizard-script-1.webp"><img src="/assets/evaluateus-wizard-script-1.jpg" alt="Create Assessment, Script step: four questions, each with its own time limit in minutes, and an Add Question button." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>Each question gets its own time limit. The footer counts the questions as you add them.</figcaption></figure><h3 id="admins-set-the-rules"><span class="num">3.</span> Admins set the rules, managers work inside them</h3><p>Skill weights must add up to 100%. Next to every parameter is an "Allow Edit" box, so the admin decides what a manager can change in one assessment. In the wizard, locked skills show in grey with a short note: admins set skill parameters, and a change can need permission. Admins also choose which statistics the AI reports, from grammar mistakes and readability to tone, empathy and intent.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-config-1.webp"><img src="/assets/evaluateus-config-1.jpg" alt="Configuration: skill weights that add up to 100%, anti-cheating and settings with Allow Edit boxes, and a list of statistics the AI can report." width="1400" height="1080" loading="lazy" decoding="async"></picture></div><figcaption>Skill weights add up to 100%. Allow Edit decides what a manager can change.</figcaption></figure><h3 id="send-by-team-structure-or-by-email"><span class="num">4.</span> Send by team structure or by email</h3><p>Scoping works in two ways. Internal teams pick a LOB, a role, a manager and teammates, then confirm the list of candidates. External hiring pastes or uploads candidate emails. After sending, a summary shows how many went out and how many failed, with a Try Again button for the failed ones.</p><div class="pair"><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-wizard-scope-1.webp"><img src="/assets/evaluateus-wizard-scope-1.jpg" alt="Create Assessment, Scoping step: dropdowns for line of business, role, manager and teammates, and a list of six candidates to select." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>Scope by team structure: line of business, role, manager and teammates.</figcaption></figure><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-sent-1.webp"><img src="/assets/evaluateus-sent-1.jpg" alt="Sending summary: 10 questions, 10 recipients, 7 sent and 3 failed, with a Try Again button." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>After sending, failed invitations get a Try Again button.</figcaption></figure></div><h3 id="tell-candidates-everything-before-they-start"><span class="num">5.</span> Tell candidates everything before they start</h3><p>The instructions page lists what they need: a quiet space for about 15 minutes, a stable connection, and a headset with a microphone. It explains screen capture and the anti-cheating checks in plain words, and asks for consent before the test starts. During the test, a progress bar and a timer stay in view.</p><div class="pair"><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-instructions-1.webp"><img src="/assets/evaluateus-instructions-1.jpg" alt="Candidate instructions for &quot;DoorDash: English language round&quot;: what the candidate needs, how screen capture works, and a consent checkbox before Continue." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>Candidates see what they need, and agree to the rules, before the test starts.</figcaption></figure><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-chat-1.webp"><img src="/assets/evaluateus-chat-1.jpg" alt="A candidate taking a chat assessment: an AI question about a late food order, the candidate&#x27;s reply, the next question, a progress bar at 2 of 10 and a timer." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>The candidate answers in a chat, with progress and time always in view.</figcaption></figure></div><h3 id="show-the-ais-working"><span class="num">6.</span> Show the AI's working</h3><p>An AI score is only useful if the assessor can trust it. In the review screen, the AI underlines each mistake in the answer. A side panel lists every correction by type: punctuation, spelling ("u" to "you", "Sory" to "Sorry") and tense ("is" to "was"). The assessor can check a score in seconds, without reading every answer twice.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-review-1.webp"><img src="/assets/evaluateus-review-1.jpg" alt="Assessor review: the candidate&#x27;s answer with four mistakes underlined, a side panel listing each correction by type, and a skill breakdown." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>The AI shows its working: every mistake underlined, every correction listed by type.</figcaption></figure><h3 id="results-that-every-role-can-read"><span class="num">7.</span> Results that every role can read</h3><p>Each assessment has a page with its candidates, their status, their score and a level, for example "85%, A2". Each client sets its own levels for its own needs. The page also shows a completion ring and a skills breakdown. Each candidate has a history page. Reports filter by campaign, LOB, site and date, and can go out by email.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-stats-1.webp"><img src="/assets/evaluateus-stats-1.jpg" alt="Assessment results: three candidates with their status, attempted share, score and level, a 50% completion ring and a skills pie chart." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>Each assessment shows its candidates, their scores and levels, and a skills breakdown.</figcaption></figure><h3 id="the-states-people-skip"><span class="num">8.</span> The states people skip</h3><p>An expired link or a missing permission gets a friendly page with an illustration and one clear way back. Empty tables and empty pages have their own designs, so nobody lands on a broken screen.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-error-1.webp"><img src="/assets/evaluateus-error-1.jpg" alt="An error page with an illustrated mailbox: &quot;Oops! The link either expired or you don&#x27;t have permission&quot;, and a Go Back button." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>An expired link gets a friendly page and one clear way back.</figcaption></figure><h2 id="the-idea-i-kept-bringing-back">The idea I kept bringing back</h2><p>While I designed the version one screens, I kept looking at the create flow. Admins had to enter every question and answer by hand. Any standard AI model could do that work.</p><p>So I proposed a different model. Give the AI a story, a scenario, as the evaluation. The AI makes the questions, with some randomness, so the test is not the same every time. It can also follow up on the candidate's previous answer, to test the tagged skills from more than one side.</p><p>In a call, I asked our senior director of development, politely, if we could build it. I gave two reasons. The test would be more dynamic. And without the load of typing every question, more teams would use the product. At the time, he did not see enough in it to change the plan.</p><p>Then an internal client came to us with the exact same requirement. Our Wellness team wanted a tool that could run as much on its own as possible, for their health and wellness campaigns. That changed the conversation, and we built it.</p><h2 id="research">Research: what the Wellness team needed</h2><p>I spoke with the leader of Wellness at TaskUs. I asked how she used the assessment tools on the market, and what she was actually looking for.</p><p>One thing she said stayed with me. She wanted the context for every field on the form itself, while she created an assessment. That made sense. We cannot expect every user to know everything. So each field carries its own brief: how it works, and what the outcome will be.</p><p>She also wanted AI help at every step, from writing the scenario to configuring the assessment, so the user never feels lost. Her idea of simplicity through an AI assistant changed how the AI version came in. For her team, we also split scenario creation into more steps, so each step asks for one thing.</p><h2 id="version-two">Version two: write the scenario, not the questions</h2><p>The update notes in the file list the changes in five lines. "Mock Call" became a new type in step 1. Step 2 picks a scenario instead of a script, and shows a transcript instead of a question list. Scenario setup replaced script creation, with a test call. Upload became optional. Then came the candidate's side of the call.</p><h3 id="describe-the-situation-in-plain-words"><span class="num">1.</span> Describe the situation in plain words</h3><p>A scenario has a name, a call type (inbound or outbound), an AI voice, a language and a short setup: the scenario, the customer's role and a backstory. For example: "The Rainy Day. Role: Annoyed Rider." The rider was on a ride-hail trip in Austin when a heavy rainstorm hit, and their autonomous car has stopped in the street.</p><div class="pair"><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/voiceai-scenarios-1.webp"><img src="/assets/voiceai-scenarios-1.jpg" alt="A scenarios list with two scenarios, &quot;The Rainy Day&quot; and &quot;Sales follow-up call&quot;, showing call type, AI voice, language and who created each one." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>Scenarios, each with a call type, an AI voice and a language.</figcaption></figure><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/voiceai-scenario-select-1.webp"><img src="/assets/voiceai-scenario-select-1.jpg" alt="Create Assessment, Scenario step: &quot;The Rainy Day&quot; picked, with tags for inbound call, voice and language, its setup text, and a Start Simulation button." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>The admin describes the situation in plain words, then tests it with Start Simulation.</figcaption></figure></div><h3 id="test-the-call-before-any-candidate-does"><span class="num">2.</span> Test the call before any candidate does</h3><p>Start Simulation turns the admin into the agent. The AI customer speaks, and the transcript builds live on the screen. Then the admin can restart, duplicate and edit, or save. Nobody has to guess how a scenario will behave.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/voiceai-simulation-1.webp"><img src="/assets/voiceai-simulation-1.jpg" alt="A test call: the scenario setup above a live transcript between the AI customer and the admin acting as the agent, with Restart and Duplicate and Edit buttons." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>A test call: the AI customer speaks, and the transcript builds live.</figcaption></figure><h3 id="show-what-the-ai-is-doing"><span class="num">3.</span> Show what the AI is doing</h3><p>A voice call has nothing on screen to watch, so a small status chip shows the AI's state: Idle, Listening, Understanding, Speaking or On Hold. The person on the call always knows whose turn it is.</p><h3 id="make-the-mock-call-feel-like-a-call"><span class="num">4.</span> Make the mock call feel like a call</h3><p>The candidate sees the scenario (if the admin allows it), the status chip and the live transcript. They can put the customer on hold, resume, and end the call, as they would on the floor.</p><div class="pair"><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/voiceai-call-1.webp"><img src="/assets/voiceai-call-1.jpg" alt="A candidate on a mock call: the scenario, a Speaking status chip, the AI customer&#x27;s first message, and Put on Hold and End Call buttons." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>On the call, a status chip shows the AI's state.</figcaption></figure><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/voiceai-call-2.webp"><img src="/assets/voiceai-call-2.jpg" alt="The same mock call on hold: an On Hold status chip, three messages in the transcript, and Resume Call and End Call buttons." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>The candidate can put the customer on hold and resume, as they would on the floor.</figcaption></figure></div><h3 id="skills-that-match-the-test"><span class="num">5.</span> Skills that match the test</h3><p>For a mock call, the skills change from grammar and spelling to the parts of a good call: opening and greeting, acknowledging the issue, empathy and assurance, resolution, and closing with next steps. The same rule applies: the weights add up to 100%.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/voiceai-configure-1.webp"><img src="/assets/voiceai-configure-1.jpg" alt="Configure step for a mock call: call-handling skills with weights that add up to 100%, anti-cheating options, and a setting to show the scenario during the call." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>For a mock call, the skills become the parts of a good call.</figcaption></figure><h3 id="the-ai-writes-the-feedback-questions-too"><span class="num">6.</span> The AI writes the feedback questions too</h3><p>The admin writes the scenario, and the AI writes the evaluation questions from it. Results get a second tab, "Feedback by Question". Each question gets a score out of 10 and one line on why. For example: "Did the agent acknowledge that the rider felt unsafe before solving the problem?" The tab only shows when the evaluation has feedback questions.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/voiceai-feedback-1.webp"><img src="/assets/voiceai-feedback-1.jpg" alt="The Feedback by Question tab: three AI-written evaluation questions, each with a score out of 10 and one line on why, next to completion and skills charts." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>The AI writes the evaluation questions from the scenario, then scores each one with a reason.</figcaption></figure><h3 id="a-results-page-built-for-coaching"><span class="num">7.</span> A results page built for coaching</h3><p>Each mock call gets its own results page. Three scores sit at the top: communication, problem solving and customer empathy. Below them are the call recording on a timeline, and the full transcript with time stamps. A summary lists where the agent earned points and where they lost them. Coaching tips close the page, so the next step is always clear.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/voiceai-results-1.webp"><img src="/assets/voiceai-results-1.jpg" alt="Mock Call Training Results: scores for communication, problem solving and customer empathy, a call recording timeline, the transcript with time stamps, a performance summary and coaching tips." width="1400" height="1376" loading="lazy" decoding="async"></picture></div><figcaption>Mock call results: three scores, the recording, the transcript, and coaching tips.</figcaption></figure><h3 id="one-dashboard-for-two-kinds-of-test"><span class="num">8.</span> One dashboard for two kinds of test</h3><p>The analytics page filters by campaign and by product type. When you look at all types together, the skills chart greys out. It comes back when you pick one type, because a language test and a mock call do not measure the same skills.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/voiceai-dashboard-1.webp"><img src="/assets/voiceai-dashboard-1.jpg" alt="An analytics dashboard filtered to EvaluateUs: assessment adoption and creation charts, cards for assessments, users, scripts and attempts, and a skills pie chart." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>One dashboard for both kinds of test, filtered by product type.</figcaption></figure><h2 id="from-design-to-build">From design to build</h2><p>I left notes for developers inside the file, next to the screens they describe. For example: when a simulation starts, scroll to the scenario picker. Only the transcript scrolls, not the whole page. The footer stays at the bottom. "Select all" has three states: all, some and none. The back button only shows for admins who came from the candidate list.</p><p>To get the full context of the application, I also wrote 13 points for the team, from Ping sign-in for internal users to resending a link to one candidate.</p><p>The developers built the scenario builder straight from the design architecture I set up. Then I tested it from the UI side and improved it. The builder grew to eight steps for the Wellness team: an overview, AI and human roles with objectives and non-negotiable rules, a session flow in phases, a persona builder, if-else behaviour rules, feedback scoring, a summary, and publish. Sliders tune the AI customer's tone, impatience, starting mood, difficulty and age group.</p><h2 id="craft">Craft</h2><p>EvaluateUs uses one type family, Inter, with a short scale: 24, 20 and 16 px for headings, and 16, 14 and 12 px for body text. Components carry their states: step status (completed, current, skipped and upcoming), navigation (expanded and collapsed), menu items (default, hover, selected and disabled), and assessment cards tagged by type. EvaluateUs also got its own theme, so TaskUs could sell it to external clients. It was built to WCAG 2.2 AA throughout.</p><figure class="shot"><div class="frame"><picture><source type="image/webp" srcset="/assets/evaluateus-list-1.webp"><img src="/assets/evaluateus-list-1.jpg" alt="A grid of assessment cards, each with an abstract thumbnail, a title such as &quot;DoorDash: English language round&quot;, its status and date, and a Script or VoiceAI tag." width="1400" height="900" loading="lazy" decoding="async"></picture></div><figcaption>Assessment cards, tagged by type.</figcaption></figure><h2 id="outcome">Outcome</h2><p>Agents who took EvaluateUs assessments became 17% more accurate in their knowledge of the client campaign.</p><p>When the AI version came in, the first version was already in testing. Both went live, one after the other, for different clients. The Wellness team got the tool they asked for: one that runs as much on its own as possible.</p><h2 id="what-i-learned">What I learned</h2><p>Being early is not the same as being wrong. The scenario idea made sense from the start, but the business needed a reason to build it. When the reason came, the product was ready, because the first version left room for it. The four-step wizard took the AI version by changing one step, not by starting again.</p><p>Ask with the user's cost in mind. I did not ask for AI because it was new. I asked because typing every question is a load on the people who use the product, and a lighter load brings more users.</p><p>Good ideas also come from the people you design for. The Wellness leader's idea of context on every field and AI help at every step made the AI version simpler than my first plan.</p>
+    <div class="doc-end"><a class="btn btn-outline" href="/#career"><span aria-hidden="true">←</span> Back to portfolio</a></div>
+  </article>
+</div>
+</div>
 <section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
     <a href="/case-yourhour">
       <span class="nt">YourHour: <i>breaking digital addiction, compassionately</i></span>
-      <span class="arrow">→</span>
+      <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>
 </section>
-
 </main>
 <footer>
   © MMXXVI · Dipesh Gurav · Nottingham, UK · Designed with purpose, not just pixels · <a href="mailto:contact@dipeshgurav.com">contact@dipeshgurav.com</a> · <a href="tel:+447352673152">+44 7352 673152</a> · <a href="tel:+919009480090">+91 90094 80090</a>
@@ -354,6 +103,7 @@
 
 <script src="/theme.js" defer></script>
 <script src="/case-nav.js" defer></script>
+<script src="/case-reader.js" defer></script>
 <script src="/case-lead.js" defer></script>
 </body>
 </html>

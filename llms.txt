@@ -40,8 +40,7 @@ Dipesh Gurav is a Lead Product Designer with 9 years of experience, based in Not
 - Deepfake Detection: https://dipeshgurav.com/case-taskgpt-deepfake-detection, a side panel that checks images in fake claim calls and fake articles, with a score and a breakdown by method.
 - Productivity Tracker: https://dipeshgurav.com/case-taskgpt-productivity-tracker, sessions, breaks and time on each task.
 
-**EvaluateUs** (TaskUs): AI-scored assessments for hiring, coaching and training, with one dashboard for candidates, assessors and managers
-- Accuracy up 17%
+**EvaluateUs**: AI assessment platform at TaskUs for hiring, coaching and training agents. It grew from typed questions to AI scenarios where the AI plays the customer on a mock call. Agents who took assessments became 17% more accurate in their knowledge of the client campaign.
 - Built to WCAG 2.2 AA
 
 **LevelUp**: gamification platform for TaskUs operations floors. Managers turn KPIs into timed challenges; agents compete as animated 3D characters on live leaderboards. Launched January 2024, presented at AWS Summit London 2025.

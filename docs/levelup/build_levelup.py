@@ -56,7 +56,7 @@ NEXT = '''<section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
     <a href="/case-evaluateus">
-      <span class="nt">EvaluateUs: <i>heavy data, held fairly</i></span>
+      <span class="nt">EvaluateUs: <i>from typed questions to a live AI customer</i></span>
       <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>
