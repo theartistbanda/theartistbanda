@@ -47,7 +47,7 @@ Dipesh Gurav is a Lead Product Designer with 9 years of experience, based in Not
 
 **AutoQA** (TaskUs): Automated review of agent calls, held to its goal of getting flagged agents into training and one-to-ones
 
-**Maestro** (TaskUs): An AI assistant inside Google Chat; team leads ask plain questions and get a summary, charts and a next action such as booking coaching
+**Maestro**: AI assistant inside Google Chat, designed at TaskUs. Team leads, operations managers and client QAs ask about their numbers in plain words, or get a brief and alerts on a schedule. Live as a service for many clients and used as TaskUs's own operational tool.
 
 **YourHour** (Mindefy): Digital wellbeing app
 - Over a million downloads, 22 languages, 4.6 stars, 70,000+ reviews on Google Play

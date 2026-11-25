@@ -197,9 +197,20 @@ const PORTFOLIO = {
       href: '/case-evaluateus',
     },
     {
+      // After EvaluateUs (Dipesh, 25 Nov 2026)
+      id: 'maestro',
+      index: '04',
+      year: '2025–2026',
+      title: 'Maestro',
+      kicker: 'Conversational AI · Google Chat · Live for many clients',
+      tagline: 'Your team\'s numbers, in the chat you already use',
+      image: '/assets/maestro-brief-1.webp',
+      href: '/case-maestro',
+    },
+    {
       // In Experience below EvaluateUs (Dipesh, 23 Nov 2026)
       id: 'job-app-assistant',
-      index: '04',
+      index: '05',
       year: 2026,
       title: 'Job App Assistant',
       kicker: 'Generative AI · Solo build · Live product',
@@ -219,7 +230,7 @@ const PORTFOLIO = {
     },
     {
       id: 'yourhour',
-      index: '05',
+      index: '06',
       year: '2018–2020',
       title: 'YourHour',
       kicker: 'Digital wellbeing · India · 1M+ downloads',
@@ -238,7 +249,7 @@ const PORTFOLIO = {
     },
     {
       id: 'aatmnirbhar',
-      index: '06',
+      index: '07',
       year: 2020,
       title: 'Aatmnirbhar',
       kicker: 'Brand mark · Open MyGov competition',
@@ -256,7 +267,7 @@ const PORTFOLIO = {
     },
     {
       id: 'jego',
-      index: '07',
+      index: '08',
       year: '',
       title: 'JEGO',
       kicker: 'Wellbeing streaming · UAE',
@@ -273,7 +284,7 @@ const PORTFOLIO = {
     },
     {
       id: 'earlyfoods',
-      index: '08',
+      index: '09',
       year: '',
       title: 'EarlyFoods',
       kicker: 'E-commerce · Organic baby food',
@@ -375,7 +386,7 @@ const PORTFOLIO = {
       ],
       tags: ['AI Design', 'Generative AI Tools', 'Experimentation', 'Enterprise UX', 'Design Systems', 'Founding designer'],
       // Case studies shown under this role on /career (Dipesh, 23 Nov 2026)
-      products: ['taskgpt', 'levelup', 'evaluateus'],
+      products: ['taskgpt', 'levelup', 'evaluateus', 'maestro'],
       current: false,
     },
     {

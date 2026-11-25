@@ -1447,8 +1447,8 @@ function ACareerProducts({
       margin: 0,
       display: 'grid',
       gap: 16,
-      // Two across on phones and tablets, three on desktop
-      gridTemplateColumns: `repeat(auto-fill, minmax(${bp.isMobile ? 116 : bp.isTablet ? 140 : 176}px, 1fr))`
+      // Two across on phones and tablets, three on desktop, or four in one row for a role with four
+      gridTemplateColumns: `repeat(auto-fill, minmax(${bp.isMobile ? 116 : bp.isTablet ? 140 : items.length > 3 ? 130 : 176}px, 1fr))`
     }
   }, items.map(p => /*#__PURE__*/React.createElement("li", {
     key: p.id,

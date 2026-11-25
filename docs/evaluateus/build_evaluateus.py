@@ -61,8 +61,8 @@ DESC = ('How Dipesh Gurav designed EvaluateUs, a TaskUs AI assessment platform t
 NEXT = '''<section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
-    <a href="/case-yourhour">
-      <span class="nt">YourHour: <i>breaking digital addiction, compassionately</i></span>
+    <a href="/case-maestro">
+      <span class="nt">Maestro: <i>your team's numbers, in the chat you already use</i></span>
       <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>
