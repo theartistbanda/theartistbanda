@@ -283,7 +283,7 @@ def page(path, title, desc, og_img, label, body, *, part_of=False, progress=Fals
         'creator': {'@type': 'Person', 'name': 'Dipesh Gurav'},
     }
     if part_of:
-        ld['isPartOf'] = {'@type': 'CreativeWork', 'name': 'TaskGPT', 'url': SITE + '/case-taskgpt'}
+        ld['isPartOf'] = {'@type': 'CreativeWork', 'name': 'TaskGPT', 'url': SITE + '/case-taskgpt-full'}
     bar = '<span class="progress" aria-hidden="true"><span></span></span>' if progress else ''
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -712,11 +712,10 @@ def hub_groups(secs):
 
 
 def product_tree(groups, current, page_toc):
-    """The tree on a product page: the overview, the full case study, then every product in its
-    group with what it is in plain words. The current one is marked and lists its own parts."""
+    """The tree on a product page: the full case study, then every product in its group with what
+    it is in plain words. No link to the overview page (Dipesh, 25 Nov 2026). The current one is marked and lists its own parts."""
     names = {p[0]: p[1] for p in PAGES}
-    items = ['<li class="toc-l1 toc-page"><div class="toc-row"><a href="/case-taskgpt">TaskGPT overview</a></div></li>',
-             '<li class="toc-l1 toc-page"><div class="toc-row"><a href="/case-taskgpt-full">The full case study</a></div></li>']
+    items = ['<li class="toc-l1 toc-page"><div class="toc-row"><a href="/case-taskgpt-full">The full case study</a></div></li>']
     for title, slugs in groups:
         kids = []
         for sl in slugs:
@@ -980,7 +979,7 @@ def build_standalone(idx, sections, ext_table, ext_decisions, instrumented, popu
     <ol class="toc-list">{product_tree(tree_groups, sl, page_toc)}</ol>
   </nav>
   <article class="doc product" id="content" tabindex="-1">
-    <nav aria-label="Breadcrumb"><ol class="crumb"><li><a href="/case-taskgpt">TaskGPT</a></li><li aria-current="page">{esc(name)}</li></ol></nav>
+    <nav aria-label="Breadcrumb"><ol class="crumb"><li><a href="/case-taskgpt-full">TaskGPT</a></li><li aria-current="page">{esc(name)}</li></ol></nav>
     <h1>{esc(name)}</h1>
     <p class="kind">{esc(DESCRIPTORS[sl])}</p>
     <p class="lede statement">{statement(inline(card["desc"]), sl)}</p>
@@ -988,13 +987,13 @@ def build_standalone(idx, sections, ext_table, ext_decisions, instrumented, popu
     <div class="cover-fig">{cover}</div>
     <div class="context-box">
       <p>{context}</p>
-      <p class="context-links"><a href="/case-taskgpt">See all of TaskGPT</a><a href="/case-taskgpt-full#{full_id}">Read the full case study</a></p>
+      <p class="context-links"><a href="/case-taskgpt-full">See all of TaskGPT</a><a href="/case-taskgpt-full#{full_id}">Read the full case study</a></p>
     </div>
     <div class="story-body">{"".join(story)}</div>
     <section class="more-from" aria-labelledby="more-from">
       <h2 class="mono" id="more-from">More from TaskGPT</h2>
       <div class="mf-grid">{"".join(nav)}</div>
-      <p class="mf-back"><a class="btn btn-outline" href="/case-taskgpt"><span aria-hidden="true">←</span> Back to TaskGPT</a></p>
+      <p class="mf-back"><a class="btn btn-outline" href="/case-taskgpt-full"><span aria-hidden="true">←</span> Back to TaskGPT</a></p>
     </section>
   </article>
 </div>

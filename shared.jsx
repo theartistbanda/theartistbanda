@@ -106,7 +106,7 @@ const PORTFOLIO = {
       ],
       tags: ['AI Interface', 'Enterprise', 'Design Systems'],
       image: '/assets/taskgpt-dashboard.webp',
-      href: '/case-taskgpt',
+      href: '/case-taskgpt-full',
       // Every TaskGPT case study, as scrollable cards under its row on the homepage (Dipesh, 23 Nov 2026).
       // Same groups, names, opening sentence and thumbnail as the products section of /case-taskgpt:
       // [name, link, image in /assets (webp), one line].

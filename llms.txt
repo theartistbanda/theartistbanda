@@ -21,7 +21,6 @@ Dipesh Gurav is a Lead Product Designer with 9 years of experience, based in Not
 **TaskGPT** (TaskUs): enterprise AI suite for agents on live customer calls, and for the people who set up, measure and improve the AI behind them. Only designer, 2022 to 2025. All 11 products and 7 Chrome extensions went live
 - Call-handling time and operating costs each down 20%
 - Measurement designed in: usage, AI answer quality, token cost and agent feedback
-- TaskGPT hub: https://dipeshgurav.com/case-taskgpt
 - Full case study: https://dipeshgurav.com/case-taskgpt-full
 - AssistAI: https://dipeshgurav.com/case-taskgpt-assistai, the first TaskGPT chatbot.
 - AuthorAI: https://dipeshgurav.com/case-taskgpt-authorai, one-click writing help, planned from a survey of how people used TaskGPT: summaries, tone, emails and action items.
