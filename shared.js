@@ -91,7 +91,7 @@ const PORTFOLIO = {
   }, {
     value: 17,
     suffix: '%',
-    label: 'Assessment accuracy',
+    label: 'Campaign knowledge accuracy',
     sub: 'EvaluateUs'
   }, {
     value: 33,

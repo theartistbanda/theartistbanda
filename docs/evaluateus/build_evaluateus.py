@@ -10,7 +10,7 @@ Captions, alt text and sizes: docs/evaluateus/screens.json. The images are in as
 After Dipesh exports a fresh copy, put it in that folder and run, from the repo root:
   python3 docs/evaluateus/build_evaluateus.py
 
-The words come from the source as they are. The page parts (head, header, footer, tables, images,
+The words come from the source as they are, apart from COPY_SWAPS. The page parts (head, header, footer, tables, images,
 heading tree) come from the TaskGPT build script and the styles from the LevelUp page, so the three
 case studies stay alike.
 """
@@ -43,6 +43,13 @@ tg.LEDE_MARKS['evaluateus'] = (['hire, coach and train agents', 'what happens ne
 # Headings whose text or id differs from the source (brief, section 3.1)
 H3_TEXT = {'Admins set the rules. Managers work inside them': 'Admins set the rules, managers work inside them'}
 IDS = {'Admins set the rules, managers work inside them': 'admins-set-the-rules'}
+# Dipesh's wording after the source export (25 Nov 2026): the dates
+COPY_SWAPS = [
+    ('First version launched at the end of 2024. AI scenario version: September 2025 to March 2026',
+     'First version went live in December 2025. AI scenario version: September 2025 to March 2026'),
+    ('When the AI version came in, the first version was already in testing.',
+     'The first version went live in December 2025, and the AI scenario version went into testing in February 2026.'),
+]
 BEFORE_AFTER = 'The flow would grow, with settings inside settings. The full page gives every setting room.'
 
 TITLE = 'EvaluateUs case study: from typed questions to a live AI customer | Dipesh Gurav'
@@ -87,7 +94,14 @@ def main():
     files = sorted(glob.glob(os.path.join(SRC, 'evaluateus-case-study-source-*.md')), key=os.path.getmtime)
     if not files:
         sys.exit(f'No source file in {SRC}')
-    blocks = parse(open(files[-1], encoding='utf-8').read())
+    source = open(files[-1], encoding='utf-8').read()
+    for a, b in COPY_SWAPS:
+        if a in source:
+            source = source.replace(a, b)
+        elif b not in source:
+            print(f'  note: the source has neither wording of "{a[:50]}", check COPY_SWAPS')
+    assert 'end of 2024' not in source, 'the first version went live in December 2025'
+    blocks = parse(source)
 
     # Sections by ## heading
     secs, cur = [], None

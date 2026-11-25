@@ -86,7 +86,7 @@ const PORTFOLIO = {
   metrics: [
     { value: 1, suffix: 'M+', label: 'Downloads · YourHour', sub: 'Play Store verified' },
     { value: 20, suffix: '%', label: 'Call-handling time and cost cut', sub: 'TaskGPT @ TaskUs' },
-    { value: 17, suffix: '%', label: 'Assessment accuracy', sub: 'EvaluateUs' },
+    { value: 17, suffix: '%', label: 'Campaign knowledge accuracy', sub: 'EvaluateUs' },
     { value: 33, suffix: '%', label: 'Sales in two months', sub: 'EarlyFoods' },
   ],
   projects: [
