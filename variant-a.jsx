@@ -551,6 +551,8 @@ function ABeliefs() {
 // case study. It sits under TaskUs's case study cards, in the role's text column like every other
 // role's cards. One sideways-scrolling rail; thin vertical lines divide the groups. Swipe, scroll, Tab
 // through the cards, or use the arrow buttons. Fades at an edge show there is more.
+// Hidden (Dipesh, 25 Nov 2026): set this to true to bring it back.
+const SHOW_TASKGPT_RAIL = false;
 function AProductRail({ p }) {
   const bp = useBreakpoint();
   const [ref, inView] = useReveal();
@@ -625,7 +627,9 @@ function AProductRail({ p }) {
               <p id={id} style={{ ...aStyles.mono, margin: '0 0 12px' }}>{g.label} · {g.items.length}</p>
               <ul aria-labelledby={id} style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', gap: 16 }}>
                 {g.items.map(([name, href, img, line]) => (
-                  <li key={href} style={{ flex: `0 0 ${cardW}px`, display: 'flex' }}>
+                  // A real width, not a flex-basis: Safari sizes the group by the pictures' own width otherwise,
+                  // which left long blank stretches between groups (25 Nov 2026)
+                  <li key={href} style={{ flex: '0 0 auto', width: cardW, display: 'flex' }}>
                     <a href={href} data-cursor="hover" className="rail-card">
                       <span className="rail-thumb">
                         <img src={`/assets/${img}.webp`} alt="" loading="lazy" decoding="async" />
@@ -878,7 +882,7 @@ function ACareerProducts({ c, bp }) {
 function ACareerItem({ c, i, bp }) {
   const [ref, inView] = useReveal();
   // A case study with its own products (TaskGPT) opens into its rail under the role's cards
-  const expanded = caseStudiesOf(c).find((p) => p.groups);
+  const expanded = SHOW_TASKGPT_RAIL && caseStudiesOf(c).find((p) => p.groups);
   const cases = (
     <React.Fragment>
       <ACareerProducts c={c} bp={bp} />

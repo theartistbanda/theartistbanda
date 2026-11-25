@@ -876,6 +876,8 @@ function ABeliefs() {
 // case study. It sits under TaskUs's case study cards, in the role's text column like every other
 // role's cards. One sideways-scrolling rail; thin vertical lines divide the groups. Swipe, scroll, Tab
 // through the cards, or use the arrow buttons. Fades at an edge show there is more.
+// Hidden (Dipesh, 25 Nov 2026): set this to true to bring it back.
+const SHOW_TASKGPT_RAIL = false;
 function AProductRail({
   p
 }) {
@@ -994,10 +996,15 @@ function AProductRail({
         display: 'flex',
         gap: 16
       }
-    }, g.items.map(([name, href, img, line]) => /*#__PURE__*/React.createElement("li", {
+    }, g.items.map(([name, href, img, line]) =>
+    /*#__PURE__*/
+    // A real width, not a flex-basis: Safari sizes the group by the pictures' own width otherwise,
+    // which left long blank stretches between groups (25 Nov 2026)
+    React.createElement("li", {
       key: href,
       style: {
-        flex: `0 0 ${cardW}px`,
+        flex: '0 0 auto',
+        width: cardW,
         display: 'flex'
       }
     }, /*#__PURE__*/React.createElement("a", {
@@ -1459,7 +1466,7 @@ function ACareerItem({
 }) {
   const [ref, inView] = useReveal();
   // A case study with its own products (TaskGPT) opens into its rail under the role's cards
-  const expanded = caseStudiesOf(c).find(p => p.groups);
+  const expanded = SHOW_TASKGPT_RAIL && caseStudiesOf(c).find(p => p.groups);
   const cases = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ACareerProducts, {
     c: c,
     bp: bp
