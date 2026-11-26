@@ -78,11 +78,13 @@ TITLE = 'Job Desk case study: four agents do the legwork, I make the calls | Dip
 DESC = ('How Dipesh Gurav designed and built Job Desk, a job search desk with four AI agents that prepare '
         'everything and never press submit.')
 # The bottom links follow the homepage's order (Dipesh, 26 Nov 2026), see CLAUDE.md
-NEXT = '''<section class="next">
+# After the name in the title and in the link to Job App Assistant, as on the homepage cards
+AI_NOTE = '<span class="ai-note">(Built with AI)</span>'
+NEXT = f'''<section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
     <a href="/case-job-app-assistant">
-      <span class="nt">Job App Assistant: <i>building the back room, from scratch</i></span>
+      <span class="nt">Job App Assistant {AI_NOTE}: <i>building the back room, from scratch</i></span>
       <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>
@@ -174,7 +176,8 @@ def main():
     assert [r[0] for r in facts['rows']] == FACTS, facts['rows']
     assert '[VIDEO: jobdesk-walkthrough]' in paras
     name, _, rest = title.partition(':')
-    h1 = f'{esc(name)}: {esc(rest.strip())}'
+    # "(Built with AI)" after the name, as on the homepage card (Dipesh, 26 Nov 2026)
+    h1 = f'{esc(name)} {AI_NOTE}: {esc(rest.strip())}'
     assert h1.endswith('I make the calls')
     h1 = h1.replace('I make the calls', '<i>I make the calls</i>')
     opening = (f'<h1>{h1}</h1>\n    <p class="readtime">{READ_TIME}</p>\n'

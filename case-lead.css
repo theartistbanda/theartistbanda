@@ -67,3 +67,8 @@ main .statement .fig { font-weight: 300; font-size: 1em; letter-spacing: -0.01em
   .opener.is-waiting .w { color: var(--mute); }
   .opener.is-in .w { animation: leadFill .5s ease both; }
 }
+
+/* "(Built with AI)" after Job Desk and Job App Assistant in their titles and in the next links
+   that point to them, like the homepage cards (.rail-note in site.css; Dipesh, 26 Nov 2026).
+   Kept on one line so the brackets never split. */
+.ai-note { font-weight: 400; color: var(--ink2); white-space: nowrap; }
