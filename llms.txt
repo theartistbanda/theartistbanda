@@ -64,6 +64,8 @@ Dipesh Gurav is a Lead Product Designer with 9 years of experience, based in Not
 **JEGO** (Mindefy): RTL-first wellbeing and mentorship streaming platform for Gulf audiences
 - Usability satisfaction up 25%
 
+**Job Desk**: a personal job search tool that Dipesh designed and built alone with Claude in October and November 2026. One web page with a shared database and four AI agents: lead scout, application packs, tracker sync, and a read-only board check in his own Chrome. The agents prepare; Dipesh decides and submits every application himself.
+
 **Job App Assistant**: A live AI web app designed, coded and deployed solo in one session (Node.js, Claude API)
 
 **Repos Pay** (for Repos Energy): Credit platform for fuel delivery; fuel pump owners extend credit, and businesses apply for it and draw it down

@@ -1,0 +1,56 @@
+{
+  "jobdesk-narrow-1": {
+    "w": 1176,
+    "h": 1764,
+    "alt": "Job Desk in a narrow window: the header and counts stack, the filters wrap onto two lines, and below them sit the green Small teams tile and an applied lead card.",
+    "caption": "The same desk in a narrow window: the layout stacks for a phone."
+  },
+  "jobdesk-leads-1": {
+    "w": 1600,
+    "h": 946,
+    "alt": "The Leads tab: a green Small teams tile, a status filter, and lead rows with a fit score, team size, a why line, a gaps line, a main platform button and an \"Also on\" list.",
+    "caption": "One row per job, with the main platform button and every other place it is listed."
+  },
+  "jobdesk-lead-1": {
+    "w": 1600,
+    "h": 552,
+    "alt": "One lead up close: fit out of 10 with scores for skills, level and practicality, a line on why it fits, a line on the risk, a confidence label, the team size with its source, and buttons to mark it not interested or expired.",
+    "caption": "Each score says why the role fits, names the real risk, and shows where the facts came from."
+  },
+  "jobdesk-pack-1": {
+    "w": 1600,
+    "h": 946,
+    "alt": "The Packs tab in two panes: a list of packs on the left with a closed group at the bottom, and an open pack on the right with flags, apply buttons and form questions with drafted answers and character limits.",
+    "caption": "A pack: the real form's questions with drafted answers, and flags for what the agent could not check."
+  },
+  "jobdesk-tracker-1": {
+    "w": 1600,
+    "h": 824,
+    "alt": "The Tracker tab: a strip of counts, a box for an unfinished application, then applications with the company, role, the employer's hiring system with a line saying which board was used, the inbox, dates, a status menu and the next action.",
+    "caption": "The tracker keeps where I applied apart from the employer's hiring system (sample data)."
+  },
+  "jobdesk-insights-1": {
+    "w": 1600,
+    "h": 919,
+    "alt": "The Insights tab: a table of platforms with applications sent, replies, next stages and typical reply time.",
+    "caption": "Insights: sent, replied, next stage and typical reply time, for each platform (sample data)."
+  },
+  "jobdesk-mark-before-1": {
+    "w": 1600,
+    "h": 878,
+    "alt": "The Leads tab filtered to Applied: two applied jobs, Quillstone Pay and Kestrelway Travel, each with options to mark it not interested or expired. The header shows 4 packs ready.",
+    "caption": "Before: two applied jobs"
+  },
+  "jobdesk-mark-after-1": {
+    "w": 1600,
+    "h": 878,
+    "alt": "The same view after Kestrelway Travel was marked Expired: only Quillstone Pay is left, and the header and the Packs tab now show 3 packs.",
+    "caption": "After: Kestrelway Travel marked Expired"
+  },
+  "jobdesk-agents-1": {
+    "w": 1600,
+    "h": 946,
+    "alt": "The Agents tab: four agent cards, each with what it does, a note that it runs only when Run now is pressed, a Run now button, and the start of its last run summary.",
+    "caption": "Run now for each agent, and a note on what its last run did and assumed."
+  }
+}

@@ -1,43 +1,88 @@
 {
   "levelup": {
-    "file": "levelup-hero", "w": 1600, "h": 900, "start": 0.35, "label": "LevelUp walkthrough",
+    "file": "levelup-hero",
+    "w": 1600,
+    "h": 900,
+    "start": 0.35,
+    "label": "LevelUp walkthrough",
     "caption": "Prototype walkthrough: running challenges, the live leaderboard, a New Sale celebration, then Challenge Completed and the MVP board."
   },
   "evaluateus": {
-    "file": "evaluateus-hero", "corner": "left", "w": 1600, "h": 1030, "start": 0.6, "label": "EvaluateUs walkthrough",
+    "file": "evaluateus-hero",
+    "corner": "left",
+    "w": 1600,
+    "h": 1030,
+    "start": 0.6,
+    "label": "EvaluateUs walkthrough",
     "caption": "Prototype walkthrough: sign in, then create an assessment in four steps: basic information, script, configure and scoping."
   },
   "assistai": {
-    "file": "taskgpt-assistai-hero", "w": 1600, "h": 1002, "label": "First TaskGPT chatbot walkthrough",
+    "file": "taskgpt-assistai-hero",
+    "w": 1600,
+    "h": 1002,
+    "label": "First TaskGPT chatbot walkthrough",
     "caption": "The first TaskGPT chatbot, before AssistAI and AuthorAI: upload a knowledge base, ask questions, and check the answer against the original document side by side."
   },
   "authorai": {
-    "file": "taskgpt-authorai-hero", "corner": "left", "w": 1600, "h": 900, "label": "AuthorAI walkthrough",
+    "file": "taskgpt-authorai-hero",
+    "corner": "left",
+    "w": 1600,
+    "h": 900,
+    "label": "AuthorAI walkthrough",
     "caption": "AuthorAI inside Kustomer: the agent selects the customer's message and asks for the action items as bullets."
   },
   "dashboard": {
     "first_image": "off",
-    "file": "taskgpt-dashboard-hero", "w": 1600, "h": 1050, "label": "TaskGPT Dashboard walkthrough",
+    "file": "taskgpt-dashboard-hero",
+    "w": 1600,
+    "h": 1050,
+    "label": "TaskGPT Dashboard walkthrough",
     "caption": "Prototype walkthrough: the Overview tab with users, sessions, responses and consumption, then the Feedbacks tab with ratings and comments."
   },
   "observability": {
-    "file": "taskgpt-observability-hero", "w": 1600, "h": 1000, "start": 0.3, "label": "Observability walkthrough",
+    "file": "taskgpt-observability-hero",
+    "w": 1600,
+    "h": 1000,
+    "start": 0.3,
+    "label": "Observability walkthrough",
     "caption": "Prototype walkthrough: the query log shows each step of a query, a reviewer marks whether the answer is acceptable, then a chart of query volume."
   },
   "chatbotify": {
-    "file": "taskgpt-chatbotify-hero", "corner": "left", "w": 1600, "h": 1002, "label": "Chatbotify walkthrough",
+    "file": "taskgpt-chatbotify-hero",
+    "corner": "left",
+    "w": 1600,
+    "h": 1002,
+    "label": "Chatbotify walkthrough",
     "caption": "Prototype walkthrough: creating a chatbot, from the model and knowledge base to masking, small talk and the welcome message."
   },
   "bcp": {
-    "file": "taskgpt-bcp-hero", "corner": "left", "w": 1600, "h": 1002, "label": "BCP walkthrough",
+    "file": "taskgpt-bcp-hero",
+    "corner": "left",
+    "w": 1600,
+    "h": 1002,
+    "label": "BCP walkthrough",
     "caption": "Prototype walkthrough: each AI engine has a backup engine, and admins add knowledge bases to each one."
   },
   "translatebuddy": {
-    "file": "taskgpt-translatebuddy-hero", "corner": "left", "w": 1600, "h": 802, "label": "TranslateBuddy walkthrough",
+    "file": "taskgpt-translatebuddy-hero",
+    "corner": "left",
+    "w": 1600,
+    "h": 802,
+    "label": "TranslateBuddy walkthrough",
     "caption": "TranslateBuddy inside Zendesk: the customer's French message is translated for the agent, and the agent's reply is translated back."
   },
   "shield": {
-    "file": "taskgpt-shield-hero", "w": 1280, "h": 960, "label": "Shield walkthrough",
+    "file": "taskgpt-shield-hero",
+    "w": 1280,
+    "h": 960,
+    "label": "Shield walkthrough",
     "caption": "After the redesign: six tools on cards, then the Blur and Wellness Breaks settings."
+  },
+  "jobdesk": {
+    "file": "jobdesk-hero",
+    "w": 1600,
+    "h": 900,
+    "label": "Job Desk walkthrough",
+    "caption": "Walkthrough with sample data: the Leads list, a pack, the tracker, Insights, then Run now on the Agents tab."
   }
 }

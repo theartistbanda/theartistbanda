@@ -207,6 +207,18 @@ const PORTFOLIO = {
       href: '/case-maestro',
     },
     {
+      // A personal project, not TaskUs work (brief, 26 Nov 2026): first under Selected projects
+      id: 'job-desk',
+      index: '10',
+      year: 2026,
+      title: 'Job Desk',
+      kicker: 'AI agents · Design engineering · Solo build',
+      tagline: 'Four AI agents do the legwork of my job search, I make the calls',
+      tags: ['AI agents', 'Design engineering', 'Solo build'],
+      image: '/assets/jobdesk-leads-1.webp',
+      href: '/case-job-desk',
+    },
+    {
       // In Experience below EvaluateUs (Dipesh, 23 Nov 2026)
       id: 'job-app-assistant',
       index: '05',
@@ -420,7 +432,7 @@ const PORTFOLIO = {
       ],
       tags: ['Fintech', 'Developer tools', 'Generative AI'],
       // Aatmnirbhar was his own open-competition entry, not Mindefy work, so it sits here
-      products: ['job-app-assistant', 'aatmnirbhar'],
+      products: ['job-desk', 'job-app-assistant', 'aatmnirbhar'], // Job Desk first (brief, 26 Nov 2026)
     },
   ],
   skills: [

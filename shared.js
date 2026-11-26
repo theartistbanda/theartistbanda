@@ -168,6 +168,17 @@ const PORTFOLIO = {
     image: '/assets/maestro-brief-1.webp',
     href: '/case-maestro'
   }, {
+    // A personal project, not TaskUs work (brief, 26 Nov 2026): first under Selected projects
+    id: 'job-desk',
+    index: '10',
+    year: 2026,
+    title: 'Job Desk',
+    kicker: 'AI agents · Design engineering · Solo build',
+    tagline: 'Four AI agents do the legwork of my job search, I make the calls',
+    tags: ['AI agents', 'Design engineering', 'Solo build'],
+    image: '/assets/jobdesk-leads-1.webp',
+    href: '/case-job-desk'
+  }, {
     // In Experience below EvaluateUs (Dipesh, 23 Nov 2026)
     id: 'job-app-assistant',
     index: '05',
@@ -308,7 +319,7 @@ const PORTFOLIO = {
     body: ['Repos Pay, Repos Energy\'s credit platform for fuel delivery. One app let fuel pump owners extend credit; the other let businesses apply for it and draw it down. Two sides trusting one system for opposite reasons.', 'ZuQA, API testing tool. Postman had no low-code API testing at the time; a friend was building the concept and I joined as design hand. Progressive disclosure cut cognitive load and developer onboarding time by 15%.', 'Job App Assistant, a live AI web app that I designed, coded and deployed alone in one session, with Node.js and the Claude API.'],
     tags: ['Fintech', 'Developer tools', 'Generative AI'],
     // Aatmnirbhar was his own open-competition entry, not Mindefy work, so it sits here
-    products: ['job-app-assistant', 'aatmnirbhar']
+    products: ['job-desk', 'job-app-assistant', 'aatmnirbhar'] // Job Desk first (brief, 26 Nov 2026)
   }],
   skills: ['Behavioural UX', 'AI Interfaces', 'Generative AI Tools', 'Design Systems', 'Multi-audience Platforms', 'Data-dense Enterprise UX', 'A/B Testing', 'Experimentation', 'Cross-cultural', 'Figma', 'Motion', 'Conversion Rate Optimisation', 'Hiring & mentoring', 'Accessibility · WCAG 2.2 AA', 'RTL-first', 'Product Strategy'],
   notable: ['Aatmnirbhar Bharat mark, used on Indian-made goods', 'YourHour · 4.6★ · 1M+ downloads', 'LevelUp at AWS Summit London 2025', 'Repos Pay for Repos Energy, credit for fuel delivery', '300+ research sessions on YourHour'],

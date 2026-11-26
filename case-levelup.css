@@ -1,4 +1,4 @@
-/* LevelUp, EvaluateUs and Maestro case studies (24 and 25 Nov 2026). Loaded after case-taskgpt.css and case-lead.css: the header,
+/* LevelUp, EvaluateUs, Maestro and Job Desk case studies (24 to 26 Nov 2026). Loaded after case-taskgpt.css and case-lead.css: the header,
    reader, tables, figures and loop boxes are the TaskGPT ones, and only what differs is here. */
 
 /* ─── Reader ───────────────────────────────────────────────────────────────── */
@@ -30,6 +30,8 @@
 .shot.scrolls .frame:has(.scroll-box:focus-visible) { outline: 2px solid var(--ink); outline-offset: 3px; }
 @media (max-width: 1023px) { .scroll-box { height: 560px; } }
 .lu-doc .shot.narrow { max-width: 640px; margin-left: auto; margin-right: auto; }
+/* Job Desk: a tall, narrow window screen, never wider than 420px */
+.lu-doc .shot.slim { max-width: 420px; margin-left: auto; margin-right: auto; }
 .lu-doc .pair .shot, .lu-doc .pair-fig .pair { margin: 0; }
 .lu-doc .pair-fig > figcaption { margin-top: 18px; }
 @media (max-width: 1023px) { .lu-doc .pair { grid-template-columns: 1fr; gap: 28px; } }
