@@ -180,6 +180,18 @@ const PORTFOLIO = {
     image: '/assets/jobdesk-leads-1.webp',
     href: '/case-job-desk'
   }, {
+    // Selected projects, after Job Desk (brief, 26 Nov 2026). The board is private: link only the case study.
+    id: 'pattern-desk',
+    index: '11',
+    year: 2026,
+    title: 'Pattern Desk',
+    builtWithAI: true,
+    kicker: 'AI agents · Data design · Solo build',
+    tagline: 'A live market board for India, the UK and the USA that grades its own calls in the open',
+    tags: ['AI agents', 'Data design', 'Solo build'],
+    image: '/assets/patterndesk-desk-1.webp',
+    href: '/case-pattern-desk'
+  }, {
     // In Experience below EvaluateUs (Dipesh, 23 Nov 2026)
     id: 'job-app-assistant',
     index: '05',
@@ -321,7 +333,7 @@ const PORTFOLIO = {
     body: ['Repos Pay, Repos Energy\'s credit platform for fuel delivery. One app let fuel pump owners extend credit; the other let businesses apply for it and draw it down. Two sides trusting one system for opposite reasons.', 'ZuQA, API testing tool. Postman had no low-code API testing at the time; a friend was building the concept and I joined as design hand. Progressive disclosure cut cognitive load and developer onboarding time by 15%.', 'Job App Assistant, a live AI web app that I designed, coded and deployed alone in one session, with Node.js and the Claude API.'],
     tags: ['Fintech', 'Developer tools', 'Generative AI'],
     // Aatmnirbhar was his own open-competition entry, not Mindefy work, so it sits here
-    products: ['job-desk', 'job-app-assistant', 'aatmnirbhar'] // Job Desk first (brief, 26 Nov 2026)
+    products: ['job-desk', 'pattern-desk', 'job-app-assistant', 'aatmnirbhar'] // Job Desk first, then Pattern Desk (briefs, 26 Nov 2026)
   }],
   skills: ['Behavioural UX', 'AI Interfaces', 'Generative AI Tools', 'Design Systems', 'Multi-audience Platforms', 'Data-dense Enterprise UX', 'A/B Testing', 'Experimentation', 'Cross-cultural', 'Figma', 'Motion', 'Conversion Rate Optimisation', 'Hiring & mentoring', 'Accessibility · WCAG 2.2 AA', 'RTL-first', 'Product Strategy'],
   notable: ['Aatmnirbhar Bharat mark, used on Indian-made goods', 'YourHour · 4.6★ · 1M+ downloads', 'LevelUp at AWS Summit London 2025', 'Repos Pay for Repos Energy, credit for fuel delivery', '300+ research sessions on YourHour'],

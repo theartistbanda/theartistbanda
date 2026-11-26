@@ -84,5 +84,12 @@
     "h": 900,
     "label": "Job Desk walkthrough",
     "caption": "Walkthrough with sample data: the Leads list, a pack, the tracker, Insights, then Run now on the Agents tab."
+  },
+  "patterndesk": {
+    "file": "patterndesk-hero",
+    "w": 1280,
+    "h": 720,
+    "label": "Pattern Desk walkthrough",
+    "caption": "Walkthrough of the live board, with data to 23 November 2026: the Desk, the India, UK and USA plans, and the Charts tab."
   }
 }

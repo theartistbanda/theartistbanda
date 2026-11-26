@@ -63,3 +63,35 @@
 .motion-btn { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px; border: 1px solid var(--paper); outline: 1px solid var(--ink); background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
 .motion-btn:hover { background: var(--accent-hover); }
 .motion-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* ─── Pattern Desk: the architecture diagram and the call record (26 Nov 2026) ─────────────────────────────
+   Four columns (Sources, Agents, Data store, Page) with arrows between them, like the loop above, and a
+   line under them from Sources straight to Page. Below 720px the columns stack with down arrows and the
+   line becomes a note under the last column. */
+.pd-arch .loop-title { margin-bottom: 4px; }
+.pd-sub { margin: 0 0 18px !important; font-size: 14px; line-height: 1.5; color: var(--ink2); }
+.pd-row { display: grid; grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr) 28px minmax(0, 1fr); align-items: stretch; }
+.pd-col { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.pd-col-name { margin: 0 !important; text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+.pd-arch .loop-box { padding: 12px 10px; text-align: center; }
+.pd-arch .loop-name { font-size: 15px; margin: 0; }
+.pd-line { margin: 4px 0 0 !important; font-size: 13px; line-height: 1.45; color: var(--ink2); }
+.pd-down { display: block; text-align: center; font-size: 16px; line-height: 1; color: var(--ink); margin: -2px 0; }
+.pd-arch .pd-store ul { margin: 8px 0 0; padding: 0; }
+.pd-arch .pd-store li { font-size: 13px; line-height: 1.45; padding: 4px 0; margin: 0; }
+.pd-foot { margin: 0 !important; text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.5; color: var(--ink2); }
+.pd-skip { position: relative; height: 52px; margin: 0 !important; }
+/* From the middle of the first column to the middle of the last: each column is (100% - 3 arrows) / 4 */
+.pd-skip-line { position: absolute; left: calc((100% - 84px) / 8); right: calc((100% - 84px) / 8); top: 8px; height: 22px; border: 1px solid var(--ink2); border-top: none; }
+.pd-skip-line::after { content: ""; position: absolute; right: -5.5px; top: -3px; width: 0; height: 0; border: 5px solid transparent; border-top: none; border-bottom: 7px solid var(--ink2); }
+.pd-skip-label { position: absolute; left: 50%; top: 30px; transform: translate(-50%, -50%); padding: 0 12px; background: var(--paper); white-space: nowrap; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.4; color: var(--ink2); }
+.pd-skip-narrow { display: none; }
+@media (max-width: 719px) {
+  .pd-row { grid-template-columns: 1fr; }
+  .pd-skip { display: none; }
+  .pd-skip-narrow { display: block; margin: 12px 0 0 !important; text-align: center; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.5; color: var(--ink2); }
+}
+/* The call record: numbers line up on the right, and the All row is bold */
+table.pd-record { min-width: 520px; }
+.pd-record .num { text-align: right; font-variant-numeric: tabular-nums; }
+.pd-record tr.total th, .pd-record tr.total td { font-weight: 600; color: var(--ink); }

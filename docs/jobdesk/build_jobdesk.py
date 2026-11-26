@@ -58,10 +58,10 @@ IDS = {
     'What broke, and what I changed': 'what-broke', 'How I built it': 'how-i-built-it', 'Outcome': 'outcome',
     'Other things I built alone': 'other-things-i-built-alone', 'What I learned': 'what-i-learned',
 }
-# Dipesh's answers of 26 Nov 2026: Pattern Desk stays off the site until he gives it context (CLAUDE.md),
-# and Job App Assistant links to its case study
+# Pattern Desk and Job App Assistant link to their case studies (Dipesh, 26 Nov 2026: Pattern Desk has its own
+# page since then, and the board itself stays private, so never link to it)
 COPY_SWAPS = [
-    ('- **Pattern Desk.** A seven-day market pattern board for India, the UK and the USA, with data from Twelve Data and Alpha Vantage.\n', ''),
+    ('- **Pattern Desk.** ', '- **[Pattern Desk](/case-pattern-desk).** '),
     ('- **Job App Assistant.** ', '- **[Job App Assistant](/case-job-app-assistant).** '),
 ]
 # The two tables scroll sideways inside their own frame on a phone
@@ -78,20 +78,20 @@ TITLE = 'Job Desk case study: four agents do the legwork, I make the calls | Dip
 DESC = ('How Dipesh Gurav designed and built Job Desk, a job search desk with four AI agents that prepare '
         'everything and never press submit.')
 # The bottom links follow the homepage's order (Dipesh, 26 Nov 2026), see CLAUDE.md
-# After the name in the title and in the link to Job App Assistant, as on the homepage cards
+# After the name in the title and in the link to Pattern Desk, as on the homepage cards
 AI_NOTE = '<span class="ai-note">(Built with AI)</span>'
 NEXT = f'''<section class="next">
   <div class="wrap">
     <div class="mono next-label">Next case study</div>
-    <a href="/case-job-app-assistant">
-      <span class="nt">Job App Assistant {AI_NOTE}: <i>building the back room, from scratch</i></span>
+    <a href="/case-pattern-desk">
+      <span class="nt">Pattern Desk {AI_NOTE}: <i>a trading desk that shows its working</i></span>
       <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>
 </section>'''
 # Words that must never be on this page (CLAUDE.md, retired claims)
 BANNED = ['auto-apply', 'applies for me', 'the agents applied', 'built by AI', 'AI built it', 'claude.ai/artifact',
-          'trig_', 'lorem', 'Pattern Desk', 'used by']
+          'trig_', 'lorem', 'used by']
 
 used = []
 

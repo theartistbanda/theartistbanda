@@ -1,0 +1,62 @@
+{
+  "patterndesk-desk-1": {
+    "w": 1600,
+    "h": 657,
+    "alt": "The Desk tab: three market cards for India, the UK and the USA, each with a Stand aside stance, the latest close, a signal score bar, and Long if, Short if and Wait if closing levels with targets.",
+    "caption": "The Desk: one card per market, with the stance, the score and the closing levels that would change it."
+  },
+  "patterndesk-india-sessions-1": {
+    "w": 1600,
+    "h": 603,
+    "alt": "The India tab: session cards with today in the middle, a past card with the Nifty close, the move, the reason, an Anomaly line and the signal, and cards for the sessions ahead.",
+    "caption": "The seven-day strip from version 1 is still there: past sessions on the left, today in the middle, events ahead on the right."
+  },
+  "patterndesk-india-plan-1": {
+    "w": 1600,
+    "h": 732,
+    "alt": "The India plan for the Nifty 50: a Stand aside stance, a two-sentence reason, three paths with odds of 40%, 35% and 25%, each with a closing trigger, a target and an exit, and a signal score of +24.",
+    "caption": "The India plan after the rebuild: a stance, three paths with odds, and the score that sits behind them."
+  },
+  "patterndesk-backtest-1": {
+    "w": 1600,
+    "h": 999,
+    "alt": "A table titled What has worked on these bars: each signal with its direction, a hit-rate bar, the rate, the number of cases, the last 10 results, the average next move and the date last seen.",
+    "caption": "Every signal, scored against the bar that came next. Green is above 55%, red is below 45%."
+  },
+  "patterndesk-prices-1": {
+    "w": 1600,
+    "h": 773,
+    "alt": "Prices now: live tiles for the Nifty fund, the India fund, the rupee, the UK fund and the pound, and world tiles for Brent, the US 10-year yield, Fed hike odds, gold and the S&P 500 and Nasdaq-100 funds, each with its date.",
+    "caption": "A green dot means live. Every other value shows the date of the refresh it came from."
+  },
+  "patterndesk-usa-plan-1": {
+    "w": 1600,
+    "h": 544,
+    "alt": "The USA plan for the S&P 500: three paths with odds of 35%, 40% and 25%, each written as If close above or below a level, with a target and an exit, and a note that triggers use the daily close.",
+    "caption": "Each path is a test: if this close happens, here is the target, and here is the close that ends it."
+  },
+  "patterndesk-uk-plan-1": {
+    "w": 1600,
+    "h": 769,
+    "alt": "The UK plan for the FTSE 100: a Stand aside stance, three paths with odds of 30%, 40% and 30%, and a signal score of -29 that leans short.",
+    "caption": "The UK score leans short at -29, but the stance stays Stand aside: no close has broken the trigger yet."
+  },
+  "patterndesk-usa-sessions-1": {
+    "w": 1600,
+    "h": 577,
+    "alt": "USA session cards: a past card for Mon 23 Nov with the S&P 500 close, the reason for the move and an Anomaly line, today's card with scheduled events, and cards ahead.",
+    "caption": "The Anomaly line names a move the signals did not predict, so surprises stay visible."
+  },
+  "patterndesk-setups-1": {
+    "w": 1600,
+    "h": 652,
+    "alt": "Top 5 setups this week: three setup cards for the Nasdaq 100, GBP/USD and Brent crude, each with a direction, conviction, a short reason, Act if and Cancel if tests, dates and a source, and a count of 3 worked of 15 graded setups.",
+    "caption": "The weekly top 5, each with an Act if test and a Cancel if test. The running record sits in the corner."
+  },
+  "patterndesk-chart-1": {
+    "w": 1600,
+    "h": 1026,
+    "alt": "Nifty 50 daily candles with the 9 and 21 EMA, pattern triangles, open gap bands, Fibonacci levels, a Next column of pivot and CPR lines, and volume and RSI 14 panels below.",
+    "caption": "Nine instruments, five timeframes, and five layers you can switch on and off. The grey Next column holds the lines for the next session."
+  }
+}

@@ -220,6 +220,19 @@ const PORTFOLIO = {
       href: '/case-job-desk',
     },
     {
+      // Selected projects, after Job Desk (brief, 26 Nov 2026). The board is private: link only the case study.
+      id: 'pattern-desk',
+      index: '11',
+      year: 2026,
+      title: 'Pattern Desk',
+      builtWithAI: true,
+      kicker: 'AI agents · Data design · Solo build',
+      tagline: 'A live market board for India, the UK and the USA that grades its own calls in the open',
+      tags: ['AI agents', 'Data design', 'Solo build'],
+      image: '/assets/patterndesk-desk-1.webp',
+      href: '/case-pattern-desk',
+    },
+    {
       // In Experience below EvaluateUs (Dipesh, 23 Nov 2026)
       id: 'job-app-assistant',
       index: '05',
@@ -434,7 +447,7 @@ const PORTFOLIO = {
       ],
       tags: ['Fintech', 'Developer tools', 'Generative AI'],
       // Aatmnirbhar was his own open-competition entry, not Mindefy work, so it sits here
-      products: ['job-desk', 'job-app-assistant', 'aatmnirbhar'], // Job Desk first (brief, 26 Nov 2026)
+      products: ['job-desk', 'pattern-desk', 'job-app-assistant', 'aatmnirbhar'], // Job Desk first, then Pattern Desk (briefs, 26 Nov 2026)
     },
   ],
   skills: [
