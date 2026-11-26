@@ -1414,7 +1414,9 @@ function ACaseCard({
     decoding: "async"
   })), /*#__PURE__*/React.createElement("span", {
     className: "rail-name"
-  }, p.title), /*#__PURE__*/React.createElement("span", {
+  }, p.title, p.builtWithAI && /*#__PURE__*/React.createElement("span", {
+    className: "rail-note"
+  }, " (Built with AI)")), /*#__PURE__*/React.createElement("span", {
     className: "rail-line"
   }, p.tagline));
 }

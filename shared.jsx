@@ -212,6 +212,7 @@ const PORTFOLIO = {
       index: '10',
       year: 2026,
       title: 'Job Desk',
+      builtWithAI: true,
       kicker: 'AI agents · Design engineering · Solo build',
       tagline: 'Four AI agents do the legwork of my job search, I make the calls',
       tags: ['AI agents', 'Design engineering', 'Solo build'],
@@ -224,6 +225,7 @@ const PORTFOLIO = {
       index: '05',
       year: 2026,
       title: 'Job App Assistant',
+      builtWithAI: true,
       kicker: 'Generative AI · Solo build · Live product',
       tagline: 'Building the back room, from scratch',
       body:

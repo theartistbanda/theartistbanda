@@ -852,7 +852,8 @@ function ACaseCard({ p }) {
   return (
     <a href={p.href} data-cursor="hover" className="rail-card cv-card">
       <span className="rail-thumb"><img src={p.thumb || p.image} alt="" loading="lazy" decoding="async" /></span>
-      <span className="rail-name">{p.title}</span>
+      {/* "(Built with AI)" after the name on Job Desk and Job App Assistant (Dipesh, 26 Nov 2026) */}
+      <span className="rail-name">{p.title}{p.builtWithAI && <span className="rail-note"> (Built with AI)</span>}</span>
       <span className="rail-line">{p.tagline}</span>
     </a>
   );
