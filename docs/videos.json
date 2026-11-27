@@ -91,5 +91,12 @@
     "h": 720,
     "label": "Pattern Desk walkthrough",
     "caption": "Walkthrough of the live board, with data to 23 November 2026: the Desk, the India, UK and USA plans, and the Charts tab."
+  },
+  "repospay-order": {
+    "file": "repos-pay-order-placed",
+    "w": 824,
+    "h": 1460,
+    "label": "Order placed animation",
+    "caption": "Placing an order ends with a short animation: the Repos truck drives through the city, then a check mark confirms the order."
   }
 }

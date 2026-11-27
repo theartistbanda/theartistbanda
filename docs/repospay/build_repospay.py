@@ -59,7 +59,7 @@ IDS = {
     'Outcome': 'outcome', 'What I learned': 'what-i-learned',
 }
 # Image layouts (brief, section 4.3). Phone screens are tall and narrow, so they get a width cap.
-PHONE_CAP = {'repos-pay-energy-score-1': 'rp-w420', 'repos-pay-order-placed-1': 'rp-w360'}
+PHONE_CAP = {'repos-pay-energy-score-1': 'rp-w420'}
 PAIR_LAYOUT = {   # first image of the pair -> layout class
     'repos-pay-order-app-1': 'rp-mixed',          # a phone next to a web screen: 1 to 2 from 1024px
     'repos-pay-partner-pending-1': 'rp-phones',   # two phones: side by side from 640px
@@ -71,8 +71,11 @@ PAIR_CAPTIONS = {   # one caption under a before-and-after pair
     'repos-pay-signature-before-1': 'Draw, type or upload: one signature box for every screen that needs a signature.',
     'repos-pay-old-onboarding-1': 'The same onboarding, renamed and rebuilt around the order.',
 }
-# The order-placed animation: the still, until Dipesh sends the original GIF (brief, section 4.4)
+# The order-placed animation: Dipesh's recording (27 Nov 2026), played like the hero videos (case-video.js), at most
+# 360px wide like the other phone screens. The still from the export stays in assets/ but is not on the page.
 ANIMATION_STILL = 'repos-pay-order-placed-1'
+ANIMATION_VIDEO = 'repospay-order'   # docs/videos.json
+UNUSED = {ANIMATION_STILL}
 
 TITLE = 'Repos Pay case study: diesel on credit, with trust on both sides | Dipesh Gurav'
 DESC = ('How Dipesh Gurav designed Repos Pay, diesel on credit for Repos Energy, across customer, partner and admin '
@@ -113,7 +116,10 @@ def media(text):
     assert len(names) == (2 if kind in ('IMAGE PAIR', 'BEFORE AND AFTER') else 1), names
     if kind == 'ANIMATION':
         assert names[0] == ANIMATION_STILL, names
-        return figure(names[0], PHONE_CAP[names[0]])
+        v = tg.case_video(ANIMATION_VIDEO)
+        assert v.startswith('<figure class="shot case-video'), v[:60]
+        # The width class goes after "shot case-video": tg.page loads case-video.js only when it finds that text
+        return v.replace('<figure class="shot case-video', '<figure class="shot case-video rp-w360', 1)
     if kind == 'IMAGE':
         return figure(names[0], PHONE_CAP.get(names[0], ''))
     pair = f'<div class="pair {PAIR_LAYOUT[names[0]]}">' + ''.join(figure(n) for n in names) + '</div>'
@@ -196,7 +202,7 @@ def main():
             else:
                 sys.exit(f'Unhandled block {b}')
 
-    assert sorted(used) == sorted(SCREENS), set(SCREENS) ^ set(used)
+    assert sorted(used) == sorted(set(SCREENS) - UNUSED), set(SCREENS) ^ set(used) ^ UNUSED
     assert len(toc) == 8 and sum(len(t['kids']) for t in toc) == 13, (len(toc), [len(t['kids']) for t in toc])
 
     # The old names only in their own section, and in the line that explains FPC (brief, section 9)
