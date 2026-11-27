@@ -6,3 +6,7 @@ docs
 skills-lock.json
 # Old CV source, out of date and not linked; the site serves dipesh-gurav-cv.pdf
 cv/dipesh-gurav-cv.html
+# The CV source and its fonts (27 Nov 2026): the site serves only the PDF made from them
+cv/Dipesh-Gurav-CV-master.html
+cv/fonts/CV-Mono.ttf
+cv/fonts/CV-Mono-Bold.ttf
