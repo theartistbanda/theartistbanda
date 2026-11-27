@@ -70,7 +70,7 @@ Dipesh Gurav is a Lead Product Designer with 9 years of experience, based in Not
 
 **Job App Assistant**: A live AI web app designed, coded and deployed solo in one session (Node.js, Claude API)
 
-**Repos Pay** (for Repos Energy): Credit platform for fuel delivery; fuel pump owners extend credit, and businesses apply for it and draw it down
+**Repos Pay**: a credit service for diesel delivery that Dipesh designed from scratch for Repos Energy in 2020, as the only designer, inside a revamp of the Repos delivery apps. Customers order fuel on credit and sign a digital agreement; pump owners sign to accept; Repos checks each customer's CIBIL score and a third-party background check, then guarantees the transaction. Five surfaces: customer web and app, partner web and app, and an admin portal. Live. Case study: /case-repos-pay
 
 **ZuQA**: API testing tool; progressive disclosure cut developer onboarding time by 15%
 

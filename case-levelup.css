@@ -95,3 +95,17 @@
 table.pd-record { min-width: 520px; }
 .pd-record .num { text-align: right; font-variant-numeric: tabular-nums; }
 .pd-record tr.total th, .pd-record tr.total td { font-weight: 600; color: var(--ink); }
+
+/* ─── Repos Pay: phone screens and their pairs (27 Nov 2026) ──────────────────────────────────────────────
+   The app screens are tall and narrow, so each gets a width cap and sits in the middle of the column. */
+.lu-doc .shot.rp-w420 { max-width: 420px; margin-left: auto; margin-right: auto; }
+.lu-doc .shot.rp-w360 { max-width: 360px; margin-left: auto; margin-right: auto; }
+/* A phone next to a web screen: one third and two thirds from 1024px; stacked below, with the phone capped */
+@media (min-width: 1024px) { .lu-doc .pair.rp-mixed { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); } }
+@media (max-width: 1023px) { .lu-doc .pair.rp-mixed > .shot:first-child { width: 100%; max-width: 360px; justify-self: center; } }
+/* Two phone screens: side by side from 640px, each at most 360px wide, the pair centred; stacked below */
+.lu-doc .pair.rp-phones { grid-template-columns: minmax(0, 360px); justify-content: center; }
+@media (min-width: 640px) { .lu-doc .pair.rp-phones { grid-template-columns: repeat(2, minmax(0, 360px)); } }
+@media (max-width: 639px) { .lu-doc .pair.rp-tall { grid-template-columns: minmax(0, 320px); } }
+/* Two big web screens, or a before and after that are both wide: stacked at every width */
+.lu-doc .pair.rp-stack { grid-template-columns: minmax(0, 1fr); gap: 28px; }

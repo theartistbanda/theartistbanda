@@ -301,6 +301,18 @@ function ASecLine({ children, stroke = 2.6 }) {
   );
 }
 
+// Text with [links](/path): the career text and the Notable list link to case studies (Repos Pay, 27 Nov 2026)
+function withLinks(text) {
+  const parts = text.split(/\[([^\]]+)\]\(([^)\s]+)\)/);
+  if (parts.length === 1) return text;
+  const out = [];
+  for (let i = 0; i < parts.length; i += 3) {
+    if (parts[i]) out.push(parts[i]);
+    if (i + 1 < parts.length) out.push(<a key={i} href={parts[i + 2]} className="text-link" data-cursor="hover">{parts[i + 1]}</a>);
+  }
+  return out;
+}
+
 // Text with *italics* and figures, optionally with every word in a span for the fill
 function richText(text, fill) {
   const total = text.replace(/\*/g, '').split(/\s+/).filter(Boolean).length;
@@ -499,7 +511,7 @@ function APerson() {
         <div>
           <h3 style={factTitle}>Notable</h3>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {PORTFOLIO.notable.map((n) => <li key={n} style={line}>{n}</li>)}
+            {PORTFOLIO.notable.map((n) => <li key={n} style={line}>{withLinks(n)}</li>)}
           </ul>
         </div>
         <div style={{ gridColumn: '1 / -1' }}>
@@ -812,12 +824,12 @@ function ACareerBody({ c, i, gap }) {
 
   return (
     <div ref={ref} style={{ fontSize: 15, color: A.ink2, lineHeight: 1.7 }}>
-      <p style={{ margin: 0 }}>{first}</p>
+      <p style={{ margin: 0 }}>{withLinks(first)}</p>
       {rest.length > 0 && (
         <React.Fragment>
           <div id={restId} className="cv-more" hidden={!open}>
             {rest.map((para, pi) => (
-              <p key={pi} style={{ margin: `${gap}px 0 0` }}>{para}</p>
+              <p key={pi} style={{ margin: `${gap}px 0 0` }}>{withLinks(para)}</p>
             ))}
           </div>
           <button type="button" className="cv-toggle" data-cursor="hover"

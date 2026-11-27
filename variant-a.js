@@ -425,6 +425,23 @@ function ASecLine({
   })));
 }
 
+// Text with [links](/path): the career text and the Notable list link to case studies (Repos Pay, 27 Nov 2026)
+function withLinks(text) {
+  const parts = text.split(/\[([^\]]+)\]\(([^)\s]+)\)/);
+  if (parts.length === 1) return text;
+  const out = [];
+  for (let i = 0; i < parts.length; i += 3) {
+    if (parts[i]) out.push(parts[i]);
+    if (i + 1 < parts.length) out.push(/*#__PURE__*/React.createElement("a", {
+      key: i,
+      href: parts[i + 2],
+      className: "text-link",
+      "data-cursor": "hover"
+    }, parts[i + 1]));
+  }
+  return out;
+}
+
 // Text with *italics* and figures, optionally with every word in a span for the fill
 function richText(text, fill) {
   const total = text.replace(/\*/g, '').split(/\s+/).filter(Boolean).length;
@@ -787,7 +804,7 @@ function APerson() {
   }, PORTFOLIO.notable.map(n => /*#__PURE__*/React.createElement("li", {
     key: n,
     style: line
-  }, n)))), /*#__PURE__*/React.createElement("div", {
+  }, withLinks(n))))), /*#__PURE__*/React.createElement("div", {
     style: {
       gridColumn: '1 / -1'
     }
@@ -1353,7 +1370,7 @@ function ACareerBody({
     style: {
       margin: 0
     }
-  }, first), rest.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, withLinks(first)), rest.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     id: restId,
     className: "cv-more",
     hidden: !open
@@ -1362,7 +1379,7 @@ function ACareerBody({
     style: {
       margin: `${gap}px 0 0`
     }
-  }, para))), /*#__PURE__*/React.createElement("button", {
+  }, withLinks(para)))), /*#__PURE__*/React.createElement("button", {
     type: "button",
     className: "cv-toggle",
     "data-cursor": "hover",

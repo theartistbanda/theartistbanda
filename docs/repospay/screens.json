@@ -1,0 +1,116 @@
+{
+  "repos-pay-hero-1": {
+    "w": 1600,
+    "h": 1120,
+    "alt": "Customer web dashboard: \"Good Morning, Aishwary\" with Repos Pay marked Active, an Energy Score gauge at 850 that rose 10 last week and 30 last month, total credit utilised and outstanding, counts of ongoing, overdue and due orders, a banner to upload proof of an offline payment, and order cards with due-date bars.",
+    "caption": "The customer dashboard with Repos Pay active: the Energy Score, credit used and outstanding, and every order that is due."
+  },
+  "repos-pay-order-app-1": {
+    "w": 822,
+    "h": 1462,
+    "alt": "Customer app, Order Details: fuel type, date, asset, quantity with quick-pick chips, a Repos Pay checkbox with a Learn More link, and an Order Now button.",
+    "caption": "In the app, Repos Pay is one checkbox on the normal order form."
+  },
+  "repos-pay-pump-list-web-1": {
+    "w": 1600,
+    "h": 1120,
+    "alt": "Place Order, step 2 of 5, Select Mobile Pump: a table of pumps with stock, rating, rate, density and arrival time, Cheapest and Fastest buttons, and a \"Repos Pay only\" switch. Pumps that accept Repos Pay carry the Pay mark.",
+    "caption": "On the web, one switch shows only the pumps that accept Repos Pay."
+  },
+  "repos-pay-credit-details-1": {
+    "w": 1436,
+    "h": 1680,
+    "alt": "Credit Details: a field for the credit amount next to the order total and the amount due after credit, and four credit periods to choose from: 3, 7, 15 and 30 days.",
+    "caption": "Two questions: how much credit, and for how many days."
+  },
+  "repos-pay-summary-web-1": {
+    "w": 1600,
+    "h": 1120,
+    "alt": "Order Summary, step 3 of 5: a map with arrival time, the pump and the delivery address, a note that the bill uses the price on the delivery day, the agreement PDF with View and Download, and a side panel with the Repos Pay terms and the full price breakdown.",
+    "caption": "Every part of the price, the credit terms and the agreement, before the signature."
+  },
+  "repos-pay-signature-before-1": {
+    "w": 1600,
+    "h": 940,
+    "alt": "Before: three separate Sign Agreement screens, one for each way to sign (draw, type and upload), each with the agreement to view or download and a Place Order button above \"Secured with Blockchain\".",
+    "caption": "Before: one screen for each way to sign"
+  },
+  "repos-pay-signature-after-1": {
+    "w": 1600,
+    "h": 381,
+    "alt": "After: one signature component with three states: Draw, Type, and Upload (JPEG or PNG, up to 1 MB).",
+    "caption": "After: one component with three states"
+  },
+  "repos-pay-partner-pending-1": {
+    "w": 822,
+    "h": 1462,
+    "alt": "Partner app, a Repos Pay order waiting for a decision: order, price and delivery details, then part payment, credit amount, credit days and due date in blue, with Reject and Sign & Accept buttons.",
+    "caption": "The pump owner sees the part payment, credit amount, credit days and due date before deciding."
+  },
+  "repos-pay-partner-sign-1": {
+    "w": 822,
+    "h": 1462,
+    "alt": "Partner app, Sign Agreement: a signature box with Draw, Type and Upload, the agreement to view or download, and an Accept Order button above \"Secured with Blockchain\".",
+    "caption": "The pump owner signs the same agreement to accept the order."
+  },
+  "repos-pay-energy-score-1": {
+    "w": 822,
+    "h": 2160,
+    "alt": "Customer app home with Repos Pay active: the Energy Score gauge at 850, its change last week and last month, a Learn More button, total credit utilised and outstanding, and counts of overdue, ongoing and due orders.",
+    "caption": "The Energy Score on the app home, with its change last week and last month."
+  },
+  "repos-pay-onboarding-1": {
+    "w": 1600,
+    "h": 1120,
+    "alt": "Repos Pay onboarding on the web: How it works in five steps, Get started with KYC documents (Aadhaar rejected with a reason and an Upload link, PAN card waiting for approval), and two questions about the Energy Score.",
+    "caption": "Onboarding: how it works, and the status of each KYC document."
+  },
+  "repos-pay-source-of-truth-1": {
+    "w": 1600,
+    "h": 1424,
+    "alt": "Repos admin, View Order Details: partner and customer cards, an agreement card secured by blockchain, order details with payment mode Repos Pay and payment status Pending, and a Payment Source of Truth table of proofs uploaded by the customer or partner, each with view, accept and reject actions.",
+    "caption": "Proof of an offline payment, uploaded by either side and checked by Repos."
+  },
+  "repos-pay-orders-1": {
+    "w": 1600,
+    "h": 1120,
+    "alt": "Your Orders on the web: order cards with agreement status, part payment, due amount, credit days and due date, Call and Reminder actions, and an order detail panel open on the right.",
+    "caption": "Order cards show what is due and when, with Call and Reminder actions."
+  },
+  "repos-pay-admin-agreement-1": {
+    "w": 1598,
+    "h": 1734,
+    "alt": "Repos admin, View Agreements: partner Sameer Patil and customer Aishwary Dhare, credit details with an Issue tag and the line \"Customer was expected to make payment on 17-10-2020\", the convenience fee split (partner 2%, Repos 1%), incentive and penalty rates, and twelve agreement sections.",
+    "caption": "Every agreement in one place, with the issue in one line."
+  },
+  "repos-pay-admin-customer-1": {
+    "w": 1600,
+    "h": 1421,
+    "alt": "Repos admin, customer details: contact and usage details, customer assets, KYC documents, Repos Pay switches with the FPC weightage, and a credit profile card with Energy Score, CIBIL score, Karza scan score, social proofing score, payment history and business details.",
+    "caption": "A customer's credit profile in one card, next to the switches Repos controls."
+  },
+  "repos-pay-order-placed-1": {
+    "w": 822,
+    "h": 1462,
+    "alt": "Order Placed: a still frame from the animation, a light city skyline, with a Done button.",
+    "caption": "A still frame from the animation that ends every order."
+  },
+  "repos-pay-old-onboarding-1": {
+    "w": 822,
+    "h": 3314,
+    "alt": "The first version, Repos Finserv: its own logo, three steps to get a Diesel Score, five steps to order on credit, and two questions about the Diesel Score.",
+    "caption": "Before: Repos Finserv"
+  },
+  "repos-pay-onboarding-app-1": {
+    "w": 822,
+    "h": 3308,
+    "alt": "The later version, Repos Pay: the new logo, a Get started list with a status on each KYC document, five steps to order on credit, and two questions about the Energy Score.",
+    "caption": "After: Repos Pay"
+  },
+  "repos-pay-partner-app-1": {
+    "w": 1600,
+    "h": 962,
+    "alt": "Three parts of the partner app: the daily card to update the diesel rate and density, the Repos Pay dashboard with total disbursed, total received and the number of Repos Pay orders, and the order list with filters for Pending Decision, Repos Pay and To Deliver.",
+    "caption": "The partner's day: today's diesel rate, the Repos Pay dashboard and the order filters."
+  }
+}

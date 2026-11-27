@@ -66,6 +66,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .rail-btn { width: 40px; height: 40px; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: transparent; color: var(--ink); border: 1px solid rgba(var(--ink-rgb), 0.2); cursor: pointer; font: 500 16px/1 "JetBrains Mono", ui-monospace, monospace; transition: border-color .2s ease, background-color .2s ease; }
 .rail-btn:hover:not(:disabled), .rail-btn:focus-visible { border-color: var(--accent); background-color: rgba(var(--accent-rgb), 0.08); }
 .rail-btn:disabled { color: var(--mute); opacity: .5; cursor: default; }
+/* Links inside running text (withLinks in variant-a.jsx): ink and always underlined, firmer on hover and focus */
+.text-link { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: rgba(var(--ink-rgb), 0.45); transition: text-decoration-color .15s ease; }
+.text-link:hover, .text-link:focus-visible { text-decoration-color: currentColor; }
 /* Links in a list (the TaskGPT products under its row): underline on hover and focus */
 .sub-link { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: text-decoration-color .15s ease; }
 .sub-link:hover, .sub-link:focus-visible { text-decoration-color: currentColor; }

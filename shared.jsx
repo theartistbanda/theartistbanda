@@ -233,6 +233,19 @@ const PORTFOLIO = {
       href: '/case-pattern-desk',
     },
     {
+      // Selected projects, before Aatmnirbhar (Dipesh, 27 Nov 2026). Client work for Repos Energy: not Mindefy,
+      // not TaskUs. 2020, the year on the design files.
+      id: 'repos-pay',
+      index: '12',
+      year: 2020,
+      title: 'Repos Pay',
+      kicker: 'Fintech · Credit · Five surfaces',
+      tagline: 'Diesel on credit, with trust on both sides',
+      tags: ['Fintech', 'Credit', 'Five surfaces'],
+      image: '/assets/repos-pay-hero-1.webp',
+      href: '/case-repos-pay',
+    },
+    {
       // In Experience below EvaluateUs (Dipesh, 23 Nov 2026)
       id: 'job-app-assistant',
       index: '05',
@@ -441,13 +454,14 @@ const PORTFOLIO = {
       org: 'Fintech · Developer tools · AI',
       about: 'these projects',
       body: [
-        'Repos Pay, Repos Energy\'s credit platform for fuel delivery. One app let fuel pump owners extend credit; the other let businesses apply for it and draw it down. Two sides trusting one system for opposite reasons.',
+        // [text](/path) is a link (withLinks in variant-a.jsx). Wording from the Repos Pay brief, 27 Nov 2026
+        '[Repos Pay](/case-repos-pay), a credit service for diesel delivery that I designed from scratch for Repos Energy, inside a revamp of its delivery apps. Pump owners give credit, businesses buy fuel on it, and Repos holds the risk.',
         'ZuQA, API testing tool. Postman had no low-code API testing at the time; a friend was building the concept and I joined as design hand. Progressive disclosure cut cognitive load and developer onboarding time by 15%.',
         'Job App Assistant, a live AI web app that I designed, coded and deployed alone in one session, with Node.js and the Claude API.',
       ],
       tags: ['Fintech', 'Developer tools', 'Generative AI'],
       // Aatmnirbhar was his own open-competition entry, not Mindefy work, so it sits here
-      products: ['job-desk', 'pattern-desk', 'job-app-assistant', 'aatmnirbhar'], // Job Desk first, then Pattern Desk (briefs, 26 Nov 2026)
+      products: ['job-desk', 'pattern-desk', 'job-app-assistant', 'repos-pay', 'aatmnirbhar'], // Job Desk first, then Pattern Desk (briefs, 26 Nov 2026); Repos Pay before Aatmnirbhar (27 Nov 2026)
     },
   ],
   skills: [
@@ -472,7 +486,7 @@ const PORTFOLIO = {
     'Aatmnirbhar Bharat mark, used on Indian-made goods',
     'YourHour · 4.6★ · 1M+ downloads',
     'LevelUp at AWS Summit London 2025',
-    'Repos Pay for Repos Energy, credit for fuel delivery',
+    '[Repos Pay](/case-repos-pay) for Repos Energy, credit for fuel delivery',
     '300+ research sessions on YourHour',
   ],
   links: [

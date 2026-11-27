@@ -10,6 +10,7 @@ compiled shared.js). Run it after `npm run build` whenever the About or CV copy 
 """
 import html
 import json
+import re
 import os
 import subprocess
 
@@ -44,6 +45,15 @@ def plain(s):
     return ''.join(f'<em>{esc(p)}</em>' if i % 2 else esc(p) for i, p in enumerate(parts))
 
 
+def linked(s):
+    """Career text marks links as [text](/path) (Repos Pay, 27 Nov 2026); noscript keeps them as links."""
+    parts = re.split(r'\[([^\]]+)\]\(([^)\s]+)\)', s)
+    out = esc(parts[0])
+    for i in range(1, len(parts), 3):
+        out += f'<a href="{esc(parts[i + 1])}">{esc(parts[i])}</a>' + esc(parts[i + 2])
+    return out
+
+
 def noscript_about(P):
     m = ''.join(f'<li>{esc(str(x["value"]) + x["suffix"])}: {esc(x["label"])}</li>' for x in P['metrics'])
     pr = ''.join(f'<li><strong>{esc(x["title"])}</strong>: {esc(x["body"])}</li>' for x in P['principles'])
@@ -68,7 +78,7 @@ def noscript_career(P):
     for c in P['career']:
         dates = f' ({c["from"]} to {c["to"]})' if c.get('from') else ''
         out.append(f'<h2>{esc(c["role"])}, {esc(c["org"])}{esc(dates)}</h2>')
-        out += [f'<p>{esc(x)}</p>' for x in c['body']]
+        out += [f'<p>{linked(x)}</p>' for x in c['body']]
         cases = [next(p for p in P['projects'] if p['id'] == i) for i in c.get('products', [])]
         if cases:
             out.append('<p>Case studies: ' + ' · '.join(f'<a href="{esc(p["href"])}">{esc(p["title"])}</a>' for p in cases) + '</p>')
